@@ -1,0 +1,18 @@
+{
+  "road": {
+    "ambient": 0.2,
+    "temperatureControlled": 0.66
+  },
+  "rail": {
+    "ambient": 0.05,
+    "temperatureControlled": 0.06
+  },
+  "water": {
+    "ambient": 0.01,
+    "temperatureControlled": 0.02
+  },
+  "air": {
+    "ambient": 1.13,
+    "temperatureControlled": 1.13
+  }
+}

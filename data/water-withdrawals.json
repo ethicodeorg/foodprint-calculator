@@ -1,0 +1,303 @@
+[
+  {
+    "entity": "Apples",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 180.1,
+    "unit": "liters"
+  },
+  {
+    "entity": "Bananas",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 114.5,
+    "unit": "liters"
+  },
+  {
+    "entity": "Barley",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 17.1,
+    "unit": "liters"
+  },
+  {
+    "entity": "Beef (beef herd)",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 1451.2,
+    "unit": "liters"
+  },
+  {
+    "entity": "Beef (dairy herd)",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 2714.3,
+    "unit": "liters"
+  },
+  {
+    "entity": "Beet Sugar",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 217.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Berries & Grapes",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 419.6,
+    "unit": "liters"
+  },
+  {
+    "entity": "Brassicas",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 119.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Cane Sugar",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 620.1,
+    "unit": "liters"
+  },
+  {
+    "entity": "Cassava",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 0,
+    "unit": "liters"
+  },
+  {
+    "entity": "Cheese",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 5605.2,
+    "unit": "liters"
+  },
+  {
+    "entity": "Citrus Fruit",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 82.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Coffee",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 25.9,
+    "unit": "liters"
+  },
+  {
+    "entity": "Dark Chocolate",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 540.6,
+    "unit": "liters"
+  },
+  {
+    "entity": "Eggs",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 577.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Fish (farmed)",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 3691.3,
+    "unit": "liters"
+  },
+  {
+    "entity": "Groundnuts",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 1852.3,
+    "unit": "liters"
+  },
+  {
+    "entity": "Lamb & Mutton",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 1802.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Maize",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 215.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Milk",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 628.2,
+    "unit": "liters"
+  },
+  {
+    "entity": "Nuts",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 4133.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Oatmeal",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 482.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Olive Oil",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 2141.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Onions & Leeks",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 14.3,
+    "unit": "liters"
+  },
+  {
+    "entity": "Other Fruit",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 153.5,
+    "unit": "liters"
+  },
+  {
+    "entity": "Other Pulses",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 435.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Other Vegetables",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 102.5,
+    "unit": "liters"
+  },
+  {
+    "entity": "Palm Oil",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 6.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Peas",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 396.6,
+    "unit": "liters"
+  },
+  {
+    "entity": "Pig Meat",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 1795.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Potatoes",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 59.1,
+    "unit": "liters"
+  },
+  {
+    "entity": "Poultry Meat",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 660,
+    "unit": "liters"
+  },
+  {
+    "entity": "Prawns (farmed)",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 3515.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Rapeseed Oil",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 237.7,
+    "unit": "liters"
+  },
+  {
+    "entity": "Rice",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 2248.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Root Vegetables",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 28.4,
+    "unit": "liters"
+  },
+  {
+    "entity": "Soybean Oil",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 414.6,
+    "unit": "liters"
+  },
+  {
+    "entity": "Soymilk",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 27.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Sunflower Oil",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 1007.9,
+    "unit": "liters"
+  },
+  {
+    "entity": "Tofu (soybeans)",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 148.6,
+    "unit": "liters"
+  },
+  {
+    "entity": "Tomatoes",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 369.8,
+    "unit": "liters"
+  },
+  {
+    "entity": "Wheat & Rye",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 647.5,
+    "unit": "liters"
+  },
+  {
+    "entity": "Wine",
+    "code": "",
+    "year": 2018,
+    "freshwaterWithdrawalsPerKilogram": 78.9,
+    "unit": "liters"
+  }
+]
