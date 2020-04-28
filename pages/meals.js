@@ -5,6 +5,9 @@ import Layout from '../components/MyLayout';
 import Content from '../components/Content';
 import Pies from '../components/Pies';
 import MealLink from '../components/MealLink';
+import Card from '../components/Card';
+import CardTitle from '../components/CardTitle';
+import Button from '../components/Button';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -18,20 +21,20 @@ export default function Index() {
       <Header activePage="meals" />
       {data ? (
         <Content>
-          {data.length > 0 ? (
-            <MealLink id="new" title="+ Create new meal" />
-          ) : (
-            <div>You have not saved any meals</div>
-          )}
+          <MealLink id="new">
+            <Button>+ Create new meal</Button>
+          </MealLink>
+          {!data.length && <div>You have not saved any meals</div>}
           {data.map((meal) => {
             return (
-              <div className="meal" key={meal.id}>
-                <MealLink id={meal.id} title={meal.title} />
-                <Pies meal={meal} />
-              </div>
+              <MealLink id={meal.id} key={meal.id}>
+                <Card>
+                  <CardTitle>{meal.title}</CardTitle>
+                  <Pies meal={meal} />
+                </Card>
+              </MealLink>
             );
           })}
-          <MealLink id="new" title="+ Create new meal" />
 
           <style jsx>{`
             .meal {
@@ -41,7 +44,7 @@ export default function Index() {
           `}</style>
         </Content>
       ) : (
-        <Content>Loading...</Content>
+        <Content>Baking pies...</Content>
       )}
     </Layout>
   );

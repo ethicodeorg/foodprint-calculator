@@ -21,12 +21,16 @@ export function getEutroTotal(ingredients = []) {
   return total;
 }
 
-function convertToTonKilometers(distance, unit) {
+function convertToTonnes(weight, unit) {
+  return convertToKilograms(weight, unit) / 1000;
+}
+
+function convertToKilometers(distance, unit) {
   switch (unit) {
     case 'km':
-      return distance / 1000;
+      return distance;
     case 'mi':
-      return distance / 0.62137 / 1000;
+      return distance / 0.62137;
     default:
       return distance;
   }
@@ -37,12 +41,14 @@ function convertTransportToKilograms(
   distance,
   distanceUnit,
   transportMode,
-  transportType
+  transportType,
+  weight,
+  weightUnit
 ) {
-  const distanceInTonKilometers = convertToTonKilometers(distance, distanceUnit);
-  console.log(distanceInTonKilometers);
-  console.log(transportData);
-  return distanceInTonKilometers * transportData[transportMode][transportType];
+  const distanceInKilometers = convertToKilometers(distance, distanceUnit);
+  const weightInTonnes = convertToTonnes(weight, weightUnit);
+
+  return distanceInKilometers * weightInTonnes * transportData[transportMode][transportType];
 }
 
 export function getTransportEmissions(
@@ -50,7 +56,9 @@ export function getTransportEmissions(
   distance,
   distanceUnit,
   transportMode,
-  transportType
+  transportType,
+  weight,
+  weightUnit
 ) {
   return distance
     ? convertTransportToKilograms(
@@ -58,7 +66,9 @@ export function getTransportEmissions(
         distance,
         distanceUnit,
         transportMode,
-        transportType
+        transportType,
+        weight,
+        weightUnit
       )
     : 0;
 }

@@ -3,6 +3,7 @@ import landUse from '../../data/land-use.json';
 import eutrophyingEmissions from '../../data/eutrophying-emissions.json';
 import ghgEmissions from '../../data/ghg-emissions.json';
 import waterWithdrawals from '../../data/water-withdrawals.json';
+import transportEmissions from '../../data/transport-emissions.json';
 
 function sumUpGHG(foodGHG) {
   return (
@@ -16,8 +17,8 @@ function sumUpGHG(foodGHG) {
   );
 }
 
-export default (req, res) => {
-  const data = foods.map((food) => {
+function getFoodData() {
+  return foods.map((food) => {
     const foodLandUse = landUse.find((l) => l.entity === food);
     const foodEutro = eutrophyingEmissions.find((e) => e.entity === food);
     const foodGHG = ghgEmissions.find((g) => g.entity === food);
@@ -34,15 +35,15 @@ export default (req, res) => {
         unit: foodEutro.unit,
       },
       ghgEmissions: {
-        values: [
-          foodGHG.landUseChange,
-          foodGHG.animalFeed,
-          foodGHG.farm,
-          foodGHG.processing,
-          foodGHG.transport,
-          foodGHG.packaging,
-          foodGHG.retail,
-        ],
+        values: {
+          landUseChange: foodGHG.landUseChange,
+          animalFeed: foodGHG.animalFeed,
+          farm: foodGHG.farm,
+          processing: foodGHG.processing,
+          transport: foodGHG.transport,
+          packaging: foodGHG.packaging,
+          retail: foodGHG.retail,
+        },
         value: sumUpGHG(foodGHG),
         unit: foodGHG.unit,
       },
@@ -52,6 +53,11 @@ export default (req, res) => {
       },
     };
   });
+}
 
-  res.status(200).json(data);
-};
+export function getInitialState() {
+  return {
+    transportEmissions,
+    foodData: getFoodData(),
+  };
+}

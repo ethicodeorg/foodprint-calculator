@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Router from 'next/router';
-import useSWR from 'swr';
 import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
 import {
@@ -13,10 +13,14 @@ import {
 } from '../utils/calculations';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
+import Card from '../components/Card';
 import Content from '../components/Content';
 import Pies from '../components/Pies';
 import TinyPies from '../components/TinyPies';
 import Ingredients from '../components/Ingredients';
+import CardTitle from '../components/CardTitle';
+import PageTitle from '../components/PageTitle';
+import Button from '../components/Button';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -53,8 +57,9 @@ function matchFoodToTerm(food, value) {
   return food.entity.toLowerCase().indexOf(value.toLowerCase()) !== -1;
 }
 
-export default function NewMeal() {
+function NewMeal({ foodData, transportData }) {
   const [mealName, setMealName] = useState('');
+  const [aboutMeal, setAboutMeal] = useState('');
   const [autocompleteValue, setAutocompleteValue] = useState('');
   const [weight, setWeight] = useState('');
   const [distance, setDistance] = useState('');
@@ -85,10 +90,8 @@ export default function NewMeal() {
   ];
   const [weightUnit, setWeightUnit] = useState(weightUnitOptions[0].value);
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
-  const { data, error } = useSWR('/api/initialize', fetcher);
-  const { data: transportData, error: transportError } = useSWR('/api/transport', fetcher);
 
-  const options = data || [];
+  const foodOptions = foodData.map((food) => ({ value: food.entity, label: food.entity })) || [];
 
   const deleteIngredient = (index) => {
     const temp = [...ingredients];
@@ -97,14 +100,28 @@ export default function NewMeal() {
   };
 
   const addIngredient = () => {
-    const food = options.find((option) => option.entity === autocompleteValue);
+    const food = foodData.find((option) => option.entity === autocompleteValue);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
       distanceUnit,
       transportMode,
-      transportType
+      transportType,
+      weight,
+      weightUnit
     );
+    const ghgEmissionBreakdown = {
+      landUseChange:
+        food.ghgEmissions.values.landUseChange * convertToKilograms(weight, weightUnit),
+      animalFeed: food.ghgEmissions.values.animalFeed * convertToKilograms(weight, weightUnit),
+      farm: food.ghgEmissions.values.farm * convertToKilograms(weight, weightUnit),
+      processing: food.ghgEmissions.values.processing * convertToKilograms(weight, weightUnit),
+      transport: transportEmissions
+        ? transportEmissions * convertToKilograms(weight, weightUnit)
+        : food.ghgEmissions.values.transport * convertToKilograms(weight, weightUnit),
+      packaging: food.ghgEmissions.values.packaging * convertToKilograms(weight, weightUnit),
+      retail: food.ghgEmissions.values.retail * convertToKilograms(weight, weightUnit),
+    };
     const ingredient = {
       entity: autocompleteValue,
       weight,
@@ -118,6 +135,7 @@ export default function NewMeal() {
         unit: food.landUse.unit,
       },
       ghgEmissions: {
+        values: ghgEmissionBreakdown,
         value:
           food.ghgEmissions.value * convertToKilograms(weight, weightUnit) + transportEmissions,
         unit: food.ghgEmissions.unit,
@@ -131,6 +149,7 @@ export default function NewMeal() {
         unit: food.waterWithdrawals.unit,
       },
     };
+
     setIngredients((ingredients) => [...ingredients, ingredient]);
     setWeight('');
     setDistance('');
@@ -144,80 +163,55 @@ export default function NewMeal() {
     <Layout>
       <Header activePage="meals" />
       <Content>
-        <div className="meal-name">
-          <input
-            type="text"
-            name="meal-name"
-            className="meal-input"
-            placeholder="Meal name"
-            value={mealName}
-            onChange={(e) => setMealName(e.target.value)}
-          />
-        </div>
-        <Ingredients ingredients={ingredients} deleteIngredient={deleteIngredient} />
-        {isAdding ? (
-          <div className="add-ingredient">
-            <div className="required-fields">
-              <Autocomplete
-                getItemValue={(item) => item.entity}
-                items={options}
-                shouldItemRender={matchFoodToTerm}
-                renderItem={(item, isHighlighted) => (
-                  <div
-                    key={item.entity}
-                    style={{ background: isHighlighted ? 'lightgray' : 'white' }}
-                  >
-                    {item.entity}
-                  </div>
-                )}
-                value={autocompleteValue}
-                onChange={(e) => setAutocompleteValue(e.target.value)}
-                onSelect={(val) => setAutocompleteValue(val)}
-                wrapperProps={{
-                  style: {
-                    marginRight: 20,
-                  },
-                }}
-                inputProps={{
-                  style: {
-                    borderRadius: 4,
-                    border: '1px solid #ccc',
-                    height: 36,
-                    marginTop: 20,
-                    fontSize: 14,
-                    padding: '0 15px',
-                    width: 200,
-                  },
-                  placeholder: 'Ingredient',
-                }}
-              />
-              <input
-                className="weight-input"
-                placeholder="Weight"
-                type="number"
-                name="weight"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-              />
-              <div className="select-container">
-                <Select
-                  value={weightUnit.value}
-                  placeholder="Unit"
-                  onChange={(val) => setWeightUnit(val.value)}
-                  options={weightUnitOptions}
+        <PageTitle>New Meal Calculation</PageTitle>
+        <Card>
+          <Ingredients ingredients={ingredients} deleteIngredient={deleteIngredient} />
+          {isAdding ? (
+            <Card>
+              <div className="required-fields">
+                <div className="select-container ingredient-select">
+                  <Select
+                    value={autocompleteValue.value}
+                    placeholder="Ingredient"
+                    onChange={(val) => setAutocompleteValue(val.value)}
+                    options={foodOptions}
+                  />
+                </div>
+                <input
+                  className="weight-input"
+                  placeholder="Weight"
+                  type="number"
+                  name="weight"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
                 />
+                <div className="select-container">
+                  <Select
+                    value={weightUnit.value}
+                    placeholder="Unit"
+                    onChange={(val) => setWeightUnit(val.value)}
+                    options={weightUnitOptions}
+                  />
+                </div>
               </div>
-            </div>
-            <button
-              disabled={!autocompleteValue || !weight}
-              className="add-button"
-              onClick={() => addIngredient()}
-            >
-              Add
-            </button>
-            <div className="optional-fields">
               {isAddingTransport ? (
-                <div className="add-transport">
+                <div className="optional-fields">
+                  <div className="select-container transport-mode-select">
+                    <Select
+                      value={transportMode.value}
+                      placeholder="Transport mode"
+                      onChange={(val) => setTransportMode(val.value)}
+                      options={transportModeOptions}
+                    />
+                  </div>
+                  <div className="select-container transport-type-select">
+                    <Select
+                      value={transportType.value}
+                      placeholder="Transport type"
+                      onChange={(val) => setTransportType(val.value)}
+                      options={transportTypeOptions}
+                    />
+                  </div>
                   <input
                     className="distance-input"
                     placeholder="Distance"
@@ -226,7 +220,7 @@ export default function NewMeal() {
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
                   />
-                  <div className="transport-unit-select">
+                  <div className="select-container transport-unit-select">
                     <Select
                       value={distanceUnit.value}
                       placeholder="Unit"
@@ -234,107 +228,126 @@ export default function NewMeal() {
                       options={distanceUnitOptions}
                     />
                   </div>
-                  <div className="transport-select">
-                    <Select
-                      value={transportMode.value}
-                      placeholder="Transport mode"
-                      onChange={(val) => setTransportMode(val.value)}
-                      options={transportModeOptions}
-                    />
-                  </div>
-                  <div className="transport-select">
-                    <Select
-                      value={transportType.value}
-                      placeholder="Transport type"
-                      onChange={(val) => setTransportType(val.value)}
-                      options={transportTypeOptions}
-                    />
-                  </div>
                 </div>
               ) : (
-                <button className="add-transport-button" onClick={() => setIsAddingTransport(true)}>
-                  + Add Transport
-                </button>
+                <div className="optional-fields">
+                  <Button onClick={() => setIsAddingTransport(true)}>+ Add Transport</Button>
+                  <span className="optional-text">
+                    *If transport is not provided, the average transport emissions for the selected
+                    ingredient will be used
+                  </span>
+                </div>
               )}
-              <span>(Optional)</span>
+              <div className="add-button-container">
+                <Button onClick={() => addIngredient()} disabled={!autocompleteValue || !weight}>
+                  Add
+                </Button>
+              </div>
+            </Card>
+          ) : (
+            <div className="add-ingredient-container">
+              <Button onClick={() => setIsAdding(true)}>+ Add Ingredient</Button>
             </div>
-          </div>
-        ) : (
-          <button className="add-ingredient-button" onClick={() => setIsAdding(true)}>
-            + Add Ingredient
-          </button>
+          )}
+        </Card>
+        {ingredients.length > 0 && (
+          <Card>
+            <CardTitle>Meal total</CardTitle>
+            <Pies meal={getTotalByCategory(ingredients)} />
+          </Card>
         )}
-        <div className="meal-total">
-          <h3>Meal total</h3>
-          <Pies meal={getTotalByCategory(ingredients)} />
-        </div>
+        <Card>
+          <input
+            type="text"
+            name="meal-name"
+            className="meal-input"
+            placeholder="Meal name"
+            value={mealName}
+            onChange={(e) => setMealName(e.target.value)}
+          />
+          <textarea
+            id="about-meal"
+            name="about-meal"
+            rows="4"
+            cols="50"
+            className="about-meal-input"
+            placeholder="About meal (optional)"
+            value={mealName}
+            onChange={(e) => setAboutMeal(e.target.value)}
+          />
+        </Card>
         <div className="button-container">
-          <button
-            className="save-button"
+          <Button
             onClick={() => saveMeal(mealName, ingredients)}
             disabled={ingredients.length === 0 || mealName === ''}
+            primary
           >
             Save Meal
-          </button>
+          </Button>
         </div>
 
         <style jsx>{`
-          .meal-input {
+          input,
+          textarea {
             display: block;
+            padding: 7px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Avenir;
+            font-size: 16px;
+          }
+          .meal-input {
             width: 100%;
             max-width: 400px;
-            padding: 10px 15px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 24px;
+            margin-bottom: 20px;
+          }
+          .about-meal-input {
+            width: calc(100% - 20px);
+          }
+          .weight-input,
+          .distance-input {
+            width: 100px;
+            margin-right: 20px;
           }
           .add-ingredient {
             display: flex;
             flex-wrap: wrap;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.25);
           }
           .required-fields,
-          .add-transport {
-            display: flex;
-            width: 80%;
-          }
           .optional-fields {
             display: flex;
             align-items: center;
+            width: 100%;
           }
-          .weight-input {
-            width: 70px;
-            margin: 20px 20px 20px 0;
-            padding: 0 15px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-          }
-          .distance-input {
-            width: 100px;
-            margin: 0 20px;
-            padding: 0 15px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 14px;
+          .optional-fields {
+            margin-top: 20px;
           }
           .select-container {
-            margin: 20px 20px 0 0;
+            margin-right: 20px;
             width: 150px;
           }
-          .transport-select {
-            margin: 0 20px 0 0;
+          .ingredient-select {
             width: 220px;
           }
-          .transport-unit-select {
-            margin: 0 20px 0 0;
-            width: 150px;
+          .transport-mode-select {
+            width: 220px;
           }
-          .add-ingredient-button,
+          .transport-type-select {
+            min-width: 220px;
+          }
+          .transport-unit-select {
+            width: 150px;
+            margin-right: 0;
+          }
           .add-button {
             font-size: 16px;
             font-weight: bold;
             width: 180px;
-            margin: 20px 0 20px;
+            margin: 20px 0 0;
             padding: 10px;
             background-color: #4caf50;
             opacity: 1;
@@ -348,7 +361,7 @@ export default function NewMeal() {
             font-size: 16px;
             font-weight: bold;
             width: 180px;
-            margin: 0 20px;
+            margin-right: 20px;
             padding: 10px;
             background-color: #4caf50;
             opacity: 1;
@@ -358,17 +371,27 @@ export default function NewMeal() {
             border: none;
             color: #fff;
           }
-          .add-ingredient-button:disabled,
           .add-button:disabled {
             opacity: 0.7;
             cursor: default;
           }
-          .add-ingredient-button:hover,
           .add-button:hover {
             opacity: 0.7;
           }
+          .add-button-container {
+            width: 100%;
+            margin-top: 20px;
+            text-align: right;
+          }
+          .add-ingredient-container {
+            margin-top: 20px;
+          }
           .add-button {
             width: 100px;
+            margin-bottom: 0;
+          }
+          .optional-text {
+            font-size: 14px;
           }
           .button-container {
             display: flex;
@@ -403,3 +426,12 @@ export default function NewMeal() {
     </Layout>
   );
 }
+
+const mapStateToProps = (state) => ({
+  foodData: state.foodData,
+  transportData: state.transportEmissions,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewMeal);

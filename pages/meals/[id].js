@@ -15,34 +15,44 @@ import Content from '../../components/Content';
 import Pies from '../../components/Pies';
 import TinyPies from '../../components/TinyPies';
 import Ingredients from '../../components/Ingredients';
+import Card from '../../components/Card';
 import NewMeal from '../newmeal';
+import CardTitle from '../../components/CardTitle';
+import PageTitle from '../../components/PageTitle';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
 }
 
 export default () => {
-  const { data, error } = useSWR('/api/initialize', fetcher);
   const router = useRouter();
+  const mealId = router.asPath.split('/').slice(-1)[0];
 
-  if (router.query.id === 'new') {
+  if (mealId === 'new') {
     return <NewMeal />;
   }
 
-  const { data: meal, error: mealError } = useSWR(`/api/meals/${router.query.id}`, fetcher);
+  const { data: meal, error: mealError } = useSWR(
+    `/api/meals${mealId !== '[id]' ? `/${mealId}` : ''}`,
+    fetcher
+  );
 
   return (
     <Layout>
       <Header activePage="meals" />
       {meal ? (
         <Content>
-          <h2>{meal.title}</h2>
-          <Ingredients ingredients={meal.ingredients} />
-          <h3>Meal total</h3>
-          <Pies meal={meal} />
+          <PageTitle>{meal.title}</PageTitle>
+          <Card>
+            <Ingredients ingredients={meal.ingredients} />
+          </Card>
+          <Card>
+            <CardTitle>Meal total</CardTitle>
+            <Pies meal={meal} />
+          </Card>
         </Content>
       ) : (
-        <Content>Loading...</Content>
+        <Content>Baking Pies...</Content>
       )}
     </Layout>
   );

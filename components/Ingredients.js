@@ -1,10 +1,10 @@
 import TinyPies from './TinyPies';
+import CardTitle from './CardTitle';
 
 const Ingredients = ({ ingredients, deleteIngredient }) => (
   <div className="ingredients">
-    <h3>Ingredients</h3>
+    <CardTitle>Ingredients</CardTitle>
     {ingredients.map((ingredient, index) => {
-      console.log(ingredient);
       const transportString = ingredient.distance
         ? `Transported ${ingredient.distance} ${ingredient.distanceUnit} by ${ingredient.transportMode}`
         : '';
