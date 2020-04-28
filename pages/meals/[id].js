@@ -43,6 +43,12 @@ export default () => {
       {meal ? (
         <Content>
           <PageTitle>{meal.title}</PageTitle>
+          {meal.about && (
+            <Card>
+              <CardTitle>About meal</CardTitle>
+              <p>{meal.about}</p>
+            </Card>
+          )}
           <Card>
             <Ingredients ingredients={meal.ingredients} />
           </Card>

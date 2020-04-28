@@ -35,11 +35,12 @@ function getTotalByCategory(ingredients) {
   };
 }
 
-function saveMeal(mealName, ingredients) {
+function saveMeal(mealName, aboutMeal, ingredients) {
   const id = mealName.toLowerCase().replace(/\s/g, '-');
   const meal = {
     id,
     title: mealName,
+    about: aboutMeal,
     landUse: getLandUseTotal(ingredients),
     ghgEmissions: getGHGTotal(ingredients),
     waterWithdrawals: getWaterTotal(ingredients),
@@ -272,13 +273,13 @@ function NewMeal({ foodData, transportData }) {
             cols="50"
             className="about-meal-input"
             placeholder="About meal (optional)"
-            value={mealName}
+            value={aboutMeal}
             onChange={(e) => setAboutMeal(e.target.value)}
           />
         </Card>
         <div className="button-container">
           <Button
-            onClick={() => saveMeal(mealName, ingredients)}
+            onClick={() => saveMeal(mealName, aboutMeal, ingredients)}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
           >
