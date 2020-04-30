@@ -37,6 +37,9 @@ export default function Index() {
                 <MealLink id={meal.id} key={meal.id}>
                   <Card>
                     <CardTitle>{meal.title}</CardTitle>
+                    <p>{`Serves ${meal.numberOfServings} ${
+                      meal.numberOfServings === 1 ? 'person' : 'people'
+                    }`}</p>
                     {meal.about && <p>{meal.about}</p>}
                     <Pies meal={meal} />
                   </Card>

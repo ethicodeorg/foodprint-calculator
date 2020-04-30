@@ -1,5 +1,4 @@
 import PieChart from 'react-minimal-pie-chart';
-import { getLandUseTotal, getGHGTotal, getWaterTotal, getEutroTotal } from '../utils/calculations';
 import classNames from 'classnames';
 
 const Pie = ({ category, isSingle }) => {

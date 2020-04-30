@@ -26,25 +26,26 @@ function fetcher(url) {
   return fetch(url).then((r) => r.json());
 }
 
-function getTotalByCategory(ingredients) {
+function getTotalByCategory(ingredients, numberOfServings) {
   return {
-    landUse: getLandUseTotal(ingredients),
-    ghgEmissions: getGHGTotal(ingredients),
-    waterWithdrawals: getWaterTotal(ingredients),
-    eutrophyingEmissions: getEutroTotal(ingredients),
+    landUse: getLandUseTotal(ingredients, numberOfServings),
+    ghgEmissions: getGHGTotal(ingredients, numberOfServings),
+    waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
+    eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
   };
 }
 
-function saveMeal(mealName, aboutMeal, ingredients) {
+function saveMeal(mealName, aboutMeal, ingredients, numberOfServings) {
   const id = mealName.toLowerCase().replace(/\s/g, '-');
   const meal = {
     id,
     title: mealName,
     about: aboutMeal,
-    landUse: getLandUseTotal(ingredients),
-    ghgEmissions: getGHGTotal(ingredients),
-    waterWithdrawals: getWaterTotal(ingredients),
-    eutrophyingEmissions: getEutroTotal(ingredients),
+    numberOfServings,
+    landUse: getLandUseTotal(ingredients, numberOfServings),
+    ghgEmissions: getGHGTotal(ingredients, numberOfServings),
+    waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
+    eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
     ingredients,
   };
   const { data, error } = fetch('/api/meals', {
@@ -93,6 +94,15 @@ function NewMeal({ foodData, transportData }) {
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
 
   const foodOptions = foodData.map((food) => ({ value: food.entity, label: food.entity })) || [];
+
+  const numberOfServingsOptions = [];
+  for (let i = 0; i < 10; i++) {
+    numberOfServingsOptions.push({
+      value: i + 1,
+      label: `Serves ${i + 1} ${i === 0 ? 'person' : 'people'}`,
+    });
+  }
+  const [numberOfServings, setNumberOfServings] = useState(numberOfServingsOptions[0].value);
 
   const deleteIngredient = (index) => {
     const temp = [...ingredients];
@@ -166,7 +176,21 @@ function NewMeal({ foodData, transportData }) {
       <Content>
         <PageTitle>New Meal Calculation</PageTitle>
         <Card>
-          <Ingredients ingredients={ingredients} deleteIngredient={deleteIngredient} />
+          <div className="select-container number-of-servings-select">
+            <Select
+              value={numberOfServings.value}
+              placeholder="Number of servings"
+              onChange={(val) => setNumberOfServings(val.value)}
+              options={numberOfServingsOptions}
+            />
+          </div>
+        </Card>
+        <Card>
+          <Ingredients
+            ingredients={ingredients}
+            deleteIngredient={deleteIngredient}
+            numberOfServings={numberOfServings}
+          />
           {isAdding ? (
             <Card>
               <div className="required-fields">
@@ -255,8 +279,8 @@ function NewMeal({ foodData, transportData }) {
         </Card>
         {ingredients.length > 0 && (
           <Card>
-            <CardTitle>Meal total</CardTitle>
-            <Pies meal={getTotalByCategory(ingredients)} />
+            <CardTitle>{`Meal total${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+            <Pies meal={getTotalByCategory(ingredients, numberOfServings)} />
           </Card>
         )}
         <Card>
@@ -281,7 +305,7 @@ function NewMeal({ foodData, transportData }) {
         </Card>
         <div className="button-container">
           <Button
-            onClick={() => saveMeal(mealName, aboutMeal, ingredients)}
+            onClick={() => saveMeal(mealName, aboutMeal, ingredients, numberOfServings)}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
           >
@@ -318,7 +342,6 @@ function NewMeal({ foodData, transportData }) {
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.25);
           }
           .required-fields,
           .optional-fields {
@@ -332,6 +355,9 @@ function NewMeal({ foodData, transportData }) {
           .select-container {
             margin-right: 20px;
             width: 150px;
+          }
+          .number-of-servings-select {
+            width: 220px;
           }
           .ingredient-select {
             width: 220px;

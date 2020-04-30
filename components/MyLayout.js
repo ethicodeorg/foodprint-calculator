@@ -8,7 +8,7 @@ const Layout = ({ children }) => (
         min-height: 100vh;
         font-family: Avenir;
         color: #222;
-        background-color: #f5f5f5;
+        background-color: #f1f5f6;
       }
     `}</style>
   </div>

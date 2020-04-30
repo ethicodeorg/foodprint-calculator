@@ -38,6 +38,7 @@ const Header = ({ activePage }) => (
         justify-content: flex-end;
         width: calc(100% - 80px);
         padding: 30px 40px;
+        background-color: #f1f5f6;
       }
       .link {
         color: #222;

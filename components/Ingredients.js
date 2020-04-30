@@ -1,7 +1,7 @@
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
 
-const Ingredients = ({ ingredients, deleteIngredient }) => (
+const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
   <div className="ingredients">
     <CardTitle>Ingredients</CardTitle>
     {ingredients.map((ingredient, index) => {
@@ -14,7 +14,7 @@ const Ingredients = ({ ingredients, deleteIngredient }) => (
             {`${ingredient.entity} ${ingredient.weight} ${ingredient.weightUnit}`}
             <div className="transport">{transportString}</div>
           </div>
-          <TinyPies ingredient={ingredient} isSingle />
+          <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
           {deleteIngredient && (
             <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
               Remove

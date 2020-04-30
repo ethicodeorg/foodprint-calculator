@@ -46,14 +46,17 @@ export default () => {
           {meal.about && (
             <Card>
               <CardTitle>About meal</CardTitle>
+              <p>{`Serves ${meal.numberOfServings} ${
+                meal.numberOfServings === 1 ? 'person' : 'people'
+              }`}</p>
               <p>{meal.about}</p>
             </Card>
           )}
           <Card>
-            <Ingredients ingredients={meal.ingredients} />
+            <Ingredients ingredients={meal.ingredients} numberOfServings={meal.numberOfServings} />
           </Card>
           <Card>
-            <CardTitle>Meal total</CardTitle>
+            <CardTitle>{`Meal total${meal.numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
             <Pies meal={meal} />
           </Card>
         </Content>

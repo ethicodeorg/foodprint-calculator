@@ -1,24 +1,24 @@
-export function getLandUseTotal(ingredients = []) {
+export function getLandUseTotal(ingredients = [], numberOfServings = 1) {
   const total = ingredients.reduce((acc, ingredient) => acc + ingredient.landUse.value, 0);
-  return total;
+  return total / numberOfServings;
 }
 
-export function getGHGTotal(ingredients = []) {
+export function getGHGTotal(ingredients = [], numberOfServings = 1) {
   const total = ingredients.reduce((acc, ingredient) => acc + ingredient.ghgEmissions.value, 0);
-  return total;
+  return total / numberOfServings;
 }
 
-export function getWaterTotal(ingredients = []) {
+export function getWaterTotal(ingredients = [], numberOfServings = 1) {
   const total = ingredients.reduce((acc, ingredient) => acc + ingredient.waterWithdrawals.value, 0);
-  return total;
+  return total / numberOfServings;
 }
 
-export function getEutroTotal(ingredients = []) {
+export function getEutroTotal(ingredients = [], numberOfServings = 1) {
   const total = ingredients.reduce(
     (acc, ingredient) => acc + ingredient.eutrophyingEmissions.value,
     0
   );
-  return total;
+  return total / numberOfServings;
 }
 
 function convertToTonnes(weight, unit) {

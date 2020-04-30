@@ -38,32 +38,32 @@ export function getMealPieData(meal) {
   ];
 }
 
-export function getIngredientPieData(ingredient) {
+export function getIngredientPieData(ingredient, numberOfServings) {
   return [
     {
       name: 'Land use',
-      total: ingredient.landUse.value,
+      total: ingredient.landUse.value / numberOfServings,
       rda: RDAs.landUse,
       unit: 'm²',
       color: '#4caf50',
     },
     {
       name: 'GHG emissions',
-      total: ingredient.ghgEmissions.value,
+      total: ingredient.ghgEmissions.value / numberOfServings,
       rda: RDAs.ghgEmissions,
       unit: 'kg',
       color: '#e91e63',
     },
     {
       name: 'Water withdrawals',
-      total: ingredient.waterWithdrawals.value,
+      total: ingredient.waterWithdrawals.value / numberOfServings,
       rda: RDAs.waterWithdrawals,
       unit: 'L',
       color: '#2196f3',
     },
     {
       name: 'Eutrophying emissions',
-      total: ingredient.eutrophyingEmissions.value,
+      total: ingredient.eutrophyingEmissions.value / numberOfServings,
       rda: RDAs.eutrophyingEmissions,
       unit: 'kgPO₄eq',
       color: '#222',

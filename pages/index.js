@@ -32,11 +32,12 @@ export default function Index() {
       <style jsx>{`
         .FrontPage {
           max-width: 1520px;
-          padding: 40px;
+          padding: 100px;
           margin: 0 auto;
         }
         .button-container {
-          margin-top: 0px;
+          text-align: center;
+          width: 70%;
         }
         h1 {
           font-size: 104px;
