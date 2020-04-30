@@ -232,7 +232,9 @@ function NewMeal({ foodData, transportData }) {
                 </div>
               ) : (
                 <div className="optional-fields">
-                  <Button onClick={() => setIsAddingTransport(true)}>+ Add Transport</Button>
+                  <div className="add-transport-button-container">
+                    <Button onClick={() => setIsAddingTransport(true)}>+ Add Transport</Button>
+                  </div>
                   <span className="optional-text">
                     *If transport is not provided, the average transport emissions for the selected
                     ingredient will be used
@@ -378,6 +380,9 @@ function NewMeal({ foodData, transportData }) {
           }
           .add-button:hover {
             opacity: 0.7;
+          }
+          .add-transport-button-container {
+            margin-right: 20px;
           }
           .add-button-container {
             width: 100%;

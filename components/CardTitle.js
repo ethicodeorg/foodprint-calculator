@@ -6,6 +6,7 @@ const CardTitle = ({ children }) => (
       .card-title {
         margin: 0;
         font-size: 32px;
+        font-weight: normal;
       }
     `}</style>
   </h3>

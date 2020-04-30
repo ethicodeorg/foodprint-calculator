@@ -33,16 +33,18 @@ const Header = ({ activePage }) => (
 
     <style jsx>{`
       .header {
+        position: fixed;
         display: flex;
         justify-content: flex-end;
+        width: calc(100% - 80px);
         padding: 30px 40px;
       }
       .link {
         color: #222;
         text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-        margin-left: 20px;
+        font-size: 24px;
+        font-weight: normal;
+        margin-left: 30px;
         opacity: 1;
         transition: opacity 0.2s;
       }

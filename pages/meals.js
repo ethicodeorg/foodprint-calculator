@@ -21,31 +21,52 @@ export default function Index() {
     <Layout>
       <Header activePage="meals" />
       {data ? (
-        <Content>
+        <div className="meals-page">
           <PageTitle>My meals</PageTitle>
           <MealLink id="new">
-            <Button>+ Create new meal</Button>
+            <div className="button-container">
+              <Button primary round>
+                +
+              </Button>
+            </div>
           </MealLink>
           {!data.length && <div>You have not saved any meals</div>}
-          {data.map((meal) => {
-            return (
-              <MealLink id={meal.id} key={meal.id}>
-                <Card>
-                  <CardTitle>{meal.title}</CardTitle>
-                  {meal.about && <p>{meal.about}</p>}
-                  <Pies meal={meal} />
-                </Card>
-              </MealLink>
-            );
-          })}
+          <div className="meals-container">
+            {data.map((meal) => {
+              return (
+                <MealLink id={meal.id} key={meal.id}>
+                  <Card>
+                    <CardTitle>{meal.title}</CardTitle>
+                    {meal.about && <p>{meal.about}</p>}
+                    <Pies meal={meal} />
+                  </Card>
+                </MealLink>
+              );
+            })}
+          </div>
 
           <style jsx>{`
             .meal {
               font-size: 18px;
               padding-bottom: 20px;
             }
+            .button-container {
+              position: fixed;
+              right: 80px;
+              bottom: 50px;
+            }
+            .meals-page {
+              padding: 20px;
+              max-width: 1520px;
+              margin: 0 auto;
+            }
+            .meals-container {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+            }
           `}</style>
-        </Content>
+        </div>
       ) : (
         <Content>Baking pies...</Content>
       )}

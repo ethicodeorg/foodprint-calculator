@@ -6,6 +6,8 @@ const MealLink = ({ id, children }) => (
       {children}
       <style jsx>{`
         .meal-link {
+          width: 730px;
+          margin: 0 10px;
           font-size: 18px;
           font-weight: normal;
           text-decoration: none;
