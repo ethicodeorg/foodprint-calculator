@@ -1,0 +1,181 @@
+[
+  { "key": "app", "foods": ["Apples"] },
+  { "key": "ban", "foods": ["Bananas"] },
+  { "key": "bar", "foods": ["Barley"] },
+  { "key": "bbh", "foods": ["Beef (beef herd)"] },
+  { "key": "bdh", "foods": ["Beef (dairy herd)"] },
+  { "key": "bes", "foods": ["Beet Sugar"] },
+  { "key": "ber", "foods": ["Berries & Grapes", "Blueberries", "Strawberries", "Rasperries"] },
+  {
+    "key": "bra",
+    "foods": [
+      "Brassicas",
+      "Broccoli",
+      "Cauliflower",
+      "Cabbage",
+      "Choy sum",
+      "Rutabaga",
+      "Turnip",
+      "Mustard",
+      "Kale",
+      "Garden cress",
+      "Brussels sprouts",
+      "Spinach",
+      "Lettuce"
+    ]
+  },
+  { "key": "can", "foods": ["Cane Sugar", "Sugar"] },
+  { "key": "cas", "foods": ["Cassava"] },
+  { "key": "che", "foods": ["Cheese"] },
+  {
+    "key": "cit",
+    "foods": [
+      "Citrus Fruit",
+      "Grapefruit",
+      "Lemon",
+      "Lime",
+      "Orange",
+      "Tangerine",
+      "Ugli",
+      "Mandarine",
+      "Clementine",
+      "Blood orange"
+    ]
+  },
+  { "key": "cof", "foods": ["Coffee"] },
+  { "key": "cho", "foods": ["Dark Chocolate", "Chocolate"] },
+  { "key": "egg", "foods": ["Eggs"] },
+  {
+    "key": "fis",
+    "foods": [
+      "Fish (farmed)",
+      "Carp (farmed)",
+      "Tilapia (farmed)",
+      "Salmon (farmed)",
+      "Catfish (farmed)"
+    ]
+  },
+  { "key": "gro", "foods": ["Groundnuts", "Peanuts"] },
+  { "key": "lam", "foods": ["Lamb & Mutton"] },
+  { "key": "mai", "foods": ["Maize", "Corn"] },
+  { "key": "mil", "foods": ["Milk", "Cows milk", "Goat milk", "Sheep milk"] },
+  {
+    "key": "nut",
+    "foods": [
+      "Nuts",
+      "Hazelnuts",
+      "Chestnuts",
+      "Acorns",
+      "Almonds",
+      "Pecans",
+      "Pistachios",
+      "Walnuts",
+      "Brazil nuts"
+    ]
+  },
+  { "key": "oat", "foods": ["Oatmeal", "Ground oats", "Steel-cut oats", "Rolled oats"] },
+  { "key": "olo", "foods": ["Olive Oil"] },
+  {
+    "key": "oni",
+    "foods": [
+      "Onions & Leeks",
+      "Garlic",
+      "Onion",
+      "Shallot",
+      "Leek",
+      "Chive",
+      "Chinese onion",
+      "Scallion",
+      "Spring onion",
+      "Green onion"
+    ]
+  },
+  {
+    "key": "fru",
+    "foods": [
+      "Other Fruit",
+      "Avocados",
+      "Pears",
+      "Dates",
+      "Figs",
+      "Kiwi",
+      "Mango",
+      "Melon",
+      "Passionfruit",
+      "Peach",
+      "Plum",
+      "Pineapple",
+      "Pomegranate",
+      "Bell pepper",
+      "Chili pepper",
+      "Cucumber",
+      "Eggplant",
+      "Jalapeños",
+      "Olives",
+      "Pumpkin",
+      "Squash",
+      "Zucchini",
+      "Paprika"
+    ]
+  },
+  {
+    "key": "pul",
+    "foods": [
+      "Other Pulses",
+      "Dry beans",
+      "Chickpeas",
+      "Cowpeas",
+      "Pigeon peas",
+      "Lentils",
+      "Bambara beans",
+      "Vetches",
+      "Lupins",
+      "Faba beans",
+      "Black beans",
+      "Black-eyed peas",
+      "Green beans",
+      "Kidney beans",
+      "Pinto beans",
+      "Split peas"
+    ]
+  },
+  {
+    "key": "veg",
+    "foods": [
+      "Other Vegetables",
+      "Celery",
+      "Fennel",
+      "Anise",
+      "Basil",
+      "Coriander",
+      "Chamomile",
+      "Lavender",
+      "Lemongrass",
+      "Oregano",
+      "Parsley",
+      "Rosemary",
+      "Sage",
+      "Thyme",
+      "Mushrooms"
+    ]
+  },
+  { "key": "pao", "foods": ["Palm Oil"] },
+  { "key": "pea", "foods": ["Peas"] },
+  {
+    "key": "pig",
+    "foods": ["Pig Meat", "Bacon", "Pork", "Ham", "Sausage", "Gammon", "Pork chops"]
+  },
+  { "key": "pot", "foods": ["Potatoes", "Sweet potatoes", "Yam"] },
+  { "key": "pou", "foods": ["Poultry Meat", "Chicken", "Turkey", "Quail", "Squabs"] },
+  { "key": "pra", "foods": ["Prawns (farmed)", "Shrimps (farmed)"] },
+  { "key": "rao", "foods": ["Rapeseed Oil"] },
+  { "key": "ric", "foods": ["Rice"] },
+  { "key": "roo", "foods": ["Root Vegetables", "Carrots", "Ginger", "Parsnip", "Radish"] },
+  { "key": "soo", "foods": ["Soybean Oil"] },
+  { "key": "som", "foods": ["Soymilk"] },
+  { "key": "suo", "foods": ["Sunflower Oil"] },
+  { "key": "tof", "foods": ["Tofu (soybeans)", "Soy beans"] },
+  { "key": "tom", "foods": ["Tomatoes"] },
+  { "key": "whe", "foods": ["Wheat & Rye"] },
+  { "key": "win", "foods": ["Wine"] }
+]

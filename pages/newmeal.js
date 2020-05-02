@@ -35,12 +35,13 @@ function getTotalByCategory(ingredients, numberOfServings) {
   };
 }
 
-function saveMeal(mealName, aboutMeal, ingredients, numberOfServings) {
+function saveMeal(mealName, aboutMeal, mealLink, ingredients, numberOfServings) {
   const id = mealName.toLowerCase().replace(/\s/g, '-');
   const meal = {
     id,
     title: mealName,
     about: aboutMeal,
+    link: mealLink,
     numberOfServings,
     landUse: getLandUseTotal(ingredients, numberOfServings),
     ghgEmissions: getGHGTotal(ingredients, numberOfServings),
@@ -62,7 +63,9 @@ function matchFoodToTerm(food, value) {
 function NewMeal({ foodData, transportData }) {
   const [mealName, setMealName] = useState('');
   const [aboutMeal, setAboutMeal] = useState('');
+  const [mealLink, setMealLink] = useState('');
   const [autocompleteValue, setAutocompleteValue] = useState('');
+  const [autocompleteLabel, setAutocompleteLabel] = useState('');
   const [weight, setWeight] = useState('');
   const [distance, setDistance] = useState('');
   const [transportMode, setTransportMode] = useState('');
@@ -93,7 +96,13 @@ function NewMeal({ foodData, transportData }) {
   const [weightUnit, setWeightUnit] = useState(weightUnitOptions[0].value);
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
 
-  const foodOptions = foodData.map((food) => ({ value: food.entity, label: food.entity })) || [];
+  let foodOptions = [];
+  for (let i = 0; i < foodData.length; i++) {
+    for (let j = 0; j < foodData[i].entities.length; j++) {
+      foodOptions.push({ value: foodData[i].key, label: foodData[i].entities[j] });
+    }
+  }
+  foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
 
   const numberOfServingsOptions = [];
   for (let i = 0; i < 10; i++) {
@@ -111,7 +120,7 @@ function NewMeal({ foodData, transportData }) {
   };
 
   const addIngredient = () => {
-    const food = foodData.find((option) => option.entity === autocompleteValue);
+    const food = foodData.find((f) => f.key === autocompleteValue);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
@@ -134,7 +143,8 @@ function NewMeal({ foodData, transportData }) {
       retail: food.ghgEmissions.values.retail * convertToKilograms(weight, weightUnit),
     };
     const ingredient = {
-      entity: autocompleteValue,
+      key: autocompleteValue,
+      label: autocompleteLabel,
       weight,
       weightUnit,
       distance,
@@ -165,6 +175,7 @@ function NewMeal({ foodData, transportData }) {
     setWeight('');
     setDistance('');
     setAutocompleteValue('');
+    setAutocompleteLabel('');
     setIsAdding(false);
     setIsAddingTransport(false);
     setWeightUnit(weightUnitOptions[0].value);
@@ -198,7 +209,10 @@ function NewMeal({ foodData, transportData }) {
                   <Select
                     value={autocompleteValue.value}
                     placeholder="Ingredient"
-                    onChange={(val) => setAutocompleteValue(val.value)}
+                    onChange={(val) => {
+                      setAutocompleteValue(val.value);
+                      setAutocompleteLabel(val.label);
+                    }}
                     options={foodOptions}
                   />
                 </div>
@@ -302,10 +316,18 @@ function NewMeal({ foodData, transportData }) {
             value={aboutMeal}
             onChange={(e) => setAboutMeal(e.target.value)}
           />
+          <input
+            type="text"
+            name="meal-link"
+            className="link-input"
+            placeholder="Link to recipe (optional)"
+            value={mealLink}
+            onChange={(e) => setMealLink(e.target.value)}
+          />
         </Card>
         <div className="button-container">
           <Button
-            onClick={() => saveMeal(mealName, aboutMeal, ingredients, numberOfServings)}
+            onClick={() => saveMeal(mealName, aboutMeal, mealLink, ingredients, numberOfServings)}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
           >
@@ -327,6 +349,10 @@ function NewMeal({ foodData, transportData }) {
             width: 100%;
             max-width: 400px;
             margin-bottom: 20px;
+          }
+          .link-input {
+            width: calc(100% - 20px);
+            margin-top: 20px;
           }
           .about-meal-input {
             width: calc(100% - 20px);

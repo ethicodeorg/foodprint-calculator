@@ -9,7 +9,7 @@
     "packaging": 0.1,
     "retail": 0.1,
     "unit": "kg",
-    "": ""
+    "code": "whe"
   },
   {
     "entity": "Maize",
@@ -21,7 +21,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "mai"
   },
   {
     "entity": "Barley",
@@ -33,7 +33,7 @@
     "packaging": 0.5,
     "retail": 0.3,
     "unit": "kg",
-    "": ""
+    "code": "bar"
   },
   {
     "entity": "Oatmeal",
@@ -45,7 +45,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "oat"
   },
   {
     "entity": "Rice",
@@ -57,7 +57,7 @@
     "packaging": 0.1,
     "retail": 0.1,
     "unit": "kg",
-    "": ""
+    "code": "ric"
   },
   {
     "entity": "Potatoes",
@@ -69,7 +69,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "pot"
   },
   {
     "entity": "Cassava",
@@ -81,7 +81,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "cas"
   },
   {
     "entity": "Cane Sugar",
@@ -93,7 +93,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "can"
   },
   {
     "entity": "Beet Sugar",
@@ -105,7 +105,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "bes"
   },
   {
     "entity": "Other Pulses",
@@ -117,7 +117,7 @@
     "packaging": 0.4,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "pul"
   },
   {
     "entity": "Peas",
@@ -129,7 +129,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "pea"
   },
   {
     "entity": "Nuts",
@@ -141,7 +141,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "nut"
   },
   {
     "entity": "Groundnuts",
@@ -153,7 +153,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "gro"
   },
   {
     "entity": "Soymilk",
@@ -165,7 +165,7 @@
     "packaging": 0.1,
     "retail": 0.3,
     "unit": "kg",
-    "": ""
+    "code": "som"
   },
   {
     "entity": "Tofu (soybeans)",
@@ -177,7 +177,7 @@
     "packaging": 0.2,
     "retail": 0.3,
     "unit": "kg",
-    "": ""
+    "code": "tof"
   },
   {
     "entity": "Soybean Oil",
@@ -189,7 +189,7 @@
     "packaging": 0.8,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "soo"
   },
   {
     "entity": "Palm Oil",
@@ -201,7 +201,7 @@
     "packaging": 0.9,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "pao"
   },
   {
     "entity": "Sunflower Oil",
@@ -213,7 +213,7 @@
     "packaging": 0.9,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "suo"
   },
   {
     "entity": "Rapeseed Oil",
@@ -225,7 +225,7 @@
     "packaging": 0.8,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "rao"
   },
   {
     "entity": "Olive Oil",
@@ -237,7 +237,7 @@
     "packaging": 0.9,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "olo"
   },
   {
     "entity": "Tomatoes",
@@ -249,7 +249,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "tom"
   },
   {
     "entity": "Onions & Leeks",
@@ -261,7 +261,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "oni"
   },
   {
     "entity": "Root Vegetables",
@@ -273,7 +273,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "roo"
   },
   {
     "entity": "Brassicas",
@@ -285,7 +285,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "bra"
   },
   {
     "entity": "Other Vegetables",
@@ -297,7 +297,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "veg"
   },
   {
     "entity": "Citrus Fruit",
@@ -309,7 +309,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "cit"
   },
   {
     "entity": "Bananas",
@@ -321,7 +321,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "ban"
   },
   {
     "entity": "Apples",
@@ -333,7 +333,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "app"
   },
   {
     "entity": "Berries & Grapes",
@@ -345,7 +345,7 @@
     "packaging": 0.2,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "ber"
   },
   {
     "entity": "Wine",
@@ -357,7 +357,7 @@
     "packaging": 0.7,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "win"
   },
   {
     "entity": "Other Fruit",
@@ -369,7 +369,7 @@
     "packaging": 0,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "fru"
   },
   {
     "entity": "Coffee",
@@ -381,7 +381,7 @@
     "packaging": 1.6,
     "retail": 0.1,
     "unit": "kg",
-    "": ""
+    "code": "cof"
   },
   {
     "entity": "Dark Chocolate",
@@ -393,7 +393,7 @@
     "packaging": 0.4,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "cho"
   },
   {
     "entity": "Beef (beef herd)",
@@ -405,7 +405,7 @@
     "packaging": 0.2,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "bbh"
   },
   {
     "entity": "Beef (dairy herd)",
@@ -417,7 +417,7 @@
     "packaging": 0.3,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "bdh"
   },
   {
     "entity": "Lamb & Mutton",
@@ -429,7 +429,7 @@
     "packaging": 0.3,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "lam"
   },
   {
     "entity": "Pig Meat",
@@ -441,7 +441,7 @@
     "packaging": 0.3,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "pig"
   },
   {
     "entity": "Poultry Meat",
@@ -453,7 +453,7 @@
     "packaging": 0.2,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "pou"
   },
   {
     "entity": "Milk",
@@ -465,7 +465,7 @@
     "packaging": 0.1,
     "retail": 0.3,
     "unit": "kg",
-    "": ""
+    "code": "mil"
   },
   {
     "entity": "Cheese",
@@ -477,7 +477,7 @@
     "packaging": 0.2,
     "retail": 0.3,
     "unit": "kg",
-    "": ""
+    "code": "che"
   },
   {
     "entity": "Eggs",
@@ -489,7 +489,7 @@
     "packaging": 0.2,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "egg"
   },
   {
     "entity": "Fish (farmed)",
@@ -501,7 +501,7 @@
     "packaging": 0.1,
     "retail": 0,
     "unit": "kg",
-    "": ""
+    "code": "fis"
   },
   {
     "entity": "Prawns (farmed)",
@@ -513,6 +513,6 @@
     "packaging": 0.3,
     "retail": 0.2,
     "unit": "kg",
-    "": ""
+    "code": "pra"
   }
 ]

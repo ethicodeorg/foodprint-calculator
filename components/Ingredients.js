@@ -11,7 +11,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
       return (
         <div className="ingredient" key={index}>
           <div className="ingredient-basic">
-            {`${ingredient.entity} ${ingredient.weight} ${ingredient.weightUnit}`}
+            {`${ingredient.label} ${ingredient.weight} ${ingredient.weightUnit}`}
             <div className="transport">{transportString}</div>
           </div>
           <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />

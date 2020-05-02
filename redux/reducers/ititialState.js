@@ -19,13 +19,14 @@ function sumUpGHG(foodGHG) {
 
 function getFoodData() {
   return foods.map((food) => {
-    const foodLandUse = landUse.find((l) => l.entity === food);
-    const foodEutro = eutrophyingEmissions.find((e) => e.entity === food);
-    const foodGHG = ghgEmissions.find((g) => g.entity === food);
-    const foodWater = waterWithdrawals.find((w) => w.entity === food);
+    const foodLandUse = landUse.find((l) => l.code === food.key);
+    const foodEutro = eutrophyingEmissions.find((e) => e.code === food.key);
+    const foodGHG = ghgEmissions.find((g) => g.code === food.key);
+    const foodWater = waterWithdrawals.find((w) => w.code === food.key);
 
     return {
-      entity: food,
+      key: food.key,
+      entities: food.foods,
       landUse: {
         value: foodLandUse.landUsePerKilogram,
         unit: foodLandUse.unit,

@@ -23,14 +23,12 @@ export default function Index() {
       {data ? (
         <div className="meals-page">
           <PageTitle>My meals</PageTitle>
+          {!data.length && <div className="no-meals">You have not saved any meals</div>}
           <MealLink id="new">
-            <div className="button-container">
-              <Button primary round>
-                +
-              </Button>
+            <div className="button-container-above">
+              <Button primary>+ Create meal</Button>
             </div>
           </MealLink>
-          {!data.length && <div>You have not saved any meals</div>}
           <div className="meals-container">
             {data.map((meal) => {
               return (
@@ -41,6 +39,14 @@ export default function Index() {
                       meal.numberOfServings === 1 ? 'person' : 'people'
                     }`}</p>
                     {meal.about && <p>{meal.about}</p>}
+                    {meal.link && (
+                      <a href={meal.link} className="recipe-link">
+                        Link to recipe
+                      </a>
+                    )}
+                    <h3 className="footprint-title">{`Meal's environmental footprint${
+                      meal.numberOfServings > 1 ? ' - per person' : ''
+                    }`}</h3>
                     <Pies meal={meal} />
                   </Card>
                 </MealLink>
@@ -49,6 +55,9 @@ export default function Index() {
           </div>
 
           <style jsx>{`
+            .no-meals {
+              text-align: center;
+            }
             .meal {
               font-size: 18px;
               padding-bottom: 20px;
@@ -57,6 +66,9 @@ export default function Index() {
               position: fixed;
               right: 80px;
               bottom: 50px;
+            }
+            .button-container-above {
+              text-align: center;
             }
             .meals-page {
               padding: 20px;
@@ -67,6 +79,20 @@ export default function Index() {
               display: flex;
               justify-content: center;
               flex-wrap: wrap;
+            }
+            .footprint-title {
+              margin: 0;
+              font-size: 26px;
+              font-weight: normal;
+            }
+            .recipe-link {
+              display: block;
+              padding-bottom: 20px;
+              color: #2196f3;
+              text-decoration: none;
+            }
+            .recipe-link:hover {
+              opacity: 0.7;
             }
           `}</style>
         </div>
