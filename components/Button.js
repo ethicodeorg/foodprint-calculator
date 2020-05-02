@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 
-const Button = ({ onClick, disabled, primary, round, children }) => (
+const Button = ({ onClick, disabled, primary, round, small, children }) => (
   <button
     onClick={onClick}
     disabled={disabled}
     className={classNames('button', {
       'button-primary': primary,
       'button-round': round,
+      'button-small': small,
     })}
   >
     {children}
@@ -29,8 +30,7 @@ const Button = ({ onClick, disabled, primary, round, children }) => (
       .button-primary {
         font-size: 24px;
         width: 280px;
-        margin-top: 30px;
-        margin-right: 0;
+        margin: 30px 0 20px;
         padding: 15px;
         background-color: #2196f3;
       }
@@ -38,6 +38,9 @@ const Button = ({ onClick, disabled, primary, round, children }) => (
         width: auto;
         min-width: 63px;
         border-radius: 100%;
+      }
+      .button-small {
+        min-width: auto;
       }
       .button:hover {
         opacity: 0.7;

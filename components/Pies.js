@@ -31,10 +31,12 @@ export default function Pies({ meal, isSingle }) {
         return (
           <div className="category-container" key={cIndex}>
             <div className="legend-container">
-              {`${name}: ${total.toFixed(2)} ${unit}`}
+              <div className="legend-name">{name}</div>
+              <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
               <div className="percentage">
-                % of RDA:{' '}
-                <span className={`percentage-${cIndex}`}>{((total / rda) * 100).toFixed(2)}%</span>
+                <span className={`percentage-${cIndex}`}>
+                  {((total / rda) * 100).toFixed(2)}% RDA
+                </span>
               </div>
             </div>
             {extraPies.concat(lastPie).map((pie, pIndex) => (
@@ -53,11 +55,13 @@ export default function Pies({ meal, isSingle }) {
           margin: 10px 0;
         }
         .legend-container {
-          min-width: 300px;
+          min-width: 240px;
           font-size: 14px;
         }
+        .legend-name {
+          font-size: 18px;
+        }
         .percentage {
-          font-weight: bold;
         }
         .percentage-0 {
           color: #4caf50;

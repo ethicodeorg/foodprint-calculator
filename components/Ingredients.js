@@ -31,7 +31,8 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
         margin-top: 10px;
       }
       .ingredient-basic {
-        min-width: 300px;
+        min-width: 240px;
+        font-size: 14px;
       }
       .transport {
         font-size: 12px;
