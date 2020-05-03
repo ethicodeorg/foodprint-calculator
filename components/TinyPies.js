@@ -25,9 +25,17 @@ export default function TinyPies({ ingredient, isSingle, numberOfServings }) {
       unit: unit,
       color: color,
     };
+    const percentageString = `${((total / rda) * 100).toFixed(2)}% RDA`;
 
     return extraPies
       .concat(lastPie)
-      .map((pie, pIndex) => <Pie key={pIndex} category={pie} isSingle={isSingle} />);
+      .map((pie, pIndex) => (
+        <Pie
+          key={pIndex}
+          category={pie}
+          isSingle={isSingle}
+          label={`${name}: ${percentageString}`}
+        />
+      ));
   });
 }

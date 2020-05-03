@@ -1,7 +1,7 @@
 import PieChart from 'react-minimal-pie-chart';
 import classNames from 'classnames';
 
-const Pie = ({ category, isSingle }) => {
+const Pie = ({ category, isSingle, label }) => {
   const { name, total, unit, color, rda } = category;
 
   return (
@@ -11,7 +11,7 @@ const Pie = ({ category, isSingle }) => {
       })}
     >
       <PieChart
-        data={[{ title: name, value: total, color: color }]}
+        data={[{ title: label, value: total, color: color }]}
         totalValue={rda}
         animate={true}
         animationDuration={800}

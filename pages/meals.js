@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import { FaEdit, FaExternalLinkAlt } from 'react-icons/fa';
 import useSWR from 'swr';
 import PieChart from 'react-minimal-pie-chart';
 import Header from '../components/Header';
@@ -10,7 +11,7 @@ import Card from '../components/Card';
 import CardTitle from '../components/CardTitle';
 import Button from '../components/Button';
 import PageTitle from '../components/PageTitle';
-import Ingredients from '../components/Ingredients';
+import TinyPies from '../components/TinyPies';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -18,7 +19,6 @@ function fetcher(url) {
 
 export default function Index() {
   const { data, error } = useSWR('/api/meals', fetcher);
-  const [showIngredients, setShowIngredients] = useState(false);
 
   return (
     <Layout>
@@ -27,27 +27,20 @@ export default function Index() {
         <div className="meals-page">
           <PageTitle>My meals</PageTitle>
           {!data.length && <div className="no-meals">You have not saved any meals</div>}
-          <MealLink id="new">
-            <div className="button-container-above">
+          <div className="buttons-container">
+            <MealLink id="new">
               <Button primary>+ Create meal</Button>
-            </div>
-          </MealLink>
-          <div className="button-container-below">
-            <Button secondary onClick={() => setShowIngredients(!showIngredients)}>
-              {`${showIngredients ? 'Hide' : 'Show'} environmental footprints per ingredient`}
-            </Button>
+            </MealLink>
           </div>
           <div className="meals-container">
             {data.map((meal) => {
               return (
-                <div className="meal">
+                <div className="meal" key={meal.id}>
                   <Card>
                     <div className="title-container">
                       <CardTitle>{meal.title}</CardTitle>
-                      <MealLink id={meal.id} key={meal.id}>
-                        <Button seconary small>
-                          Edit
-                        </Button>
+                      <MealLink id={meal.id}>
+                        <FaEdit />
                       </MealLink>
                     </div>
                     <p>{`Serves ${meal.numberOfServings} ${
@@ -57,21 +50,11 @@ export default function Index() {
                     {meal.link && (
                       <a href={meal.link} target="_blank" className="recipe-link">
                         Link to recipe
+                        <span className="button-icon">
+                          <FaExternalLinkAlt />
+                        </span>
                       </a>
                     )}
-                    {showIngredients && (
-                      <Fragment>
-                        <div className="separator" />
-                        <Ingredients
-                          ingredients={meal.ingredients}
-                          numberOfServings={meal.numberOfServings}
-                        />
-                      </Fragment>
-                    )}
-                    <div className="separator" />
-                    <CardTitle>{`Foodprint${
-                      meal.numberOfServings > 1 ? ' - per person' : ''
-                    }`}</CardTitle>
                     <Pies meal={meal} />
                   </Card>
                 </div>
@@ -86,6 +69,7 @@ export default function Index() {
             .title-container {
               display: flex;
               justify-content: space-between;
+              align-items: center;
             }
             .meal {
               width: 600px;
@@ -96,17 +80,18 @@ export default function Index() {
             .about-meal {
               font-size: 14px;
             }
-            .separator {
-              border-top: 1px solid #ccc;
-              margin: 20px 0;
+            .buttons-container {
+              display: flex;
+              justify-content: space-between;
+              padding: 0 10px;
             }
-            .button-container-above,
-            .button-container-below {
-              text-align: center;
+            .button-icon {
+              display: inline;
+              margin-left: 10px;
             }
             .meals-page {
               padding: 20px;
-              max-width: 1520px;
+              max-width: 1240px;
               margin: 0 auto;
             }
             .meals-container {
