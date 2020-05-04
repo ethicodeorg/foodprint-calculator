@@ -15,25 +15,32 @@ export default function Pies({ meal, isSingle }) {
 
   return (
     <Fragment>
-      <div className="ingredient-button-container">
-        <Button clear onClick={() => setShowIngredients(!showIngredients)}>
-          Ingredients
-          <span
-            className={classNames('button-icon', {
-              'button-icon-reversed': showIngredients,
-            })}
-          >
-            <FaChevronDown />
-          </span>
-        </Button>
-      </div>
-      {showIngredients && (
+      {meal.ingredients && (
         <Fragment>
+          <div className="ingredient-button-container">
+            <Button clear onClick={() => setShowIngredients(!showIngredients)}>
+              Ingredients
+              <span
+                className={classNames('button-icon', {
+                  'button-icon-reversed': showIngredients,
+                })}
+              >
+                <FaChevronDown />
+              </span>
+            </Button>
+          </div>
+          {showIngredients && (
+            <Fragment>
+              <div className="separator" />
+              <Ingredients
+                ingredients={meal.ingredients}
+                numberOfServings={meal.numberOfServings}
+              />
+            </Fragment>
+          )}
           <div className="separator" />
-          <Ingredients ingredients={meal.ingredients} numberOfServings={meal.numberOfServings} />
         </Fragment>
       )}
-      <div className="separator" />
       <div className="title-container">
         <CardTitle>{`Foodprint${meal.numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>

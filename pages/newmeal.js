@@ -184,7 +184,7 @@ function NewMeal({ foodData, transportData }) {
 
   return (
     <Layout>
-      <Header activePage="meals" />
+      <Header activePage="new" />
       <Content>
         <PageTitle>New Meal Calculation</PageTitle>
         <Card>
@@ -294,7 +294,6 @@ function NewMeal({ foodData, transportData }) {
         </Card>
         {ingredients.length > 0 && (
           <Card>
-            <CardTitle>{`Meal total${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
             <Pies meal={getTotalByCategory(ingredients, numberOfServings)} />
           </Card>
         )}

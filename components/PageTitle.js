@@ -10,7 +10,7 @@ const PageTitle = ({ xl, children }) => (
 
     <style jsx>{`
       .page-title {
-        margin: 85px 0 0;
+        margin: 120px 0 0;
         font-size: 48px;
         font-weight: normal;
         text-align: center;

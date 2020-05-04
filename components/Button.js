@@ -42,7 +42,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
       .button-primary {
         font-size: 24px;
         margin: 0;
-        padding: 15px 30px;
+        padding: 15px 40px;
         background-color: ${theme.colors.water};
       }
       .button-round {

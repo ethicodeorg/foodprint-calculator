@@ -1,4 +1,11 @@
 import Link from 'next/link';
+import {
+  FaCalculator,
+  FaGlobeEurope,
+  FaGlobeAfrica,
+  FaGlobeAsia,
+  FaGlobeAmericas,
+} from 'react-icons/fa';
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
@@ -10,7 +17,19 @@ const Header = ({ activePage }) => (
           active: activePage === 'home',
         })}
       >
-        Home
+        {activePage === 'home' && <FaGlobeAmericas />}
+        {activePage === 'meals' && <FaGlobeAsia />}
+        {activePage === 'new' && <FaGlobeAfrica />}
+        {activePage === 'about' && <FaGlobeEurope />}
+      </a>
+    </Link>
+    <Link href="/meals/new">
+      <a
+        className={classNames('link new', {
+          active: activePage === 'new',
+        })}
+      >
+        <FaCalculator />
       </a>
     </Link>
     <Link href="/meals">
@@ -36,13 +55,15 @@ const Header = ({ activePage }) => (
       .header {
         position: fixed;
         display: flex;
+        align-items: center;
         justify-content: flex-end;
         width: calc(100% - 80px);
-        padding: 30px 40px;
-        background-color: ${theme.colors.background};
+        padding: 20px 40px;
+        background-color: ${theme.colors.darkBackground};
       }
       .link {
-        color: ${theme.colors.text};
+        display: flex;
+        color: #fff;
         text-decoration: none;
         font-size: 24px;
         font-weight: normal;
@@ -59,6 +80,15 @@ const Header = ({ activePage }) => (
       .home {
         margin-right: auto;
         margin-left: 0;
+        font-size: 48px;
+        color: ${theme.colors.water};
+      }
+      .new {
+        position: fixed;
+        margin: 0;
+        left: calc(50% - 16px);
+        font-size: 32px;
+        color: ${theme.colors.land};
       }
     `}</style>
   </div>

@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { FaEdit, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaEdit, FaExternalLinkAlt, FaCalculator } from 'react-icons/fa';
 import useSWR from 'swr';
 import PieChart from 'react-minimal-pie-chart';
 import Header from '../components/Header';
@@ -30,7 +30,12 @@ export default function Index() {
           {!data.length && <div className="no-meals">You have not saved any meals</div>}
           <div className="buttons-container">
             <MealLink id="new">
-              <Button primary>+ Create meal</Button>
+              <Button primary>
+                Create meal
+                <span className="calculator-container">
+                  <FaCalculator />
+                </span>
+              </Button>
             </MealLink>
           </div>
           <div className="meals-container">
@@ -41,9 +46,9 @@ export default function Index() {
                     <div className="title-container">
                       <CardTitle>{meal.title}</CardTitle>
                       <div className="edit-button-container">
-                      <MealLink id={meal.id}>
-                        <FaEdit />
-                      </MealLink>
+                        <MealLink id={meal.id}>
+                          <FaEdit />
+                        </MealLink>
                       </div>
                     </div>
                     <p>{`Serves ${meal.numberOfServings} ${
@@ -85,7 +90,7 @@ export default function Index() {
             }
             .buttons-container {
               display: flex;
-              justify-content: space-between;
+              flex-direction: row-reverse;
               padding: 0 10px;
             }
             .edit-button-container {
@@ -95,6 +100,11 @@ export default function Index() {
             .button-icon {
               display: inline;
               margin-left: 10px;
+              font-size: 14px;
+            }
+            .calculator-container {
+              display: flex;
+              margin-left: 20px;
               font-size: 14px;
             }
             .meals-page {

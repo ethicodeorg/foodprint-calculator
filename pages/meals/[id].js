@@ -53,10 +53,6 @@ export default () => {
             </Card>
           )}
           <Card>
-            <Ingredients ingredients={meal.ingredients} numberOfServings={meal.numberOfServings} />
-          </Card>
-          <Card>
-            <CardTitle>{`Meal total${meal.numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
             <Pies meal={meal} />
           </Card>
         </Content>
