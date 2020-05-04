@@ -1,3 +1,5 @@
+import theme from "../styles/theme";
+
 const Layout = ({ children }) => (
   <div className="main">
     {children}
@@ -6,9 +8,9 @@ const Layout = ({ children }) => (
       .main {
         margin: -8px;
         min-height: 100vh;
-        font-family: Avenir;
-        color: #222;
-        background-color: #f1f5f6;
+        font-family: ${theme.fontFamily.default};
+        color: ${theme.colors.text};
+        background-color: ${theme.colors.background};
       }
     `}</style>
   </div>

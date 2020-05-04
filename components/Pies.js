@@ -6,6 +6,7 @@ import Pie from '../components/Pie';
 import Button from '../components/Button';
 import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
+import theme from '../styles/theme';
 
 export default function Pies({ meal, isSingle }) {
   const pieData = getMealPieData(meal);
@@ -106,16 +107,18 @@ export default function Pies({ meal, isSingle }) {
       </div>
       <style jsx>{`
         .separator {
-          border-top: 1px solid #ccc;
+          border-top: 1px solid ${theme.colors.border};
           margin: 20px 0;
         }
         .title-container {
           display: flex;
           justify-content: space-between;
+          align-items: baseline;
         }
         .button-icon {
           display: flex;
           margin-left: 10px;
+          font-size: 14px;
           transition: 0.3s ease-in-out;
         }
         .button-icon-reversed {
@@ -145,16 +148,16 @@ export default function Pies({ meal, isSingle }) {
         .percentage {
         }
         .percentage-0 {
-          color: #4caf50;
+          color: ${theme.colors.land};
         }
         .percentage-1 {
-          color: #e91e63;
+          color: ${theme.colors.ghg};
         }
         .percentage-2 {
-          color: #2196f3;
+          color: ${theme.colors.water};
         }
         .percentage-3 {
-          color: #222;
+          color: ${theme.colors.eutro};
         }
       `}</style>
     </Fragment>

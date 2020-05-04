@@ -12,6 +12,7 @@ import CardTitle from '../components/CardTitle';
 import Button from '../components/Button';
 import PageTitle from '../components/PageTitle';
 import TinyPies from '../components/TinyPies';
+import theme from '../styles/theme';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -39,9 +40,11 @@ export default function Index() {
                   <Card>
                     <div className="title-container">
                       <CardTitle>{meal.title}</CardTitle>
+                      <div className="edit-button-container">
                       <MealLink id={meal.id}>
                         <FaEdit />
                       </MealLink>
+                      </div>
                     </div>
                     <p>{`Serves ${meal.numberOfServings} ${
                       meal.numberOfServings === 1 ? 'person' : 'people'
@@ -69,7 +72,7 @@ export default function Index() {
             .title-container {
               display: flex;
               justify-content: space-between;
-              align-items: center;
+              align-items: baseline;
             }
             .meal {
               width: 600px;
@@ -85,9 +88,14 @@ export default function Index() {
               justify-content: space-between;
               padding: 0 10px;
             }
+            .edit-button-container {
+              color: ${theme.colors.water};
+              font-size: 24px;
+            }
             .button-icon {
               display: inline;
               margin-left: 10px;
+              font-size: 14px;
             }
             .meals-page {
               padding: 20px;
@@ -106,7 +114,7 @@ export default function Index() {
             }
             .recipe-link {
               display: block;
-              color: #2196f3;
+              color: ${theme.colors.water};
               text-decoration: none;
             }
             .recipe-link:hover {

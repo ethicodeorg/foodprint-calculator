@@ -21,6 +21,7 @@ import Ingredients from '../components/Ingredients';
 import CardTitle from '../components/CardTitle';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
+import theme from '../styles/theme';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -340,9 +341,9 @@ function NewMeal({ foodData, transportData }) {
           textarea {
             display: block;
             padding: 7px 10px;
-            border: 1px solid #ccc;
+            border: 1px solid ${theme.colors.border};
             border-radius: 4px;
-            font-family: Avenir;
+            font-family: ${theme.fontFamily.default};
             font-size: 16px;
           }
           .meal-input {
@@ -366,7 +367,7 @@ function NewMeal({ foodData, transportData }) {
             display: flex;
             flex-wrap: wrap;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid ${theme.colors.border};
             border-radius: 4px;
           }
           .required-fields,
@@ -404,7 +405,7 @@ function NewMeal({ foodData, transportData }) {
             width: 180px;
             margin: 20px 0 0;
             padding: 10px;
-            background-color: #4caf50;
+            background-color: ${theme.colors.land};
             opacity: 1;
             transition: opacity 0.2s;
             cursor: pointer;
@@ -418,7 +419,7 @@ function NewMeal({ foodData, transportData }) {
             width: 180px;
             margin-right: 20px;
             padding: 10px;
-            background-color: #4caf50;
+            background-color: ${theme.colors.land};
             opacity: 1;
             transition: opacity 0.2s;
             cursor: pointer;
@@ -461,7 +462,7 @@ function NewMeal({ foodData, transportData }) {
             width: 220px;
             margin-top: 30px;
             padding: 15px;
-            background-color: #2196f3;
+            background-color: ${theme.colors.water};
             opacity: 1;
             transition: opacity 0.2s;
             cursor: pointer;

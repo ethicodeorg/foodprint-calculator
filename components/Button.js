@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import theme from '../styles/theme';
 
 const Button = ({ onClick, disabled, primary, clear, round, small, children }) => (
   <button
@@ -19,9 +20,9 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
         align-items: center;
         font-size: 16px;
         font-weight: normal;
-        font-family: Avenir;
+        font-family: ${theme.fontFamily.default};
         padding: 10px 20px;
-        background-color: #4caf50;
+        background-color: ${theme.colors.land};
         opacity: 1;
         transition: opacity 0.2s;
         cursor: pointer;
@@ -34,7 +35,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
       .button-clear {
         padding: 10px 0 0;
         background-color: transparent;
-        color: #2196f3;
+        color: ${theme.colors.water};
         font-size: 18px;
         min-width: 100px;
       }
@@ -42,7 +43,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
         font-size: 24px;
         margin: 0;
         padding: 15px 30px;
-        background-color: #2196f3;
+        background-color: ${theme.colors.water};
       }
       .button-round {
         width: auto;

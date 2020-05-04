@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import theme from '../styles/theme';
 
 const MealLink = ({ id, children }) => (
   <Link href="/meals/[id]" as={`/meals/${id}`}>
@@ -6,10 +7,13 @@ const MealLink = ({ id, children }) => (
       {children}
       <style jsx>{`
         .meal-link {
-          font-size: 18px;
+          font-size: 24px;
           font-weight: normal;
           text-decoration: none;
-          color: #222;
+          color: ${theme.colors.water};
+        }
+        .meal-link:hover {
+          opacity: 0.7;
         }
       `}</style>
     </a>

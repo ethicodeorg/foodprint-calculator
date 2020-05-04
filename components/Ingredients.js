@@ -1,5 +1,6 @@
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
+import theme from '../styles/theme';
 
 const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
   <div className="ingredients">
@@ -43,7 +44,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
         margin-left: auto;
         font-size: 14px;
         font-weight: bold;
-        background-color: #e91e63;
+        background-color: ${theme.colors.eutro};
         color: #fff;
         opacity: 1;
         transition: opacity 0.2s;

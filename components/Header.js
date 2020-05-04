@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import classNames from 'classnames';
+import theme from '../styles/theme';
 
 const Header = ({ activePage }) => (
   <div className="header">
@@ -38,10 +39,10 @@ const Header = ({ activePage }) => (
         justify-content: flex-end;
         width: calc(100% - 80px);
         padding: 30px 40px;
-        background-color: #f1f5f6;
+        background-color: ${theme.colors.background};
       }
       .link {
-        color: #222;
+        color: ${theme.colors.text};
         text-decoration: none;
         font-size: 24px;
         font-weight: normal;
@@ -53,7 +54,7 @@ const Header = ({ activePage }) => (
         opacity: 0.7;
       }
       .active {
-        color: #e91e63;
+        color: ${theme.colors.ghg};
       }
       .home {
         margin-right: auto;

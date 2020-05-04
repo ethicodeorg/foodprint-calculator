@@ -1,3 +1,5 @@
+import theme from "../styles/theme";
+
 const RDAs = {
   landUse: 18,
   ghgEmissions: 4.8,
@@ -12,28 +14,28 @@ export function getMealPieData(meal) {
       total: meal.landUse,
       rda: RDAs.landUse,
       unit: 'm²',
-      color: '#4caf50',
+      color: theme.colors.land,
     },
     {
       name: 'GHG emissions',
       total: meal.ghgEmissions,
       rda: RDAs.ghgEmissions,
       unit: 'kg',
-      color: '#e91e63',
+      color: theme.colors.ghg,
     },
     {
       name: 'Water withdrawals',
       total: meal.waterWithdrawals,
       rda: RDAs.waterWithdrawals,
       unit: 'L',
-      color: '#2196f3',
+      color: theme.colors.water,
     },
     {
       name: 'Eutrophying emissions',
       total: meal.eutrophyingEmissions,
       rda: RDAs.eutrophyingEmissions,
       unit: 'kgPO₄eq',
-      color: '#222',
+      color: theme.colors.eutro,
     },
   ];
 }
@@ -45,28 +47,28 @@ export function getIngredientPieData(ingredient, numberOfServings) {
       total: ingredient.landUse.value / numberOfServings,
       rda: RDAs.landUse,
       unit: 'm²',
-      color: '#4caf50',
+      color: theme.colors.land,
     },
     {
       name: 'GHG emissions',
       total: ingredient.ghgEmissions.value / numberOfServings,
       rda: RDAs.ghgEmissions,
       unit: 'kg',
-      color: '#e91e63',
+      color: theme.colors.ghg,
     },
     {
       name: 'Water withdrawals',
       total: ingredient.waterWithdrawals.value / numberOfServings,
       rda: RDAs.waterWithdrawals,
       unit: 'L',
-      color: '#2196f3',
+      color: theme.colors.water,
     },
     {
       name: 'Eutrophying emissions',
       total: ingredient.eutrophyingEmissions.value / numberOfServings,
       rda: RDAs.eutrophyingEmissions,
       unit: 'kgPO₄eq',
-      color: '#222',
+      color: theme.colors.eutro,
     },
   ];
 }
