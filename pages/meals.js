@@ -63,7 +63,7 @@ export default function Index() {
                         </span>
                       </a>
                     )}
-                    <Pies meal={meal} />
+                    <Pies meal={meal} numberOfServings={meal.numberOfServings} />
                   </Card>
                 </div>
               );

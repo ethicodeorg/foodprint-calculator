@@ -8,7 +8,7 @@ import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 
-export default function Pies({ meal, isSingle }) {
+export default function Pies({ meal, isSingle, numberOfServings }) {
   const pieData = getMealPieData(meal);
   const [showDetails, setShowDetails] = useState(false);
   const [showIngredients, setShowIngredients] = useState(false);
@@ -32,17 +32,14 @@ export default function Pies({ meal, isSingle }) {
           {showIngredients && (
             <Fragment>
               <div className="separator" />
-              <Ingredients
-                ingredients={meal.ingredients}
-                numberOfServings={meal.numberOfServings}
-              />
+              <Ingredients ingredients={meal.ingredients} numberOfServings={numberOfServings} />
             </Fragment>
           )}
           <div className="separator" />
         </Fragment>
       )}
       <div className="title-container">
-        <CardTitle>{`Foodprint${meal.numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+        <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
           Details
           <span

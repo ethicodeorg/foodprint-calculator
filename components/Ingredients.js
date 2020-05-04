@@ -43,7 +43,6 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
         padding: 5px 20px;
         margin-left: auto;
         font-size: 14px;
-        font-weight: bold;
         background-color: ${theme.colors.eutro};
         color: #fff;
         opacity: 1;

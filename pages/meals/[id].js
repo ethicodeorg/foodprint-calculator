@@ -53,7 +53,7 @@ export default () => {
             </Card>
           )}
           <Card>
-            <Pies meal={meal} />
+            <Pies meal={meal} numberOfServings={meal.numberOfServings} />
           </Card>
         </Content>
       ) : (

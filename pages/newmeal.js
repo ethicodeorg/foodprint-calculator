@@ -294,7 +294,10 @@ function NewMeal({ foodData, transportData }) {
         </Card>
         {ingredients.length > 0 && (
           <Card>
-            <Pies meal={getTotalByCategory(ingredients, numberOfServings)} />
+            <Pies
+              meal={getTotalByCategory(ingredients, numberOfServings)}
+              numberOfServings={numberOfServings}
+            />
           </Card>
         )}
         <Card>
@@ -437,9 +440,10 @@ function NewMeal({ foodData, transportData }) {
             margin-right: 20px;
           }
           .add-button-container {
+            display: flex;
+            justify-content: flex-end;
             width: 100%;
             margin-top: 20px;
-            text-align: right;
           }
           .add-ingredient-container {
             margin-top: 20px;
@@ -452,6 +456,7 @@ function NewMeal({ foodData, transportData }) {
             font-size: 14px;
           }
           .button-container {
+            margin-top: 20px;
             display: flex;
             justify-content: flex-end;
           }
