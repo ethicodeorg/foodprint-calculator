@@ -395,7 +395,7 @@ function NewMeal({ foodData, transportData }) {
             width: 220px;
           }
           .transport-type-select {
-            min-width: 220px;
+            width: 220px;
           }
           .transport-unit-select {
             width: 150px;
