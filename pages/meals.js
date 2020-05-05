@@ -13,6 +13,7 @@ import Button from '../components/Button';
 import PageTitle from '../components/PageTitle';
 import TinyPies from '../components/TinyPies';
 import theme from '../styles/theme';
+import ExternalLink from '../components/ExternalLink';
 
 function fetcher(url) {
   return fetch(url).then((r) => r.json());
@@ -55,14 +56,7 @@ export default function Index() {
                       meal.numberOfServings === 1 ? 'person' : 'people'
                     }`}</p>
                     {meal.about && <p className="about-meal">{meal.about}</p>}
-                    {meal.link && (
-                      <a href={meal.link} target="_blank" className="recipe-link">
-                        Link to recipe
-                        <span className="button-icon">
-                          <FaExternalLinkAlt />
-                        </span>
-                      </a>
-                    )}
+                    {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
                     <Pies meal={meal} numberOfServings={meal.numberOfServings} />
                   </Card>
                 </div>

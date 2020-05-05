@@ -1,4 +1,4 @@
-import { FaCalculator } from 'react-icons/fa';
+import { FaCalculator, FaUtensils } from 'react-icons/fa';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -6,26 +6,43 @@ import MealLink from '../components/MealLink';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
+import Link from 'next/link';
 
 export default function Index() {
   return (
     <Layout>
       <Header activePage="home" />
       <div className="FrontPage">
-        <h1>Foodprint calculator</h1>
-        <h3>Calculate the environmental footprint of your meals</h3>
-        <p>Are we eating up our planet by choosing the wrong types of food?</p>
+        <h1>Foodprint Calculator</h1>
+        <h3>
+          Calculate the environmental footprint of your meals
+          <span className="utensils-container">
+            <FaUtensils />
+          </span>
+        </h3>
         <p>
-          Earth has finite resources which we all share and lately we've been making efforts to use
-          them sparingly.
+          This calculator enables us to visualize and compare how our meals impact our environment
+          with respect to
+          <Link href="/about">
+            <a className="about-link land"> land use</a>
+          </Link>
+          ,
+          <Link href="/about">
+            <a className="about-link water"> water withdrawals</a>
+          </Link>
+          ,
+          <Link href="/about">
+            <a className="about-link ghg"> greenhouse gas emissions</a>
+          </Link>
+          , and
+          <Link href="/about">
+            <a className="about-link eutro"> eutrophying emissions</a>
+          </Link>
+          .
         </p>
-        <p>
-          This calculator enables us to visualize how our food types and meals compare against each
-          other with respect to <span className="land">land use</span>,{' '}
-          <span className="water">water withdrawals</span>,{' '}
-          <span className="ghg">greenhouse gas emissions</span> and
-          <span className="eutro"> eutrophying emissions</span>.
-        </p>
+        <Link href="/about">
+          <a className="about-link">This is how.</a>
+        </Link>
         <MealLink id="new">
           <div className="button-container">
             <Button primary>
@@ -55,6 +72,18 @@ export default function Index() {
           margin-left: 20px;
           font-size: 14px;
         }
+        .utensils-container {
+          font-size: 30px;
+          margin-left: 10px;
+        }
+        .about-link {
+          color: ${theme.colors.water};
+          text-decoration: none;
+          font-size: 20px;
+        }
+        .about-link:hover {
+          opacity: 0.7;
+        }
         .land {
           color: ${theme.colors.land};
         }
@@ -79,7 +108,7 @@ export default function Index() {
         p {
           font-size: 20px;
           margin: 20px 0;
-          max-width: 1000px;
+          max-width: 900px;
         }
       `}</style>
     </Layout>

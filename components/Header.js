@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {
   FaCalculator,
+  FaUtensils,
   FaGlobeEurope,
   FaGlobeAfrica,
   FaGlobeAsia,
@@ -11,6 +12,7 @@ import theme from '../styles/theme';
 
 const Header = ({ activePage }) => (
   <div className="header">
+    <div className="land" />
     <Link href="/">
       <a
         className={classNames('link home', {
@@ -29,7 +31,12 @@ const Header = ({ activePage }) => (
           active: activePage === 'new',
         })}
       >
-        <FaCalculator />
+        <span className="icon-container">
+          <FaUtensils />
+        </span>
+        <span className="icon-container">
+          <FaCalculator />
+        </span>
       </a>
     </Link>
     <Link href="/meals">
@@ -83,12 +90,29 @@ const Header = ({ activePage }) => (
         font-size: 48px;
         color: ${theme.colors.water};
       }
+      .home:hover {
+        opacity: 1;
+      }
       .new {
         position: fixed;
         margin: 0;
-        left: calc(50% - 16px);
+        left: calc(50% - 42px);
+        top: 28px;
         font-size: 32px;
         color: ${theme.colors.land};
+      }
+      .icon-container {
+        margin: 0 5px;
+      }
+      .land {
+        position: fixed;
+        left: 43px;
+        height: 43px;
+        width: 43px;
+        margin-left: 0;
+        border-radius: 100%;
+        background-color: ${theme.colors.land};
+        z-index: -1;
       }
     `}</style>
   </div>
