@@ -28,8 +28,8 @@ export default function About() {
             countries and 40 products representing ~90% of global protein and calorie consumption.
           </p>
           <p>
-            This calculator utilizes the data from these sources to calculate the environmental
-            footprint for any meal, given a list of its ingredients.
+            This data is utilized by the Foodprint Calculator to accumulate the environmental impact
+            of any meal, given a list of its ingredients.
           </p>
           <CardTitle>Recommended daily allowance</CardTitle>
           <p>
@@ -88,9 +88,9 @@ export default function About() {
           </p>
           <CardTitle>How accurate is it?</CardTitle>
           <p>
-            Of course, the results accumulated by the calculator should not be regarded as exact
-            science but rather a rough estimation of the result. The environmental impact of each
-            food product type varies considerably between individual products and productions.
+            Of course, the results accumulated by the Foodprint Calculator should not be regarded as
+            exact science but rather a rough estimation of the result. The environmental impact of
+            each food product type varies considerably between individual products and productions.
             However, given that the data being used for this calculator is widely regarded as the
             most comprehensive and accurate data that we have today, we can assume that this
             calculator is as accurate as it gets.
@@ -113,20 +113,20 @@ export default function About() {
                 Some ingredients contain a bunch of other ingredients. The most accurate method is
                 to add an ingredient for each subingredient but in many cases it should be enough to
                 only add the main ingredient, e.g. most ketchups contain some other ingredients than
-                tomatos but most of the time tomatoes make up the bulk of the ketchup and should be
+                tomatos but tomatoes make up the bulk of the ketchup and therefore, it should be
                 considered accurate enough to add "Tomatoes" for ketchup.
               </li>
             </ol>
           </p>
           <CardTitle>Whitelabels</CardTitle>
           <p>
-            This calculator is being offered to restaurants, cefaterias, ready-meals producers,
-            etc., as a whitelabel solution, i.e. branded, styled and customized for each partner.
-            The foodprints from each meal can then be exported in various formats to display on
-            menus, advertisments and packaging, along with barcodes that link to the partner
-            whitelabel page. If you are interested in becoming a whitelabel partner of the Foodprint
-            Calculator and show your customers the calculated environmental impact for each of your
-            products, please contact us at{' '}
+            The Foodprint Calculator is being offered to restaurants, cefaterias, ready-meals
+            producers, etc., as a whitelabel solution, i.e. branded, styled and customized for each
+            partner. The environmental impact of each meal can then be exported in various formats
+            to display on menus, advertisments and packaging, along with barcodes that link to the
+            partner whitelabel page. If you are interested in becoming a whitelabel partner of the
+            Foodprint Calculator and show your customers the calculated environmental impact for
+            each of your products, please contact us at{' '}
             <ExternalLink email href="mailto:ethicode@ethicode.org">
               ethicode@ethicode.org
             </ExternalLink>
