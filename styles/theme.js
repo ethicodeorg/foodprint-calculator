@@ -12,6 +12,9 @@ const theme = {
     ghg: '#FF4136',
     water: '#0074D9',
     eutro: '#85144b',
+    teal: '#39CCCC',
+    green: '#2ECC40',
+    aqua: '#7FDBFF',
   },
 };
 

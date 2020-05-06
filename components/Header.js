@@ -100,6 +100,7 @@ const Header = ({ activePage }) => (
         top: 28px;
         font-size: 32px;
         color: ${theme.colors.land};
+        animation: colorfade 20s linear 0s infinite;
       }
       .icon-container {
         margin: 0 5px;
@@ -113,6 +114,23 @@ const Header = ({ activePage }) => (
         border-radius: 100%;
         background-color: ${theme.colors.land};
         z-index: -1;
+      }
+      @keyframes colorfade {
+        0% {
+          color: ${theme.colors.land};
+        }
+        20% {
+          color: ${theme.colors.green};
+        }
+        40% {
+          color: ${theme.colors.aqua};
+        }
+        80% {
+          color: ${theme.colors.teal};
+        }
+        100% {
+          color: ${theme.colors.land};
+        }
       }
     `}</style>
   </div>
