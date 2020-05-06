@@ -98,7 +98,7 @@ export default function Index() {
             }
             .calculator-container {
               display: flex;
-              margin-left: 20px;
+              margin-left: 10px;
               font-size: 14px;
             }
             .meals-page {

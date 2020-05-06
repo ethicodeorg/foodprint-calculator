@@ -46,7 +46,7 @@ export default function Index() {
         <MealLink id="new">
           <div className="button-container">
             <Button primary>
-              Let's Calculate!
+              Let's Calculate
               <span className="calculator-container">
                 <FaCalculator />
               </span>
@@ -69,7 +69,7 @@ export default function Index() {
         }
         .calculator-container {
           display: flex;
-          margin-left: 20px;
+          margin-left: 10px;
           font-size: 14px;
         }
         .utensils-container {
