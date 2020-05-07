@@ -1,4 +1,4 @@
-import { SAVE_MEAL, getFoodData } from '../actions/pageActions';
+import { SAVE_MEAL } from '../actions/pageActions';
 import { getInitialState } from './ititialState';
 
 const initialState = getInitialState();
