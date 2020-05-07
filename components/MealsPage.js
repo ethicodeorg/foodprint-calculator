@@ -46,7 +46,12 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
                 <p>{`Serves ${meal.numberOfServings} ${
                   meal.numberOfServings === 1 ? 'person' : 'people'
                 }`}</p>
-                {meal.about && <p className="about-meal">{meal.about}</p>}
+                {meal.about &&
+                  meal.about.split('\n').map((paragraph, i) => (
+                    <p key={i} className="about-meal">
+                      {paragraph}
+                    </p>
+                  ))}
                 {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
                 <Pies meal={meal} numberOfServings={meal.numberOfServings} />
               </Card>
