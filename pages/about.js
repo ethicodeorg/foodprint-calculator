@@ -7,7 +7,7 @@ import CardTitle from '../components/CardTitle';
 import ExternalLink from '../components/ExternalLink';
 import theme from '../styles/theme';
 
-export default function About() {
+const About = () => {
   return (
     <Layout>
       <Header activePage="about" />
@@ -96,7 +96,7 @@ export default function About() {
             calculator is as accurate as it gets.
           </p>
           <CardTitle>How to use</CardTitle>
-          <p>
+          <div>
             When adding ingredients from a recipe, two common issues will almost certainly be
             stumbled upon:
             <ol>
@@ -117,7 +117,7 @@ export default function About() {
                 considered accurate enough to add "Tomatoes" for ketchup.
               </li>
             </ol>
-          </p>
+          </div>
           <CardTitle>Whitelabels</CardTitle>
           <p>
             The Foodprint Calculator is being offered to restaurants, cefaterias, ready-meals
@@ -150,4 +150,6 @@ export default function About() {
       `}</style>
     </Layout>
   );
-}
+};
+
+export default About;

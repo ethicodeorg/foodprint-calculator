@@ -8,7 +8,7 @@ import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 
-export default function Pies({ meal, isSingle, numberOfServings }) {
+const Pies = ({ meal, isSingle, numberOfServings }) => {
   const pieData = getMealPieData(meal);
   const [showDetails, setShowDetails] = useState(false);
   const [showIngredients, setShowIngredients] = useState(false);
@@ -166,4 +166,6 @@ export default function Pies({ meal, isSingle, numberOfServings }) {
       `}</style>
     </Fragment>
   );
-}
+};
+
+export default Pies;

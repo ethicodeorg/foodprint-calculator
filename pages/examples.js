@@ -4,25 +4,23 @@ import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
-const Meals = ({ meals }) => {
+const Examples = ({ examples }) => {
   return (
     <Layout>
-      <Header activePage="meals" />
+      <Header activePage="examples" />
       <MealsPage
-        meals={meals}
-        title="My Meals"
-        emptyMessage="You have not saved any meals"
-        showCreateButton
-        showEditButton
+        meals={examples}
+        title="Example Meals"
+        emptyMessage="Could not load examples at this time"
       />
     </Layout>
   );
 };
 
 const mapStateToProps = (state) => ({
-  meals: state.meals,
+  examples: state.examples,
 });
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Meals);
+export default connect(mapStateToProps, mapDispatchToProps)(Examples);

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { connect } from 'react-redux';
 import {
   FaCalculator,
   FaUtensils,
@@ -10,7 +11,7 @@ import {
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Header = ({ activePage }) => (
+const Header = ({ activePage, meals }) => (
   <div className="header">
     <div className="land" />
     <Link href="/">
@@ -20,12 +21,12 @@ const Header = ({ activePage }) => (
         })}
       >
         {activePage === 'home' && <FaGlobeAmericas />}
-        {activePage === 'meals' && <FaGlobeAsia />}
+        {(activePage === 'meals' || activePage === 'examples') && <FaGlobeAsia />}
         {activePage === 'new' && <FaGlobeAfrica />}
         {activePage === 'about' && <FaGlobeEurope />}
       </a>
     </Link>
-    <Link href="/meals/new">
+    <Link href="/newmeal">
       <a
         className={classNames('link new', {
           active: activePage === 'new',
@@ -39,15 +40,26 @@ const Header = ({ activePage }) => (
         </span>
       </a>
     </Link>
-    <Link href="/meals">
+    <Link href="/examples">
       <a
         className={classNames('link', {
-          active: activePage === 'meals',
+          active: activePage === 'examples',
         })}
       >
-        My Meals
+        Examples
       </a>
     </Link>
+    {meals.length > 0 && (
+      <Link href="/meals">
+        <a
+          className={classNames('link', {
+            active: activePage === 'meals',
+          })}
+        >
+          My Meals
+        </a>
+      </Link>
+    )}
     <Link href="/about">
       <a
         className={classNames('link', {
@@ -158,4 +170,10 @@ const Header = ({ activePage }) => (
   </div>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  meals: state.meals,
+});
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

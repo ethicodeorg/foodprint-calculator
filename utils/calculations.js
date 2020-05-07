@@ -87,3 +87,12 @@ export function convertToKilograms(weight, unit) {
       return weight;
   }
 }
+
+export function getTotalByCategory(ingredients, numberOfServings) {
+  return {
+    landUse: getLandUseTotal(ingredients, numberOfServings),
+    ghgEmissions: getGHGTotal(ingredients, numberOfServings),
+    waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
+    eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
+  };
+}

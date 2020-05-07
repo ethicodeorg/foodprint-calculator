@@ -1,7 +1,7 @@
 import Pie from '../components/Pie';
 import { getIngredientPieData } from '../utils/pieUtils';
 
-export default function TinyPies({ ingredient, isSingle, numberOfServings }) {
+const TinyPies = ({ ingredient, isSingle, numberOfServings }) => {
   const pieData = getIngredientPieData(ingredient, numberOfServings);
 
   return pieData.map((category, cIndex) => {
@@ -38,4 +38,6 @@ export default function TinyPies({ ingredient, isSingle, numberOfServings }) {
         />
       ));
   });
-}
+};
+
+export default TinyPies;

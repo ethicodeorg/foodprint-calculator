@@ -1,6 +1,5 @@
-export const LOAD_FOOD_DATA = 'LOAD_FOOD_DATA';
+export const SAVE_MEAL = 'SAVE_MEAL';
 
-export const loadFoodData = () => ({
-  type: LOAD_FOOD_DATA,
-  foodData: getFoodData(),
-});
+export const saveNewMeal = (newMeal) => {
+  return { type: SAVE_MEAL, newMeal };
+};

@@ -2,13 +2,12 @@ import { FaCalculator, FaUtensils } from 'react-icons/fa';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
-import MealLink from '../components/MealLink';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 import Link from 'next/link';
 
-export default function Index() {
+const Index = () => {
   return (
     <Layout>
       <Header activePage="home" />
@@ -43,16 +42,18 @@ export default function Index() {
         <Link href="/about">
           <a className="about-link">This is how.</a>
         </Link>
-        <MealLink id="new">
-          <div className="button-container">
-            <Button primary>
-              Let's Calculate
-              <span className="calculator-container">
-                <FaCalculator />
-              </span>
-            </Button>
-          </div>
-        </MealLink>
+        <div className="button-container">
+          <Button primary>
+            <Link href="newmeal">
+              <a className="lets-calculate">
+                Let's Calculate
+                <span className="calculator-container">
+                  <FaCalculator />
+                </span>
+              </a>
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <style jsx>{`
@@ -110,7 +111,15 @@ export default function Index() {
           margin: 20px 0;
           max-width: 900px;
         }
+        .lets-calculate {
+          display: flex;
+          align-items: center;
+          color: #fff;
+          text-decoration: none;
+        }
       `}</style>
     </Layout>
   );
-}
+};
+
+export default Index;

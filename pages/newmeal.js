@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
+import { saveNewMeal } from '../redux/actions/pageActions';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -10,6 +11,7 @@ import {
   getEutroTotal,
   getTransportEmissions,
   convertToKilograms,
+  getTotalByCategory,
 } from '../utils/calculations';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
@@ -23,45 +25,7 @@ import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
-function fetcher(url) {
-  return fetch(url).then((r) => r.json());
-}
-
-function getTotalByCategory(ingredients, numberOfServings) {
-  return {
-    landUse: getLandUseTotal(ingredients, numberOfServings),
-    ghgEmissions: getGHGTotal(ingredients, numberOfServings),
-    waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
-    eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
-  };
-}
-
-function saveMeal(mealName, aboutMeal, mealLink, ingredients, numberOfServings) {
-  const id = mealName.toLowerCase().replace(/\s/g, '-');
-  const meal = {
-    id,
-    title: mealName,
-    about: aboutMeal,
-    link: mealLink,
-    numberOfServings,
-    landUse: getLandUseTotal(ingredients, numberOfServings),
-    ghgEmissions: getGHGTotal(ingredients, numberOfServings),
-    waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
-    eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
-    ingredients,
-  };
-  const { data, error } = fetch('/api/meals', {
-    method: 'POST',
-    body: JSON.stringify(meal),
-  });
-  Router.push(`/meals/${id}`);
-}
-
-function matchFoodToTerm(food, value) {
-  return food.entity.toLowerCase().indexOf(value.toLowerCase()) !== -1;
-}
-
-function NewMeal({ foodData, transportData }) {
+const NewMeal = ({ foodData, transportData, addMeal }) => {
   const [mealName, setMealName] = useState('');
   const [aboutMeal, setAboutMeal] = useState('');
   const [mealLink, setMealLink] = useState('');
@@ -113,6 +77,25 @@ function NewMeal({ foodData, transportData }) {
     });
   }
   const [numberOfServings, setNumberOfServings] = useState(numberOfServingsOptions[0].value);
+
+  const saveMeal = () => {
+    const id = mealName.toLowerCase().replace(/\s/g, '-');
+    const meal = {
+      id,
+      title: mealName,
+      about: aboutMeal,
+      link: mealLink,
+      numberOfServings,
+      landUse: getLandUseTotal(ingredients, numberOfServings),
+      ghgEmissions: getGHGTotal(ingredients, numberOfServings),
+      waterWithdrawals: getWaterTotal(ingredients, numberOfServings),
+      eutrophyingEmissions: getEutroTotal(ingredients, numberOfServings),
+      ingredients,
+    };
+
+    addMeal(meal);
+    Router.push('/meals');
+  };
 
   const deleteIngredient = (index) => {
     const temp = [...ingredients];
@@ -330,7 +313,7 @@ function NewMeal({ foodData, transportData }) {
         </Card>
         <div className="button-container">
           <Button
-            onClick={() => saveMeal(mealName, aboutMeal, mealLink, ingredients, numberOfServings)}
+            onClick={() => saveMeal()}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
           >
@@ -488,13 +471,15 @@ function NewMeal({ foodData, transportData }) {
       </Content>
     </Layout>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   foodData: state.foodData,
   transportData: state.transportEmissions,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  addMeal: (meal) => dispatch(saveNewMeal(meal)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewMeal);
