@@ -13,6 +13,7 @@ import {
   convertToKilograms,
   getTotalByCategory,
 } from '../utils/calculations';
+import { getCookie } from '../utils/cookieUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Card from '../components/Card';
@@ -93,7 +94,12 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
       ingredients,
     };
 
-    addMeal(meal);
+    // Add the meal to the user cookie
+    const cookie = JSON.parse(getCookie('meals', document.cookie));
+    document.cookie = `meals=${JSON.stringify([...cookie, meal])}`;
+
+    /* addMeal(meal); */
+
     Router.push('/meals');
   };
 

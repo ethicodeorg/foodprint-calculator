@@ -13,7 +13,7 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
-      {!meals.length && <div className="no-meals">{emptyMessage}</div>}
+      {/* !meals.length && <div className="no-meals">{emptyMessage}</div> */}
       {showCreateButton && (
         <div className="buttons-container">
           <Button primary>
@@ -80,8 +80,8 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
         }
         .buttons-container {
           display: flex;
-          flex-direction: row-reverse;
-          padding: 0 10px;
+          justify-content: center;
+          padding: 10px;
         }
         .edit-button-container {
           color: ${theme.colors.water};

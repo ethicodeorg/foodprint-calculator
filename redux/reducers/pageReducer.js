@@ -1,4 +1,4 @@
-import { SAVE_MEAL } from '../actions/pageActions';
+import { SAVE_MEAL, LOAD_COOKIE } from '../actions/pageActions';
 import { getInitialState } from './ititialState';
 
 const initialState = getInitialState();
@@ -10,6 +10,8 @@ const pageReducer = (state = initialState, action) => {
         ...state,
         meals: [...state.meals, action.newMeal],
       };
+    case LOAD_COOKIE:
+      return { ...state, meals: action.cookie };
     default:
       return { ...state };
   }

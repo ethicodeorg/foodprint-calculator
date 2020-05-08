@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { connect } from 'react-redux';
 import {
   FaCalculator,
   FaUtensils,
@@ -11,7 +10,7 @@ import {
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Header = ({ activePage, meals }) => (
+const Header = ({ activePage }) => (
   <div className="header">
     <div className="land" />
     <Link href="/">
@@ -49,17 +48,15 @@ const Header = ({ activePage, meals }) => (
         Examples
       </a>
     </Link>
-    {meals.length > 0 && (
-      <Link href="/meals">
-        <a
-          className={classNames('link', {
-            active: activePage === 'meals',
-          })}
-        >
-          My Meals
-        </a>
-      </Link>
-    )}
+    <Link href="/meals">
+      <a
+        className={classNames('link', {
+          active: activePage === 'meals',
+        })}
+      >
+        My Meals
+      </a>
+    </Link>
     <Link href="/about">
       <a
         className={classNames('link', {
@@ -170,10 +167,4 @@ const Header = ({ activePage, meals }) => (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  meals: state.meals,
-});
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
