@@ -64,7 +64,7 @@ const Header = ({ activePage }) => {
           position: fixed;
           top: 88px;
           right: ${isMenuOpen ? '0' : '-220px'};
-          padding: 20px 50px;
+          padding: 10px 40px;
           background-color: ${theme.colors.darkBackground};
           transition: right 0.5s;
         }
@@ -72,7 +72,7 @@ const Header = ({ activePage }) => {
           display: flex;
           padding: 10px 0;
           text-decoration: none;
-          font-size: 24px;
+          font-size: 16px;
           font-weight: normal;
           opacity: 1;
           transition: opacity 0.2s;
@@ -125,6 +125,21 @@ const Header = ({ activePage }) => {
           z-index: -1;
         }
 
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .menu-items {
+            padding: 20px 50px;
+          }
+          .link {
+            font-size: 24px;
+          }
+          .home {
+            font-size: 48px;
+          }
+          .new {
+            font-size: 32px;
+          }
+        }
+
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .menu-items {
             display: flex;
@@ -135,7 +150,6 @@ const Header = ({ activePage }) => {
             display: none;
           }
           .link {
-            padding: 0;
           }
           .examples,
           .meals,
