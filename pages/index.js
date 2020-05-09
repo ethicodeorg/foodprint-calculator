@@ -58,15 +58,14 @@ const Index = () => {
 
       <style jsx>{`
         .FrontPage {
-          max-width: 1520px;
-          padding: 100px;
+          padding: 40px 20px;
           margin: 0 auto;
         }
         .button-container {
           display: flex;
           justify-content: space-around;
-          margin-top: 60px;
-          width: 70%;
+          margin-top: 40px;
+          width: 100%;
         }
         .calculator-container {
           display: flex;
@@ -74,13 +73,13 @@ const Index = () => {
           font-size: 14px;
         }
         .utensils-container {
-          font-size: 30px;
+          font-size: 20px;
           margin-left: 10px;
         }
         .about-link {
           color: ${theme.colors.water};
           text-decoration: none;
-          font-size: 20px;
+          font-size: 16px;
         }
         .about-link:hover {
           opacity: 0.7;
@@ -98,24 +97,65 @@ const Index = () => {
           color: ${theme.colors.eutro};
         }
         h1 {
-          font-size: 104px;
+          font-size: 60px;
           font-weight: normal;
-          margin-top: 150px;
+          margin-top: 120px;
         }
         h3 {
-          font-size: 40px;
+          font-size: 24px;
           font-weight: normal;
         }
         p {
-          font-size: 20px;
+          font-size: 16px;
           margin: 20px 0;
-          max-width: 900px;
         }
         .lets-calculate {
           display: flex;
           align-items: center;
           color: #fff;
           text-decoration: none;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .FrontPage {
+            max-width: 1520px;
+            padding: 60px 40px;
+          }
+          .about-link {
+            font-size: 20px;
+          }
+          h1 {
+            font-size: 72px;
+            margin-top: 150px;
+          }
+          h3 {
+            font-size: 32px;
+          }
+          p {
+            font-size: 20px;
+          }
+        }
+
+        @media only screen and (min-width: ${theme.sizes.tablet}) {
+          .FrontPage {
+            padding: 100px;
+          }
+          .button-container {
+            margin-top: 60px;
+            width: 70%;
+          }
+          .utensils-container {
+            font-size: 30px;
+          }
+          h1 {
+            font-size: 104px;
+          }
+          h3 {
+            font-size: 40px;
+          }
+          p {
+            max-width: 900px;
+          }
         }
       `}</style>
     </Layout>

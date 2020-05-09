@@ -1,22 +1,26 @@
 import classNames from 'classnames';
+import theme from '../styles/theme';
 
-const PageTitle = ({ xl, children }) => (
-  <h3
-    className={classNames('page-title', {
-      'page-title-xl': xl,
-    })}
-  >
+const PageTitle = ({ children }) => (
+  <h3>
     {children}
 
     <style jsx>{`
-      .page-title {
+      h3 {
         margin: 120px 0 0;
-        font-size: 48px;
+        padding: 0 20px;
+        font-size: 32px;
         font-weight: normal;
         text-align: center;
       }
-      .page-title-xl {
-        font-size: 104px;
+
+      @media only screen and (min-width: ${theme.sizes.mobile}) {
+        h3 {
+          margin: 120px 0 0;
+          font-size: 48px;
+          font-weight: normal;
+          text-align: center;
+        }
       }
     `}</style>
   </h3>

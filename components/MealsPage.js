@@ -43,7 +43,7 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
                     </div>
                   )}
                 </div>
-                <p>{`Serves ${meal.numberOfServings} ${
+                <p className="servings">{`Serves ${meal.numberOfServings} ${
                   meal.numberOfServings === 1 ? 'person' : 'people'
                 }`}</p>
                 {meal.about &&
@@ -69,14 +69,17 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
           justify-content: space-between;
           align-items: baseline;
         }
+        .servings {
+          font-size: 14px;
+        }
         .meal {
           width: 600px;
-          margin: 0 10px;
+          margin: 0;
           padding-bottom: 20px;
           font-size: 18px;
         }
         .about-meal {
-          font-size: 14px;
+          font-size: 12px;
         }
         .buttons-container {
           display: flex;
@@ -93,8 +96,7 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
           font-size: 14px;
         }
         .meals-page {
-          padding: 20px;
-          max-width: 1240px;
+          padding: 2px 0;
           margin: 0 auto;
         }
         .meals-container {
@@ -107,6 +109,22 @@ const MealsPage = ({ meals, title, emptyMessage, showCreateButton, showEditButto
           align-items: center;
           color: #fff;
           text-decoration: none;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .meals-page {
+            padding: 20px;
+            max-width: 1240px;
+          }
+          .meal {
+            margin: 0 10px;
+          }
+          .servings {
+            font-size: 18px;
+          }
+          .about-meal {
+            font-size: 14px;
+          }
         }
       `}</style>
     </div>

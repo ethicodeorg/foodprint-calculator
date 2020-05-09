@@ -32,7 +32,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
         margin-top: 10px;
       }
       .ingredient-basic {
-        min-width: 240px;
+        min-width: 50%;
         font-size: 14px;
       }
       .transport {
@@ -53,6 +53,12 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
       }
       .delete-button:hover {
         opacity: 0.7;
+      }
+
+      @media only screen and (min-width: ${theme.sizes.mobile}) {
+        .ingredient-basic {
+          font-size: 14px;
+        }
       }
     `}</style>
   </div>

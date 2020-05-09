@@ -36,7 +36,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
         padding: 10px 0 0;
         background-color: transparent;
         color: ${theme.colors.water};
-        font-size: 18px;
+        font-size: 14px;
         min-width: 100px;
       }
       .button-primary {
@@ -59,6 +59,12 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
       .button:disabled {
         opacity: 0.7;
         cursor: default;
+      }
+
+      @media only screen and (min-width: ${theme.sizes.mobile}) {
+        .button-clear {
+          font-size: 18px;
+        }
       }
     `}</style>
   </button>

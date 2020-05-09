@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Autocomplete from 'react-autocomplete';
@@ -10,6 +9,7 @@ import {
   getWaterTotal,
   getEutroTotal,
 } from '../../utils/calculations';
+import { getCookie } from '../../utils/cookieUtils';
 import Header from '../../components/Header';
 import Layout from '../../components/MyLayout';
 import Content from '../../components/Content';
@@ -20,10 +20,11 @@ import Card from '../../components/Card';
 import CardTitle from '../../components/CardTitle';
 import PageTitle from '../../components/PageTitle';
 
-const Meal = ({ meals }) => {
+const Meal = () => {
   const router = useRouter();
   const mealId = router.asPath.split('/').slice(-1)[0];
-
+  const meals =
+    typeof window !== 'undefined' ? JSON.parse(getCookie('meals', document.cookie)) : [];
   const meal = meals.find((m) => m.id === mealId);
 
   return (
@@ -52,10 +53,4 @@ const Meal = ({ meals }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  meals: state.meals,
-});
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Meal);
+export default Meal;

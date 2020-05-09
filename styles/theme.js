@@ -18,6 +18,10 @@ const theme = {
     orange: '#FF851B',
     fuchsia: '#F012BE',
   },
+  sizes: {
+    mobile: '600px',
+    tablet: '1200px',
+  },
 };
 
 export default theme;

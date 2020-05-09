@@ -98,8 +98,6 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
     const cookie = JSON.parse(getCookie('meals', document.cookie));
     document.cookie = `meals=${JSON.stringify([...cookie, meal])}`;
 
-    /* addMeal(meal); */
-
     Router.push('/meals');
   };
 
@@ -193,7 +191,7 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
             numberOfServings={numberOfServings}
           />
           {isAdding ? (
-            <Card>
+            <Card inner>
               <div className="required-fields">
                 <div className="select-container ingredient-select">
                   <Select
@@ -338,7 +336,7 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
             font-size: 16px;
           }
           .meal-input {
-            width: 100%;
+            width: calc(100% - 20px);
             max-width: 400px;
             margin-bottom: 20px;
           }
@@ -351,8 +349,8 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
           }
           .weight-input,
           .distance-input {
-            width: 100px;
-            margin-right: 20px;
+            width: 100%;
+            margin: 0 0 20px 0;
           }
           .add-ingredient {
             display: flex;
@@ -364,6 +362,7 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
           .required-fields,
           .optional-fields {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             width: 100%;
           }
@@ -371,23 +370,25 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
             margin-top: 20px;
           }
           .select-container {
-            margin-right: 20px;
-            width: 150px;
+            width: 100%;
           }
           .number-of-servings-select {
-            width: 220px;
+            width: 100%;
           }
           .ingredient-select {
-            width: 220px;
+            width: 100%;
+            margin-bottom: 20px;
           }
           .transport-mode-select {
-            width: 220px;
+            width: 100%;
+            margin-bottom: 20px;
           }
           .transport-type-select {
-            width: 220px;
+            width: 100%;
+            margin-bottom: 20px;
           }
           .transport-unit-select {
-            width: 150px;
+            width: 100%;
             margin-right: 0;
           }
           .add-button {
@@ -442,12 +443,13 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
             margin-bottom: 0;
           }
           .optional-text {
+            margin: 10px 0 0;
             font-size: 14px;
           }
           .button-container {
             margin-top: 20px;
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
           }
           .save-button {
             font-size: 20px;
@@ -472,6 +474,51 @@ const NewMeal = ({ foodData, transportData, addMeal }) => {
           }
           .save-button:disabled:hover {
             opacity: 0.7;
+          }
+
+          @media only screen and (min-width: ${theme.sizes.mobile}) {
+            .required-fields {
+              flex-wrap: nowrap;
+            }
+            .optional-fields {
+              flex-wrap: ${isAddingTransport ? 'wrap' : 'nowrap'};
+            }
+            .select-container {
+              width: 170px;
+            }
+            .ingredient-select {
+              width: 220px;
+              margin: 0 20px 0 0;
+            }
+            .number-of-servings-select {
+              width: 220px;
+            }
+            .weight-input,
+            .distance-input {
+              width: 104px;
+              margin: 0 20px 0 0;
+            }
+            .distance-input {
+              margin: 0 20px 20px 0;
+            }
+            .transport-mode-select {
+              min-width: 170px;
+              margin: 0 20px 20px 0;
+            }
+            .transport-type-select {
+              min-width: 170px;
+              margin: 0 20px 20px 0;
+            }
+            .transport-unit-select {
+              min-width: 100px;
+              margin: 0 0 20px 0;
+            }
+            .add-button-container {
+              margin-top: 0;
+            }
+            .optional-text {
+              margin: 10px 0;
+            }
           }
         `}</style>
       </Content>

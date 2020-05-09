@@ -122,7 +122,7 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         .button-icon {
           display: flex;
           margin-left: 10px;
-          font-size: 14px;
+          font-size: 10px;
           transition: 0.3s ease-in-out;
         }
         .button-icon-reversed {
@@ -143,13 +143,17 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
           transition: 0.3s ease-in-out;
         }
         .legend-container {
-          min-width: 240px;
+          min-width: 50%;
           font-size: 14px;
         }
         .legend-name {
-          font-size: 18px;
+          font-size: 14px;
+        }
+        .value {
+          font-size: 10px;
         }
         .percentage {
+          font-size: 10px;
         }
         .percentage-0 {
           color: ${theme.colors.land};
@@ -162,6 +166,21 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         }
         .percentage-3 {
           color: ${theme.colors.eutro};
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .button-icon {
+            font-size: 14px;
+          }
+          .legend-name {
+            font-size: 18px;
+          }
+          .value {
+            font-size: 14px;
+          }
+          .percentage {
+            font-size: 14px;
+          }
         }
       `}</style>
     </Fragment>

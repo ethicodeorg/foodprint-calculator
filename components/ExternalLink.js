@@ -8,6 +8,7 @@ const ExternalLink = ({ href, children, color, email }) => (
 
     <style jsx>{`
       a {
+        font-size: 14px;
         font-weight: normal;
         text-decoration: none;
         color: ${color || theme.colors.water};
@@ -19,6 +20,12 @@ const ExternalLink = ({ href, children, color, email }) => (
         display: inline;
         margin-left: 5px;
         font-size: 12px;
+      }
+
+      @media only screen and (min-width: ${theme.sizes.mobile}) {
+        a {
+          font-size: 18px;
+        }
       }
     `}</style>
   </a>
