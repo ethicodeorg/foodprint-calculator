@@ -11,7 +11,7 @@ const Index = () => {
   return (
     <Layout>
       <Header activePage="home" />
-      <div className="FrontPage">
+      <div className="front-page">
         <h1>Foodprint Calculator</h1>
         <h3>
           Calculate the environmental footprint of your meals
@@ -57,7 +57,8 @@ const Index = () => {
       </div>
 
       <style jsx>{`
-        .FrontPage {
+        .front-page {
+          min-height: 100vh;
           padding: 40px 20px;
           margin: 0 auto;
         }
@@ -117,7 +118,7 @@ const Index = () => {
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
-          .FrontPage {
+          .front-page {
             max-width: 1520px;
             padding: 60px 40px;
           }
@@ -137,7 +138,7 @@ const Index = () => {
         }
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
-          .FrontPage {
+          .front-page {
             padding: 100px;
           }
           .button-container {

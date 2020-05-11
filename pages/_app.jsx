@@ -18,6 +18,11 @@ class MyApp extends App {
     return (
       <Provider store={store}>
         <Component {...pageProps} />
+        <style jsx>{`
+          :global(body) {
+            margin: 0;
+          }
+        `}</style>
       </Provider>
     );
   }

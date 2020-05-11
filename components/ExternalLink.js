@@ -24,7 +24,7 @@ const ExternalLink = ({ href, children, color, email }) => (
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {
         a {
-          font-size: 18px;
+          font-size: 16px;
         }
       }
     `}</style>
