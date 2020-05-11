@@ -1,13 +1,14 @@
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Button = ({ onClick, disabled, primary, clear, round, small, children }) => (
+const Button = ({ onClick, disabled, primary, clear, round, small, remove, children }) => (
   <button
     onClick={onClick}
     disabled={disabled}
     className={classNames('button', {
       'button-primary': primary,
       'button-clear': clear,
+      'button-remove': remove,
       'button-round': round,
       'button-small': small,
     })}
@@ -18,6 +19,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
       .button {
         display: flex;
         align-items: center;
+        justify-content: center;
         font-size: 16px;
         font-weight: normal;
         font-family: ${theme.fontFamily.default};
@@ -29,7 +31,6 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
         border-radius: 4px;
         border: none;
         color: #fff;
-        min-width: 180px;
         outline: none;
       }
       .button-clear {
@@ -40,10 +41,15 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
         min-width: 100px;
       }
       .button-primary {
-        font-size: 24px;
+        font-size: 20px;
         margin: 0;
-        padding: 15px 40px;
-        background-color: ${theme.colors.water};
+        min-width: 130px;
+        padding: 10px 20px;
+        border: ${clear ? `2px solid ${theme.colors.water}` : 'none'};
+        background-color: ${clear ? 'transparent' : theme.colors.water};
+      }
+      .button-remove {
+        background-color: ${theme.colors.eutro};
       }
       .button-round {
         width: auto;
@@ -63,7 +69,12 @@ const Button = ({ onClick, disabled, primary, clear, round, small, children }) =
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {
         .button-clear {
-          font-size: 18px;
+          font-size: ${primary ? '24px' : '18px'};
+        }
+        .button-primary {
+          font-size: 24px;
+          min-width: 180px;
+          padding: 15px 40px;
         }
       }
     `}</style>

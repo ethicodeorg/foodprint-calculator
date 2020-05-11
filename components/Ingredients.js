@@ -1,6 +1,7 @@
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
 import theme from '../styles/theme';
+import { FaTrash } from 'react-icons/fa';
 
 const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
   <div className="ingredients">
@@ -18,7 +19,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
           <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
           {deleteIngredient && (
             <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
-              Remove
+              <FaTrash />
             </button>
           )}
         </div>
@@ -39,12 +40,11 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
         font-size: 12px;
       }
       .delete-button {
-        min-width: 100px;
-        padding: 5px 20px;
+        padding: 0;
         margin-left: auto;
         font-size: 14px;
-        background-color: ${theme.colors.eutro};
-        color: #fff;
+        color: ${theme.colors.eutro};
+        background-color: #fff;
         opacity: 1;
         transition: opacity 0.2s;
         cursor: pointer;
