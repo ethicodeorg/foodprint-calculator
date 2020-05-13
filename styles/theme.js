@@ -1,6 +1,6 @@
 const theme = {
   fontFamily: {
-    default: 'Avenir',
+    default: 'Avenir, Nunito Sans',
   },
   colors: {
     text: '#222',

@@ -18,6 +18,7 @@ const Layout = ({ children }) => {
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>Foodprint Calculator</title>
+        <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
       </Head>
       <div className="background" />
       {children}

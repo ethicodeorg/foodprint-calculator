@@ -196,7 +196,7 @@ const MealsPage = ({
         }
         .confirm-message {
           padding: 30px;
-          font-family: Avenir;
+          font-family: ${theme.fontFamily.default};
           font-size: 24px;
         }
         .modal-button-container {
