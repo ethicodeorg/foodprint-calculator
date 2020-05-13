@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { initGA, logPageView } from '../utils/analytics';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
@@ -14,6 +15,10 @@ const Layout = ({ children }) => {
 
   return (
     <div className="main">
+      <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <title>Foodprint Calculator</title>
+      </Head>
       <div className="background" />
       {children}
       <div className="footer">
