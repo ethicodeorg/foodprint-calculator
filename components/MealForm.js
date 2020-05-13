@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import Autocomplete from 'react-autocomplete';
@@ -15,7 +15,6 @@ import {
 } from '../utils/calculations';
 import { setCookie } from '../utils/cookieUtils';
 import Header from '../components/Header';
-import Layout from '../components/MyLayout';
 import Card from '../components/Card';
 import Content from '../components/Content';
 import Pies from '../components/Pies';
@@ -171,7 +170,7 @@ const MealForm = ({ meal, foodData, transportData }) => {
   };
 
   return (
-    <Layout>
+    <Fragment>
       <Header activePage={meal ? 'meals' : 'new'} />
       <Content>
         <PageTitle>{meal ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
@@ -531,7 +530,7 @@ const MealForm = ({ meal, foodData, transportData }) => {
           }
         `}</style>
       </Content>
-    </Layout>
+    </Fragment>
   );
 };
 

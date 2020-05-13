@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { getCookie } from '../../utils/cookieUtils';
 import MealForm from '../../components/MealForm';
+import Layout from '../../components/MyLayout';
 
 const Meal = () => {
   const router = useRouter();
@@ -9,7 +10,11 @@ const Meal = () => {
     typeof window !== 'undefined' ? JSON.parse(getCookie('meals', document.cookie)) : [];
   const meal = meals.find((m) => m.id === mealId);
 
-  return <MealForm meal={meal} />;
+  return (
+    <Layout>
+      <MealForm meal={meal} />
+    </Layout>
+  );
 };
 
 export default Meal;
