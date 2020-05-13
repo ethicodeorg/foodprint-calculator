@@ -14,7 +14,7 @@ const About = () => {
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>
-          <CardTitle>Sources</CardTitle>
+          <CardTitle>Data Sources</CardTitle>
           <p>
             In January 2020, Our World in Data published{' '}
             <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
