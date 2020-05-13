@@ -14,6 +14,7 @@ const theme = {
     eutro: '#85144b',
     teal: '#39CCCC',
     green: '#2ECC40',
+    lightGreen: '#baff9e',
     aqua: '#7FDBFF',
     orange: '#FF851B',
     fuchsia: '#F012BE',

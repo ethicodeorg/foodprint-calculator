@@ -17,7 +17,7 @@ const Index = () => {
           <span className="calc-container">
             <FaCalculator />
           </span>
-          Calculate the environmental footprint of your meals
+          Calculate the <span className="environmental">environmental</span> footprint of your meals
           <span className="utensils-container">
             <FaUtensils />
           </span>
@@ -70,12 +70,15 @@ const Index = () => {
           margin-right: 10px;
         }
         .about-link {
-          color: ${theme.colors.green};
+          color: ${theme.colors.lightGreen};
           text-decoration: none;
           font-size: 16px;
         }
         .about-link:hover {
           opacity: 0.7;
+        }
+        .environmental {
+          color: ${theme.colors.lightGreen};
         }
         h1 {
           font-size: 60px;
