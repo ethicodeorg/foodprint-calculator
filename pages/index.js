@@ -12,32 +12,19 @@ const Index = () => {
     <Layout>
       <Header activePage="home" />
       <div className="front-page">
-        <h1>Foodprint Calculator</h1>
+        <h1>The Foodprint Calculator</h1>
         <h3>
+          <span className="calc-container">
+            <FaCalculator />
+          </span>
           Calculate the environmental footprint of your meals
           <span className="utensils-container">
             <FaUtensils />
           </span>
         </h3>
         <p>
-          This calculator enables us to visualize and compare how our meals impact our environment
-          with respect to
-          <Link href="/about">
-            <a className="about-link land"> land use</a>
-          </Link>
-          ,
-          <Link href="/about">
-            <a className="about-link water"> water withdrawals</a>
-          </Link>
-          ,
-          <Link href="/about">
-            <a className="about-link ghg"> greenhouse gas emissions</a>
-          </Link>
-          , and
-          <Link href="/about">
-            <a className="about-link eutro"> eutrophying emissions</a>
-          </Link>
-          .
+          The Foodprint Calculator determines the environmental impact of a single meal, given a
+          list of its ingredients and their weight.
         </p>
         <Link href="/about">
           <a className="about-link">This is how.</a>
@@ -61,6 +48,7 @@ const Index = () => {
           min-height: 100vh;
           padding: 40px 20px;
           margin: 0 auto;
+          color: #fff;
         }
         .button-container {
           display: flex;
@@ -77,25 +65,17 @@ const Index = () => {
           font-size: 20px;
           margin-left: 10px;
         }
+        .calc-container {
+          font-size: 20px;
+          margin-right: 10px;
+        }
         .about-link {
-          color: ${theme.colors.water};
+          color: ${theme.colors.green};
           text-decoration: none;
           font-size: 16px;
         }
         .about-link:hover {
           opacity: 0.7;
-        }
-        .land {
-          color: ${theme.colors.land};
-        }
-        .water {
-          color: ${theme.colors.water};
-        }
-        .ghg {
-          color: ${theme.colors.ghg};
-        }
-        .eutro {
-          color: ${theme.colors.eutro};
         }
         h1 {
           font-size: 60px;
@@ -133,6 +113,7 @@ const Index = () => {
             font-size: 32px;
           }
           p {
+            max-width: 900px;
             font-size: 20px;
           }
         }
@@ -145,17 +126,15 @@ const Index = () => {
             margin-top: 60px;
             width: 70%;
           }
-          .utensils-container {
-            font-size: 30px;
+          .utensils-container,
+          .calc-container {
+            font-size: 26px;
           }
           h1 {
             font-size: 104px;
           }
           h3 {
             font-size: 40px;
-          }
-          p {
-            max-width: 900px;
           }
         }
       `}</style>

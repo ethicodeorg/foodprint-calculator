@@ -3,6 +3,7 @@ import ExternalLink from './ExternalLink';
 
 const Layout = ({ children }) => (
   <div className="main">
+    <div className="background" />
     {children}
     <div className="footer">
       <div>
@@ -17,7 +18,16 @@ const Layout = ({ children }) => (
         min-height: 100vh;
         font-family: ${theme.fontFamily.default};
         color: ${theme.colors.text};
-        background-color: ${theme.colors.background};
+        background-color: transparent;
+      }
+      .background {
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        z-index: -1;
+        opacity: 0.85;
+        background: url('/earth-cover.jpg') no-repeat 50%;
+        background-size: cover;
       }
       .footer {
         display: flex;

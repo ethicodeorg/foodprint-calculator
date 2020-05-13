@@ -8,7 +8,7 @@ const ExternalLink = ({ href, children, color, email }) => (
 
     <style jsx>{`
       a {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: normal;
         text-decoration: none;
         color: ${color || theme.colors.water};

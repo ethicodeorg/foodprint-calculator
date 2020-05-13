@@ -230,10 +230,10 @@ const MealsPage = ({
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .meals-page {
             padding: 20px;
-            max-width: 1240px;
+            max-width: 1280px;
           }
           .meal {
-            margin: 0 10px;
+            margin: 0 20px;
           }
           .servings {
             font-size: 18px;

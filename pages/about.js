@@ -14,6 +14,7 @@ const About = () => {
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>
+          <CardTitle>Sources</CardTitle>
           <p>
             In January 2020, Our World in Data published{' '}
             <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
@@ -47,8 +48,8 @@ const About = () => {
               51 million km²
             </ExternalLink>
             . If we divide that by the current population, 7.78 billion people, we get 6.555 m² per
-            person, or about 18 m² per day. Therefore this calculator considers that to be the RDA
-            for an individual's land use.
+            person, or about 18 m² per day. Therefore the Foodprint Calculator considers that to be
+            the RDA for an individual's land use.
           </p>
           <CardTitle>Water withdrawals</CardTitle>
           <p>

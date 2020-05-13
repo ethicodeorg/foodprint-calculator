@@ -36,9 +36,8 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, child
       .button-clear {
         padding: 10px 0 0;
         background-color: transparent;
-        color: ${theme.colors.water};
-        font-size: 14px;
-        min-width: 100px;
+        color: ${primary ? '#fff' : theme.colors.water};
+        font-size: 16px;
       }
       .button-primary {
         font-size: 20px;
