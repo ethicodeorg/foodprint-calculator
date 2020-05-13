@@ -114,7 +114,7 @@ const MealsPage = ({
       >
         <div className="confirm-message">Are you sure you want to delete this meal?</div>
         <div className="modal-button-container">
-          <Button primary clear onClick={() => setShowConfirmModal(false)}>
+          <Button primary onClick={() => setShowConfirmModal(false)}>
             Cancel
           </Button>
           <Button primary remove onClick={() => confirmDelete()}>

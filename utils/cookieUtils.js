@@ -41,5 +41,5 @@ export function setCookie(document, oldMeal, newMeal) {
 
   // Add the new meal to the user cookie if needed
   const newCookie = newMeal ? [...cookie, newMeal] : cookie;
-  document.cookie = `meals=${JSON.stringify(newCookie)}; path=/`;
+  document.cookie = `meals=${encodeURIComponent(JSON.stringify(newCookie))}; path=/`;
 }

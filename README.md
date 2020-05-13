@@ -10,11 +10,7 @@ npm run dev
 ### Deploy
 
 ```
-# Log into Droplet
-ssh root@167.99.192.228
-
-# Pull and rebuild app
-ggpur
+# After pulling on the droplet, rebuild the app
 npm run build
 
 # Find running process
