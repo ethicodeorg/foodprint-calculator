@@ -33,7 +33,7 @@ const AboutMeal = ({ text }) => {
           text-align: center;
           margin: 0;
           padding: 0 0 0 65%;
-          background-image: linear-gradient(to bottom, transparent, #fff);
+          background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
         }
         p {
           margin: 0;
