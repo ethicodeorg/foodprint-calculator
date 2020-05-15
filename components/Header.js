@@ -58,6 +58,7 @@ const Header = ({ activePage }) => {
           width: calc(100% - 80px);
           padding: 20px 40px;
           background-color: ${theme.colors.darkBackground};
+          z-index: 1;
         }
         .menu-items {
           display: block;
