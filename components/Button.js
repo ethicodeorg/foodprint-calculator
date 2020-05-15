@@ -57,6 +57,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, child
       }
       .button-small {
         min-width: auto;
+        font-size: inherit;
       }
       .button:hover {
         opacity: 0.7;
@@ -69,6 +70,9 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, child
       @media only screen and (min-width: ${theme.sizes.mobile}) {
         .button-clear {
           font-size: ${primary ? '24px' : '16px'};
+        }
+        .button-small {
+          font-size: inherit;
         }
         .button-primary {
           font-size: 24px;

@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import PageTitle from '../components/PageTitle';
 import ExternalLink from '../components/ExternalLink';
 import theme from '../styles/theme';
+import AboutMeal from './AboutMeal';
 
 Modal.setAppElement('#__next');
 
@@ -40,7 +41,6 @@ const MealsPage = ({
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
-      {/* !meals.length && <div className="no-meals">{emptyMessage}</div> */}
       {showCreateButton && (
         <div className="buttons-container">
           <Button primary>
@@ -73,12 +73,7 @@ const MealsPage = ({
                 <p className="servings">{`Serves ${meal.numberOfServings} ${
                   meal.numberOfServings === 1 ? 'person' : 'people'
                 }`}</p>
-                {meal.about &&
-                  meal.about.split('\n').map((paragraph, i) => (
-                    <p key={i} className="about-meal">
-                      {paragraph}
-                    </p>
-                  ))}
+                {meal.about && <AboutMeal text={meal.about} />}
                 {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
                 <Pies meal={meal} numberOfServings={meal.numberOfServings} />
                 {showDeleteButton && (
