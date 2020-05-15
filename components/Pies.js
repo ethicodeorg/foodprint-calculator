@@ -97,14 +97,16 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
                   </div>
                 </div>
               )}
-              {extraPies.concat(lastPie).map((pie, pIndex) => (
-                <Pie
-                  key={pIndex}
-                  category={pie}
-                  isSingle={isSingle}
-                  label={`${name}: ${percentageString}`}
-                />
-              ))}
+              <div className="pies-container">
+                {extraPies.concat(lastPie).map((pie, pIndex) => (
+                  <Pie
+                    key={pIndex}
+                    category={pie}
+                    isSingle={isSingle}
+                    label={`${name}: ${percentageString}`}
+                  />
+                ))}
+              </div>
             </div>
           );
         })}
@@ -132,6 +134,7 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         .flex-container {
           display: flex;
           align-items: center;
+          flex-wrap: ${showDetails ? 'nowrap' : 'wrap'};
         }
         .pie-container {
           margin: 20px 0 0;
@@ -139,12 +142,17 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         .category-container {
           display: flex;
           align-items: center;
-          margin: 10px 0;
+          margin: 0;
           transition: 0.3s ease-in-out;
         }
         .legend-container {
           min-width: 50%;
           font-size: 14px;
+        }
+        .pies-container {
+          display: flex;
+          flex-wrap: ${!showDetails ? 'nowrap' : 'wrap'};
+          margin-top: 10px;
         }
         .legend-name {
           font-size: 14px;

@@ -16,7 +16,9 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
             {`${ingredient.label} ${ingredient.weight} ${ingredient.weightUnit}`}
             <div className="transport">{transportString}</div>
           </div>
-          <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
+          <div className="pies-container">
+            <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
+          </div>
           {deleteIngredient && (
             <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
               <FaTrash />
@@ -30,11 +32,14 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
       .ingredient {
         display: flex;
         align-items: center;
-        margin-top: 10px;
       }
       .ingredient-basic {
         min-width: 50%;
         font-size: 14px;
+      }
+      .pies-container {
+        display: flex;
+        flex-wrap: wrap;
       }
       .transport {
         font-size: 12px;

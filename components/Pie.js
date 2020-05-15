@@ -21,7 +21,7 @@ const Pie = ({ category, isSingle, label }) => {
         .pie {
           max-width: 60px;
           font-size: 14px;
-          margin-right: 10px;
+          margin: 5px;
         }
         .tiny-pie {
           max-width: 20px;
