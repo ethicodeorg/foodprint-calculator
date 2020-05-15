@@ -84,7 +84,6 @@ const MealForm = ({ meal, foodData, transportData }) => {
 
   const saveMeal = () => {
     const currentMeal = {
-      id: mealName.toLowerCase().replace(/\s/g, '-'),
       title: mealName,
       about: aboutMeal,
       link: mealLink,

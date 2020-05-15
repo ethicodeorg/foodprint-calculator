@@ -5,11 +5,14 @@ import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
 const Meals = () => {
+  const meals =
+    typeof window !== 'undefined' ? JSON.parse(getCookie('meals', document.cookie)) : [];
+
   return (
     <Layout>
       <Header activePage="meals" />
       <MealsPage
-        meals={typeof window !== 'undefined' ? JSON.parse(getCookie('meals', document.cookie)) : []}
+        meals={meals}
         title="My Meals"
         emptyMessage="You have not saved any meals"
         showCreateButton

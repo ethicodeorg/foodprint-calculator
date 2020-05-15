@@ -1,3 +1,16 @@
+function createUniqueId(newMeal, oldCookie) {
+  const randomThreeLetters = [0, 1, 2]
+    .map((i) => String.fromCharCode(Math.floor(Math.random() * 25 + 97)))
+    .reduce((pre, curr) => pre + curr, '');
+  const id = `${newMeal.title} ${randomThreeLetters}`
+    .toLowerCase()
+    .replace(/\s/g, '-')
+    .replace(/[^A-Za-z0-9-]/g, '')
+    .replace(/-+/, '-');
+
+  return id;
+}
+
 export function getCookie(cookieName, cookies) {
   const name = cookieName + '=';
   const decodedCookie = decodeURIComponent(cookies);
@@ -37,6 +50,11 @@ export function setCookie(document, oldMeal, newMeal) {
     if (oldEntryIndex > -1) {
       cookie.splice(oldEntryIndex, 1);
     }
+  }
+
+  // Create unique id for the meal if needed
+  if (newMeal) {
+    newMeal.id = createUniqueId(newMeal, cookie);
   }
 
   // Add the new meal to the user cookie if needed
