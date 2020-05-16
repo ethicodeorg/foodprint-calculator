@@ -14,35 +14,66 @@ const About = () => {
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>
+          <CardTitle>Vision</CardTitle>
+          <p>
+            The Foodprint Calculator was built and deployed in May 2020 and is still a work in
+            progress. The idea is that anyone assembling meals (restaurants, cafeterias, ready-meals
+            producers, food bloggers, home cooks, etc.) can use this calculator to get a concise,
+            straightforward summary of how their meals are impacting the environment. All that's
+            needed is the meals's list of ingredients and their weight, and the Foodprint Calculator
+            does the rest. The output can then be exported in various formats to display on menus,
+            advertisements, websites, and packaging.
+          </p>
+          <p>
+            The Foodprint Calculator is and always will be free to use for everyone. It can also be
+            customized, branded, and hosted separately for each company and then linked to the
+            company website, menus, packaging, recipes, ads, etc. There will be an initial set up
+            cost, which will vary based on the amount of customizations requested and then a
+            subscription fee for continued access. Included in that package is data storing for all
+            the meals of the account. For everyone else, the meals are only stored in the browser
+            cookie, meaning that all saved data will only be available in that particular browser,
+            and would be lost upon clearing the browser's cookies.
+          </p>
+          <p>
+            Another potential for the Foodprint Calculator is to connect with supermarket's computer
+            systems and summarize each checkout. Shoppers can then create an account for their
+            household, and then every time someone from that household makes a purchase, the
+            environmental footprint amounts are added to their account. Users could then visualize
+            and compare their ecological footprints from grocery shopping only.
+          </p>
+          <p>
+            If your company is interested in showing your customers the calculated environmental
+            impact for each of their products, please reach out to us at{' '}
+            <ExternalLink email href="mailto:ethicode@ethicode.org">
+              ethicode@ethicode.org
+            </ExternalLink>
+            , we will happily answer any questions you might have.
+          </p>
           <CardTitle>Data Sources</CardTitle>
           <p>
             In January 2020, Our World in Data published{' '}
             <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
               Environmental impacts of food production
             </ExternalLink>{' '}
-            by Hannah Ritchie and Max Roser, which was largely based on the research by Joseph Poore
-            and Thomas Nemecek,{' '}
+            by Hannah Ritchie and Max Roser, which was primarily based on the research by Joseph
+            Poore and Thomas Nemecek,{' '}
             <ExternalLink href="https://science.sciencemag.org/content/360/6392/987">
               Reducing food’s environmental impacts through producers and consumers
             </ExternalLink>
             . The data set from that research covers ~38,700 commercially viable farms in 119
             countries and 40 products representing ~90% of global protein and calorie consumption.
           </p>
-          <p>
-            This data is utilized by the Foodprint Calculator to accumulate the environmental impact
-            of any meal, given a list of its ingredients.
-          </p>
           <CardTitle>Recommended daily allowance</CardTitle>
           <p>
-            Earth has a finite amount of resources which we all share. The production of food takes
-            up a lot of these resources, especially when it comes to land use, greenhouse gas
-            emissions, water withdrawals and eutrophying emissions. The Foodprint Calculator
-            considers an RDA (recommended daily allowance) for each of these categories, using the
-            following derivation:
+            Earth has a finite amount of resources that we all share. Food production takes up a lot
+            of these resources, especially when it comes to land use, greenhouse gas emissions,
+            water withdrawals, and eutrophying emissions. The Foodprint Calculator considers an RDA
+            (recommended daily allowance) for each of these categories, using the following
+            derivation:
           </p>
           <CardTitle>Land use</CardTitle>
           <p>
-            Earth has about 104 million km² of habitable land and almost half of that is used for
+            Earth has about 104 million km² of habitable land, and almost half of that is used for
             agriculture or{' '}
             <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
               51 million km²
@@ -59,10 +90,10 @@ const About = () => {
             </ExternalLink>{' '}
             of which{' '}
             <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
-              70% is used by our agriculture
+              our agriculture uses 70%
             </ExternalLink>
-            . Divide that amongst the population, we get about 360 m³ or an RDA of about 1 m³ (1000
-            litres) of water per individual.
+            . Divided amongst the population, and we get about 360 m³ or an RDA of about one m³
+            (1000 liters) of water per individual.
           </p>
           <CardTitle>Greenhouse gas emissions</CardTitle>
           <p>
@@ -84,17 +115,17 @@ const About = () => {
             <ExternalLink href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/">
               2,000 kcal a day for women and 2,500 for men
             </ExternalLink>{' '}
-            or 2,250 on average. Again, if we only aim to not increase this amount, which we should
+            or 2,250 on average. Again, if we only aim not to increase this amount, which we should
             be aiming to reduce, we can consider 28 kgPO₄eq the RDA of eutrophying emissions.
           </p>
           <CardTitle>How accurate is it?</CardTitle>
           <p>
             Of course, the results accumulated by the Foodprint Calculator should not be regarded as
-            exact science but rather a rough estimation of the result. The environmental impact of
-            each food product type varies considerably between individual products and productions.
-            However, given that the data being used for this calculator is widely regarded as the
-            most comprehensive and accurate data that we have today, we can assume that this
-            calculator is as accurate as it gets.
+            an exact science but rather a rough estimation. The environmental impact of each food
+            product type varies considerably between individual products and productions. However,
+            given that the data being used for the Foodprint Calculator is widely regarded as the
+            most comprehensive and accurate data we have today, we can assume that it is as precise
+            as it gets.
           </p>
           <CardTitle>How to use</CardTitle>
           <div>
@@ -111,28 +142,14 @@ const About = () => {
                 to convert some common food types from volume to weight.
               </li>
               <li>
-                Some ingredients contain a bunch of other ingredients. The most accurate method is
-                to add an ingredient for each subingredient but in many cases it should be enough to
-                only add the main ingredient, e.g. most ketchups contain some other ingredients than
-                tomatos but tomatoes make up the bulk of the ketchup and therefore, it should be
-                considered accurate enough to add "Tomatoes" for ketchup.
+                Some ingredients contain a bunch of other elements. The most accurate method is to
+                add an ingredient for each such sub-element. Nevertheless, in many cases, it should
+                be enough only to add the main ingredient. E.g., most kinds of ketchup contain some
+                other ingredients than tomatoes, but tomatoes make up the bulk of the ketchup.
+                Therefore, it should be considered accurate enough to add "Tomatoes" for ketchup.
               </li>
             </ol>
           </div>
-          <CardTitle>Whitelabels</CardTitle>
-          <p>
-            The Foodprint Calculator is being offered to restaurants, cefaterias, ready-meals
-            producers, etc., as a whitelabel solution, i.e. branded, styled and customized for each
-            partner. The environmental impact of each meal can then be exported in various formats
-            to display on menus, advertisments and packaging, along with barcodes that link to the
-            partner whitelabel page. If you are interested in becoming a whitelabel partner of the
-            Foodprint Calculator and show your customers the calculated environmental impact for
-            each of your products, please contact us at{' '}
-            <ExternalLink email href="mailto:ethicode@ethicode.org">
-              ethicode@ethicode.org
-            </ExternalLink>
-            .
-          </p>
         </Card>
       </Content>
       <style jsx>{`
