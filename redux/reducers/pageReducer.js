@@ -1,17 +1,15 @@
-import { SAVE_MEAL, LOAD_COOKIE } from '../actions/pageActions';
+import { UPDATE_MEALS } from '../actions/pageActions';
 import { getInitialState } from './ititialState';
 
 const initialState = getInitialState();
 
 const pageReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SAVE_MEAL:
+    case UPDATE_MEALS:
       return {
         ...state,
-        meals: [...state.meals, action.newMeal],
+        meals: action.meals,
       };
-    case LOAD_COOKIE:
-      return { ...state, meals: action.cookie };
     default:
       return { ...state };
   }

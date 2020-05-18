@@ -30,9 +30,9 @@ const About = () => {
             company website, menus, packaging, recipes, ads, etc. There will be an initial set up
             cost, which will vary based on the amount of customizations requested and then a
             subscription fee for continued access. Included in that package is data storing for all
-            the meals of the account. For everyone else, the meals are only stored in the browser
-            cookie, meaning that all saved data will only be available in that particular browser,
-            and would be lost upon clearing the browser's cookies.
+            the meals of the account. For everyone else, the meals are only stored in their browser,
+            meaning that all saved data will only be available in that particular browser, and would
+            be lost upon clearing the user's browsing data.
           </p>
           <p>
             Another potential for the Foodprint Calculator is to connect with supermarket's computer

@@ -1,3 +1,4 @@
+import store from 'store';
 import foods from '../../data/foods.json';
 import landUse from '../../data/land-use.json';
 import eutrophyingEmissions from '../../data/eutrophying-emissions.json';
@@ -61,7 +62,7 @@ export function getInitialState() {
   return {
     transportEmissions,
     examples,
-    meals: [],
+    meals: store.get('meals') || [],
     foodData: getFoodData(),
   };
 }

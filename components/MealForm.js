@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
-import { saveNewMeal } from '../redux/actions/pageActions';
+import { addMeal, editMeal } from '../redux/actions/pageActions';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -13,7 +13,6 @@ import {
   convertToKilograms,
   getTotalByCategory,
 } from '../utils/calculations';
-import { setCookie } from '../utils/cookieUtils';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Content from '../components/Content';
@@ -25,7 +24,7 @@ import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
-const MealForm = ({ meal, foodData, transportData }) => {
+const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => {
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
@@ -95,7 +94,11 @@ const MealForm = ({ meal, foodData, transportData }) => {
       ingredients,
     };
 
-    setCookie(document, meal, currentMeal);
+    if (meal) {
+      updateMeal(meal.id, currentMeal);
+    } else {
+      addNewMeal(currentMeal);
+    }
 
     Router.push('/meals');
   };
@@ -538,4 +541,9 @@ const mapStateToProps = (state) => ({
   transportData: state.transportEmissions,
 });
 
-export default connect(mapStateToProps)(MealForm);
+const mapDispatchToProps = (dispatch) => ({
+  addNewMeal: (meal) => dispatch(addMeal(meal)),
+  updateMeal: (mealId, meal) => dispatch(editMeal(mealId, meal)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealForm);

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Link from 'next/link';
 import Router from 'next/router';
 import { FaCalculator, FaEdit, FaTrash } from 'react-icons/fa';
 import Modal from 'react-modal';
-import { getCookie, setCookie } from '../utils/cookieUtils';
+import { deleteMeal } from '../redux/actions/pageActions';
 import Pies from '../components/Pies';
 import MealLink from '../components/MealLink';
 import Card from '../components/Card';
@@ -23,19 +24,20 @@ const MealsPage = ({
   showCreateButton,
   showEditButton,
   showDeleteButton,
+  removeMeal,
 }) => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [mealToDelete, setMealToDelete] = useState({});
+  const [mealIdToDelete, setMealIdToDelete] = useState('');
   const modalAnimationTime = 200;
 
   const confirmDelete = () => {
-    setCookie(document, mealToDelete);
-    Router.reload();
+    setShowConfirmModal(false);
+    removeMeal(mealIdToDelete);
   };
 
   const deleteMeal = (meal) => {
-    setShowConfirmModal(!showConfirmModal);
-    setMealToDelete(meal);
+    setShowConfirmModal(true);
+    setMealIdToDelete(meal.id);
   };
 
   return (
@@ -242,4 +244,10 @@ const MealsPage = ({
   );
 };
 
-export default MealsPage;
+const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  removeMeal: (mealId) => dispatch(deleteMeal(mealId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealsPage);

@@ -21,6 +21,4 @@ const mapStateToProps = (state) => ({
   examples: state.examples,
 });
 
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Examples);
+export default connect(mapStateToProps)(Examples);

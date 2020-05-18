@@ -1,13 +1,10 @@
 import React from 'react';
-import { getCookie } from '../utils/cookieUtils';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
-const Meals = () => {
-  const meals =
-    typeof window !== 'undefined' ? JSON.parse(getCookie('meals', document.cookie)) : [];
-
+const Meals = ({ meals }) => {
   return (
     <Layout>
       <Header activePage="meals" />
@@ -23,4 +20,8 @@ const Meals = () => {
   );
 };
 
-export default Meals;
+const mapStateToProps = (state) => ({
+  meals: state.meals,
+});
+
+export default connect(mapStateToProps)(Meals);
