@@ -1,5 +1,5 @@
 import store from 'store';
-import foods from '../../data/foods.json';
+import foods from '../../data/foods-expanded.json';
 import landUse from '../../data/land-use.json';
 import eutrophyingEmissions from '../../data/eutrophying-emissions.json';
 import ghgEmissions from '../../data/ghg-emissions.json';
