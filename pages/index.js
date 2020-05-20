@@ -45,7 +45,7 @@ const Index = () => {
 
       <style jsx>{`
         .front-page {
-          min-height: 100vh;
+          min-height: 90vh;
           padding: 40px 20px;
           margin: 0 auto;
           color: #fff;

@@ -14,6 +14,7 @@ import PageTitle from '../components/PageTitle';
 import ExternalLink from '../components/ExternalLink';
 import theme from '../styles/theme';
 import AboutMeal from './AboutMeal';
+import Separator from './Separator';
 
 Modal.setAppElement('#__next');
 
@@ -80,7 +81,7 @@ const MealsPage = ({
                 <Pies meal={meal} numberOfServings={meal.numberOfServings} />
                 {showDeleteButton && (
                   <div className="delete-button-container">
-                    <div className="separator" />
+                    <Separator />
                     <button className="delete-button" onClick={() => deleteMeal(meal)}>
                       <FaTrash />
                     </button>
@@ -121,10 +122,6 @@ const MealsPage = ({
       </Modal>
 
       <style jsx>{`
-        .separator {
-          border-top: 1px solid ${theme.colors.border};
-          margin: 20px 0;
-        }
         .no-meals {
           text-align: center;
         }

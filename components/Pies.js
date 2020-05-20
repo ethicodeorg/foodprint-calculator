@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
+import Separator from './Separator';
 
 const Pies = ({ meal, isSingle, numberOfServings }) => {
   const pieData = getMealPieData(meal);
@@ -31,11 +32,11 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
           </div>
           {showIngredients && (
             <Fragment>
-              <div className="separator" />
+              <Separator />
               <Ingredients ingredients={meal.ingredients} numberOfServings={numberOfServings} />
             </Fragment>
           )}
-          <div className="separator" />
+          <Separator />
         </Fragment>
       )}
       <div className="title-container">
@@ -112,10 +113,6 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         })}
       </div>
       <style jsx>{`
-        .separator {
-          border-top: 1px solid ${theme.colors.border};
-          margin: 20px 0;
-        }
         .title-container {
           display: flex;
           justify-content: space-between;
@@ -153,6 +150,7 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
           display: flex;
           flex-wrap: ${!showDetails ? 'nowrap' : 'wrap'};
           margin-top: 10px;
+          min-width: 50%;
         }
         .legend-name {
           font-size: 14px;

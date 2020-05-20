@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Button = ({ onClick, disabled, primary, clear, round, small, remove, children }) => (
+const Button = ({ onClick, disabled, primary, clear, round, small, remove, title, children }) => (
   <button
     onClick={onClick}
     disabled={disabled}
@@ -36,7 +36,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, child
       .button-clear {
         padding: 10px 0 0;
         background-color: transparent;
-        color: ${primary ? '#fff' : theme.colors.water};
+        color: ${title ? '#222' : theme.colors.water};
         font-size: 16px;
       }
       .button-primary {
@@ -46,6 +46,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, child
         padding: 10px 20px;
         border: ${clear ? `2px solid ${theme.colors.water}` : 'none'};
         background-color: ${clear ? 'transparent' : theme.colors.water};
+        color: #fff;
       }
       .button-remove {
         background-color: ${theme.colors.eutro};

@@ -17,7 +17,7 @@ export function getMealPieData(meal) {
       color: theme.colors.land,
     },
     {
-      name: 'GHG emissions',
+      name: 'Greenhouse gas emissions',
       total: meal.ghgEmissions,
       rda: RDAs.ghgEmissions,
       unit: 'kg',
