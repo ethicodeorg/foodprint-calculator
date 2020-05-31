@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
@@ -8,8 +9,10 @@ import theme from '../styles/theme';
 import Link from 'next/link';
 
 const Index = () => {
-  // Clear the bloated meals cookie previously used
-  document.cookie = 'meals=;';
+  useEffect(() => {
+    // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
+    document.cookie = 'meals=;';
+  });
 
   return (
     <Layout>
