@@ -10,9 +10,7 @@ handler.use(middleware);
 
 // GET api/meals
 handler.get(async (req, res) => {
-  console.log(process.env.MONGODB_URI);
-  console.log(process.env.DB_NAME);
-  const query = req.query;
+  const { query } = req;
   let filter = {};
 
   if (query.user) {
