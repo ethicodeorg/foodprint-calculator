@@ -10,6 +10,8 @@ export async function setUpDb(db) {
 }
 
 export default async function database(req, res, next) {
+  console.log(process.env.MONGODB_URI);
+  console.log(process.env.DB_NAME);
   if (!client.isConnected()) await client.connect();
   req.dbClient = client;
   req.db = client.db(process.env.DB_NAME);
