@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { initGA, logPageView } from '../utils/analytics';
+import { FOODPRINT_CALCULATOR } from '../utils/constants';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 
@@ -12,7 +13,7 @@ const Layout = ({ children, title = '' }) => {
     }
     logPageView();
   });
-  const headTitle = title ? `${title} | Foodprint Calculator` : 'Foodprint Calculator';
+  const headTitle = title ? `${title} | ${FOODPRINT_CALCULATOR}` : FOODPRINT_CALCULATOR;
 
   return (
     <div className="main">

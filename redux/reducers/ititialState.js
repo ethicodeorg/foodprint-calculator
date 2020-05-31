@@ -1,11 +1,9 @@
-import store from 'store';
 import foods from '../../data/foods-expanded.json';
 import landUse from '../../data/land-use.json';
 import eutrophyingEmissions from '../../data/eutrophying-emissions.json';
 import ghgEmissions from '../../data/ghg-emissions.json';
 import waterWithdrawals from '../../data/water-withdrawals.json';
 import transportEmissions from '../../data/transport-emissions.json';
-import examples from '../../data/examples.json';
 
 function sumUpGHG(foodGHG) {
   return (
@@ -61,8 +59,6 @@ function getFoodData() {
 export function getInitialState() {
   return {
     transportEmissions,
-    examples,
-    mymeals: store.get('mymeals') || [],
     foodData: getFoodData(),
   };
 }
