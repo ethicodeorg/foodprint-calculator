@@ -5,12 +5,12 @@ import PageTitle from '../components/PageTitle';
 import Card from '../components/Card';
 import CardTitle from '../components/CardTitle';
 import ExternalLink from '../components/ExternalLink';
-import theme from '../styles/theme';
 import AboutSection from '../components/AboutSection';
+import theme from '../styles/theme';
 
 const About = () => {
   return (
-    <Layout>
+    <Layout title="About">
       <Header activePage="about" />
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Select from 'react-select';
@@ -64,13 +63,10 @@ const UserPage = () => {
   };
 
   return (
-    <Layout>
-      <Head>
-        <title>User Settings</title>
-      </Head>
+    <Layout title="Settings">
       <Header activePage="user" />
       <Content>
-        <PageTitle>User Settings</PageTitle>
+        <PageTitle>Settings</PageTitle>
         <Card>
           <div className="input-container">
             <label htmlFor="name">Name:</label>

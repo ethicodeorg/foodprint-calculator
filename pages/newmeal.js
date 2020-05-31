@@ -2,7 +2,7 @@ import MealForm from '../components/MealForm';
 import Layout from '../components/MyLayout';
 
 const NewMeal = () => (
-  <Layout>
+  <Layout title="New Meal">
     <MealForm />
   </Layout>
 );

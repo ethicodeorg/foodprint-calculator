@@ -73,7 +73,7 @@ const Header = ({ activePage }) => {
                 active: activePage === 'user',
               })}
             >
-              <span className="user-settings">User Settings</span>
+              <span className="user-settings">Settings</span>
               <span className="user-icon">
                 <FaUser />
               </span>

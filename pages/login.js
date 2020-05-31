@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
@@ -65,10 +64,7 @@ const LoginPage = () => {
   }
 
   return (
-    <Layout>
-      <Head>
-        <title>Log in</title>
-      </Head>
+    <Layout title="Log in">
       <Header activePage="login" />
       <Content>
         <PageTitle>Log in</PageTitle>

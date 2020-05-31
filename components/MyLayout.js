@@ -4,7 +4,7 @@ import { initGA, logPageView } from '../utils/analytics';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title = '' }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -12,12 +12,13 @@ const Layout = ({ children }) => {
     }
     logPageView();
   });
+  const headTitle = title ? `${title} | Foodprint Calculator` : 'Foodprint Calculator';
 
   return (
     <div className="main">
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>Foodprint Calculator</title>
+        <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
       </Head>
       <div className="background" />

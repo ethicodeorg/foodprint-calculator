@@ -21,7 +21,7 @@ const Meal = () => {
   const meal = user ? data?.meals[0] : localStorageMeals.find((m) => m._id === id);
 
   return (
-    <Layout>
+    <Layout title="Edit Meal">
       {meal ? (
         <MealForm meal={meal} />
       ) : (

@@ -11,20 +11,12 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const MyMeals = () => {
   const [user] = useUser();
   const userId = user ? user._id : '';
-  let meals = [];
-
-  if (userId) {
-    // If the user is logged in, we use his saved data in the database
-    const { data, error } = useSWR(`/api/meals?user=${userId}`, fetcher);
-    if (error) return <div>failed to load</div>;
-    meals = data?.meals;
-  } else {
-    // Otherwise, we use localStorage
-    meals = getLocalStorageMeals();
-  }
+  const { data, error } = useSWR(`/api/meals?user=${userId}`, fetcher);
+  const localStorageMeals = getLocalStorageMeals();
+  const meals = userId ? data?.meals : localStorageMeals;
 
   return (
-    <Layout>
+    <Layout title="My Meals">
       <Header activePage="mymeals" />
       <MealsPage
         meals={meals}

@@ -12,7 +12,7 @@ const Meals = () => {
   if (error) return <div>failed to load</div>;
 
   return (
-    <Layout>
+    <Layout title="All Meals">
       <Header activePage="meals" />
       <MealsPage
         meals={data?.meals}
