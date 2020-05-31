@@ -8,6 +8,9 @@ import theme from '../styles/theme';
 import Link from 'next/link';
 
 const Index = () => {
+  // Clear the bloated meals cookie previously used
+  document.cookie = 'meals=;';
+
   return (
     <Layout>
       <Header activePage="home" />

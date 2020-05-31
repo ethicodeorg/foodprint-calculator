@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
-import { addMeal, editMeal } from '../redux/actions/pageActions';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -13,6 +12,8 @@ import {
   convertToKilograms,
   getTotalByCategory,
 } from '../utils/calculations';
+import { editLocalStorageMeal, addLocalStorageMeal } from '../utils/localStorage';
+import { useUser } from '../lib/hooks';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import Content from '../components/Content';
@@ -25,6 +26,8 @@ import Button from '../components/Button';
 import theme from '../styles/theme';
 
 const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => {
+  const [user] = useUser();
+  const [errorMsg, setErrorMsg] = useState('');
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
@@ -81,8 +84,13 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       : numberOfServingsOptions[0]
   );
 
-  const saveMeal = () => {
+  const saveMeal = async () => {
     const currentMeal = {
+      owner: {
+        id: user?._id,
+        name: user?.name,
+      },
+      visibility: 'private',
       title: mealName,
       about: aboutMeal,
       link: mealLink,
@@ -94,13 +102,48 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       ingredients,
     };
 
-    if (meal) {
-      updateMeal(meal.id, currentMeal);
+    // If the user is logged in, we store to database
+    if (user) {
+      if (meal) {
+        // Edit meal
+        const res = await fetch('/api/meals', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mealId: meal._id, meal: currentMeal }),
+        });
+
+        if (res.status === 201) {
+          const response = await res.json();
+        } else {
+          setErrorMsg(await res.text());
+        }
+      } else {
+        // Add new meal
+        const res = await fetch('api/meals', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ meal: currentMeal }),
+        });
+
+        if (res.status === 201) {
+          const response = await res.json();
+        } else {
+          setErrorMsg(await res.text());
+        }
+      }
     } else {
-      addNewMeal(currentMeal);
+      // Otherwise, we use localStorage (no user logged in)
+
+      if (meal) {
+        // Edit meal
+        editLocalStorageMeal(meal._id, currentMeal);
+      } else {
+        // Add new meal
+        addLocalStorageMeal(currentMeal);
+      }
     }
 
-    Router.push('/meals');
+    Router.push('/mymeals');
   };
 
   const deleteIngredient = (index) => {
@@ -173,7 +216,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
 
   return (
     <Fragment>
-      <Header activePage={meal ? 'meals' : 'new'} />
+      <Header activePage={meal ? 'mymeals' : 'new'} />
       <Content>
         <PageTitle>{meal ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
         <Card>
@@ -318,7 +361,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
           />
         </Card>
         <div className="button-container">
-          <Button onClick={() => Router.push('/meals')} primary clear>
+          <Button onClick={() => Router.push('/mymeals')} primary clear>
             Cancel
           </Button>
           <Button
@@ -541,9 +584,4 @@ const mapStateToProps = (state) => ({
   transportData: state.transportEmissions,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  addNewMeal: (meal) => dispatch(addMeal(meal)),
-  updateMeal: (mealId, meal) => dispatch(editMeal(mealId, meal)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MealForm);
+export default connect(mapStateToProps)(MealForm);

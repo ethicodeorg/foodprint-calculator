@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { FaCalculator, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaCalculator, FaEdit, FaTrash, FaToggleOn, FaToggleOff } from 'react-icons/fa';
 import Modal from 'react-modal';
-import { deleteMeal } from '../redux/actions/pageActions';
+import classNames from 'classnames';
+import { deleteLocalStorageMeal } from '../utils/localStorage';
+import { useUser } from '../lib/hooks';
 import Pies from '../components/Pies';
 import MealLink from '../components/MealLink';
 import Card from '../components/Card';
@@ -15,6 +16,7 @@ import ExternalLink from '../components/ExternalLink';
 import theme from '../styles/theme';
 import AboutMeal from './AboutMeal';
 import Separator from './Separator';
+import Loading from './Loading';
 
 Modal.setAppElement('#__next');
 
@@ -27,18 +29,41 @@ const MealsPage = ({
   showDeleteButton,
   removeMeal,
 }) => {
+  const [user] = useUser();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mealIdToDelete, setMealIdToDelete] = useState('');
   const modalAnimationTime = 200;
 
   const confirmDelete = () => {
     setShowConfirmModal(false);
-    removeMeal(mealIdToDelete);
+    if (user) {
+      fetch('/api/meals', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mealId: mealIdToDelete, userId: user._id }),
+      });
+    } else {
+      deleteLocalStorageMeal(mealIdToDelete);
+    }
+
+    Router.push('/mymeals');
+    Router;
   };
 
   const deleteMeal = (meal) => {
     setShowConfirmModal(true);
-    setMealIdToDelete(meal.id);
+    setMealIdToDelete(meal._id);
+  };
+
+  const changeVisibility = (meal) => {
+    meal.visibility = meal.visibility === 'private' ? 'public' : 'private';
+    fetch('api/meals', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mealId: meal._id, meal }),
+    });
+
+    Router.push('/mymeals');
   };
 
   return (
@@ -59,38 +84,58 @@ const MealsPage = ({
         </div>
       )}
       <div className="meals-container">
-        {meals.map((meal) => {
-          return (
-            <div className="meal" key={meal.id}>
-              <Card>
-                <div className="title-container">
-                  <CardTitle>{meal.title}</CardTitle>
-                  {showEditButton && (
-                    <div className="edit-button-container">
-                      <MealLink id={meal.id}>
-                        <FaEdit />
-                      </MealLink>
-                    </div>
-                  )}
-                </div>
-                <p className="servings">{`Serves ${meal.numberOfServings} ${
-                  meal.numberOfServings === 1 ? 'person' : 'people'
-                }`}</p>
-                {meal.about && <AboutMeal text={meal.about} />}
-                {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-                <Pies meal={meal} numberOfServings={meal.numberOfServings} />
-                {showDeleteButton && (
-                  <div className="delete-button-container">
-                    <Separator />
-                    <button className="delete-button" onClick={() => deleteMeal(meal)}>
-                      <FaTrash />
-                    </button>
+        {meals ? (
+          meals.map((meal) => {
+            return (
+              <div className="meal" key={meal._id}>
+                <Card>
+                  <div className="title-container">
+                    <CardTitle>{meal.title}</CardTitle>
+                    {showEditButton && (
+                      <div className="edit-button-container">
+                        <MealLink id={meal._id}>
+                          <span className="footer-text edit-text">Edit</span>
+                          <FaEdit />
+                        </MealLink>
+                      </div>
+                    )}
                   </div>
-                )}
-              </Card>
-            </div>
-          );
-        })}
+                  <div className="subtitle">{meal.owner.name}</div>
+                  <p className="servings">{`Serves ${meal.numberOfServings} ${
+                    meal.numberOfServings === 1 ? 'person' : 'people'
+                  }`}</p>
+                  {meal.about && <AboutMeal text={meal.about} />}
+                  {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
+                  <Pies meal={meal} numberOfServings={meal.numberOfServings} />
+                  {showDeleteButton && (
+                    <Fragment>
+                      <Separator />
+                      <div className="footer-button-container">
+                        <button className="delete-button" onClick={() => deleteMeal(meal)}>
+                          <span className="footer-text">Delete</span>
+                          <FaTrash />
+                        </button>
+                        {user && (
+                          <button
+                            className={classNames('visibility-button', {
+                              'visibility-button-public': meal.visibility === 'public',
+                            })}
+                            onClick={() => changeVisibility(meal)}
+                          >
+                            <span className="footer-text visibility-text">Visibility</span>
+                            {meal.visibility === 'public' ? <FaToggleOn /> : <FaToggleOff />}
+                          </button>
+                        )}
+                      </div>
+                    </Fragment>
+                  )}
+                </Card>
+              </div>
+            );
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
       <Modal
         isOpen={showConfirmModal}
@@ -149,7 +194,7 @@ const MealsPage = ({
         }
         .edit-button-container {
           color: ${theme.colors.water};
-          font-size: 24px;
+          font-size: 22px;
         }
         .calculator-container {
           display: flex;
@@ -172,10 +217,11 @@ const MealsPage = ({
           color: #fff;
           text-decoration: none;
         }
-        .delete-button {
-          display: block;
+        .delete-button,
+        .visibility-button {
+          display: flex;
+          align-items: center;
           padding: 0;
-          margin-left: auto;
           font-size: 22px;
           color: ${theme.colors.eutro};
           background-color: #fff;
@@ -184,8 +230,10 @@ const MealsPage = ({
           cursor: pointer;
           border-radius: 4px;
           border: none;
+          outline: none;
         }
-        .delete-button:hover {
+        .delete-button:hover,
+        .visibility-button:hover {
           opacity: 0.7;
         }
         .confirm-message {
@@ -197,6 +245,29 @@ const MealsPage = ({
           display: flex;
           justify-content: space-between;
           padding: 30px;
+        }
+        .footer-button-container {
+          display: flex;
+          justify-content: space-between;
+        }
+        .visibility-button {
+          font-size: 28px;
+          color: #777;
+        }
+        .visibility-button-public {
+          color: ${theme.colors.land};
+        }
+        .footer-text {
+          font-family: ${theme.fontFamily.default};
+          font-size: 18px;
+          margin-right: 10px;
+        }
+        .edit-text {
+          position: relative;
+          top: -4px;
+        }
+        .loading {
+          color: #fff;
         }
 
         // Modal animation
@@ -241,10 +312,4 @@ const MealsPage = ({
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeMeal: (mealId) => dispatch(deleteMeal(mealId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MealsPage);
+export default MealsPage;

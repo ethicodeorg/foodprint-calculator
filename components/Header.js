@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
+import { connect } from 'react-redux';
 import {
   FaCalculator,
   FaUtensils,
@@ -9,24 +10,27 @@ import {
   FaGlobeAmericas,
   FaHamburger,
   FaPizzaSlice,
+  FaUser,
 } from 'react-icons/fa';
 import classNames from 'classnames';
+import { useUser } from '../lib/hooks';
 import theme from '../styles/theme';
 import Button from './Button';
 import FadingIcons from './FadingIcons';
 
 const Header = ({ activePage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [user] = useUser();
 
   return (
     <div className="header">
       <div className="land" />
       <Link href="/">
         <a className="link home">
-          {activePage === 'home' && <FaGlobeAmericas />}
-          {(activePage === 'meals' || activePage === 'examples') && <FaGlobeAsia />}
-          {activePage === 'new' && <FaGlobeAfrica />}
-          {activePage === 'about' && <FaGlobeEurope />}
+          {(activePage === 'home' || activePage === 'user') && <FaGlobeAmericas />}
+          {(activePage === 'meals' || activePage === 'mymeals') && <FaGlobeAsia />}
+          {(activePage === 'new' || activePage === 'signup') && <FaGlobeAfrica />}
+          {(activePage === 'about' || activePage === 'login') && <FaGlobeEurope />}
         </a>
       </Link>
       <Link href="/newmeal">
@@ -35,15 +39,68 @@ const Header = ({ activePage }) => {
         </a>
       </Link>
       <div className="menu-items">
-        <Link href="/examples">
-          <a className="link examples">Examples</a>
+        <Link href="/about">
+          <a
+            className={classNames('link', 'right-side', {
+              active: activePage === 'about',
+            })}
+          >
+            About
+          </a>
         </Link>
         <Link href="/meals">
-          <a className="link meals">My Meals</a>
+          <a
+            className={classNames('link', 'right-side', {
+              active: activePage === 'meals',
+            })}
+          >
+            All meals
+          </a>
         </Link>
-        <Link href="/about">
-          <a className="link about">About</a>
+        <Link href="/mymeals">
+          <a
+            className={classNames('link', 'right-side', {
+              active: activePage === 'mymeals',
+            })}
+          >
+            My Meals
+          </a>
         </Link>
+        {user ? (
+          <Link href="/user">
+            <a
+              className={classNames('link', 'user', 'right-side', {
+                active: activePage === 'user',
+              })}
+            >
+              <span className="user-settings">User Settings</span>
+              <span className="user-icon">
+                <FaUser />
+              </span>
+            </a>
+          </Link>
+        ) : (
+          <Fragment>
+            <Link href="/login">
+              <a
+                className={classNames('link', 'right-side', {
+                  active: activePage === 'login',
+                })}
+              >
+                Log In
+              </a>
+            </Link>
+            <Link href="/signup">
+              <a
+                className={classNames('link', 'right-side', {
+                  active: activePage === 'signup',
+                })}
+              >
+                Sign Up
+              </a>
+            </Link>
+          </Fragment>
+        )}
       </div>
       <div className="burger-container" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         {isMenuOpen ? <FaPizzaSlice /> : <FaHamburger />}
@@ -81,14 +138,11 @@ const Header = ({ activePage }) => {
         .link:hover {
           opacity: 0.7;
         }
-        .examples {
-          color: ${activePage === 'examples' ? theme.colors.ghg : '#fff'};
+        .right-side {
+          color: #fff;
         }
-        .meals {
-          color: ${activePage === 'meals' ? theme.colors.ghg : '#fff'};
-        }
-        .about {
-          color: ${activePage === 'about' ? theme.colors.ghg : '#fff'};
+        .active {
+          color: ${theme.colors.ghg};
         }
         .home {
           display: flex;
@@ -110,6 +164,10 @@ const Header = ({ activePage }) => {
           top: 28px;
           font-size: 32px;
         }
+        .user {
+          display: flex;
+          padding: 0;
+        }
         .burger-container {
           display: flex;
           font-size: 32px;
@@ -125,19 +183,30 @@ const Header = ({ activePage }) => {
           background-color: ${theme.colors.green};
           z-index: -1;
         }
+        .user-settings {
+          display: inline;
+          font-size: 16px;
+          padding: 10px 0;
+        }
+        .user-icon {
+          display: none;
+        }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .menu-items {
             padding: 20px 50px;
           }
           .link {
-            font-size: 24px;
+            font-size: 18px;
           }
           .home {
             font-size: 48px;
           }
           .new {
             font-size: 32px;
+          }
+          .user {
+            font-size: 24px;
           }
         }
 
@@ -150,12 +219,15 @@ const Header = ({ activePage }) => {
           .burger-container {
             display: none;
           }
-          .link {
-          }
-          .examples,
-          .meals,
-          .about {
+          .right-side {
             margin-left: 20px;
+          }
+          .user-settings {
+            display: none;
+          }
+          .user-icon {
+            display: flex;
+            align-items: center;
           }
         }
       `}</style>

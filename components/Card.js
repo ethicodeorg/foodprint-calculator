@@ -1,6 +1,6 @@
 import theme from '../styles/theme';
 
-const Card = ({ children, inner }) => (
+const Card = ({ children, inner, userForm }) => (
   <div className="card">
     {children}
 
@@ -10,8 +10,9 @@ const Card = ({ children, inner }) => (
         border-radius: 0;
         box-shadow: none;
         padding: ${inner ? '0' : '20px'};
-        margin-top: 20px;
+        margin: 20px auto 0;
         background-color: #fff;
+        max-width: ${userForm ? '300px' : 'auto'};
       }
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {

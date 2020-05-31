@@ -1,8 +1,20 @@
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Button = ({ onClick, disabled, primary, clear, round, small, remove, title, children }) => (
+const Button = ({
+  type,
+  onClick,
+  disabled,
+  primary,
+  clear,
+  round,
+  small,
+  remove,
+  title,
+  children,
+}) => (
   <button
+    type={type}
     onClick={onClick}
     disabled={disabled}
     className={classNames('button', {

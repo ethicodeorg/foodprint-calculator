@@ -62,7 +62,7 @@ export function getInitialState() {
   return {
     transportEmissions,
     examples,
-    meals: store.get('meals') || [],
+    mymeals: store.get('mymeals') || [],
     foodData: getFoodData(),
   };
 }
