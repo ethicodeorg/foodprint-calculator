@@ -1,7 +1,16 @@
 import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
-import { FaCalculator, FaEdit, FaTrash, FaToggleOn, FaToggleOff } from 'react-icons/fa';
+import {
+  FaCalculator,
+  FaEdit,
+  FaTrash,
+  FaToggleOn,
+  FaToggleOff,
+  FaEye,
+  FaEyeSlash,
+} from 'react-icons/fa';
+import Tooltip from '@material-ui/core/Tooltip';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { deleteLocalStorageMeal } from '../utils/localStorage';
@@ -27,6 +36,7 @@ const MealsPage = ({
   showCreateButton,
   showEditButton,
   showDeleteButton,
+  showEyeButton,
   removeMeal,
 }) => {
   const [user] = useUser();
@@ -91,13 +101,20 @@ const MealsPage = ({
                 <Card>
                   <div className="title-container">
                     <CardTitle>{meal.title}</CardTitle>
-                    {showEditButton && (
-                      <div className="edit-button-container">
-                        <MealLink id={meal._id}>
-                          <span className="footer-text edit-text">Edit</span>
-                          <FaEdit />
-                        </MealLink>
-                      </div>
+                    {showEyeButton && (
+                      <Tooltip
+                        title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
+                        placement="left"
+                      >
+                        <button
+                          className={classNames('visibility-button', {
+                            'visibility-button-public': meal.visibility === 'public',
+                          })}
+                          onClick={() => changeVisibility(meal)}
+                        >
+                          {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
+                        </button>
+                      </Tooltip>
                     )}
                   </div>
                   <div className="subtitle">{meal.owner.name}</div>
@@ -111,20 +128,19 @@ const MealsPage = ({
                     <Fragment>
                       <Separator />
                       <div className="footer-button-container">
-                        <button className="delete-button" onClick={() => deleteMeal(meal)}>
-                          <span className="footer-text">Delete</span>
-                          <FaTrash />
-                        </button>
-                        {user && (
-                          <button
-                            className={classNames('visibility-button', {
-                              'visibility-button-public': meal.visibility === 'public',
-                            })}
-                            onClick={() => changeVisibility(meal)}
-                          >
-                            <span className="footer-text visibility-text">Visibility</span>
-                            {meal.visibility === 'public' ? <FaToggleOn /> : <FaToggleOff />}
+                        <Tooltip title="Delete meal" placement="right">
+                          <button className="delete-button" onClick={() => deleteMeal(meal)}>
+                            <FaTrash />
                           </button>
+                        </Tooltip>
+                        {showEditButton && (
+                          <Tooltip title="Edit meal" placement="left">
+                            <div className="edit-button-container">
+                              <MealLink id={meal._id}>
+                                <FaEdit />
+                              </MealLink>
+                            </div>
+                          </Tooltip>
                         )}
                       </div>
                     </Fragment>

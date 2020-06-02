@@ -46,7 +46,7 @@ const Button = ({
         outline: none;
       }
       .button-clear {
-        padding: 10px 0 0;
+        padding: 0;
         background-color: transparent;
         color: ${title ? '#222' : theme.colors.water};
         font-size: 16px;

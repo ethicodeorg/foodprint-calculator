@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Router from 'next/router';
 import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
+import Tooltip from '@material-ui/core/Tooltip';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -303,13 +304,16 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
                 </div>
               ) : (
                 <div className="optional-fields">
-                  <div className="add-transport-button-container">
-                    <Button onClick={() => setIsAddingTransport(true)}>+ Add Transport</Button>
-                  </div>
-                  <span className="optional-text">
-                    *If transport is not provided, the average transport emissions for the selected
-                    ingredient will be used
-                  </span>
+                  <Tooltip
+                    title="If transport is not provided, the average transport emissions for the selected
+                    ingredient will be used"
+                  >
+                    <div className="add-transport-button-container">
+                      <Button clear onClick={() => setIsAddingTransport(true)}>
+                        Add Transport (Optional)
+                      </Button>
+                    </div>
+                  </Tooltip>
                 </div>
               )}
               <div className="add-button-container">

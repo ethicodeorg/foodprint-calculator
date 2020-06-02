@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^4.10.1",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.2.6",
     "connect-mongo": "^3.2.0",

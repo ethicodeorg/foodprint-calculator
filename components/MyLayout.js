@@ -21,6 +21,10 @@ const Layout = ({ children, title = '' }) => {
         <link rel="shortcut icon" href="/favicon.ico" />
         <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
       </Head>
       <div className="background" />
       {children}

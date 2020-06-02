@@ -25,6 +25,7 @@ const MyMeals = () => {
         showCreateButton
         showEditButton
         showDeleteButton
+        showEyeButton={!!user}
       />
     </Layout>
   );
