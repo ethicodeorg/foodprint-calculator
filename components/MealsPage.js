@@ -14,6 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Modal from 'react-modal';
 import classNames from 'classnames';
 import { deleteLocalStorageMeal } from '../utils/localStorage';
+import { userTypeMap } from '../utils/constants';
 import { useUser } from '../lib/hooks';
 import Pies from '../components/Pies';
 import MealLink from '../components/MealLink';
@@ -96,6 +97,12 @@ const MealsPage = ({
       <div className="meals-container">
         {meals ? (
           meals.map((meal) => {
+            const userSubtitle = `${meal.owner.name}${
+              meal.owner.type && meal.owner.type !== 'other'
+                ? `, ${userTypeMap[meal.owner.type]}`
+                : ''
+            }`;
+
             return (
               <div className="meal" key={meal._id}>
                 <Card>
@@ -117,7 +124,13 @@ const MealsPage = ({
                       </Tooltip>
                     )}
                   </div>
-                  <div className="subtitle">{meal.owner.name}</div>
+                  <div className="subtitle">
+                    {meal.owner.homepage ? (
+                      <ExternalLink href={meal.owner.homepage}>{userSubtitle}</ExternalLink>
+                    ) : (
+                      userSubtitle
+                    )}
+                  </div>
                   <p className="servings">{`Serves ${meal.numberOfServings} ${
                     meal.numberOfServings === 1 ? 'person' : 'people'
                   }`}</p>

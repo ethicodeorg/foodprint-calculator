@@ -1,17 +1,13 @@
 import Link from 'next/link';
 import Select from 'react-select';
+import { userTypes, userTypeMap } from '../utils/constants';
 import theme from '../styles/theme';
 import Button from './Button';
 
 const UserForm = ({ onSubmit, errorMsg, isLogin }) => {
-  const typeOptions = [
-    { value: 'homeCook', label: 'Home cook' },
-    { value: 'foodBlogger', label: 'Recipe publisher' },
-    { value: 'cafeteria', label: 'Cafeteria' },
-    { value: 'restaurant', label: 'Restaurant' },
-    { value: 'readyMealSupplier', label: 'Ready meal supplier' },
-    { value: 'other', label: 'Other' },
-  ];
+  const typeOptions = userTypes.map((type) => {
+    return { value: type, label: userTypeMap[type] };
+  });
 
   return (
     <form className="user-form" onSubmit={onSubmit}>

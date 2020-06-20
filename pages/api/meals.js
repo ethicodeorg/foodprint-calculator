@@ -41,7 +41,27 @@ handler.post(async (req, res) => {
 
 // PUT api/meals
 handler.put(async (req, res) => {
-  const { mealId, meal } = req.body;
+  const { mealId, meal, user } = req.body;
+
+  if (user) {
+    // Update all the user's meals with the new user details
+    const resp = await req.db.collection('meals').updateMany(
+      { 'owner.id': user._id },
+      {
+        $set: {
+          owner: {
+            id: user._id,
+            name: user.name,
+            type: user.type,
+            homepage: user.homepage,
+          },
+        },
+      }
+    );
+
+    return res.status(201).json({ meals: resp });
+  }
+
   const response = await req.db.collection('meals').findOneAndUpdate(
     { _id: ObjectId(mealId) },
     {

@@ -12,20 +12,16 @@ import UserForm from '../components/UserForm';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 import { setUserCookie } from '../utils/userCookie';
+import { userTypes, userTypeMap } from '../utils/constants';
 
 const UserPage = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
-  const [tmpUser, setTmpUser] = useState(user || {});
-  const typeOptions = [
-    { value: 'restaurant', label: 'Restaurant' },
-    { value: 'cafeteria', label: 'Cafeteria' },
-    { value: 'readyMealSupplier', label: 'Ready meal supplier' },
-    { value: 'foodBlogger', label: 'Recipe publisher' },
-    { value: 'homeCook', label: 'Home cook' },
-    { value: 'other', label: 'Other' },
-  ];
+  const [tmpUser, setTmpUser] = useState({ _id: user?._id });
+  const typeOptions = userTypes.map((type) => {
+    return { value: type, label: userTypeMap[type] };
+  });
 
   useEffect(() => {
     // redirect to home if user is logger out
@@ -42,19 +38,35 @@ const UserPage = () => {
   };
 
   const saveUser = async () => {
-    const res = await fetch('/api/users', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(tmpUser),
-    });
+    if (tmpUser.name || tmpUser.type || tmpUser.homepage) {
+      const res = await fetch('/api/users', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tmpUser),
+      });
 
-    if (res.status === 201) {
-      const response = await res.json();
-      // writing our user object to the state
-      mutate({ user: response.user });
-      router.replace('/mymeals');
-    } else {
-      setErrorMsg(await res.text());
+      if (res.status === 201) {
+        const response = await res.json();
+        // writing our user object to the state
+        mutate({ user: response.user });
+
+        // Change the user name and type on all their meals
+        const res2 = await fetch('api/meals', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user: response.user }),
+        });
+
+        if (res2.status === 201) {
+          const response2 = await res2.json();
+        } else {
+          setErrorMsg(await res2.text());
+        }
+
+        router.replace('/mymeals');
+      } else {
+        setErrorMsg(await res.text());
+      }
     }
   };
 
@@ -64,6 +76,7 @@ const UserPage = () => {
       <Content>
         <PageTitle>Settings</PageTitle>
         <Card>
+          {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
           <div className="input-container">
             <label htmlFor="name">Name:</label>
             <input
@@ -71,7 +84,7 @@ const UserPage = () => {
               name="name"
               type="text"
               placeholder="Your name, e.g. brand name, company name, cook name, etc."
-              value={tmpUser.name}
+              value={tmpUser.name || user?.name}
               onChange={(e) =>
                 setTmpUser({
                   ...tmpUser,
@@ -80,12 +93,30 @@ const UserPage = () => {
               }
             />
           </div>
-
+          <div className="input-container">
+            <label htmlFor="homepage">Homepage:</label>
+            <input
+              id="homepage"
+              name="homepage"
+              type="text"
+              placeholder="Your homepage"
+              value={tmpUser.homepage || user?.homepage}
+              onChange={(e) =>
+                setTmpUser({
+                  ...tmpUser,
+                  homepage: e.target.value,
+                })
+              }
+            />
+          </div>
           <div className="type-container">
             <label>Type:</label>
             <div className="select-container">
               <Select
-                value={typeOptions.find((t) => t.value === tmpUser.type)}
+                value={
+                  typeOptions.find((t) => t.value === tmpUser.type) ||
+                  typeOptions.find((t) => t.value === user?.type)
+                }
                 placeholder="User type"
                 onChange={(val) =>
                   setTmpUser({
