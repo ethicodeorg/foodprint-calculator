@@ -38,7 +38,7 @@ const SignupPage = () => {
 
       clearLocalStorageMeals();
 
-      router.replace('/user');
+      router.replace('/mymeals');
     }
   }, [user]);
 
@@ -48,10 +48,11 @@ const SignupPage = () => {
       email: e.currentTarget.email.value,
       name: e.currentTarget.name.value,
       password: e.currentTarget.password.value,
-      type: 'other',
-      visibility: 'private',
+      retypedPassword: e.currentTarget.retypedPassword.value,
+      type: e.currentTarget.type[1].value,
       subscriptionType: 'free',
     };
+
     const res = await fetch('/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

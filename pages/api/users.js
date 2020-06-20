@@ -1,7 +1,8 @@
 import nextConnect from 'next-connect';
+import bcrypt from 'bcryptjs';
+import { ObjectId } from 'mongodb';
 import isEmail from 'validator/lib/isEmail';
 import normalizeEmail from 'validator/lib/normalizeEmail';
-import bcrypt from 'bcryptjs';
 import middleware from '../../middlewares/middleware';
 import { extractUser } from '../../lib/apiHelpers';
 
@@ -25,7 +26,7 @@ handler.get(async (req, res) => {
 
 // POST /api/users
 handler.post(async (req, res) => {
-  const { name, password, type, visibility, subscription } = req.body;
+  const { name, password, retypedPassword, type, subscription } = req.body;
   const email = normalizeEmail(req.body.email); // this is to handle things like jane.doe@gmail.com and janedoe@gmail.com being the same
 
   if (!isEmail(email)) {
@@ -33,14 +34,25 @@ handler.post(async (req, res) => {
     return;
   }
 
-  if (!password || !name) {
-    res.status(400).send('Missing field(s)');
+  if (!password || !name || !type) {
+    res.status(400).send('Missing field(s).');
+    return;
+  }
+
+  if (password !== retypedPassword) {
+    res.status(400).send('The password and retyped password did not match.');
     return;
   }
 
   // check if email existed
   if ((await req.db.collection('users').countDocuments({ email })) > 0) {
     res.status(403).send('The email has already been used.');
+    return;
+  }
+
+  // check if name existed
+  if ((await req.db.collection('users').countDocuments({ name })) > 0) {
+    res.status(403).send('The name has already been used.');
     return;
   }
 
@@ -52,7 +64,6 @@ handler.post(async (req, res) => {
       password: hashedPassword,
       name,
       type,
-      visibility,
       subscription,
     })
     .then(({ ops }) => ops[0]);
@@ -74,7 +85,6 @@ handler.put(async (req, res) => {
     { _id: ObjectId(updatedUser._id) },
     {
       $set: {
-        visibility: updatedUser.visibility || 'private',
         name: updatedUser.name || '',
         type: updatedUser.type || 'other',
         subscription: updatedUser.subscription || 'free',

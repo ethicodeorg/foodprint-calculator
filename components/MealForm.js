@@ -310,7 +310,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
                   >
                     <div className="add-transport-button-container">
                       <Button clear onClick={() => setIsAddingTransport(true)}>
-                        Add Transport (Optional)
+                        Add Transport (optional)
                       </Button>
                     </div>
                   </Tooltip>

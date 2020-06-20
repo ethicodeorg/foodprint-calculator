@@ -18,10 +18,6 @@ const UserPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
   const [tmpUser, setTmpUser] = useState(user || {});
-  const visibilityOptions = [
-    { value: 'private', label: 'Private' },
-    { value: 'public', label: 'Public' },
-  ];
   const typeOptions = [
     { value: 'restaurant', label: 'Restaurant' },
     { value: 'cafeteria', label: 'Cafeteria' },
@@ -84,22 +80,6 @@ const UserPage = () => {
               }
             />
           </div>
-          <div className="visibility-container">
-            <label>Visibility:</label>
-            <div className="select-container">
-              <Select
-                value={visibilityOptions.find((opt) => opt.value === tmpUser.visibility)}
-                placeholder="User visibility"
-                onChange={(val) =>
-                  setTmpUser({
-                    ...tmpUser,
-                    visibility: val.value,
-                  })
-                }
-                options={visibilityOptions}
-              />
-            </div>
-          </div>
 
           <div className="type-container">
             <label>Type:</label>
@@ -141,8 +121,7 @@ const UserPage = () => {
           justify-content: space-between;
         }
         .input-container,
-        .type-container,
-        .visibility-container {
+        .type-container {
           display: flex;
           align-items: center;
           margin-bottom: 20px;

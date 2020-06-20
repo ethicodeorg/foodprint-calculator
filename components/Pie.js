@@ -3,6 +3,12 @@ import classNames from 'classnames';
 
 const Pie = ({ category, isSingle, label }) => {
   const { name, total, unit, color, rda } = category;
+  let data = [{ title: label, value: total, color: color }];
+
+  // Add grey filler to last pie of each category
+  if (total !== rda) {
+    data.push({ title: label, value: rda - total, color: '#eee' });
+  }
 
   return (
     <div
@@ -11,7 +17,7 @@ const Pie = ({ category, isSingle, label }) => {
       })}
     >
       <PieChart
-        data={[{ title: label, value: total, color: color }]}
+        data={data}
         totalValue={rda}
         animate={true}
         animationDuration={800}
