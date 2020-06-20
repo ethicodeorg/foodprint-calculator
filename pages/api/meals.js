@@ -32,7 +32,8 @@ handler.get(async (req, res) => {
 
 // POST api/meals
 handler.post(async (req, res) => {
-  const { meal } = req.body;
+  let { meal } = req.body;
+  meal.createdAt = new Date();
 
   const response = await req.db.collection('meals').insertOne(meal);
 
@@ -49,6 +50,7 @@ handler.put(async (req, res) => {
       { 'owner.id': user._id },
       {
         $set: {
+          lastModified: new Date(),
           owner: {
             id: user._id,
             name: user.name,
@@ -66,6 +68,7 @@ handler.put(async (req, res) => {
     { _id: ObjectId(mealId) },
     {
       $set: {
+        lastModified: new Date(),
         visibility: meal.visibility,
         owner: meal.owner,
         title: meal.title,

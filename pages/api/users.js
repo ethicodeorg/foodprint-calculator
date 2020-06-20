@@ -65,6 +65,7 @@ handler.post(async (req, res) => {
       name,
       type,
       subscription,
+      createdAt: new Date(),
     })
     .then(({ ops }) => ops[0]);
 
@@ -81,11 +82,13 @@ handler.post(async (req, res) => {
 handler.put(async (req, res) => {
   // TODO: If the user updated his username, we have to change the owner property in all his meals.
   const updatedUser = req.body;
-  const setObj = {};
+  const setObj = {
+    lastModified: new Date(),
+  };
 
   if (updatedUser.name) {
     // Check if name existed
-    if ((await req.db.collection('users').countDocuments({ name: setObj.name })) > 0) {
+    if ((await req.db.collection('users').countDocuments({ name: updatedUser.name })) > 0) {
       res.status(403).send('The name has already been used.');
       return;
     }
