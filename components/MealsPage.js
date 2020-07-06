@@ -27,6 +27,7 @@ import theme from '../styles/theme';
 import AboutMeal from './AboutMeal';
 import Separator from './Separator';
 import Loading from './Loading';
+import Filters from './Filters';
 
 Modal.setAppElement('#__next');
 
@@ -39,6 +40,7 @@ const MealsPage = ({
   showDeleteButton,
   showEyeButton,
   removeMeal,
+  filters,
 }) => {
   const [user] = useUser();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -94,6 +96,7 @@ const MealsPage = ({
           </Button>
         </div>
       )}
+      {filters && <Filters />}
       <div className="meals-container">
         {meals ? (
           meals.map((meal) => {

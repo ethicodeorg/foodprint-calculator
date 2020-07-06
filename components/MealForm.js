@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import Autocomplete from 'react-autocomplete';
 import Select from 'react-select';
 import Tooltip from '@material-ui/core/Tooltip';
 import {

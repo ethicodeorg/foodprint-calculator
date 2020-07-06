@@ -10,24 +10,28 @@ handler.use(middleware);
 
 // GET api/meals
 handler.get(async (req, res) => {
-  const { query } = req;
+  const { user, id, visibility, title, sortBy = 'landUse' } = req.query;
   let filter = {};
 
-  if (query.user) {
-    filter = { 'owner.id': query.user };
+  if (user && user !== 'all') {
+    filter = { 'owner.id': user };
   }
 
-  if (query.id) {
-    filter = { _id: ObjectId(query.id) };
+  if (id) {
+    filter = { _id: ObjectId(id) };
   }
 
-  if (query.visibility) {
-    filter.visibility = query.visibility;
+  if (visibility) {
+    filter.visibility = visibility;
+  }
+
+  if (title) {
+    filter.title = title;
   }
 
   const docs = await req.db.collection('meals').find(filter).toArray();
 
-  res.status(200).json({ meals: docs });
+  res.status(200).json({ meals: docs.sort((a, b) => a[sortBy] - b[sortBy]) });
 });
 
 // POST api/meals
