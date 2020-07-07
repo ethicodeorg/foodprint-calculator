@@ -17,7 +17,7 @@ const Filters = ({ query }) => {
     })
   );
   const [userFilter, setUserFilter] = useState(
-    userFilterOptions.find((option) => option.value === query.user) || userFilterOptions[0]
+    userFilterOptions.find((option) => option?.value === query.user) || userFilterOptions[0]
   );
   const sortByOptions = [
     { value: 'landUse', label: 'Sort by land use' },
@@ -52,6 +52,7 @@ const Filters = ({ query }) => {
           }}
           options={userFilterOptions}
           styles={customStyles}
+          instanceId="user"
         />
       </div>
       <div className="select-container sort-select">
@@ -67,6 +68,7 @@ const Filters = ({ query }) => {
           }}
           options={sortByOptions}
           styles={customStyles}
+          instanceId="sortby"
         />
       </div>
 
