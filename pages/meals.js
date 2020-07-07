@@ -32,6 +32,7 @@ const Meals = () => {
         title="All Meals"
         emptyMessage="Could not load meals at this time"
         filters
+        query={router.query}
       />
     </Layout>
   );

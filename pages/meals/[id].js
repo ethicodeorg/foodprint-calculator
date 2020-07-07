@@ -28,10 +28,19 @@ const Meal = () => {
         <Fragment>
           <Header activePage="mymeals" />
           <Content>
-            <Loading />
+            <div className="loading-container">
+              <Loading />
+            </div>
           </Content>
         </Fragment>
       )}
+      <style jsx>{`
+        .loading-container {
+          display: flex;
+          justify-content: center;
+          margin-top: 100px;
+        }
+      `}</style>
     </Layout>
   );
 };

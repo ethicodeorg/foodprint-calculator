@@ -6,7 +6,7 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Filters = () => {
+const Filters = ({ query }) => {
   const { data, error } = useSWR('/api/users', fetcher);
   const userFilterOptions = [{ value: 'all', label: 'All users' }].concat(
     data?.users.map((user) => {
@@ -16,14 +16,18 @@ const Filters = () => {
       };
     })
   );
-  const [userFilter, setUserFilter] = useState(userFilterOptions[0].value);
+  const [userFilter, setUserFilter] = useState(
+    userFilterOptions.find((option) => option.value === query.user) || userFilterOptions[0]
+  );
   const sortByOptions = [
     { value: 'landUse', label: 'Sort by land use' },
     { value: 'ghgEmissions', label: 'Sort by greenhouse gas emissions' },
     { value: 'waterWithdrawals', label: 'Sort by water withdrawals' },
     { value: 'eutrophyingEmissions', label: 'Sort by eutrophying emissions' },
   ];
-  const [sortBy, setSortBy] = useState(sortByOptions[0].value);
+  const [sortBy, setSortBy] = useState(
+    sortByOptions.find((option) => option.value === query.sortBy) || sortByOptions[0]
+  );
 
   const customStyles = {
     control: (provided, state) => ({
@@ -37,13 +41,13 @@ const Filters = () => {
     <div className="filters">
       <div className="select-container user-select">
         <Select
-          value={userFilter.value}
+          value={userFilter}
           placeholder="All users"
           onChange={(val) => {
-            setUserFilter(val.value);
+            setUserFilter(val);
             Router.push({
               pathname: '/meals',
-              query: { user: val.value, sortBy },
+              query: { user: val.value, sortBy: sortBy.value },
             });
           }}
           options={userFilterOptions}
@@ -52,13 +56,13 @@ const Filters = () => {
       </div>
       <div className="select-container sort-select">
         <Select
-          value={sortBy.value}
+          value={sortBy}
           placeholder="Sort by"
           onChange={(val) => {
-            setSortBy(val.value);
+            setSortBy(val);
             Router.push({
               pathname: '/meals',
-              query: { sortBy: val.value, user: userFilter },
+              query: { sortBy: val.value, user: userFilter.value },
             });
           }}
           options={sortByOptions}

@@ -41,6 +41,7 @@ const MealsPage = ({
   showEyeButton,
   removeMeal,
   filters,
+  query,
 }) => {
   const [user] = useUser();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -60,7 +61,6 @@ const MealsPage = ({
     }
 
     Router.push('/mymeals');
-    Router;
   };
 
   const deleteMeal = (meal) => {
@@ -96,75 +96,79 @@ const MealsPage = ({
           </Button>
         </div>
       )}
-      {filters && <Filters />}
+      {filters && <Filters query={query} />}
       <div className="meals-container">
         {meals ? (
-          meals.map((meal) => {
-            const userSubtitle = `${meal.owner.name}${
-              meal.owner.type && meal.owner.type !== 'other'
-                ? `, ${userTypeMap[meal.owner.type]}`
-                : ''
-            }`;
+          meals.length ? (
+            meals.map((meal) => {
+              const userSubtitle = `${meal.owner.name}${
+                meal.owner.type && meal.owner.type !== 'other'
+                  ? `, ${userTypeMap[meal.owner.type]}`
+                  : ''
+              }`;
 
-            return (
-              <div className="meal" key={meal._id}>
-                <Card>
-                  <div className="title-container">
-                    <CardTitle>{meal.title}</CardTitle>
-                    {showEyeButton && (
-                      <Tooltip
-                        title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
-                        placement="left"
-                      >
-                        <button
-                          className={classNames('visibility-button', {
-                            'visibility-button-public': meal.visibility === 'public',
-                          })}
-                          onClick={() => changeVisibility(meal)}
+              return (
+                <div className="meal" key={meal._id}>
+                  <Card>
+                    <div className="title-container">
+                      <CardTitle>{meal.title}</CardTitle>
+                      {showEyeButton && (
+                        <Tooltip
+                          title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
+                          placement="left"
                         >
-                          {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
-                        </button>
-                      </Tooltip>
-                    )}
-                  </div>
-                  <div className="subtitle">
-                    {meal.owner.homepage ? (
-                      <ExternalLink href={meal.owner.homepage}>{userSubtitle}</ExternalLink>
-                    ) : (
-                      userSubtitle
-                    )}
-                  </div>
-                  <p className="servings">{`Serves ${meal.numberOfServings} ${
-                    meal.numberOfServings === 1 ? 'person' : 'people'
-                  }`}</p>
-                  {meal.about && <AboutMeal text={meal.about} />}
-                  {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-                  <Pies meal={meal} numberOfServings={meal.numberOfServings} />
-                  {showDeleteButton && (
-                    <Fragment>
-                      <Separator />
-                      <div className="footer-button-container">
-                        <Tooltip title="Delete meal" placement="right">
-                          <button className="delete-button" onClick={() => deleteMeal(meal)}>
-                            <FaTrash />
+                          <button
+                            className={classNames('visibility-button', {
+                              'visibility-button-public': meal.visibility === 'public',
+                            })}
+                            onClick={() => changeVisibility(meal)}
+                          >
+                            {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
                           </button>
                         </Tooltip>
-                        {showEditButton && (
-                          <Tooltip title="Edit meal" placement="left">
-                            <div className="edit-button-container">
-                              <MealLink id={meal._id}>
-                                <FaEdit />
-                              </MealLink>
-                            </div>
+                      )}
+                    </div>
+                    <div className="subtitle">
+                      {meal.owner.homepage ? (
+                        <ExternalLink href={meal.owner.homepage}>{userSubtitle}</ExternalLink>
+                      ) : (
+                        userSubtitle
+                      )}
+                    </div>
+                    <p className="servings">{`Serves ${meal.numberOfServings} ${
+                      meal.numberOfServings === 1 ? 'person' : 'people'
+                    }`}</p>
+                    {meal.about && <AboutMeal text={meal.about} />}
+                    {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
+                    <Pies meal={meal} numberOfServings={meal.numberOfServings} />
+                    {showDeleteButton && (
+                      <Fragment>
+                        <Separator />
+                        <div className="footer-button-container">
+                          <Tooltip title="Delete meal" placement="right">
+                            <button className="delete-button" onClick={() => deleteMeal(meal)}>
+                              <FaTrash />
+                            </button>
                           </Tooltip>
-                        )}
-                      </div>
-                    </Fragment>
-                  )}
-                </Card>
-              </div>
-            );
-          })
+                          {showEditButton && (
+                            <Tooltip title="Edit meal" placement="left">
+                              <div className="edit-button-container">
+                                <MealLink id={meal._id}>
+                                  <FaEdit />
+                                </MealLink>
+                              </div>
+                            </Tooltip>
+                          )}
+                        </div>
+                      </Fragment>
+                    )}
+                  </Card>
+                </div>
+              );
+            })
+          ) : (
+            <div className="no-results">No meals</div>
+          )
         ) : (
           <Loading />
         )}
@@ -298,7 +302,9 @@ const MealsPage = ({
           position: relative;
           top: -4px;
         }
-        .loading {
+        .no-results {
+          margin-top: 50px;
+          font-size: 24px;
           color: #fff;
         }
 

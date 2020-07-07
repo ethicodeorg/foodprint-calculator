@@ -2,8 +2,6 @@ import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
 import { connect } from 'react-redux';
 import {
-  FaCalculator,
-  FaUtensils,
   FaGlobeEurope,
   FaGlobeAfrica,
   FaGlobeAsia,

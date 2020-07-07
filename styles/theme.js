@@ -18,6 +18,7 @@ const theme = {
     aqua: '#7FDBFF',
     orange: '#FF851B',
     fuchsia: '#F012BE',
+    white: '#FFF',
   },
   sizes: {
     mobile: '600px',
