@@ -40,7 +40,7 @@ const MealsPage = ({
   showDeleteButton,
   showEyeButton,
   removeMeal,
-  filters,
+  allMeals,
   query,
 }) => {
   const [user] = useUser();
@@ -96,7 +96,7 @@ const MealsPage = ({
           </Button>
         </div>
       )}
-      {filters && <Filters query={query} />}
+      {allMeals && <Filters query={query} />}
       <div className="meals-container">
         {meals ? (
           meals.length ? (
@@ -108,7 +108,7 @@ const MealsPage = ({
               }`;
 
               return (
-                <div className="meal" key={meal._id}>
+                <div className="meal" key={meal._id} id={meal._id}>
                   <Card>
                     <div className="title-container">
                       <CardTitle>{meal.title}</CardTitle>
@@ -140,7 +140,11 @@ const MealsPage = ({
                     }`}</p>
                     {meal.about && <AboutMeal text={meal.about} />}
                     {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-                    <Pies meal={meal} numberOfServings={meal.numberOfServings} />
+                    <Pies
+                      meal={meal}
+                      numberOfServings={meal.numberOfServings}
+                      allMeals={allMeals}
+                    />
                     {showDeleteButton && (
                       <Fragment>
                         <Separator />

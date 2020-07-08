@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
+import { Fragment, useState, useEffect } from 'react';
+import { FaChevronDown, FaDownload } from 'react-icons/fa';
 import classNames from 'classnames';
+import { Tooltip } from '@material-ui/core';
 import { getMealPieData } from '../utils/pieUtils';
 import Pie from '../components/Pie';
 import Button from '../components/Button';
@@ -9,10 +10,47 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 
-const Pies = ({ meal, isSingle, numberOfServings }) => {
+const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
+  let html2canvas;
   const pieData = getMealPieData(meal);
   const [showDetails, setShowDetails] = useState(false);
   const [showIngredients, setShowIngredients] = useState(false);
+
+  useEffect(() => {
+    html2canvas = require('html2canvas');
+  });
+
+  const downloadReport = (meal) => {
+    if (html2canvas && window && document) {
+      const pieContainer = meal._id
+        ? document.getElementById(meal._id).getElementsByClassName('pie-container')[0]
+        : document.getElementsByClassName('pie-container')[0];
+
+      // Process SVGs for canvas rendering
+      let svgElements = pieContainer.querySelectorAll('svg');
+      svgElements.forEach((item) => {
+        item.setAttribute('width', item.getBoundingClientRect().width);
+        item.style.width = null;
+      });
+
+      // Convert HTML element to HTML canvas
+      html2canvas(pieContainer, {
+        scrollY: -window.scrollY, // Vertical positioning
+        backgroundColor: null, // Transparent background
+      }).then((canvas) => {
+        // Create image from canvas
+        const dataURL = canvas.toDataURL();
+        const title = meal.title || mealTitle || 'Meal';
+        let link = document.createElement('a');
+        link.download = `${title
+          .toLowerCase()
+          .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
+          .replace(/ /g, '-')}-${showDetails ? 'detailed' : 'minified'}-foodprint-report.png`;
+        link.href = dataURL;
+        link.click();
+      });
+    }
+  };
 
   return (
     <Fragment>
@@ -40,7 +78,16 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         </Fragment>
       )}
       <div className="title-container">
-        <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+        <div className="title-download">
+          <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+          {!allMeals && (
+            <Tooltip title="Download report">
+              <span className="download-button-container">
+                <FaDownload onClick={() => downloadReport(meal)} />
+              </span>
+            </Tooltip>
+          )}
+        </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
           Details
           <span
@@ -172,6 +219,15 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         }
         .percentage-3 {
           color: ${theme.colors.eutro};
+        }
+        .title-download {
+          display: flex;
+          align-items: baseline;
+        }
+        .download-button-container {
+          color: ${theme.colors.water};
+          font-size: 22px;
+          margin: 0 20px;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

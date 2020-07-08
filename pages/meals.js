@@ -31,7 +31,7 @@ const Meals = () => {
         meals={data?.meals}
         title="All Meals"
         emptyMessage="Could not load meals at this time"
-        filters
+        allMeals
         query={router.query}
       />
     </Layout>
