@@ -90,7 +90,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
         id: user?._id,
         name: user?.name,
       },
-      visibility: 'private',
+      visibility: meal.visibility || 'private',
       title: mealName,
       about: aboutMeal,
       link: mealLink,
