@@ -80,7 +80,7 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
       <div className="title-container">
         <div className="title-download">
           <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
-          {!allMeals && (
+          {!allMeals && showDetails && (
             <Tooltip title="Download report">
               <span className="download-button-container">
                 <FaDownload onClick={() => downloadReport(meal)} />
