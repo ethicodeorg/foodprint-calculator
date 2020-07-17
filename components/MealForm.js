@@ -86,11 +86,8 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
 
   const saveMeal = async () => {
     const currentMeal = {
-      owner: {
-        id: user?._id,
-        name: user?.name,
-      },
-      visibility: meal.visibility || 'private',
+      ownerId: user?._id,
+      visibility: meal?.visibility || 'private',
       title: mealName,
       about: aboutMeal,
       link: mealLink,

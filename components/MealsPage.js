@@ -101,9 +101,9 @@ const MealsPage = ({
         {meals ? (
           meals.length ? (
             meals.map((meal) => {
-              const userSubtitle = `${meal.owner.name}${
-                meal.owner.type && meal.owner.type !== 'other'
-                  ? `, ${userTypeMap[meal.owner.type]}`
+              const userSubtitle = `${meal.user.name}${
+                meal.user.type && meal.user.type !== 'other'
+                  ? `, ${userTypeMap[meal.user.type]}`
                   : ''
               }`;
 
@@ -129,8 +129,8 @@ const MealsPage = ({
                       )}
                     </div>
                     <div className="subtitle">
-                      {meal.owner.homepage ? (
-                        <ExternalLink href={meal.owner.homepage}>{userSubtitle}</ExternalLink>
+                      {meal.user.homepage ? (
+                        <ExternalLink href={meal.user.homepage}>{userSubtitle}</ExternalLink>
                       ) : (
                         userSubtitle
                       )}

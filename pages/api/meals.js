@@ -14,7 +14,7 @@ handler.get(async (req, res) => {
   let filter = {};
 
   if (user && user !== 'all') {
-    filter = { 'owner.id': user };
+    filter = { ownerId: user };
   }
 
   if (id) {
@@ -31,7 +31,20 @@ handler.get(async (req, res) => {
 
   const docs = await req.db.collection('meals').find(filter).toArray();
 
-  res.status(200).json({ meals: docs.sort((a, b) => a[sortBy] - b[sortBy]) });
+  // Add user info to the meal object for the client
+  const mealsWithUserInfo = await Promise.all(
+    docs.map(async (doc) => {
+      const userDocs = await req.db
+        .collection('users')
+        .find({ _id: ObjectId(doc.ownerId) })
+        .toArray();
+      doc.user = extractUser(userDocs[0]);
+
+      return doc;
+    })
+  );
+
+  res.status(200).json({ meals: mealsWithUserInfo.sort((a, b) => a[sortBy] - b[sortBy]) });
 });
 
 // POST api/meals
@@ -48,33 +61,13 @@ handler.post(async (req, res) => {
 handler.put(async (req, res) => {
   const { mealId, meal, user } = req.body;
 
-  if (user) {
-    // Update all the user's meals with the new user details
-    const resp = await req.db.collection('meals').updateMany(
-      { 'owner.id': user._id },
-      {
-        $set: {
-          lastModified: new Date(),
-          owner: {
-            id: user._id,
-            name: user.name,
-            type: user.type,
-            homepage: user.homepage,
-          },
-        },
-      }
-    );
-
-    return res.status(201).json({ meals: resp });
-  }
-
   const response = await req.db.collection('meals').findOneAndUpdate(
     { _id: ObjectId(mealId) },
     {
       $set: {
         lastModified: new Date(),
         visibility: meal.visibility,
-        owner: meal.owner,
+        ownerId: meal.ownerId,
         title: meal.title,
         about: meal.about,
         link: meal.link,
@@ -100,7 +93,7 @@ handler.delete(async (req, res) => {
   const { mealId, userId } = req.body;
   const response = await req.db
     .collection('meals')
-    .remove({ _id: ObjectId(mealId), 'owner.id': userId });
+    .remove({ _id: ObjectId(mealId), ownerId: userId });
 });
 
 export default handler;

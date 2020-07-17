@@ -13,9 +13,11 @@ import Button from '../components/Button';
 import theme from '../styles/theme';
 import { setUserCookie } from '../utils/userCookie';
 import { userTypes, userTypeMap } from '../utils/constants';
+import Loading from '../components/Loading';
 
 const UserPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
   const [tmpUser, setTmpUser] = useState({ _id: user?._id });
@@ -38,7 +40,16 @@ const UserPage = () => {
   };
 
   const saveUser = async () => {
-    if (tmpUser.name || tmpUser.type || tmpUser.homepage) {
+    if (
+      tmpUser.name ||
+      tmpUser.type ||
+      tmpUser.homepage ||
+      tmpUser.password ||
+      tmpUser.retypedPassword
+    ) {
+      setIsLoading(true);
+      setErrorMsg('');
+
       const res = await fetch('/api/users', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -50,23 +61,12 @@ const UserPage = () => {
         // writing our user object to the state
         mutate({ user: response.user });
 
-        // Change the user name and type on all their meals
-        const res2 = await fetch('api/meals', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user: response.user }),
-        });
-
-        if (res2.status === 201) {
-          const response2 = await res2.json();
-        } else {
-          setErrorMsg(await res2.text());
-        }
-
         router.replace('/mymeals');
       } else {
         setErrorMsg(await res.text());
       }
+
+      setIsLoading(false);
     }
   };
 
@@ -75,6 +75,11 @@ const UserPage = () => {
       <Header activePage="user" />
       <Content>
         <PageTitle>Settings</PageTitle>
+        {isLoading && (
+          <div className="loading-container">
+            <Loading />
+          </div>
+        )}
         <Card>
           {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
           <div className="input-container">
@@ -84,7 +89,7 @@ const UserPage = () => {
               name="name"
               type="text"
               placeholder="Your name, e.g. brand name, company name, cook name, etc."
-              value={tmpUser.name || user?.name}
+              value={tmpUser.name || user?.name || ''}
               onChange={(e) =>
                 setTmpUser({
                   ...tmpUser,
@@ -100,7 +105,7 @@ const UserPage = () => {
               name="homepage"
               type="text"
               placeholder="Your homepage"
-              value={tmpUser.homepage || user?.homepage}
+              value={tmpUser.homepage || user?.homepage || ''}
               onChange={(e) =>
                 setTmpUser({
                   ...tmpUser,
@@ -115,7 +120,8 @@ const UserPage = () => {
               <Select
                 value={
                   typeOptions.find((t) => t.value === tmpUser.type) ||
-                  typeOptions.find((t) => t.value === user?.type)
+                  typeOptions.find((t) => t.value === user?.type) ||
+                  typeOptions[5]
                 }
                 placeholder="User type"
                 onChange={(val) =>
@@ -127,6 +133,38 @@ const UserPage = () => {
                 options={typeOptions}
               />
             </div>
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">Change password:</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="New password"
+              value={tmpUser.password || ''}
+              onChange={(e) =>
+                setTmpUser({
+                  ...tmpUser,
+                  password: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div className="input-container">
+            <label htmlFor="confirm-password">Retype new password:</label>
+            <input
+              id="confirm-password"
+              name="confirm-password"
+              type="password"
+              placeholder="Confirm new password"
+              value={tmpUser.retypedPassword || ''}
+              onChange={(e) =>
+                setTmpUser({
+                  ...tmpUser,
+                  retypedPassword: e.target.value,
+                })
+              }
+            />
           </div>
           <div className="buttons-container">
             <Button remove onClick={handleLogout}>
@@ -158,10 +196,18 @@ const UserPage = () => {
           margin-bottom: 20px;
         }
         .select-container {
-          width: calc(100% - 100px);
+          width: 322px;
+        }
+        .loading-container {
+          position: fixed;
+          display: flex;
+          justify-content: center;
+          margin-top: 100px;
+          left: calc(50% - 50px);
+          z-index: 3;
         }
         label {
-          min-width: 100px;
+          min-width: 200px;
         }
       `}</style>
     </Layout>

@@ -7,7 +7,7 @@ import theme from '../styles/theme';
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const Filters = ({ query }) => {
-  const { data, error } = useSWR('/api/users', fetcher);
+  const { data, error } = useSWR('/api/users?publicOnly=true', fetcher);
   const userFilterOptions = [{ value: 'all', label: 'All users' }].concat(
     data?.users.map((user) => {
       return {

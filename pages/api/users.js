@@ -32,20 +32,22 @@ handler.get(async (req, res) => {
     filter._id = query.user;
   }
 
-  const users = await req.db.collection('users').find().toArray();
+  let users = await req.db.collection('users').find(filter).toArray();
 
-  // Only return users that have some public meals
-  const usersWithPublicMeals = await asyncFilter(users, async (user) => {
-    const mealFilter = {
-      'owner.id': user._id.toString(),
-      visibility: 'public',
-    };
-    const docs = await req.db.collection('meals').find(mealFilter).toArray();
+  if (query.publicOnly) {
+    // Only return users that have some public meals
+    users = await asyncFilter(users, async (user) => {
+      const mealFilter = {
+        ownerId: user._id.toString(),
+        visibility: 'public',
+      };
+      const docs = await req.db.collection('meals').find(mealFilter).toArray();
 
-    return docs.length;
-  });
+      return docs.length;
+    });
+  }
 
-  res.status(200).json({ users: usersWithPublicMeals });
+  res.status(200).json({ users });
 });
 
 // POST /api/users
@@ -104,32 +106,41 @@ handler.post(async (req, res) => {
 
 // PUT /api/users
 handler.put(async (req, res) => {
-  // TODO: If the user updated his username, we have to change the owner property in all his meals.
-  const updatedUser = req.body;
+  const { name, type, homepage, _id, password, retypedPassword } = req.body;
   const setObj = {
     lastModified: new Date(),
   };
 
-  if (updatedUser.name) {
+  if (password || retypedPassword) {
+    if (password !== retypedPassword) {
+      res.status(400).send('The password and retyped password did not match.');
+      return;
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    setObj.password = hashedPassword;
+  }
+
+  if (name) {
     // Check if name existed
-    if ((await req.db.collection('users').countDocuments({ name: updatedUser.name })) > 0) {
+    if ((await req.db.collection('users').countDocuments({ name: name })) > 0) {
       res.status(403).send('The name has already been used.');
       return;
     }
 
-    setObj.name = updatedUser.name;
+    setObj.name = name;
   }
 
-  if (updatedUser.type) {
-    setObj.type = updatedUser.type;
+  if (type) {
+    setObj.type = type;
   }
 
-  if (updatedUser.homepage) {
-    setObj.homepage = updatedUser.homepage;
+  if (homepage) {
+    setObj.homepage = homepage;
   }
 
   const response = await req.db.collection('users').findOneAndUpdate(
-    { _id: ObjectId(updatedUser._id) },
+    { _id: ObjectId(_id) },
     {
       $set: setObj,
     },

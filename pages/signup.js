@@ -24,10 +24,7 @@ const SignupPage = () => {
       const localStorageMeals = getLocalStorageMeals();
       localStorageMeals.forEach((meal) => {
         delete meal._id;
-        meal.owner = {
-          id: user._id,
-          name: user.name,
-        };
+        meal.ownerId = user._id;
 
         fetch('api/meals', {
           method: 'POST',
