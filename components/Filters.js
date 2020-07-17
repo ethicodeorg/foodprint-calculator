@@ -9,20 +9,12 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const Filters = ({ query }) => {
   const { data, error } = useSWR('/api/users', fetcher);
   const userFilterOptions = [{ value: 'all', label: 'All users' }].concat(
-    data?.users
-      // only show users that have some public meals
-      .filter((user) => {
-        const queryString = `?visibility=public&user=${user._id}`;
-        const { data, error } = useSWR(`/api/meals${queryString}`, fetcher);
-        const numberOfPublicMeals = data?.meals.length;
-        return numberOfPublicMeals;
-      })
-      .map((user) => {
-        return {
-          value: user._id,
-          label: user.name,
-        };
-      })
+    data?.users.map((user) => {
+      return {
+        value: user._id,
+        label: user.name,
+      };
+    })
   );
   const [userFilter, setUserFilter] = useState(
     userFilterOptions.find((option) => option?.value === query.user) || userFilterOptions[0]

@@ -6,6 +6,19 @@ import normalizeEmail from 'validator/lib/normalizeEmail';
 import middleware from '../../middlewares/middleware';
 import { extractUser } from '../../lib/apiHelpers';
 
+/**
+ * Async filter function for filtering users with some public meals
+ * https://advancedweb.hu/how-to-use-async-functions-with-array-filter-in-javascript/
+ * @param {Array} users
+ * @param {Function} predicate
+ * @returns {Array} the filtered result
+ */
+const asyncFilter = async (users, predicate) => {
+  const results = await Promise.all(users.map(predicate));
+
+  return users.filter((_v, index) => results[index]);
+};
+
 const handler = nextConnect();
 
 handler.use(middleware);
@@ -21,7 +34,18 @@ handler.get(async (req, res) => {
 
   const users = await req.db.collection('users').find().toArray();
 
-  res.status(200).json({ users });
+  // Only return users that have some public meals
+  const usersWithPublicMeals = await asyncFilter(users, async (user) => {
+    const mealFilter = {
+      'owner.id': user._id.toString(),
+      visibility: 'public',
+    };
+    const docs = await req.db.collection('meals').find(mealFilter).toArray();
+
+    return docs.length;
+  });
+
+  res.status(200).json({ users: usersWithPublicMeals });
 });
 
 // POST /api/users
