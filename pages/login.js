@@ -73,7 +73,15 @@ const LoginPage = () => {
         <PageTitle>Log in</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
-          <UserForm onSubmit={onSubmit} errorMsg={errorMsg} isLogin />
+          <UserForm
+            onSubmit={onSubmit}
+            errorMsg={errorMsg}
+            isLogin
+            showPassword
+            showForgotPassword
+            buttonText="Log in"
+            passwordPlaceholder="Password"
+          />
         </Card>
       </Content>
     </Layout>

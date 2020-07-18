@@ -4,7 +4,17 @@ import { userTypes, userTypeMap } from '../utils/constants';
 import theme from '../styles/theme';
 import Button from './Button';
 
-const UserForm = ({ onSubmit, errorMsg, isLogin }) => {
+const UserForm = ({
+  onSubmit,
+  errorMsg,
+  showName,
+  showType,
+  showPassword,
+  showRetypedPassword,
+  showForgotPassword,
+  buttonText,
+  passwordPlaceholder,
+}) => {
   const typeOptions = userTypes.map((type) => {
     return { value: type, label: userTypeMap[type] };
   });
@@ -15,25 +25,22 @@ const UserForm = ({ onSubmit, errorMsg, isLogin }) => {
       <label htmlFor="email">
         <input id="email" type="email" name="email" placeholder="Email address" />
       </label>
-      {!isLogin && (
+      {showName && (
         <label htmlFor="name">
           <input id="name" name="name" type="text" placeholder="Name" />
         </label>
       )}
-      {!isLogin && (
+      {showType && (
         <label htmlFor="type">
           <Select inputId="type" name="type" placeholder="Type" options={typeOptions} />
         </label>
       )}
-      <label htmlFor="password">
-        <input
-          id="password"
-          type="password"
-          name="password"
-          placeholder={isLogin ? 'Password' : 'Create a password'}
-        />
-      </label>
-      {!isLogin && (
+      {showPassword && (
+        <label htmlFor="password">
+          <input id="password" type="password" name="password" placeholder={passwordPlaceholder} />
+        </label>
+      )}
+      {showRetypedPassword && (
         <label htmlFor="retypedPassword">
           <input
             id="retypedPassword"
@@ -43,8 +50,8 @@ const UserForm = ({ onSubmit, errorMsg, isLogin }) => {
           />
         </label>
       )}
-      <Button type="submit">{isLogin ? 'Log in' : 'Sign up'}</Button>
-      {isLogin && (
+      <Button type="submit">{buttonText}</Button>
+      {showForgotPassword && (
         <Link href="/forgot-password">
           <a className="forgot-password">Forgot password</a>
         </Link>
