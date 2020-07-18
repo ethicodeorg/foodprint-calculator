@@ -151,7 +151,7 @@ const UserPage = () => {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="confirm-password">Retype new password:</label>
+            <label htmlFor="confirm-password">Retype password:</label>
             <input
               id="confirm-password"
               name="confirm-password"
@@ -178,7 +178,7 @@ const UserPage = () => {
       <style jsx>{`
         input {
           display: block;
-          width: 300px;
+          width: 100%;
           padding: 7px 10px;
           border: 1px solid ${theme.colors.border};
           border-radius: 4px;
@@ -192,11 +192,13 @@ const UserPage = () => {
         .input-container,
         .type-container {
           display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
           align-items: center;
           margin-bottom: 20px;
         }
         .select-container {
-          width: 322px;
+          width: 100%;
         }
         .loading-container {
           position: fixed;
@@ -207,7 +209,27 @@ const UserPage = () => {
           z-index: 3;
         }
         label {
-          min-width: 200px;
+          min-width: 100%;
+          margin-bottom: 5px;
+          font-size: 12px;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          label {
+            min-width: 180px;
+            margin-bottom: 0;
+            font-size: 16px;
+          }
+          input {
+            width: 430px;
+          }
+          .input-container,
+          .type-container {
+            flex-wrap: nowrap;
+          }
+          .select-container {
+            width: 452px;
+          }
         }
       `}</style>
     </Layout>
