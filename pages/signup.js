@@ -37,7 +37,7 @@ const SignupPage = () => {
 
       clearLocalStorageMeals();
 
-      router.replace('/mymeals');
+      router.replace('/check-email');
     }
   }, [user]);
 

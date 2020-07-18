@@ -25,7 +25,9 @@ const Header = ({ activePage }) => {
       <div className="land" />
       <Link href="/">
         <a className="link home">
-          {(activePage === 'home' || activePage === 'user') && <FaGlobeAmericas />}
+          {(activePage === 'home' || activePage === 'user' || activePage === 'email-verified') && (
+            <FaGlobeAmericas />
+          )}
           {(activePage === 'meals' ||
             activePage === 'mymeals' ||
             activePage === 'forgot-password') && <FaGlobeAsia />}

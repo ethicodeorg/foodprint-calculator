@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
+import Link from 'next/link';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
-import Link from 'next/link';
 
 const Index = () => {
   useEffect(() => {
