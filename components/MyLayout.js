@@ -56,7 +56,7 @@ const Layout = ({ children, title = '' }) => {
           height: 100vh;
           width: 100vw;
           z-index: -1;
-          opacity: 0.85;
+          opacity: 0.6;
           background: url('/earth-cover.jpg') no-repeat 50%;
           background-size: cover;
         }
