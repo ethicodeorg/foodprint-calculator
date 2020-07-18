@@ -29,8 +29,8 @@ const Loading = () => {
           flex-wrap: wrap;
           width: 100px;
           height: 100px;
-          margin-top: 100px;
           animation: spin 3s linear infinite;
+          z-index: 3;
         }
         .earth1,
         .earth2,

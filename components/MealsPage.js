@@ -26,7 +26,7 @@ import ExternalLink from '../components/ExternalLink';
 import theme from '../styles/theme';
 import AboutMeal from './AboutMeal';
 import Separator from './Separator';
-import Loading from './Loading';
+import LoadingOnTop from './LoadingOnTop';
 import Filters from './Filters';
 
 Modal.setAppElement('#__next');
@@ -174,7 +174,7 @@ const MealsPage = ({
             <div className="no-results">No meals</div>
           )
         ) : (
-          <Loading />
+          <LoadingOnTop />
         )}
       </div>
       <Modal

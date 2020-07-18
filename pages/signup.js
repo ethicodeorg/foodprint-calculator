@@ -10,9 +10,11 @@ import Content from '../components/Content';
 import Card from '../components/Card';
 import PageTitle from '../components/PageTitle';
 import UserForm from '../components/UserForm';
+import LoadingOnTop from '../components/LoadingOnTop';
 
 const SignupPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
 
@@ -40,6 +42,8 @@ const SignupPage = () => {
   }, [user]);
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
+    setErrorMsg('');
     e.preventDefault();
     const body = {
       email: e.currentTarget.email.value,
@@ -64,6 +68,8 @@ const SignupPage = () => {
     } else {
       setErrorMsg(await res.text());
     }
+
+    setIsLoading(false);
   };
 
   return (
@@ -71,6 +77,7 @@ const SignupPage = () => {
       <Header activePage="signup" />
       <Content>
         <PageTitle>Sign up</PageTitle>
+        {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
           <UserForm onSubmit={handleSubmit} errorMsg={errorMsg} />
         </Card>

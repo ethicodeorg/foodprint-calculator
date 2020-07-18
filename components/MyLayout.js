@@ -26,6 +26,7 @@ const Layout = ({ children, title = '' }) => {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
       </Head>
+      <div className="behind-background" />
       <div className="background" />
       {children}
       <div className="footer">
@@ -42,6 +43,13 @@ const Layout = ({ children, title = '' }) => {
           font-family: ${theme.fontFamily.default};
           color: ${theme.colors.text};
           background-color: transparent;
+        }
+        .behind-background {
+          position: fixed;
+          height: 100vh;
+          width: 100vw;
+          z-index: -2;
+          background-color: #666;
         }
         .background {
           position: fixed;

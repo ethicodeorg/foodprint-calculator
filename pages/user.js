@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Select from 'react-select';
+import { FaTimes, FaCheck } from 'react-icons/fa';
 import { useUser } from '../lib/hooks';
+import { setUserCookie } from '../utils/userCookie';
+import { userTypes, userTypeMap } from '../utils/constants';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Content from '../components/Content';
@@ -10,15 +13,14 @@ import PageTitle from '../components/PageTitle';
 import Card from '../components/Card';
 import UserForm from '../components/UserForm';
 import Button from '../components/Button';
+import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
-import { setUserCookie } from '../utils/userCookie';
-import { userTypes, userTypeMap } from '../utils/constants';
-import Loading from '../components/Loading';
 
 const UserPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [user, { mutate }] = useUser();
   const [tmpUser, setTmpUser] = useState({ _id: user?._id });
   const typeOptions = userTypes.map((type) => {
@@ -49,6 +51,7 @@ const UserPage = () => {
     ) {
       setIsLoading(true);
       setErrorMsg('');
+      setSuccessMsg('');
 
       const res = await fetch('/api/users', {
         method: 'PUT',
@@ -60,8 +63,7 @@ const UserPage = () => {
         const response = await res.json();
         // writing our user object to the state
         mutate({ user: response.user });
-
-        router.replace('/mymeals');
+        setSuccessMsg('Successfully saved!');
       } else {
         setErrorMsg(await res.text());
       }
@@ -75,13 +77,7 @@ const UserPage = () => {
       <Header activePage="user" />
       <Content>
         <PageTitle>Settings</PageTitle>
-        {isLoading && (
-          <div className="loading-container">
-            <Loading />
-          </div>
-        )}
         <Card>
-          {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
           <div className="input-container">
             <label htmlFor="name">Name:</label>
             <input
@@ -166,12 +162,29 @@ const UserPage = () => {
               }
             />
           </div>
+          {errorMsg && (
+            <div className="icon-container">
+              <span className="error-icon">
+                <FaTimes />
+              </span>
+              <span className="error-msg">{errorMsg}</span>
+            </div>
+          )}
+          {successMsg && (
+            <div className="icon-container">
+              <span className="check-icon">
+                <FaCheck />
+              </span>
+              <span className="success-msg">{successMsg}</span>
+            </div>
+          )}
           <div className="buttons-container">
             <Button remove onClick={handleLogout}>
               Log Out
             </Button>
             <Button onClick={saveUser}>Save Changes</Button>
           </div>
+          {isLoading && <LoadingOnTop blockUI />}
         </Card>
       </Content>
 
@@ -212,6 +225,30 @@ const UserPage = () => {
           min-width: 100%;
           margin-bottom: 5px;
           font-size: 12px;
+        }
+        .icon-container {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          margin-bottom: 20px;
+        }
+        .error-icon {
+          height: 22px;
+          padding-right: 5px;
+          color: red;
+          font-size: 22px;
+        }
+        .error-msg {
+          color: red;
+        }
+        .check-icon {
+          height: 22px;
+          padding-right: 5px;
+          color: green;
+          font-size: 22px;
+        }
+        .success-msg {
+          color: green;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

@@ -6,7 +6,7 @@ import { useUser } from '../../lib/hooks';
 import { getLocalStorageMeals } from '../../utils/localStorage';
 import MealForm from '../../components/MealForm';
 import Layout from '../../components/MyLayout';
-import Loading from '../../components/Loading';
+import LoadingOnTop from '../../components/LoadingOnTop';
 import Content from '../../components/Content';
 import Header from '../../components/Header';
 
@@ -28,9 +28,7 @@ const Meal = () => {
         <Fragment>
           <Header activePage="mymeals" />
           <Content>
-            <div className="loading-container">
-              <Loading />
-            </div>
+            <LoadingOnTop />
           </Content>
         </Fragment>
       )}

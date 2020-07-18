@@ -23,6 +23,7 @@ const theme = {
   sizes: {
     mobile: '600px',
     tablet: '1200px',
+    large: '1320px',
   },
 };
 

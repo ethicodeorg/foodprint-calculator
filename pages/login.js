@@ -11,9 +11,11 @@ import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Card from '../components/Card';
 import UserForm from '../components/UserForm';
+import LoadingOnTop from '../components/LoadingOnTop';
 
 const LoginPage = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
 
@@ -40,6 +42,8 @@ const LoginPage = () => {
   }, [user]);
 
   async function onSubmit(e) {
+    setIsLoading(true);
+    setErrorMsg('');
     e.preventDefault();
     const body = {
       email: e.currentTarget.email.value,
@@ -58,6 +62,8 @@ const LoginPage = () => {
     } else {
       setErrorMsg('Incorrect username or password. Try again!');
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -65,6 +71,7 @@ const LoginPage = () => {
       <Header activePage="login" />
       <Content>
         <PageTitle>Log in</PageTitle>
+        {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
           <UserForm onSubmit={onSubmit} errorMsg={errorMsg} isLogin />
         </Card>

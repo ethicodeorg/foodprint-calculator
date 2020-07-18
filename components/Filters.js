@@ -34,6 +34,22 @@ const Filters = ({ query }) => {
       ...provided,
       borderRadius: 20,
       padding: '0 5px',
+      backgroundColor: theme.colors.darkBackground,
+      color: theme.colors.white,
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: theme.colors.white,
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      backgroundColor: theme.colors.darkBackground,
+      color: theme.colors.white,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? theme.colors.aqua : theme.colors.darkBackground,
+      color: state.isFocused ? theme.colors.darkBackground : theme.colors.white,
     }),
   };
 
@@ -75,13 +91,19 @@ const Filters = ({ query }) => {
       <style jsx>{`
         .filters {
           display: flex;
-          justify-content: space-between;
+          justify-content: space-around;
           font-size: 14px;
-          margin-bottom: 20px;
+          margin: 20px;
         }
         .select-container {
           width: 260px;
           margin: 0 20px;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.large}) {
+          .filters {
+            justify-content: space-between;
+          }
         }
       `}</style>
     </div>
