@@ -84,7 +84,7 @@ const MealsPage = ({
       <PageTitle>{title}</PageTitle>
       {showCreateButton && (
         <div className="buttons-container">
-          <Button primary>
+          <Button primary animate>
             <Link href="/newmeal">
               <a className="create-meal">
                 Create meal

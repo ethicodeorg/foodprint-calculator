@@ -20,7 +20,7 @@ const EmailVerified = () => {
         </div>
         <div className="email-verified-text">Congratulations, your email has been verified!</div>
         <div className="button-container">
-          <Button primary>
+          <Button primary animate>
             <Link href="newmeal">
               <a className="lets-calculate">
                 Let's Calculate

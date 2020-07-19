@@ -369,6 +369,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             onClick={() => saveMeal()}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
+            animate
           >
             Save
           </Button>

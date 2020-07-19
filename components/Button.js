@@ -12,6 +12,7 @@ const Button = ({
   remove,
   title,
   children,
+  animate,
 }) => (
   <button
     type={type}
@@ -23,12 +24,14 @@ const Button = ({
       'button-remove': remove,
       'button-round': round,
       'button-small': small,
+      animate: animate,
     })}
   >
     {children}
 
     <style jsx>{`
       .button {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -74,6 +77,36 @@ const Button = ({
       }
       .button:hover {
         opacity: 0.7;
+      }
+      .animate {
+        transition: background-color 0.2s;
+      }
+      .animate:hover {
+        opacity: 1;
+        background-color: #1b84e0;
+      }
+      .animate:enabled:after {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 0%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.4);
+        -webkit-transition: none;
+        -moz-transition: none;
+        -ms-transition: none;
+        -o-transition: none;
+        transition: none;
+      }
+      .animate:hover:enabled:after {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0);
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
       }
       .button:disabled {
         opacity: 0.7;

@@ -36,7 +36,7 @@ const Index = () => {
           <a className="about-link">This is how.</a>
         </Link>
         <div className="button-container">
-          <Button primary>
+          <Button primary animate>
             <Link href="newmeal">
               <a className="lets-calculate">
                 Let's Calculate
