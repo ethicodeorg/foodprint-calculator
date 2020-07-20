@@ -11,7 +11,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const MyMeals = () => {
   const [user] = useUser();
   const userId = user ? user._id : '';
-  const { data, error } = useSWR(`/api/meals?user=${userId}`, fetcher);
+  const { data, error } = useSWR(user ? `/api/meals?user=${userId}` : null, fetcher);
   const localStorageMeals = getLocalStorageMeals();
   const meals = userId ? data?.meals : localStorageMeals;
 

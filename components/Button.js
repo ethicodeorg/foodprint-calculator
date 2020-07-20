@@ -13,6 +13,7 @@ const Button = ({
   title,
   children,
   animate,
+  noPad,
 }) => (
   <button
     type={type}
@@ -58,7 +59,7 @@ const Button = ({
         font-size: 20px;
         margin: 0;
         min-width: 130px;
-        padding: 10px 20px;
+        padding: ${noPad ? '0' : '10px 20px'};
         border: ${clear ? `2px solid ${theme.colors.water}` : 'none'};
         background-color: ${clear ? 'transparent' : theme.colors.water};
         color: #fff;
@@ -79,34 +80,30 @@ const Button = ({
         opacity: 0.7;
       }
       .animate {
+        overflow: hidden;
+        position: relative;
+        padding: 0;
         transition: background-color 0.2s;
       }
-      .animate:hover {
+      .animate:enabled:hover {
         opacity: 1;
         background-color: #1b84e0;
       }
       .animate:enabled:after {
+        background: #fff;
         content: '';
+        height: 155px;
+        left: -75px;
+        opacity: 0.2;
         position: absolute;
-        top: 0px;
-        left: 0px;
-        width: 0%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.4);
-        -webkit-transition: none;
-        -moz-transition: none;
-        -ms-transition: none;
-        -o-transition: none;
-        transition: none;
+        top: -50px;
+        transform: rotate(35deg);
+        transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+        width: 50px;
       }
-      .animate:hover:enabled:after {
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0);
-        -webkit-transition: all 0.3s ease-out;
-        -moz-transition: all 0.3s ease-out;
-        -ms-transition: all 0.3s ease-out;
-        -o-transition: all 0.3s ease-out;
-        transition: all 0.3s ease-out;
+      .animate:enabled:hover:after {
+        left: 120%;
+        transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
       }
       .button:disabled {
         opacity: 0.7;
@@ -123,7 +120,7 @@ const Button = ({
         .button-primary {
           font-size: 24px;
           min-width: 180px;
-          padding: 15px 40px;
+          padding: ${noPad ? '0' : '15px 40px'};
         }
       }
     `}</style>

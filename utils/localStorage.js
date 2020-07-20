@@ -19,7 +19,7 @@ export function deleteLocalStorageMeal(mealId) {
 
 export function editLocalStorageMeal(mealId, updatedMeal) {
   const oldMeals = store.get('mymeals') || [];
-  const oldEntryIndex = oldMeals.indexOf(oldMeals.find((m) => m._id === meal._id));
+  const oldEntryIndex = oldMeals.indexOf(oldMeals.find((m) => m._id === mealId));
 
   // Remove the old entry if we find it
   if (oldEntryIndex > -1) {
@@ -27,7 +27,7 @@ export function editLocalStorageMeal(mealId, updatedMeal) {
   }
 
   // Add the updated meal
-  updatedMeal._id = meal._id;
+  updatedMeal._id = mealId;
   const updatedMeals = [...oldMeals, updatedMeal];
   store.set('mymeals', updatedMeals);
 }

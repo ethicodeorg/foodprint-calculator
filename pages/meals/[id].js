@@ -16,7 +16,7 @@ const Meal = () => {
   const router = useRouter();
   const [user] = useUser();
   const { id } = router.query;
-  const { data, error } = useSWR(`/api/meals?id=${id}`, fetcher);
+  const { data, error } = useSWR(user ? `/api/meals?id=${id}` : null, fetcher);
   const localStorageMeals = getLocalStorageMeals();
   const meal = user ? data?.meals[0] : localStorageMeals.find((m) => m._id === id);
 

@@ -84,7 +84,7 @@ const MealsPage = ({
       <PageTitle>{title}</PageTitle>
       {showCreateButton && (
         <div className="buttons-container">
-          <Button primary animate>
+          <Button primary animate noPad>
             <Link href="/newmeal">
               <a className="create-meal">
                 Create meal
@@ -101,9 +101,9 @@ const MealsPage = ({
         {meals ? (
           meals.length ? (
             meals.map((meal) => {
-              const userSubtitle = `${meal.user.name}${
-                meal.user.type && meal.user.type !== 'other'
-                  ? `, ${userTypeMap[meal.user.type]}`
+              const userSubtitle = `${meal.user?.name || ''}${
+                meal.user?.type && meal.user?.type !== 'other'
+                  ? `, ${userTypeMap[meal.user?.type]}`
                   : ''
               }`;
 
@@ -129,7 +129,7 @@ const MealsPage = ({
                       )}
                     </div>
                     <div className="subtitle">
-                      {meal.user.homepage ? (
+                      {meal.user?.homepage ? (
                         <ExternalLink href={meal.user.homepage}>{userSubtitle}</ExternalLink>
                       ) : (
                         userSubtitle
@@ -254,6 +254,7 @@ const MealsPage = ({
         .create-meal {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
           color: #fff;
           text-decoration: none;
         }
@@ -347,6 +348,9 @@ const MealsPage = ({
           }
           .about-meal {
             font-size: 14px;
+          }
+          .create-meal {
+            padding: 15px 40px;
           }
         }
       `}</style>

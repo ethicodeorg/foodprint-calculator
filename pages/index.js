@@ -36,7 +36,7 @@ const Index = () => {
           <a className="about-link">This is how.</a>
         </Link>
         <div className="button-container">
-          <Button primary animate>
+          <Button primary animate noPad>
             <Link href="newmeal">
               <a className="lets-calculate">
                 Let's Calculate
@@ -102,6 +102,7 @@ const Index = () => {
         .lets-calculate {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
           color: #fff;
           text-decoration: none;
         }
@@ -124,6 +125,9 @@ const Index = () => {
           p {
             max-width: 900px;
             font-size: 20px;
+          }
+          .lets-calculate {
+            padding: 15px 40px;
           }
         }
 

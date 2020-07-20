@@ -503,30 +503,6 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             display: flex;
             justify-content: space-between;
           }
-          .save-button {
-            font-size: 20px;
-            font-weight: bold;
-            width: 220px;
-            margin-top: 30px;
-            padding: 15px;
-            background-color: ${theme.colors.water};
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: #fff;
-          }
-          .save-button:hover {
-            opacity: 0.7;
-          }
-          .save-button:disabled {
-            opacity: 0.7;
-            cursor: default;
-          }
-          .save-button:disabled:hover {
-            opacity: 0.7;
-          }
 
           @media only screen and (min-width: ${theme.sizes.mobile}) {
             .required-fields {

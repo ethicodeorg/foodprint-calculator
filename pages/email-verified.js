@@ -20,7 +20,7 @@ const EmailVerified = () => {
         </div>
         <div className="email-verified-text">Congratulations, your email has been verified!</div>
         <div className="button-container">
-          <Button primary animate>
+          <Button primary animate noPad>
             <Link href="newmeal">
               <a className="lets-calculate">
                 Let's Calculate
@@ -74,8 +74,15 @@ const EmailVerified = () => {
         .lets-calculate {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
           color: #fff;
           text-decoration: none;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .lets-calculate {
+            padding: 15px 40px;
+          }
         }
       `}</style>
     </Layout>
