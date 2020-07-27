@@ -23,6 +23,7 @@
     "next-connect": "^0.6.6",
     "next-redux-wrapper": "^6.0.0-rc.7",
     "next-session": "^3.1.0",
+    "node-fetch": "^2.6.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "react": "^16.13.1",

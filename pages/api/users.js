@@ -106,7 +106,7 @@ handler.post(async (req, res) => {
 
 // PUT /api/users
 handler.put(async (req, res) => {
-  const { name, type, homepage, _id, password, retypedPassword } = req.body;
+  const { name, type, homepage, _id, password, retypedPassword, verify } = req.body;
   const setObj = {
     lastModified: new Date(),
   };
@@ -137,6 +137,10 @@ handler.put(async (req, res) => {
 
   if (homepage) {
     setObj.homepage = homepage;
+  }
+
+  if (verify) {
+    setObj.verifiedAt = new Date();
   }
 
   const response = await req.db.collection('users').findOneAndUpdate(

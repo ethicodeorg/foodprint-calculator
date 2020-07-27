@@ -20,7 +20,7 @@ const SignupPage = () => {
 
   // call whenever user changes (ex. right after signing up successfully)
   useEffect(() => {
-    // redirect to user settings if user is authenticated
+    // redirect to check-email page if user is authenticated
     if (user) {
       // If there are any meals in local storage, we add them to the database
       const localStorageMeals = getLocalStorageMeals();
@@ -37,6 +37,13 @@ const SignupPage = () => {
 
       clearLocalStorageMeals();
 
+      // Send verification email
+      fetch('api/send-verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: user.name, email: user.email }),
+      });
+
       router.replace('/check-email');
     }
   }, [user]);
@@ -51,7 +58,7 @@ const SignupPage = () => {
       password: e.currentTarget.password.value,
       retypedPassword: e.currentTarget.retypedPassword.value,
       type: e.currentTarget.type[1].value,
-      subscriptionType: 'free',
+      subscription: 'free',
     };
 
     const res = await fetch('/api/users', {
