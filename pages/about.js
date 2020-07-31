@@ -35,12 +35,12 @@ const About = () => {
               its ingredients and their weight.
             </p>
           </AboutSection>
-          <AboutSection title="Recommended daily allowance">
+          <AboutSection title="Recommended daily amounts">
             <p>
               Earth has a finite amount of resources that we all share. Food production takes up a
               lot of these resources, especially when it comes to land use, greenhouse gas
               emissions, water withdrawals, and eutrophying emissions. The Foodprint Calculator
-              considers an RDA (recommended daily allowance) for each of these categories, using the
+              considers an RDA (recommended daily amount) for each of these categories, using the
               following derivation:
             </p>
             <CardTitle sub>Land use</CardTitle>

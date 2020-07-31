@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import Select from 'react-select';
+import { FaTimes } from 'react-icons/fa';
 import Tooltip from '@material-ui/core/Tooltip';
 import {
   getLandUseTotal,
@@ -14,15 +15,16 @@ import {
 } from '../utils/calculations';
 import { editLocalStorageMeal, addLocalStorageMeal } from '../utils/localStorage';
 import { useUser } from '../lib/hooks';
-import Header from '../components/Header';
-import Card from '../components/Card';
-import Content from '../components/Content';
-import Pies from '../components/Pies';
-import TinyPies from '../components/TinyPies';
-import Ingredients from '../components/Ingredients';
-import CardTitle from '../components/CardTitle';
-import PageTitle from '../components/PageTitle';
-import Button from '../components/Button';
+import Header from './Header';
+import Card from './Card';
+import Content from './Content';
+import Pies from './Pies';
+import TinyPies from './TinyPies';
+import Ingredients from './Ingredients';
+import CardTitle from './CardTitle';
+import PageTitle from './PageTitle';
+import Button from './Button';
+import Separator from './Separator';
 import theme from '../styles/theme';
 
 const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => {
@@ -232,8 +234,16 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             deleteIngredient={deleteIngredient}
             numberOfServings={numberOfServings.value}
           />
+          <Separator />
           {isAdding ? (
             <Card inner>
+              <div className="close-container">
+                <Tooltip title="Close" placement="left" arrow>
+                  <button className="close-button" onClick={() => setIsAdding(false)}>
+                    <FaTimes />
+                  </button>
+                </Tooltip>
+              </div>
               <div className="required-fields">
                 <div className="select-container ingredient-select">
                   <Select
@@ -303,6 +313,8 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
                   <Tooltip
                     title="If transport is not provided, the average transport emissions for the selected
                     ingredient will be used"
+                    placement="right"
+                    arrow
                   >
                     <div className="add-transport-button-container">
                       <Button clear onClick={() => setIsAddingTransport(true)}>
@@ -503,6 +515,28 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             display: flex;
             justify-content: space-between;
           }
+          .close-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            height: 30px;
+          }
+          .close-button {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            font-size: 22px;
+            color: ${theme.colors.text};
+            background-color: #fff;
+            opacity: 1;
+            transition: opacity 0.2s;
+            cursor: pointer;
+            border: none;
+            outline: none;
+          }
+          .close-button:hover {
+            opacity: 0.7;
+          }
 
           @media only screen and (min-width: ${theme.sizes.mobile}) {
             .required-fields {
@@ -549,6 +583,12 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             }
             .button-container {
               padding: 0;
+            }
+          }
+
+          @media only screen and (min-width: ${theme.sizes.ipad}) {
+            .close-container {
+              height: 0;
             }
           }
         `}</style>

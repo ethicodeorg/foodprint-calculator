@@ -116,6 +116,7 @@ const MealsPage = ({
                         <Tooltip
                           title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
                           placement="left"
+                          arrow
                         >
                           <button
                             className={classNames('visibility-button', {
@@ -149,13 +150,13 @@ const MealsPage = ({
                       <Fragment>
                         <Separator />
                         <div className="footer-button-container">
-                          <Tooltip title="Delete meal" placement="right">
+                          <Tooltip title="Delete meal" placement="right" arrow>
                             <button className="delete-button" onClick={() => deleteMeal(meal)}>
                               <FaTrash />
                             </button>
                           </Tooltip>
                           {showEditButton && (
-                            <Tooltip title="Edit meal" placement="left">
+                            <Tooltip title="Edit meal" placement="left" arrow>
                               <div className="edit-button-container">
                                 <MealLink id={meal._id}>
                                   <FaEdit />

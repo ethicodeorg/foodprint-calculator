@@ -81,10 +81,10 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
         <div className="title-download">
           <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
           {!allMeals && showDetails && (
-            <Tooltip title="Download report">
-              <span className="download-button-container">
-                <FaDownload onClick={() => downloadReport(meal)} />
-              </span>
+            <Tooltip title="Download report" placement="right" arrow>
+              <button className="download-button" onClick={() => downloadReport(meal)}>
+                <FaDownload />
+              </button>
             </Tooltip>
           )}
         </div>
@@ -141,7 +141,13 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
                   <div className="legend-name">{name}</div>
                   <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
                   <div className="percentage">
-                    <span className={`percentage-${cIndex}`}>{percentageString}</span>
+                    <Tooltip
+                      title="For more info on the RDAs, navigate to the about page"
+                      placement="right"
+                      arrow
+                    >
+                      <span className={`percentage-${cIndex}`}>{percentageString}</span>
+                    </Tooltip>
                   </div>
                 </div>
               )}
@@ -224,10 +230,22 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
           display: flex;
           align-items: baseline;
         }
-        .download-button-container {
-          color: ${theme.colors.water};
-          font-size: 22px;
+        .download-button {
+          display: flex;
+          align-items: center;
           margin: 0 20px;
+          padding: 0;
+          font-size: 22px;
+          color: ${theme.colors.water};
+          background-color: #fff;
+          opacity: 1;
+          transition: opacity 0.2s;
+          cursor: pointer;
+          border: none;
+          outline: none;
+        }
+        .download-button:hover {
+          opacity: 0.7;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
