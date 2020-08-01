@@ -4,7 +4,7 @@ import useSWR from 'swr';
 import { FaDivide } from 'react-icons/fa';
 import { useUser } from '../../lib/hooks';
 import { getLocalStorageMeals } from '../../utils/localStorage';
-import MealForm from '../../components/MealForm';
+import Meal from '../../components/Meal';
 import Layout from '../../components/MyLayout';
 import LoadingOnTop from '../../components/LoadingOnTop';
 import Content from '../../components/Content';
@@ -12,26 +12,20 @@ import Header from '../../components/Header';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Meal = () => {
+const MealPage = () => {
   const router = useRouter();
-  const [user] = useUser();
   const { id } = router.query;
-  const { data, error } = useSWR(user ? `/api/meals?id=${id}` : null, fetcher);
-  const localStorageMeals = getLocalStorageMeals();
-  const meal = user ? data?.meals[0] : localStorageMeals.find((m) => m._id === id);
+  const { data, error } = useSWR(`/api/meals?id=${id}`, fetcher);
+  const meal = data?.meals[0];
 
   return (
     <Layout title="Edit Meal">
-      {meal ? (
-        <MealForm meal={meal} />
-      ) : (
-        <Fragment>
-          <Header activePage="mymeals" />
-          <Content>
-            <LoadingOnTop />
-          </Content>
-        </Fragment>
-      )}
+      <Fragment>
+        <Header activePage="meals" />
+        <Content>
+          {meal ? <Meal key={meal._id} meal={meal} allMeals isIndividual /> : <LoadingOnTop />}
+        </Content>
+      </Fragment>
       <style jsx>{`
         .loading-container {
           display: flex;
@@ -43,4 +37,4 @@ const Meal = () => {
   );
 };
 
-export default Meal;
+export default MealPage;

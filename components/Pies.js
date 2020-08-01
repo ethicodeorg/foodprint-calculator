@@ -10,10 +10,10 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 
-const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle }) => {
+const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndividual }) => {
   let html2canvas;
   const pieData = getMealPieData(meal);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(isIndividual);
   const [showIngredients, setShowIngredients] = useState(false);
 
   useEffect(() => {

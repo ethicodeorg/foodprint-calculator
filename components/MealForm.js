@@ -1,6 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
+import useSWR from 'swr';
 import Select from 'react-select';
 import { FaTimes } from 'react-icons/fa';
 import Tooltip from '@material-ui/core/Tooltip';
@@ -13,7 +14,11 @@ import {
   convertToKilograms,
   getTotalByCategory,
 } from '../utils/calculations';
-import { editLocalStorageMeal, addLocalStorageMeal } from '../utils/localStorage';
+import {
+  getLocalStorageMeals,
+  editLocalStorageMeal,
+  addLocalStorageMeal,
+} from '../utils/localStorage';
 import { useUser } from '../lib/hooks';
 import Header from './Header';
 import Card from './Card';
@@ -25,10 +30,19 @@ import CardTitle from './CardTitle';
 import PageTitle from './PageTitle';
 import Button from './Button';
 import Separator from './Separator';
+import LoadingOnTop from './LoadingOnTop';
 import theme from '../styles/theme';
 
-const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => {
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
   const [user] = useUser();
+  const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
+  const localStorageMeals = getLocalStorageMeals();
+  const [meal, setMeal] = useState(
+    user ? data?.meals[0] : localStorageMeals.find((m) => m._id === id)
+  );
+  const [isLoading, setIsLoading] = useState(id && !meal);
   const [errorMsg, setErrorMsg] = useState('');
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
@@ -86,7 +100,23 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       : numberOfServingsOptions[0]
   );
 
+  useEffect(() => {
+    if (data) {
+      const mealData = data.meals[0];
+      setMeal(mealData);
+      setMealName(mealData.title);
+      setAboutMeal(mealData.about);
+      setMealLink(mealData.link);
+      setIngredients(mealData.ingredients);
+      setNumberOfServings(
+        numberOfServingsOptions.find((o) => o.value === mealData.numberOfServings)
+      );
+      setIsLoading(false);
+    }
+  }, [data]);
+
   const saveMeal = async () => {
+    setIsLoading(true);
     const currentMeal = {
       ownerId: user?._id,
       visibility: meal?.visibility || 'private',
@@ -142,6 +172,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       }
     }
 
+    setIsLoading(false);
     Router.push('/mymeals');
   };
 
@@ -217,7 +248,8 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
     <Fragment>
       <Header activePage={meal ? 'mymeals' : 'new'} />
       <Content>
-        <PageTitle>{meal ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
+        <PageTitle>{id ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
+        {isLoading && <LoadingOnTop blockUI />}
         <Card>
           <div className="select-container number-of-servings-select">
             <Select

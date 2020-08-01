@@ -94,6 +94,8 @@ handler.delete(async (req, res) => {
   const response = await req.db
     .collection('meals')
     .remove({ _id: ObjectId(mealId), ownerId: userId });
+
+  res.status(204).end();
 });
 
 export default handler;

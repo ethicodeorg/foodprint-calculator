@@ -1,33 +1,16 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-import {
-  FaCalculator,
-  FaEdit,
-  FaTrash,
-  FaToggleOn,
-  FaToggleOff,
-  FaEye,
-  FaEyeSlash,
-} from 'react-icons/fa';
-import Tooltip from '@material-ui/core/Tooltip';
+import { FaCalculator } from 'react-icons/fa';
 import Modal from 'react-modal';
-import classNames from 'classnames';
 import { deleteLocalStorageMeal } from '../utils/localStorage';
-import { userTypeMap } from '../utils/constants';
 import { useUser } from '../lib/hooks';
-import Pies from '../components/Pies';
-import MealLink from '../components/MealLink';
-import Card from '../components/Card';
-import CardTitle from '../components/CardTitle';
-import Button from '../components/Button';
-import PageTitle from '../components/PageTitle';
-import ExternalLink from '../components/ExternalLink';
-import theme from '../styles/theme';
-import AboutMeal from './AboutMeal';
-import Separator from './Separator';
+import Button from './Button';
+import PageTitle from './PageTitle';
+import Meal from './Meal';
 import LoadingOnTop from './LoadingOnTop';
 import Filters from './Filters';
+import theme from '../styles/theme';
+import MealLink from './MealLink';
 
 Modal.setAppElement('#__next');
 
@@ -42,16 +25,21 @@ const MealsPage = ({
   removeMeal,
   allMeals,
   query,
+  isValidating,
+  mutate,
 }) => {
   const [user] = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mealIdToDelete, setMealIdToDelete] = useState('');
   const modalAnimationTime = 200;
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     setShowConfirmModal(false);
+    setIsLoading(true);
+
     if (user) {
-      fetch('/api/meals', {
+      await fetch('/api/meals', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mealId: mealIdToDelete, userId: user._id }),
@@ -60,7 +48,8 @@ const MealsPage = ({
       deleteLocalStorageMeal(mealIdToDelete);
     }
 
-    Router.push('/mymeals');
+    setIsLoading(false);
+    mutate();
   };
 
   const deleteMeal = (meal) => {
@@ -68,20 +57,10 @@ const MealsPage = ({
     setMealIdToDelete(meal._id);
   };
 
-  const changeVisibility = (meal) => {
-    meal.visibility = meal.visibility === 'private' ? 'public' : 'private';
-    fetch('api/meals', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mealId: meal._id, meal }),
-    });
-
-    Router.push('/mymeals');
-  };
-
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
+      {(isLoading || isValidating) && <LoadingOnTop />}
       {showCreateButton && (
         <div className="buttons-container">
           <Button primary animate noPad>
@@ -101,74 +80,16 @@ const MealsPage = ({
         {meals ? (
           meals.length ? (
             meals.map((meal) => {
-              const userSubtitle = `${meal.user?.name || ''}${
-                meal.user?.type && meal.user?.type !== 'other'
-                  ? `, ${userTypeMap[meal.user?.type]}`
-                  : ''
-              }`;
-
               return (
-                <div className="meal" key={meal._id} id={meal._id}>
-                  <Card>
-                    <div className="title-container">
-                      <CardTitle>{meal.title}</CardTitle>
-                      {showEyeButton && (
-                        <Tooltip
-                          title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
-                          placement="left"
-                          arrow
-                        >
-                          <button
-                            className={classNames('visibility-button', {
-                              'visibility-button-public': meal.visibility === 'public',
-                            })}
-                            onClick={() => changeVisibility(meal)}
-                          >
-                            {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
-                          </button>
-                        </Tooltip>
-                      )}
-                    </div>
-                    <div className="subtitle">
-                      {meal.user?.homepage ? (
-                        <ExternalLink href={meal.user.homepage}>{userSubtitle}</ExternalLink>
-                      ) : (
-                        userSubtitle
-                      )}
-                    </div>
-                    <p className="servings">{`Serves ${meal.numberOfServings} ${
-                      meal.numberOfServings === 1 ? 'person' : 'people'
-                    }`}</p>
-                    {meal.about && <AboutMeal text={meal.about} />}
-                    {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-                    <Pies
-                      meal={meal}
-                      numberOfServings={meal.numberOfServings}
-                      allMeals={allMeals}
-                    />
-                    {showDeleteButton && (
-                      <Fragment>
-                        <Separator />
-                        <div className="footer-button-container">
-                          <Tooltip title="Delete meal" placement="right" arrow>
-                            <button className="delete-button" onClick={() => deleteMeal(meal)}>
-                              <FaTrash />
-                            </button>
-                          </Tooltip>
-                          {showEditButton && (
-                            <Tooltip title="Edit meal" placement="left" arrow>
-                              <div className="edit-button-container">
-                                <MealLink id={meal._id}>
-                                  <FaEdit />
-                                </MealLink>
-                              </div>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </Fragment>
-                    )}
-                  </Card>
-                </div>
+                <Meal
+                  key={meal._id}
+                  meal={meal}
+                  showEyeButton={showEyeButton}
+                  allMeals={allMeals}
+                  showDeleteButton={showDeleteButton}
+                  deleteMeal={deleteMeal}
+                  showEditButton={showEditButton}
+                />
               );
             })
           ) : (
@@ -208,34 +129,10 @@ const MealsPage = ({
       </Modal>
 
       <style jsx>{`
-        .no-meals {
-          text-align: center;
-        }
-        .title-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        }
-        .servings {
-          font-size: 14px;
-        }
-        .meal {
-          width: 600px;
-          margin: 0;
-          padding-bottom: 20px;
-          font-size: 18px;
-        }
-        .about-meal {
-          font-size: 12px;
-        }
         .buttons-container {
           display: flex;
           justify-content: center;
           padding: 10px;
-        }
-        .edit-button-container {
-          color: ${theme.colors.water};
-          font-size: 22px;
         }
         .calculator-container {
           display: flex;
@@ -259,25 +156,6 @@ const MealsPage = ({
           color: #fff;
           text-decoration: none;
         }
-        .delete-button,
-        .visibility-button {
-          display: flex;
-          align-items: center;
-          padding: 0;
-          font-size: 22px;
-          color: ${theme.colors.eutro};
-          background-color: #fff;
-          opacity: 1;
-          transition: opacity 0.2s;
-          cursor: pointer;
-          border-radius: 4px;
-          border: none;
-          outline: none;
-        }
-        .delete-button:hover,
-        .visibility-button:hover {
-          opacity: 0.7;
-        }
         .confirm-message {
           padding: 30px;
           font-family: ${theme.fontFamily.default};
@@ -287,26 +165,6 @@ const MealsPage = ({
           display: flex;
           justify-content: space-between;
           padding: 30px;
-        }
-        .footer-button-container {
-          display: flex;
-          justify-content: space-between;
-        }
-        .visibility-button {
-          font-size: 28px;
-          color: #777;
-        }
-        .visibility-button-public {
-          color: ${theme.colors.land};
-        }
-        .footer-text {
-          font-family: ${theme.fontFamily.default};
-          font-size: 18px;
-          margin-right: 10px;
-        }
-        .edit-text {
-          position: relative;
-          top: -4px;
         }
         .no-results {
           margin-top: 50px;
@@ -340,15 +198,6 @@ const MealsPage = ({
           .meals-page {
             padding: 20px;
             max-width: 1280px;
-          }
-          .meal {
-            margin: 0 20px;
-          }
-          .servings {
-            font-size: 18px;
-          }
-          .about-meal {
-            font-size: 14px;
           }
           .create-meal {
             padding: 15px 40px;

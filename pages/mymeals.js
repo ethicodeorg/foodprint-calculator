@@ -11,7 +11,10 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const MyMeals = () => {
   const [user] = useUser();
   const userId = user ? user._id : '';
-  const { data, error } = useSWR(user ? `/api/meals?user=${userId}` : null, fetcher);
+  const { data, error, isValidating, mutate } = useSWR(
+    user ? `/api/meals?user=${userId}` : null,
+    fetcher
+  );
   const localStorageMeals = getLocalStorageMeals();
   const meals = userId ? data?.meals : localStorageMeals;
 
@@ -19,6 +22,8 @@ const MyMeals = () => {
     <Layout title="My Meals">
       <Header activePage="mymeals" />
       <MealsPage
+        isValidating={isValidating}
+        mutate={mutate}
         meals={meals}
         title="My Meals"
         emptyMessage="You have not saved any meals"

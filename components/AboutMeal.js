@@ -2,8 +2,8 @@ import { useState } from 'react';
 import theme from '../styles/theme';
 import Button from './Button';
 
-const AboutMeal = ({ text }) => {
-  const [expanded, setExpanded] = useState(false);
+const AboutMeal = ({ text, isIndividual }) => {
+  const [expanded, setExpanded] = useState(isIndividual);
 
   return (
     <div className="about-meal">
