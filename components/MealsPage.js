@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import Link from 'next/link';
-import Router from 'next/router';
-import { FaCalculator, FaEdit, FaTrash } from 'react-icons/fa';
+import { FaCalculator } from 'react-icons/fa';
 import Modal from 'react-modal';
-import { deleteMeal } from '../redux/actions/pageActions';
-import Pies from '../components/Pies';
-import MealLink from '../components/MealLink';
-import Card from '../components/Card';
-import CardTitle from '../components/CardTitle';
-import Button from '../components/Button';
-import PageTitle from '../components/PageTitle';
-import ExternalLink from '../components/ExternalLink';
+import { deleteLocalStorageMeal } from '../utils/localStorage';
+import { useUser } from '../lib/hooks';
+import Button from './Button';
+import PageTitle from './PageTitle';
+import Meal from './Meal';
+import LoadingOnTop from './LoadingOnTop';
+import Filters from './Filters';
 import theme from '../styles/theme';
-import AboutMeal from './AboutMeal';
-import Separator from './Separator';
+import MealLink from './MealLink';
 
 Modal.setAppElement('#__next');
 
@@ -23,30 +19,50 @@ const MealsPage = ({
   title,
   emptyMessage,
   showCreateButton,
-  showEditButton,
-  showDeleteButton,
+  showFooterButtons,
+  showEyeButton,
   removeMeal,
+  allMeals,
+  query,
+  isValidating,
+  mutate,
 }) => {
+  const [user] = useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mealIdToDelete, setMealIdToDelete] = useState('');
   const modalAnimationTime = 200;
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     setShowConfirmModal(false);
-    removeMeal(mealIdToDelete);
+    setIsLoading(true);
+
+    if (user) {
+      await fetch('/api/meals', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mealId: mealIdToDelete, userId: user._id }),
+      });
+    } else {
+      deleteLocalStorageMeal(mealIdToDelete);
+    }
+
+    setIsLoading(false);
+    mutate();
   };
 
   const deleteMeal = (meal) => {
     setShowConfirmModal(true);
-    setMealIdToDelete(meal.id);
+    setMealIdToDelete(meal._id);
   };
 
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
+      {(isLoading || isValidating) && <LoadingOnTop />}
       {showCreateButton && (
         <div className="buttons-container">
-          <Button primary>
+          <Button primary animate noPad>
             <Link href="/newmeal">
               <a className="create-meal">
                 Create meal
@@ -58,39 +74,28 @@ const MealsPage = ({
           </Button>
         </div>
       )}
+      {allMeals && <Filters query={query} />}
       <div className="meals-container">
-        {meals.map((meal) => {
-          return (
-            <div className="meal" key={meal.id}>
-              <Card>
-                <div className="title-container">
-                  <CardTitle>{meal.title}</CardTitle>
-                  {showEditButton && (
-                    <div className="edit-button-container">
-                      <MealLink id={meal.id}>
-                        <FaEdit />
-                      </MealLink>
-                    </div>
-                  )}
-                </div>
-                <p className="servings">{`Serves ${meal.numberOfServings} ${
-                  meal.numberOfServings === 1 ? 'person' : 'people'
-                }`}</p>
-                {meal.about && <AboutMeal text={meal.about} />}
-                {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-                <Pies meal={meal} numberOfServings={meal.numberOfServings} />
-                {showDeleteButton && (
-                  <div className="delete-button-container">
-                    <Separator />
-                    <button className="delete-button" onClick={() => deleteMeal(meal)}>
-                      <FaTrash />
-                    </button>
-                  </div>
-                )}
-              </Card>
-            </div>
-          );
-        })}
+        {meals ? (
+          meals.length ? (
+            meals.map((meal) => {
+              return (
+                <Meal
+                  key={meal._id}
+                  meal={meal}
+                  showEyeButton={showEyeButton}
+                  allMeals={allMeals}
+                  showFooterButtons={showFooterButtons}
+                  deleteMeal={deleteMeal}
+                />
+              );
+            })
+          ) : (
+            <div className="no-results">No meals</div>
+          )
+        ) : (
+          <LoadingOnTop />
+        )}
       </div>
       <Modal
         isOpen={showConfirmModal}
@@ -122,34 +127,10 @@ const MealsPage = ({
       </Modal>
 
       <style jsx>{`
-        .no-meals {
-          text-align: center;
-        }
-        .title-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        }
-        .servings {
-          font-size: 14px;
-        }
-        .meal {
-          width: 600px;
-          margin: 0;
-          padding-bottom: 20px;
-          font-size: 18px;
-        }
-        .about-meal {
-          font-size: 12px;
-        }
         .buttons-container {
           display: flex;
           justify-content: center;
           padding: 10px;
-        }
-        .edit-button-container {
-          color: ${theme.colors.water};
-          font-size: 24px;
         }
         .calculator-container {
           display: flex;
@@ -169,24 +150,9 @@ const MealsPage = ({
         .create-meal {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
           color: #fff;
           text-decoration: none;
-        }
-        .delete-button {
-          display: block;
-          padding: 0;
-          margin-left: auto;
-          font-size: 22px;
-          color: ${theme.colors.eutro};
-          background-color: #fff;
-          opacity: 1;
-          transition: opacity 0.2s;
-          cursor: pointer;
-          border-radius: 4px;
-          border: none;
-        }
-        .delete-button:hover {
-          opacity: 0.7;
         }
         .confirm-message {
           padding: 30px;
@@ -197,6 +163,11 @@ const MealsPage = ({
           display: flex;
           justify-content: space-between;
           padding: 30px;
+        }
+        .no-results {
+          margin-top: 50px;
+          font-size: 24px;
+          color: #fff;
         }
 
         // Modal animation
@@ -226,14 +197,8 @@ const MealsPage = ({
             padding: 20px;
             max-width: 1280px;
           }
-          .meal {
-            margin: 0 20px;
-          }
-          .servings {
-            font-size: 18px;
-          }
-          .about-meal {
-            font-size: 14px;
+          .create-meal {
+            padding: 15px 40px;
           }
         }
       `}</style>
@@ -241,10 +206,4 @@ const MealsPage = ({
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeMeal: (mealId) => dispatch(deleteMeal(mealId)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MealsPage);
+export default MealsPage;

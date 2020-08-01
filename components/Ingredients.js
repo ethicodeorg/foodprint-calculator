@@ -1,3 +1,4 @@
+import Tooltip from '@material-ui/core/Tooltip';
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
 import theme from '../styles/theme';
@@ -20,9 +21,11 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
             <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
           </div>
           {deleteIngredient && (
-            <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
-              <FaTrash />
-            </button>
+            <Tooltip title="Remove ingredient" placement="left" arrow>
+              <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
+                <FaTrash />
+              </button>
+            </Tooltip>
           )}
         </div>
       );

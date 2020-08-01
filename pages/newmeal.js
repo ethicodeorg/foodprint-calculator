@@ -1,8 +1,8 @@
 import MealForm from '../components/MealForm';
 import Layout from '../components/MyLayout';
 
-const NewMeal = ({ foodData, transportData, addMeal }) => (
-  <Layout>
+const NewMeal = () => (
+  <Layout title="New Meal">
     <MealForm />
   </Layout>
 );

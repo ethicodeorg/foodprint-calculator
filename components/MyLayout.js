@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { initGA, logPageView } from '../utils/analytics';
+import { FOODPRINT_CALCULATOR } from '../utils/constants';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 
-const Layout = ({ children }) => {
+const Layout = ({ children, title = '' }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -12,14 +13,20 @@ const Layout = ({ children }) => {
     }
     logPageView();
   });
+  const headTitle = title ? `${title} | ${FOODPRINT_CALCULATOR}` : FOODPRINT_CALCULATOR;
 
   return (
     <div className="main">
       <Head>
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>Foodprint Calculator</title>
+        <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        />
       </Head>
+      <div className="behind-background" />
       <div className="background" />
       {children}
       <div className="footer">
@@ -37,12 +44,19 @@ const Layout = ({ children }) => {
           color: ${theme.colors.text};
           background-color: transparent;
         }
+        .behind-background {
+          position: fixed;
+          height: 100vh;
+          width: 100vw;
+          z-index: -2;
+          background-color: #666;
+        }
         .background {
           position: fixed;
           height: 100vh;
           width: 100vw;
           z-index: -1;
-          opacity: 0.85;
+          opacity: 0.6;
           background: url('/earth-cover.jpg') no-repeat 50%;
           background-size: cover;
         }

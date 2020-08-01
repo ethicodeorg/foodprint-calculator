@@ -18,10 +18,13 @@ const theme = {
     aqua: '#7FDBFF',
     orange: '#FF851B',
     fuchsia: '#F012BE',
+    white: '#FFF',
   },
   sizes: {
     mobile: '600px',
+    ipad: '768px',
     tablet: '1200px',
+    large: '1320px',
   },
 };
 

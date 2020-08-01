@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Router from 'next/router';
-import Autocomplete from 'react-autocomplete';
+import useSWR from 'swr';
 import Select from 'react-select';
-import { addMeal, editMeal } from '../redux/actions/pageActions';
+import { FaTimes } from 'react-icons/fa';
+import Tooltip from '@material-ui/core/Tooltip';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -13,18 +14,36 @@ import {
   convertToKilograms,
   getTotalByCategory,
 } from '../utils/calculations';
-import Header from '../components/Header';
-import Card from '../components/Card';
-import Content from '../components/Content';
-import Pies from '../components/Pies';
-import TinyPies from '../components/TinyPies';
-import Ingredients from '../components/Ingredients';
-import CardTitle from '../components/CardTitle';
-import PageTitle from '../components/PageTitle';
-import Button from '../components/Button';
+import {
+  getLocalStorageMeals,
+  editLocalStorageMeal,
+  addLocalStorageMeal,
+} from '../utils/localStorage';
+import { useUser } from '../lib/hooks';
+import Header from './Header';
+import Card from './Card';
+import Content from './Content';
+import Pies from './Pies';
+import TinyPies from './TinyPies';
+import Ingredients from './Ingredients';
+import CardTitle from './CardTitle';
+import PageTitle from './PageTitle';
+import Button from './Button';
+import Separator from './Separator';
+import LoadingOnTop from './LoadingOnTop';
 import theme from '../styles/theme';
 
-const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => {
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
+  const [user] = useUser();
+  const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
+  const localStorageMeals = getLocalStorageMeals();
+  const [meal, setMeal] = useState(
+    user ? data?.meals[0] : localStorageMeals.find((m) => m._id === id)
+  );
+  const [isLoading, setIsLoading] = useState(id && !meal);
+  const [errorMsg, setErrorMsg] = useState('');
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
@@ -81,8 +100,26 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       : numberOfServingsOptions[0]
   );
 
-  const saveMeal = () => {
+  useEffect(() => {
+    if (data) {
+      const mealData = data.meals[0];
+      setMeal(mealData);
+      setMealName(mealData.title);
+      setAboutMeal(mealData.about);
+      setMealLink(mealData.link);
+      setIngredients(mealData.ingredients);
+      setNumberOfServings(
+        numberOfServingsOptions.find((o) => o.value === mealData.numberOfServings)
+      );
+      setIsLoading(false);
+    }
+  }, [data]);
+
+  const saveMeal = async () => {
+    setIsLoading(true);
     const currentMeal = {
+      ownerId: user?._id,
+      visibility: meal?.visibility || 'private',
       title: mealName,
       about: aboutMeal,
       link: mealLink,
@@ -94,13 +131,49 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
       ingredients,
     };
 
-    if (meal) {
-      updateMeal(meal.id, currentMeal);
+    // If the user is logged in, we store to database
+    if (user) {
+      if (meal) {
+        // Edit meal
+        const res = await fetch('/api/meals', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ mealId: meal._id, meal: currentMeal }),
+        });
+
+        if (res.status === 201) {
+          const response = await res.json();
+        } else {
+          setErrorMsg(await res.text());
+        }
+      } else {
+        // Add new meal
+        const res = await fetch('api/meals', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ meal: currentMeal }),
+        });
+
+        if (res.status === 201) {
+          const response = await res.json();
+        } else {
+          setErrorMsg(await res.text());
+        }
+      }
     } else {
-      addNewMeal(currentMeal);
+      // Otherwise, we use localStorage (no user logged in)
+
+      if (meal) {
+        // Edit meal
+        editLocalStorageMeal(meal._id, currentMeal);
+      } else {
+        // Add new meal
+        addLocalStorageMeal(currentMeal);
+      }
     }
 
-    Router.push('/meals');
+    setIsLoading(false);
+    Router.push('/mymeals');
   };
 
   const deleteIngredient = (index) => {
@@ -173,9 +246,10 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
 
   return (
     <Fragment>
-      <Header activePage={meal ? 'meals' : 'new'} />
+      <Header activePage={meal ? 'mymeals' : 'new'} />
       <Content>
-        <PageTitle>{meal ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
+        <PageTitle>{id ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
+        {isLoading && <LoadingOnTop blockUI />}
         <Card>
           <div className="select-container number-of-servings-select">
             <Select
@@ -192,8 +266,16 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             deleteIngredient={deleteIngredient}
             numberOfServings={numberOfServings.value}
           />
+          <Separator />
           {isAdding ? (
             <Card inner>
+              <div className="close-container">
+                <Tooltip title="Close" placement="left" arrow>
+                  <button className="close-button" onClick={() => setIsAdding(false)}>
+                    <FaTimes />
+                  </button>
+                </Tooltip>
+              </div>
               <div className="required-fields">
                 <div className="select-container ingredient-select">
                   <Select
@@ -260,13 +342,18 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
                 </div>
               ) : (
                 <div className="optional-fields">
-                  <div className="add-transport-button-container">
-                    <Button onClick={() => setIsAddingTransport(true)}>+ Add Transport</Button>
-                  </div>
-                  <span className="optional-text">
-                    *If transport is not provided, the average transport emissions for the selected
-                    ingredient will be used
-                  </span>
+                  <Tooltip
+                    title="If transport is not provided, the average transport emissions for the selected
+                    ingredient will be used"
+                    placement="right"
+                    arrow
+                  >
+                    <div className="add-transport-button-container">
+                      <Button clear onClick={() => setIsAddingTransport(true)}>
+                        Add Transport (optional)
+                      </Button>
+                    </div>
+                  </Tooltip>
                 </div>
               )}
               <div className="add-button-container">
@@ -286,6 +373,7 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             <Pies
               meal={getTotalByCategory(ingredients, numberOfServings.value)}
               numberOfServings={numberOfServings.value}
+              mealTitle={mealName}
             />
           </Card>
         )}
@@ -318,13 +406,14 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
           />
         </Card>
         <div className="button-container">
-          <Button onClick={() => Router.push('/meals')} primary clear>
+          <Button onClick={() => Router.push('/mymeals')} primary clear>
             Cancel
           </Button>
           <Button
             onClick={() => saveMeal()}
             disabled={ingredients.length === 0 || mealName === ''}
             primary
+            animate
           >
             Save
           </Button>
@@ -458,28 +547,26 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
             display: flex;
             justify-content: space-between;
           }
-          .save-button {
-            font-size: 20px;
-            font-weight: bold;
-            width: 220px;
-            margin-top: 30px;
-            padding: 15px;
-            background-color: ${theme.colors.water};
+          .close-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            height: 30px;
+          }
+          .close-button {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            font-size: 22px;
+            color: ${theme.colors.text};
+            background-color: #fff;
             opacity: 1;
             transition: opacity 0.2s;
             cursor: pointer;
-            border-radius: 4px;
             border: none;
-            color: #fff;
+            outline: none;
           }
-          .save-button:hover {
-            opacity: 0.7;
-          }
-          .save-button:disabled {
-            opacity: 0.7;
-            cursor: default;
-          }
-          .save-button:disabled:hover {
+          .close-button:hover {
             opacity: 0.7;
           }
 
@@ -530,6 +617,12 @@ const MealForm = ({ meal, foodData, transportData, addNewMeal, updateMeal }) => 
               padding: 0;
             }
           }
+
+          @media only screen and (min-width: ${theme.sizes.ipad}) {
+            .close-container {
+              height: 0;
+            }
+          }
         `}</style>
       </Content>
     </Fragment>
@@ -541,9 +634,4 @@ const mapStateToProps = (state) => ({
   transportData: state.transportEmissions,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  addNewMeal: (meal) => dispatch(addMeal(meal)),
-  updateMeal: (mealId, meal) => dispatch(editMeal(mealId, meal)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MealForm);
+export default connect(mapStateToProps)(MealForm);

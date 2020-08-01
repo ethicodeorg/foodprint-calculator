@@ -2,8 +2,8 @@ import { useState } from 'react';
 import theme from '../styles/theme';
 import Button from './Button';
 
-const AboutMeal = ({ text }) => {
-  const [expanded, setExpanded] = useState(false);
+const AboutMeal = ({ text, isIndividual }) => {
+  const [expanded, setExpanded] = useState(isIndividual);
 
   return (
     <div className="about-meal">
@@ -32,7 +32,7 @@ const AboutMeal = ({ text }) => {
           width: 30%;
           text-align: center;
           margin: 0;
-          padding: 0 0 0 65%;
+          padding: 15px 0 0 65%;
           background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
         }
         p {
@@ -46,7 +46,7 @@ const AboutMeal = ({ text }) => {
           }
           .button-container {
             width: 88px;
-            padding: 4px 0 0 450px;
+            padding: 15px 0 0 450px;
           }
         }
       `}</style>

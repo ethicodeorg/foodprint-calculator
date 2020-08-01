@@ -1,8 +1,22 @@
 import classNames from 'classnames';
 import theme from '../styles/theme';
 
-const Button = ({ onClick, disabled, primary, clear, round, small, remove, title, children }) => (
+const Button = ({
+  type,
+  onClick,
+  disabled,
+  primary,
+  clear,
+  round,
+  small,
+  remove,
+  title,
+  children,
+  animate,
+  noPad,
+}) => (
   <button
+    type={type}
     onClick={onClick}
     disabled={disabled}
     className={classNames('button', {
@@ -11,12 +25,14 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, title
       'button-remove': remove,
       'button-round': round,
       'button-small': small,
+      animate: animate,
     })}
   >
     {children}
 
     <style jsx>{`
       .button {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,7 +50,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, title
         outline: none;
       }
       .button-clear {
-        padding: 10px 0 0;
+        padding: 0;
         background-color: transparent;
         color: ${title ? '#222' : theme.colors.water};
         font-size: 16px;
@@ -43,7 +59,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, title
         font-size: 20px;
         margin: 0;
         min-width: 130px;
-        padding: 10px 20px;
+        padding: ${noPad ? '0' : '10px 20px'};
         border: ${clear ? `2px solid ${theme.colors.water}` : 'none'};
         background-color: ${clear ? 'transparent' : theme.colors.water};
         color: #fff;
@@ -63,6 +79,32 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, title
       .button:hover {
         opacity: 0.7;
       }
+      .animate {
+        overflow: hidden;
+        position: relative;
+        padding: 0;
+        transition: background-color 0.2s;
+      }
+      .animate:enabled:hover {
+        opacity: 1;
+        background-color: #1b84e0;
+      }
+      .animate:enabled:after {
+        background: #fff;
+        content: '';
+        height: 155px;
+        left: -75px;
+        opacity: 0.2;
+        position: absolute;
+        top: -50px;
+        transform: rotate(35deg);
+        transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+        width: 50px;
+      }
+      .animate:enabled:hover:after {
+        left: 120%;
+        transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+      }
       .button:disabled {
         opacity: 0.7;
         cursor: default;
@@ -78,7 +120,7 @@ const Button = ({ onClick, disabled, primary, clear, round, small, remove, title
         .button-primary {
           font-size: 24px;
           min-width: 180px;
-          padding: 15px 40px;
+          padding: ${noPad ? '0' : '15px 40px'};
         }
       }
     `}</style>

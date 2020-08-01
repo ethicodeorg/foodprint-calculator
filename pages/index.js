@@ -1,13 +1,19 @@
+import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
+import Link from 'next/link';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
-import Link from 'next/link';
 
 const Index = () => {
+  useEffect(() => {
+    // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
+    document.cookie = 'meals=;';
+  });
+
   return (
     <Layout>
       <Header activePage="home" />
@@ -30,7 +36,7 @@ const Index = () => {
           <a className="about-link">This is how.</a>
         </Link>
         <div className="button-container">
-          <Button primary>
+          <Button primary animate noPad>
             <Link href="newmeal">
               <a className="lets-calculate">
                 Let's Calculate
@@ -96,6 +102,7 @@ const Index = () => {
         .lets-calculate {
           display: flex;
           align-items: center;
+          padding: 10px 20px;
           color: #fff;
           text-decoration: none;
         }
@@ -118,6 +125,9 @@ const Index = () => {
           p {
             max-width: 900px;
             font-size: 20px;
+          }
+          .lets-calculate {
+            padding: 15px 40px;
           }
         }
 

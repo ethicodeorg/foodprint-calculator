@@ -1,27 +1,41 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
-const Meals = ({ meals }) => {
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
+const Meals = () => {
+  const router = useRouter();
+  const { visibility, user, sortBy } = router.query;
+  let queryString = `?visibility=${visibility || 'public'}`;
+
+  if (user) {
+    queryString += `&user=${user}`;
+  }
+
+  if (sortBy) {
+    queryString += `&sortBy=${sortBy}`;
+  }
+
+  const { data, error } = useSWR(`/api/meals${queryString}`, fetcher);
+
+  if (error) return <div>failed to load</div>;
+
   return (
-    <Layout>
+    <Layout title="All Meals">
       <Header activePage="meals" />
       <MealsPage
-        meals={meals}
-        title="My Meals"
-        emptyMessage="You have not saved any meals"
-        showCreateButton
-        showEditButton
-        showDeleteButton
+        meals={data?.meals}
+        title="All Meals"
+        emptyMessage="Could not load meals at this time"
+        allMeals
+        query={router.query}
       />
     </Layout>
   );
 };
 
-const mapStateToProps = (state) => ({
-  meals: state.meals,
-});
-
-export default connect(mapStateToProps)(Meals);
+export default Meals;

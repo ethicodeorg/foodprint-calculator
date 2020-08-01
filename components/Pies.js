@@ -1,6 +1,7 @@
-import { Fragment, useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
+import React, { Fragment, useState, useEffect } from 'react';
+import { FaChevronDown, FaDownload } from 'react-icons/fa';
 import classNames from 'classnames';
+import { Tooltip } from '@material-ui/core';
 import { getMealPieData } from '../utils/pieUtils';
 import Pie from '../components/Pie';
 import Button from '../components/Button';
@@ -9,10 +10,47 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 
-const Pies = ({ meal, isSingle, numberOfServings }) => {
+const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndividual }) => {
+  let html2canvas;
   const pieData = getMealPieData(meal);
-  const [showDetails, setShowDetails] = useState(false);
+  const [showDetails, setShowDetails] = useState(isIndividual);
   const [showIngredients, setShowIngredients] = useState(false);
+
+  useEffect(() => {
+    html2canvas = require('html2canvas');
+  });
+
+  const downloadReport = (meal) => {
+    if (html2canvas && window && document) {
+      const pieContainer = meal._id
+        ? document.getElementById(meal._id).getElementsByClassName('pie-container')[0]
+        : document.getElementsByClassName('pie-container')[0];
+
+      // Process SVGs for canvas rendering
+      let svgElements = pieContainer.querySelectorAll('svg');
+      svgElements.forEach((item) => {
+        item.setAttribute('width', item.getBoundingClientRect().width);
+        item.style.width = null;
+      });
+
+      // Convert HTML element to HTML canvas
+      html2canvas(pieContainer, {
+        scrollY: -window.scrollY, // Vertical positioning
+        backgroundColor: null, // Transparent background
+      }).then((canvas) => {
+        // Create image from canvas
+        const dataURL = canvas.toDataURL();
+        const title = meal.title || mealTitle || 'Meal';
+        let link = document.createElement('a');
+        link.download = `${title
+          .toLowerCase()
+          .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
+          .replace(/ /g, '-')}-foodprint-report.png`;
+        link.href = dataURL;
+        link.click();
+      });
+    }
+  };
 
   return (
     <Fragment>
@@ -40,7 +78,16 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         </Fragment>
       )}
       <div className="title-container">
-        <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+        <div className="title-download">
+          <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+          {!allMeals && showDetails && (
+            <Tooltip title="Download report" placement="right" arrow>
+              <button className="download-button" onClick={() => downloadReport(meal)}>
+                <FaDownload />
+              </button>
+            </Tooltip>
+          )}
+        </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
           Details
           <span
@@ -94,7 +141,13 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
                   <div className="legend-name">{name}</div>
                   <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
                   <div className="percentage">
-                    <span className={`percentage-${cIndex}`}>{percentageString}</span>
+                    <Tooltip
+                      title="For more info on the RDAs, navigate to the about page"
+                      placement="right"
+                      arrow
+                    >
+                      <span className={`percentage-${cIndex}`}>{percentageString}</span>
+                    </Tooltip>
                   </div>
                 </div>
               )}
@@ -172,6 +225,27 @@ const Pies = ({ meal, isSingle, numberOfServings }) => {
         }
         .percentage-3 {
           color: ${theme.colors.eutro};
+        }
+        .title-download {
+          display: flex;
+          align-items: baseline;
+        }
+        .download-button {
+          display: flex;
+          align-items: center;
+          margin: 0 20px;
+          padding: 0;
+          font-size: 22px;
+          color: ${theme.colors.water};
+          background-color: #fff;
+          opacity: 1;
+          transition: opacity 0.2s;
+          cursor: pointer;
+          border: none;
+          outline: none;
+        }
+        .download-button:hover {
+          opacity: 0.7;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
