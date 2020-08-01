@@ -19,8 +19,7 @@ const MealsPage = ({
   title,
   emptyMessage,
   showCreateButton,
-  showEditButton,
-  showDeleteButton,
+  showFooterButtons,
   showEyeButton,
   removeMeal,
   allMeals,
@@ -86,9 +85,8 @@ const MealsPage = ({
                   meal={meal}
                   showEyeButton={showEyeButton}
                   allMeals={allMeals}
-                  showDeleteButton={showDeleteButton}
+                  showFooterButtons={showFooterButtons}
                   deleteMeal={deleteMeal}
-                  showEditButton={showEditButton}
                 />
               );
             })

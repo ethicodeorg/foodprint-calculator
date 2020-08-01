@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import Router from 'next/router';
 import Tooltip from '@material-ui/core/Tooltip';
-import { FaEdit, FaTrash, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaEye, FaEyeSlash, FaQrcode } from 'react-icons/fa';
 import classNames from 'classnames';
+import QRCode from 'qrcode.react';
 import { userTypeMap } from '../utils/constants';
 import Card from './Card';
 import CardTitle from './CardTitle';
@@ -13,15 +14,7 @@ import Separator from './Separator';
 import MealLink from './MealLink';
 import theme from '../styles/theme';
 
-const Meal = ({
-  meal,
-  showEyeButton,
-  allMeals,
-  showDeleteButton,
-  deleteMeal,
-  showEditButton,
-  isIndividual,
-}) => {
+const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, isIndividual }) => {
   const userSubtitle = `${meal?.user?.name || ''}${
     meal?.user?.type && meal?.user?.type !== 'other' ? `, ${userTypeMap[meal?.user?.type]}` : ''
   }`;
@@ -35,6 +28,20 @@ const Meal = ({
     });
 
     Router.push('/mymeals');
+  };
+
+  const downloadQRCode = (meal) => {
+    const elem = document.getElementById(`qr-${meal._id}`);
+    const canvas = elem.children[0];
+    const dataURL = canvas.toDataURL();
+    const title = meal.title || mealTitle || 'Meal';
+    let link = document.createElement('a');
+    link.download = `${title
+      .toLowerCase()
+      .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
+      .replace(/ /g, '-')}-qr-code.png`;
+    link.href = dataURL;
+    link.click();
   };
 
   return (
@@ -79,7 +86,7 @@ const Meal = ({
           allMeals={allMeals}
           isIndividual={isIndividual}
         />
-        {showDeleteButton && (
+        {showFooterButtons && (
           <Fragment>
             <Separator />
             <div className="footer-button-container">
@@ -88,15 +95,23 @@ const Meal = ({
                   <FaTrash />
                 </button>
               </Tooltip>
-              {showEditButton && (
-                <Tooltip title="Edit meal" placement="left" arrow>
+              <div className="right-footer">
+                <Tooltip title="Download QR code" placement="left" arrow>
+                  <button className="download-button" onClick={() => downloadQRCode(meal)}>
+                    <FaQrcode />
+                    <span id={`qr-${meal._id}`} className="qr-code">
+                      <QRCode value={`https://foodprintcalculator.com/meals/${meal._id}`} />
+                    </span>
+                  </button>
+                </Tooltip>
+                <Tooltip title="Edit meal" placement="top" arrow>
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
                       <FaEdit />
                     </MealLink>
                   </div>
                 </Tooltip>
-              )}
+              </div>
             </div>
           </Fragment>
         )}
@@ -150,6 +165,29 @@ const Meal = ({
         }
         .visibility-button-public {
           color: ${theme.colors.land};
+        }
+        .download-button {
+          display: flex;
+          align-items: center;
+          margin: 0 20px;
+          padding: 0;
+          font-size: 22px;
+          color: ${theme.colors.text};
+          background-color: #fff;
+          opacity: 1;
+          transition: opacity 0.2s;
+          cursor: pointer;
+          border: none;
+          outline: none;
+        }
+        .download-button:hover {
+          opacity: 0.7;
+        }
+        .right-footer {
+          display: flex;
+        }
+        .qr-code {
+          display: none;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

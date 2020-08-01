@@ -28,8 +28,7 @@ const MyMeals = () => {
         title="My Meals"
         emptyMessage="You have not saved any meals"
         showCreateButton
-        showEditButton
-        showDeleteButton
+        showFooterButtons
         showEyeButton={!!user}
       />
     </Layout>

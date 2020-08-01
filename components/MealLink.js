@@ -9,6 +9,7 @@ const MealLink = ({ id, children, isEdit }) => {
         {children}
         <style jsx>{`
           .meal-link {
+            display: flex;
             font-size: ${isEdit ? '24px' : '32px'};
             font-weight: normal;
             text-decoration: none;

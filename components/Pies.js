@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { FaChevronDown, FaDownload } from 'react-icons/fa';
 import classNames from 'classnames';
 import { Tooltip } from '@material-ui/core';
@@ -45,7 +45,7 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndivid
         link.download = `${title
           .toLowerCase()
           .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
-          .replace(/ /g, '-')}-${showDetails ? 'detailed' : 'minified'}-foodprint-report.png`;
+          .replace(/ /g, '-')}-foodprint-report.png`;
         link.href = dataURL;
         link.click();
       });
