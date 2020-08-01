@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 const SENDGRID_API = 'https://api.sendgrid.com/v3/mail/send';
-const SENDGRID_API_KEY = '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';
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 
 export async function sendVerifyEmail({ name, email }) {
   await fetch(SENDGRID_API, {
