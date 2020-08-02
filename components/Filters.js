@@ -3,12 +3,13 @@ import Select from 'react-select';
 import Router from 'next/router';
 import useSWR from 'swr';
 import theme from '../styles/theme';
+import { FaSearch } from 'react-icons/fa';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const Filters = ({ query }) => {
   const { data, error } = useSWR('/api/users?publicOnly=true', fetcher);
-  const userFilterOptions = [{ value: 'all', label: 'All users' }].concat(
+  const userFilterOptions = [{ value: 'all', label: 'All owners' }].concat(
     data?.users.map((user) => {
       return {
         value: user._id,
@@ -28,6 +29,7 @@ const Filters = ({ query }) => {
   const [sortBy, setSortBy] = useState(
     sortByOptions.find((option) => option.value === query.sortBy) || sortByOptions[0]
   );
+  const [searchTerm, setSearchTerm] = useState(query.search || '');
 
   const customStyles = {
     control: (provided, state) => ({
@@ -58,18 +60,46 @@ const Filters = ({ query }) => {
       <div className="select-container user-select">
         <Select
           value={userFilter}
-          placeholder="All users"
+          placeholder="All owners"
           onChange={(val) => {
             setUserFilter(val);
             Router.push({
               pathname: '/meals',
-              query: { user: val.value, sortBy: sortBy.value },
+              query: {
+                ...query,
+                user: val.value,
+              },
             });
           }}
           options={userFilterOptions}
           styles={customStyles}
           instanceId="user"
         />
+      </div>
+      <div className="search-container">
+        <label htmlFor="search">
+          <div className="search-icon">
+            <FaSearch />
+          </div>
+          <input
+            id="search"
+            type="text"
+            name="search"
+            placeholder="Search"
+            className="search-input"
+            value={searchTerm || ''}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              Router.push({
+                pathname: '/meals',
+                query: {
+                  ...query,
+                  search: e.target.value,
+                },
+              });
+            }}
+          />
+        </label>
       </div>
       <div className="select-container sort-select">
         <Select
@@ -79,7 +109,10 @@ const Filters = ({ query }) => {
             setSortBy(val);
             Router.push({
               pathname: '/meals',
-              query: { sortBy: val.value, user: userFilter.value },
+              query: {
+                ...query,
+                sortBy: val.value,
+              },
             });
           }}
           options={sortByOptions}
@@ -91,18 +124,59 @@ const Filters = ({ query }) => {
       <style jsx>{`
         .filters {
           display: flex;
-          justify-content: space-around;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           font-size: 14px;
           margin: 20px;
         }
+        .search-container,
         .select-container {
+          width: 220px;
+          margin: 0 20px 20px;
+        }
+        .search-container {
           width: 260px;
+          margin: 0 0 20px;
+        }
+        .sort-select {
           margin: 0 20px;
         }
+        .search-icon {
+          position: absolute;
+          color: ${theme.colors.white};
+          margin: 12px 0 0 13px;
+        }
+        label {
+          width: 100%;
+        }
+        input {
+          width: calc(100% - 50px);
+          padding: 9px 15px 8px 35px;
+          border: 1px solid ${theme.colors.white};
+          font-family: ${theme.fontFamily.default};
+          font-size: 14px;
+          background-color: ${theme.colors.darkBackground};
+          color: #fff;
+          border-radius: 20px;
+          outline: none;
+        }
+        input::placeholder {
+          font-family: ${theme.fontFamily.default};
+          color: #fff;
+        }
 
-        @media only screen and (min-width: ${theme.sizes.large}) {
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
           .filters {
-            justify-content: space-between;
+            flex-direction: row;
+          }
+          .search-container {
+            width: 240px;
+            margin: 0 20px;
+          }
+          .select-container {
+            width: 180px;
+            margin: 0 20px;
           }
         }
       `}</style>

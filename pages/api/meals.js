@@ -10,7 +10,7 @@ handler.use(middleware);
 
 // GET api/meals
 handler.get(async (req, res) => {
-  const { user, id, visibility, title, sortBy = 'landUse' } = req.query;
+  const { user, id, visibility, title, sortBy = 'landUse', search } = req.query;
   let filter = {};
 
   if (user && user !== 'all') {
@@ -25,8 +25,8 @@ handler.get(async (req, res) => {
     filter.visibility = visibility;
   }
 
-  if (title) {
-    filter.title = title;
+  if (search) {
+    filter.title = { $regex: search, $options: 'i' };
   }
 
   const docs = await req.db.collection('meals').find(filter).toArray();
