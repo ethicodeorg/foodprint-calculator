@@ -4,7 +4,7 @@ const SENDGRID_API = 'https://api.sendgrid.com/v3/mail/send';
 const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
 
 export async function sendVerifyEmail({ name, email }) {
-  await fetch(SENDGRID_API, {
+  return await fetch(SENDGRID_API, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export async function sendVerifyEmail({ name, email }) {
 }
 
 export async function sendWelcomeEmail({ name, email }) {
-  await fetch(SENDGRID_API, {
+  return await fetch(SENDGRID_API, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

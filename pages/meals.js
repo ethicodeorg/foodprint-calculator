@@ -9,7 +9,7 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const Meals = () => {
   const router = useRouter();
-  const { visibility, user, sortBy } = router.query;
+  const { visibility, user, search, sortBy } = router.query;
   let queryString = `?visibility=${visibility || 'public'}`;
 
   if (user) {
@@ -18,6 +18,10 @@ const Meals = () => {
 
   if (sortBy) {
     queryString += `&sortBy=${sortBy}`;
+  }
+
+  if (search) {
+    queryString += `&search=${search}`;
   }
 
   const { data, error } = useSWR(`/api/meals${queryString}`, fetcher);
