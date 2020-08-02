@@ -257,6 +257,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
               placeholder="Number of servings"
               onChange={(val) => setNumberOfServings(val)}
               options={numberOfServingsOptions}
+              instanceId="number-of-servings"
             />
           </div>
         </Card>
@@ -286,6 +287,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
                       setAutocompleteLabel(val.label);
                     }}
                     options={foodOptions}
+                    instanceId="ingredient"
                   />
                 </div>
                 <input
@@ -302,6 +304,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
                     placeholder="Unit"
                     onChange={(val) => setWeightUnit(val.value)}
                     options={weightUnitOptions}
+                    instanceId="weight-unit"
                   />
                 </div>
               </div>
@@ -313,6 +316,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
                       placeholder="Transport mode"
                       onChange={(val) => setTransportMode(val.value)}
                       options={transportModeOptions}
+                      instanceId="transport-mode"
                     />
                   </div>
                   <div className="select-container transport-type-select">
@@ -321,6 +325,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
                       placeholder="Transport type"
                       onChange={(val) => setTransportType(val.value)}
                       options={transportTypeOptions}
+                      instanceId="transport-type"
                     />
                   </div>
                   <input
@@ -337,6 +342,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
                       placeholder="Unit"
                       onChange={(val) => setDistanceUnit(val.value)}
                       options={distanceUnitOptions}
+                      instanceId="distance-unit"
                     />
                   </div>
                 </div>

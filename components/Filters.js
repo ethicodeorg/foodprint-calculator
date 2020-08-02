@@ -73,7 +73,7 @@ const Filters = ({ query }) => {
           }}
           options={userFilterOptions}
           styles={customStyles}
-          instanceId="user"
+          instanceId="user-filter"
         />
       </div>
       <div className="search-container">
