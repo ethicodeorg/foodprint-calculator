@@ -32,7 +32,13 @@ const UserForm = ({
       )}
       {showType && (
         <label htmlFor="type">
-          <Select inputId="type" name="type" placeholder="Type" options={typeOptions} />
+          <Select
+            inputId="type"
+            name="type"
+            placeholder="Type"
+            options={typeOptions}
+            instanceId="user-type"
+          />
         </label>
       )}
       {showPassword && (

@@ -127,6 +127,7 @@ const UserPage = () => {
                   })
                 }
                 options={typeOptions}
+                instanceId="user-type"
               />
             </div>
           </div>
