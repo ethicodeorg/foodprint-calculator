@@ -1,7 +1,7 @@
 import Pie from '../components/Pie';
 import { getIngredientPieData } from '../utils/pieUtils';
 
-const TinyPies = ({ ingredient, isSingle, numberOfServings }) => {
+const TinyPies = ({ ingredient, numberOfServings }) => {
   const pieData = getIngredientPieData(ingredient, numberOfServings);
 
   return pieData.map((category, cIndex) => {
@@ -30,12 +30,7 @@ const TinyPies = ({ ingredient, isSingle, numberOfServings }) => {
     return extraPies
       .concat(lastPie)
       .map((pie, pIndex) => (
-        <Pie
-          key={pIndex}
-          category={pie}
-          isSingle={isSingle}
-          label={`${name}: ${percentageString}`}
-        />
+        <Pie key={pIndex} category={pie} isTiny label={`${name}: ${percentageString}`} />
       ));
   });
 };

@@ -9,11 +9,13 @@ import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
+import { useRouter } from 'next/router';
 
-const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndividual }) => {
+const Pies = ({ meal, numberOfServings, mealTitle }) => {
   let html2canvas;
+  const router = useRouter();
   const pieData = getMealPieData(meal);
-  const [showDetails, setShowDetails] = useState(isIndividual);
+  const [showDetails, setShowDetails] = useState(router.route === '/meals/[id]');
   const [showIngredients, setShowIngredients] = useState(false);
 
   useEffect(() => {
@@ -80,7 +82,7 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndivid
       <div className="title-container">
         <div className="title-download">
           <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
-          {!allMeals && showDetails && (
+          {router.route === '/mymeals' && showDetails && (
             <Tooltip title="Download report" placement="right" arrow>
               <button className="download-button" onClick={() => downloadReport(meal)}>
                 <FaDownload />
@@ -153,12 +155,7 @@ const Pies = ({ meal, isSingle, numberOfServings, allMeals, mealTitle, isIndivid
               )}
               <div className="pies-container">
                 {extraPies.concat(lastPie).map((pie, pIndex) => (
-                  <Pie
-                    key={pIndex}
-                    category={pie}
-                    isSingle={isSingle}
-                    label={`${name}: ${percentageString}`}
-                  />
+                  <Pie key={pIndex} category={pie} label={`${name}: ${percentageString}`} />
                 ))}
               </div>
             </div>

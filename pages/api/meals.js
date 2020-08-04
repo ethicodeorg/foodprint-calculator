@@ -10,7 +10,7 @@ handler.use(middleware);
 
 // GET api/meals
 handler.get(async (req, res) => {
-  const { user, id, visibility, title, sortBy = 'landUse', search } = req.query;
+  const { user, id, visibility, title, sortBy, search } = req.query;
   let filter = {};
 
   if (user && user !== 'all') {
@@ -18,7 +18,8 @@ handler.get(async (req, res) => {
   }
 
   if (id) {
-    filter = { _id: ObjectId(id) };
+    const ids = id.split(',').map((mealId) => (mealId === 'empty' ? mealId : ObjectId(mealId)));
+    filter = { _id: { $in: ids } };
   }
 
   if (visibility) {

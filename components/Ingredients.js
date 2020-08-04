@@ -18,7 +18,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
             <div className="transport">{transportString}</div>
           </div>
           <div className="pies-container">
-            <TinyPies ingredient={ingredient} isSingle numberOfServings={numberOfServings} />
+            <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} />
           </div>
           {deleteIngredient && (
             <Tooltip title="Remove ingredient" placement="left" arrow>

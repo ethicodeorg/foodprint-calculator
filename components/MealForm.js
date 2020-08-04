@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Select from 'react-select';
 import { FaTimes } from 'react-icons/fa';
@@ -35,7 +35,8 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
+const MealForm = ({ id, foodData, transportData }) => {
+  const router = useRouter();
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const localStorageMeals = getLocalStorageMeals();
@@ -173,7 +174,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
     }
 
     setIsLoading(false);
-    Router.push('/mymeals');
+    router.push('/mymeals');
   };
 
   const deleteIngredient = (index) => {
@@ -246,7 +247,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
 
   return (
     <Fragment>
-      <Header activePage={meal ? 'mymeals' : 'new'} />
+      <Header />
       <Content>
         <PageTitle>{id ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
@@ -412,7 +413,7 @@ const MealForm = ({ id, foodData, transportData, addNewMeal, updateMeal }) => {
           />
         </Card>
         <div className="button-container">
-          <Button onClick={() => Router.push('/mymeals')} primary clear>
+          <Button onClick={() => router.push('/mymeals')} primary clear>
             Cancel
           </Button>
           <Button

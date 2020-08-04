@@ -11,7 +11,7 @@ import theme from '../styles/theme';
 const About = () => {
   return (
     <Layout title="About">
-      <Header activePage="about" />
+      <Header />
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>

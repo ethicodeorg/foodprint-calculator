@@ -20,16 +20,13 @@ const MyMeals = () => {
 
   return (
     <Layout title="My Meals">
-      <Header activePage="mymeals" />
+      <Header />
       <MealsPage
         isValidating={isValidating}
         mutate={mutate}
         meals={meals}
         title="My Meals"
         emptyMessage="You have not saved any meals"
-        showCreateButton
-        showFooterButtons
-        showEyeButton={!!user}
       />
     </Layout>
   );

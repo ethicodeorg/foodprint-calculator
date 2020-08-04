@@ -74,7 +74,7 @@ const UserPage = () => {
 
   return (
     <Layout title="Settings">
-      <Header activePage="user" />
+      <Header />
       <Content>
         <PageTitle>Settings</PageTitle>
         <Card>

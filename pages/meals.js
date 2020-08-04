@@ -10,14 +10,10 @@ const fetcher = (url) => fetch(url).then((r) => r.json());
 const Meals = () => {
   const router = useRouter();
   const { visibility, user, search, sortBy } = router.query;
-  let queryString = `?visibility=${visibility || 'public'}`;
+  let queryString = `?visibility=${visibility || 'public'}&sortBy=${sortBy || 'landUse'}`;
 
   if (user) {
     queryString += `&user=${user}`;
-  }
-
-  if (sortBy) {
-    queryString += `&sortBy=${sortBy}`;
   }
 
   if (search) {
@@ -30,12 +26,11 @@ const Meals = () => {
 
   return (
     <Layout title="All Meals">
-      <Header activePage="meals" />
+      <Header />
       <MealsPage
         meals={data?.meals}
         title="All Meals"
         emptyMessage="Could not load meals at this time"
-        allMeals
         query={router.query}
       />
     </Layout>

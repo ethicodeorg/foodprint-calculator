@@ -81,7 +81,7 @@ const SignupPage = () => {
 
   return (
     <Layout title="Sign up">
-      <Header activePage="signup" />
+      <Header />
       <Content>
         <PageTitle>Sign up</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}

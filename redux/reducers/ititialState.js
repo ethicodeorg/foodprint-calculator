@@ -60,5 +60,6 @@ export function getInitialState() {
   return {
     transportEmissions,
     foodData: getFoodData(),
+    comparisons: ['5f231d36ec4ca17d0c69b506', '5f231f4eec4ca17d0c69b507'],
   };
 }

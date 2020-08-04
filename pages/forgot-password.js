@@ -16,7 +16,7 @@ const ForgotPassword = () => {
 
   return (
     <Layout title="Forgot password">
-      <Header activePage="forgot-password" />
+      <Header />
       <Content>
         <PageTitle>Forgot password</PageTitle>
         <Card userForm>

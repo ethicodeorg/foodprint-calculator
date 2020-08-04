@@ -21,10 +21,8 @@ const MealPage = () => {
   return (
     <Layout title="Edit Meal">
       <Fragment>
-        <Header activePage="meals" />
-        <Content>
-          {meal ? <Meal key={meal._id} meal={meal} allMeals isIndividual /> : <LoadingOnTop />}
-        </Content>
+        <Header />
+        <Content>{meal ? <Meal key={meal._id} meal={meal} /> : <LoadingOnTop />}</Content>
       </Fragment>
       <style jsx>{`
         .loading-container {
