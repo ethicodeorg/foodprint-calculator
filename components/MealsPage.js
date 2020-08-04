@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import { FaCalculator } from 'react-icons/fa';
 import Modal from 'react-modal';
+import Select from 'react-select';
+import useSWR from 'swr';
+import { addMealToComparisons } from '../redux/actions/pageActions';
 import { deleteLocalStorageMeal } from '../utils/localStorage';
 import { useUser } from '../lib/hooks';
 import Button from './Button';
@@ -14,23 +19,33 @@ import MealLink from './MealLink';
 
 Modal.setAppElement('#__next');
 
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
 const MealsPage = ({
   meals,
   title,
   emptyMessage,
-  showCreateButton,
-  showFooterButtons,
-  showEyeButton,
   removeMeal,
-  allMeals,
+  comparisons,
   query,
   isValidating,
   mutate,
+  addMealToCompare,
 }) => {
   const [user] = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [mealIdToDelete, setMealIdToDelete] = useState('');
+  const { data, error } = useSWR('/api/meals?visibility=public', fetcher);
+  const mealOptions = data?.meals
+    .filter((meal) => !comparisons?.includes(meal._id))
+    .map((meal) => {
+      return {
+        value: meal._id,
+        label: `${meal.title} - ${meal.user.name}`,
+      };
+    });
   const modalAnimationTime = 200;
 
   const confirmDelete = async () => {
@@ -56,11 +71,47 @@ const MealsPage = ({
     setMealIdToDelete(meal._id);
   };
 
+  const addToComparisons = (mealId) => {
+    addMealToCompare(mealId);
+  };
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: 20,
+      padding: '0 5px',
+      backgroundColor: theme.colors.darkBackground,
+      color: theme.colors.white,
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: theme.colors.white,
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      backgroundColor: theme.colors.darkBackground,
+      color: theme.colors.white,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? theme.colors.aqua : theme.colors.darkBackground,
+      color: state.isFocused ? theme.colors.darkBackground : theme.colors.white,
+    }),
+    input: (provided, state) => ({
+      ...provided,
+      color: theme.colors.white,
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      color: theme.colors.white,
+    }),
+  };
+
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
       {(isLoading || isValidating) && <LoadingOnTop />}
-      {showCreateButton && (
+      {router.route === '/mymeals' && (
         <div className="buttons-container">
           <Button primary animate noPad>
             <Link href="/newmeal">
@@ -74,24 +125,27 @@ const MealsPage = ({
           </Button>
         </div>
       )}
-      {allMeals && <Filters query={query} />}
+      {router.route === '/meals' && <Filters query={query} />}
+      {router.route === '/compare' && (
+        <div className="select-container">
+          <Select
+            placeholder="Add meal to compare"
+            onChange={(val) => addToComparisons(val.value)}
+            options={mealOptions}
+            styles={customStyles}
+            controlShouldRenderValue={false}
+            instanceId="meal-finder"
+          />
+        </div>
+      )}
       <div className="meals-container">
         {meals ? (
           meals.length ? (
             meals.map((meal) => {
-              return (
-                <Meal
-                  key={meal._id}
-                  meal={meal}
-                  showEyeButton={showEyeButton}
-                  allMeals={allMeals}
-                  showFooterButtons={showFooterButtons}
-                  deleteMeal={deleteMeal}
-                />
-              );
+              return <Meal key={meal._id} meal={meal} deleteMeal={deleteMeal} />;
             })
           ) : (
-            <div className="no-results">No meals</div>
+            <div className="no-results">{emptyMessage}</div>
           )
         ) : (
           <LoadingOnTop />
@@ -169,6 +223,11 @@ const MealsPage = ({
           font-size: 24px;
           color: #fff;
         }
+        .select-container {
+          max-width: 400px;
+          margin: 20px auto;
+          padding: 0 20px;
+        }
 
         // Modal animation
         :global(.ReactModal__Content) {
@@ -206,4 +265,12 @@ const MealsPage = ({
   );
 };
 
-export default MealsPage;
+const mapStateToProps = (state) => ({
+  comparisons: state.comparisons,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addMealToCompare: (mealId) => dispatch(addMealToComparisons(mealId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MealsPage);

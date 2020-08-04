@@ -16,7 +16,7 @@ const Index = () => {
 
   return (
     <Layout>
-      <Header activePage="home" />
+      <Header />
       <div className="front-page">
         <h1>The Foodprint Calculator</h1>
         <h3>

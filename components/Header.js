@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import {
   FaGlobeEurope,
@@ -16,24 +17,40 @@ import theme from '../styles/theme';
 import Button from './Button';
 import FadingIcons from './FadingIcons';
 
-const Header = ({ activePage }) => {
+const Header = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user] = useUser();
+
+  const getGlobe = () => {
+    switch (router.route) {
+      case '/':
+      case '/user':
+      case '/email-verified':
+        return <FaGlobeAmericas />;
+      case '/meals':
+      case '/meals/[id]':
+      case '/mymeals':
+      case '/mymeals/[id]':
+        return <FaGlobeAsia />;
+      case '/newmeal':
+      case '/signup':
+      case '/compare':
+        return <FaGlobeAfrica />;
+      case '/about':
+      case '/login':
+      case '/forgot-password':
+        return <FaGlobeEurope />;
+      default:
+        return <FaGlobeEurope />;
+    }
+  };
 
   return (
     <div className="header">
       <div className="land" />
       <Link href="/">
-        <a className="link home">
-          {(activePage === 'home' || activePage === 'user' || activePage === 'email-verified') && (
-            <FaGlobeAmericas />
-          )}
-          {(activePage === 'meals' ||
-            activePage === 'mymeals' ||
-            activePage === 'forgot-password') && <FaGlobeAsia />}
-          {(activePage === 'new' || activePage === 'signup') && <FaGlobeAfrica />}
-          {(activePage === 'about' || activePage === 'login') && <FaGlobeEurope />}
-        </a>
+        <a className="link home">{getGlobe()}</a>
       </Link>
       <Link href="/newmeal">
         <a className="link new">
@@ -44,7 +61,7 @@ const Header = ({ activePage }) => {
         <Link href="/about">
           <a
             className={classNames('link', 'right-side', {
-              active: activePage === 'about',
+              active: router.route === '/about',
             })}
           >
             About
@@ -53,16 +70,25 @@ const Header = ({ activePage }) => {
         <Link href="/meals">
           <a
             className={classNames('link', 'right-side', {
-              active: activePage === 'meals',
+              active: router.route === '/meals',
             })}
           >
             All meals
           </a>
         </Link>
+        <Link href="/compare">
+          <a
+            className={classNames('link', 'right-side', {
+              active: router.route === '/compare',
+            })}
+          >
+            Compare
+          </a>
+        </Link>
         <Link href="/mymeals">
           <a
             className={classNames('link', 'right-side', {
-              active: activePage === 'mymeals',
+              active: router.route === '/mymeals',
             })}
           >
             My Meals
@@ -72,7 +98,7 @@ const Header = ({ activePage }) => {
           <Link href="/user">
             <a
               className={classNames('link', 'user', 'right-side', {
-                active: activePage === 'user',
+                active: router.route === '/user',
               })}
             >
               <span className="user-settings">Settings</span>
@@ -86,7 +112,7 @@ const Header = ({ activePage }) => {
             <Link href="/login">
               <a
                 className={classNames('link', 'right-side', {
-                  active: activePage === 'login',
+                  active: router.route === '/login',
                 })}
               >
                 Log In
@@ -95,7 +121,7 @@ const Header = ({ activePage }) => {
             <Link href="/signup">
               <a
                 className={classNames('link', 'right-side', {
-                  active: activePage === 'signup',
+                  active: router.route === '/signup',
                 })}
               >
                 Sign Up

@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
-import { FaEdit, FaTrash, FaEye, FaEyeSlash, FaQrcode } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaEye, FaEyeSlash, FaQrcode, FaTimes, FaPlus } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
+import { removeMealFromComparisons, addMealToComparisons } from '../redux/actions/pageActions';
+import { useUser } from '../lib/hooks';
 import { userTypeMap } from '../utils/constants';
 import Card from './Card';
 import CardTitle from './CardTitle';
@@ -14,10 +17,20 @@ import Separator from './Separator';
 import MealLink from './MealLink';
 import theme from '../styles/theme';
 
-const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, isIndividual }) => {
+const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToCompare }) => {
+  const router = useRouter();
+  const [user] = useUser();
   const userSubtitle = `${meal?.user?.name || ''}${
     meal?.user?.type && meal?.user?.type !== 'other' ? `, ${userTypeMap[meal?.user?.type]}` : ''
   }`;
+
+  const removeFromComparison = (mealId) => {
+    removeMealFromCompare(mealId);
+  };
+
+  const addToComparison = (mealId) => {
+    addMealToCompare(mealId);
+  };
 
   const changeVisibility = (meal) => {
     meal.visibility = meal.visibility === 'private' ? 'public' : 'private';
@@ -27,7 +40,7 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
       body: JSON.stringify({ mealId: meal._id, meal }),
     });
 
-    Router.push('/mymeals');
+    router.push('/mymeals');
   };
 
   const downloadQRCode = (meal) => {
@@ -49,9 +62,13 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
       <Card>
         <div className="title-container">
           <CardTitle>
-            {isIndividual ? meal.title : <MealLink id={meal._id}>{meal.title}</MealLink>}
+            {router.route === '/meals/[id]' ? (
+              meal.title
+            ) : (
+              <MealLink id={meal._id}>{meal.title}</MealLink>
+            )}
           </CardTitle>
-          {showEyeButton && (
+          {router.route === '/mymeals' && !!user && (
             <Tooltip
               title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
               placement="left"
@@ -67,6 +84,20 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
               </button>
             </Tooltip>
           )}
+          {router.route === '/compare' && (
+            <Tooltip title="Remove from comparison" placement="left" arrow>
+              <button className="remove-button" onClick={() => removeFromComparison(meal._id)}>
+                <FaTimes />
+              </button>
+            </Tooltip>
+          )}
+          {router.route === '/meals' && !comparisons.includes(meal._id) && (
+            <Tooltip title="Add to compare" placement="left" arrow>
+              <button className="add-button" onClick={() => addToComparison(meal._id)}>
+                <FaPlus />
+              </button>
+            </Tooltip>
+          )}
         </div>
         <div className="subtitle">
           {meal.user?.homepage ? (
@@ -78,15 +109,10 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
         <p className="servings">{`Serves ${meal.numberOfServings} ${
           meal.numberOfServings === 1 ? 'person' : 'people'
         }`}</p>
-        {meal.about && <AboutMeal text={meal.about} isIndividual={isIndividual} />}
+        {meal.about && <AboutMeal text={meal.about} />}
         {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-        <Pies
-          meal={meal}
-          numberOfServings={meal.numberOfServings}
-          allMeals={allMeals}
-          isIndividual={isIndividual}
-        />
-        {showFooterButtons && (
+        <Pies meal={meal} numberOfServings={meal.numberOfServings} />
+        {router.route === '/mymeals' && (
           <Fragment>
             <Separator />
             <div className="footer-button-container">
@@ -127,8 +153,8 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
           font-size: 14px;
         }
         .meal {
-          width: ${isIndividual ? '100%' : '600px'};
-          margin: ${isIndividual ? '120px 0 0' : '0'};
+          width: ${router.route === '/meals/[id]' ? '100%' : '600px'};
+          margin: ${router.route === '/meals/[id]' ? '120px 0 0' : '0'};
           padding-bottom: 20px;
           font-size: 18px;
         }
@@ -137,6 +163,8 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
           font-size: 22px;
         }
         .delete-button,
+        .remove-button,
+        .add-button,
         .visibility-button {
           display: flex;
           align-items: center;
@@ -152,8 +180,16 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
           outline: none;
         }
         .delete-button:hover,
+        .remove-button:hover,
+        .add-button:hover,
         .visibility-button:hover {
           opacity: 0.7;
+        }
+        .remove-button {
+          color: ${theme.colors.text};
+        }
+        .add-button {
+          color: ${theme.colors.land};
         }
         .footer-button-container {
           display: flex;
@@ -192,7 +228,7 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .meal {
-            margin: ${isIndividual ? '120px 0 0' : '0 20px'};
+            margin: ${router.route === '/meals/[id]' ? '120px 0 0' : '0 20px'};
           }
           .servings {
             font-size: 18px;
@@ -203,4 +239,13 @@ const Meal = ({ meal, showEyeButton, allMeals, showFooterButtons, deleteMeal, is
   );
 };
 
-export default Meal;
+const mapStateToProps = (state) => ({
+  comparisons: state.comparisons,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  removeMealFromCompare: (mealId) => dispatch(removeMealFromComparisons(mealId)),
+  addMealToCompare: (mealId) => dispatch(addMealToComparisons(mealId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Meal);

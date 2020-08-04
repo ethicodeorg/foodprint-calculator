@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import theme from '../styles/theme';
 import Button from './Button';
 
-const AboutMeal = ({ text, isIndividual }) => {
-  const [expanded, setExpanded] = useState(isIndividual);
+const AboutMeal = ({ text }) => {
+  const router = useRouter();
+  const [expanded, setExpanded] = useState(router.route === '/meals/[id]');
 
   return (
     <div className="about-meal">

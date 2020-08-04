@@ -8,7 +8,7 @@ import { FaAt, FaCalculator, FaCheckCircle } from 'react-icons/fa';
 const EmailVerified = () => {
   return (
     <Layout title="Email verified">
-      <Header activePage="email-verified" />
+      <Header />
       <div className="email-verified">
         <div className="icons">
           <span className="email-icon">
