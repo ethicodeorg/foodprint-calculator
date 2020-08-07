@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+import { FaTractor, FaTint, FaSmog } from 'react-icons/fa';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -9,13 +11,16 @@ import AboutSection from '../components/AboutSection';
 import theme from '../styles/theme';
 
 const About = () => {
+  const router = useRouter();
+  const { openSection = 'sources' } = router.query;
+
   return (
     <Layout title="About">
       <Header />
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>
-          <AboutSection title="Data sources">
+          <AboutSection title="Data sources" isOpen={openSection === 'sources'}>
             <p>
               In January 2020, Our World in Data published{' '}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
@@ -32,10 +37,10 @@ const About = () => {
             <p>
               This extensive data has graciously been made available for everyone to use, and the
               Foodprint Calculator uses it to determine the environmental impact of any meal, given
-              its ingredients and their weight.
+              its ingredients.
             </p>
           </AboutSection>
-          <AboutSection title="Recommended daily amounts">
+          <AboutSection title="Recommended daily amounts" isOpen={openSection === 'rda'}>
             <p>
               Earth has a finite amount of resources that we all share. Food production takes up a
               lot of these resources, especially when it comes to land use, greenhouse gas
@@ -43,7 +48,12 @@ const About = () => {
               considers an RDA (recommended daily amount) for each of these categories, using the
               following derivation:
             </p>
-            <CardTitle sub>Land use</CardTitle>
+            <CardTitle sub color={theme.colors.land}>
+              <span className="header-icon">
+                <FaTractor />
+              </span>
+              Land use
+            </CardTitle>
             <p>
               Earth has about 104 million km² of habitable land, and almost half of that is used for
               agriculture or{' '}
@@ -54,7 +64,12 @@ const About = () => {
               per person, or about 18 m² per day. Therefore the Foodprint Calculator considers that
               to be the RDA for an individual's land use.
             </p>
-            <CardTitle sub>Water withdrawals</CardTitle>
+            <CardTitle sub color={theme.colors.water}>
+              <span className="header-icon">
+                <FaTint />
+              </span>
+              Water withdrawals
+            </CardTitle>
             <p>
               Each year, global water withdrawals are about{' '}
               <ExternalLink href="https://ourworldindata.org/water-use-stress#global-freshwater-use">
@@ -67,7 +82,12 @@ const About = () => {
               . Divided amongst the population, and we get about 360 m³ or an RDA of about one m³
               (1000 liters) of water per individual.
             </p>
-            <CardTitle sub>Greenhouse gas emissions</CardTitle>
+            <CardTitle sub color={theme.colors.ghg}>
+              <span className="header-icon">
+                <FaSmog />
+              </span>
+              Greenhouse gas emissions
+            </CardTitle>
             <p>
               Food is responsible for about{' '}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
@@ -77,7 +97,12 @@ const About = () => {
               amount as is, although we should be trying to reduce it, that calculates to 1.75
               tonnes per person or an RDA of about 4.8 kg for each individual.
             </p>
-            <CardTitle sub>Eutrophying emissions</CardTitle>
+            <CardTitle sub color={theme.colors.eutro}>
+              <span className="header-icon">
+                <FaTint />
+              </span>
+              Eutrophying emissions
+            </CardTitle>
             <p>
               Eutrophying emissions are about{' '}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
@@ -92,23 +117,14 @@ const About = () => {
               emissions.
             </p>
           </AboutSection>
-          <AboutSection title="How to use">
+          <AboutSection title="How to use" isOpen={openSection === 'how-to-use'}>
             <div className="how-to-use">
               When adding ingredients from a recipe, these important considerations should be made:
               <ol>
                 <li>
-                  Converting units can be tricky with all the different measurements being used in
-                  recipes, e.g. spoons and cups and other volumes. The most reliable way is to weigh
-                  each ingredient if that's possible. Otherwise, you can use{' '}
-                  <ExternalLink href="https://www.calculateme.com/recipe/recipe-volume-to-weight-conversion">
-                    this website
-                  </ExternalLink>{' '}
-                  to convert some common food types from volume to weight.
-                </li>
-                <li>
                   Some ingredients contain a bunch of other elements. The most accurate method is to
                   add an ingredient for each such sub-element. Nevertheless, in many cases, it
-                  should be enough only to add the main ingredient. E.g., most kinds of ketchup
+                  should be enough to only add the main ingredient. E.g., most kinds of ketchup
                   contain some other ingredients than tomatoes, but tomatoes make up the bulk of the
                   ketchup. Therefore, it should be considered accurate enough to add "Tomatoes" for
                   ketchup.
@@ -130,7 +146,7 @@ const About = () => {
               </ol>
             </div>
           </AboutSection>
-          <AboutSection title="How accurate is it?">
+          <AboutSection title="How accurate is it?" isOpen={openSection === 'accuracy'}>
             <p>
               Of course, the results accumulated by the Foodprint Calculator should not be regarded
               as an exact science but rather a rough estimation. The environmental impact of each
@@ -140,15 +156,15 @@ const About = () => {
               it is as precise as it gets.
             </p>
           </AboutSection>
-          <AboutSection title="The project">
+          <AboutSection title="The project" isOpen={openSection === 'project'}>
             <p>
               The Foodprint Calculator was built and deployed in May 2020 and is still a work in
               progress. The idea is that anyone assembling meals (restaurants, cafeterias,
               ready-meals producers, food bloggers, home cooks, etc.) can use this calculator to get
               a concise, straightforward summary of how their meals are impacting the environment.
-              All that's needed is the meals's list of ingredients and their weight, and the
-              Foodprint Calculator does the rest. The output can then be exported in various formats
-              to display on menus, advertisements, websites, and packaging.
+              All that's needed is the meals's list of ingredients, and the Foodprint Calculator
+              does the rest. The output can then be exported in various formats to display on menus,
+              advertisements, websites, and packaging.
             </p>
             <p>
               The Foodprint Calculator is and always will be free to use for everyone. However, it
@@ -170,6 +186,11 @@ const About = () => {
       <style jsx>{`
         .how-to-use {
           margin-top: 20px;
+        }
+        .header-icon {
+          display: flex;
+          align-items: center;
+          margin-right: 10px;
         }
         li {
           margin-bottom: 10px;

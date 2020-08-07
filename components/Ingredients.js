@@ -11,10 +11,14 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
       const transportString = ingredient.distance
         ? `Transported ${ingredient.distance} ${ingredient.distanceUnit} by ${ingredient.transportMode}`
         : '';
+      const amountString = `${ingredient.amount} ${
+        ingredient.amountUnit === 'qty' ? '' : ingredient.amountUnit
+      }`;
+
       return (
         <div className="ingredient" key={index}>
           <div className="ingredient-basic">
-            {`${ingredient.label} ${ingredient.weight} ${ingredient.weightUnit}`}
+            {`${amountString} ${ingredient.label}`}
             <div className="transport">{transportString}</div>
           </div>
           <div className="pies-container">
