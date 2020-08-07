@@ -21,8 +21,8 @@ export function getEutroTotal(ingredients = [], numberOfServings = 1) {
   return total / numberOfServings;
 }
 
-function convertToTonnes(weight, unit) {
-  return convertToKilograms(weight, unit) / 1000;
+function convertToTonnes(amount, unit, selectedIngredient) {
+  return convertToKilograms(amount, unit, selectedIngredient) / 1000;
 }
 
 function convertToKilometers(distance, unit) {
@@ -42,11 +42,12 @@ function convertTransportToKilograms(
   distanceUnit,
   transportMode,
   transportType,
-  weight,
-  weightUnit
+  amount,
+  amountUnit,
+  selectedIngredient
 ) {
   const distanceInKilometers = convertToKilometers(distance, distanceUnit);
-  const weightInTonnes = convertToTonnes(weight, weightUnit);
+  const weightInTonnes = convertToTonnes(amount, amountUnit, selectedIngredient);
 
   return distanceInKilometers * weightInTonnes * transportData[transportMode][transportType];
 }
@@ -57,8 +58,9 @@ export function getTransportEmissions(
   distanceUnit,
   transportMode,
   transportType,
-  weight,
-  weightUnit
+  amount,
+  amountUnit,
+  selectedIngredient
 ) {
   return distance
     ? convertTransportToKilograms(
@@ -67,24 +69,35 @@ export function getTransportEmissions(
         distanceUnit,
         transportMode,
         transportType,
-        weight,
-        weightUnit
+        amount,
+        amountUnit,
+        selectedIngredient
       )
     : 0;
 }
 
-export function convertToKilograms(weight, unit) {
+export function convertToKilograms(amount, unit, selectedIngredient) {
   switch (unit) {
+    case 'qty':
+      return (amount * selectedIngredient.averageWeight) / 1000;
+    case 'tsp':
+      return (amount * selectedIngredient.gramsPerLiter * (5 / 1000)) / 1000;
+    case 'tbsp':
+      return (amount * selectedIngredient.gramsPerLiter * (15 / 1000)) / 1000;
+    case 'cups':
+      return (amount * selectedIngredient.gramsPerLiter * (250 / 1000)) / 1000;
+    case 'ltr':
+      return (amount * selectedIngredient.gramsPerLiter) / 1000;
     case 'g':
-      return weight / 1000;
+      return amount / 1000;
     case 'oz':
-      return weight / 35.274;
+      return amount / 35.274;
     case 'lbs':
-      return weight / 2.2046;
+      return amount / 2.2046;
     case 'kg':
-      return weight;
+      return amount;
     default:
-      return weight;
+      return amount;
   }
 }
 

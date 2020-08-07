@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { FaChevronDown, FaDownload } from 'react-icons/fa';
+import { FaChevronDown, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
 import classNames from 'classnames';
 import { Tooltip } from '@material-ui/core';
 import { getMealPieData } from '../utils/pieUtils';
@@ -10,6 +10,7 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Pies = ({ meal, numberOfServings, mealTitle }) => {
   let html2canvas;
@@ -143,13 +144,14 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
                   <div className="legend-name">{name}</div>
                   <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
                   <div className="percentage">
-                    <Tooltip
-                      title="For more info on the RDAs, navigate to the about page"
-                      placement="right"
-                      arrow
-                    >
-                      <span className={`percentage-${cIndex}`}>{percentageString}</span>
-                    </Tooltip>
+                    <Link href="/about?openSection=rda">
+                      <a className={`percentage-${cIndex}`} target="_blank">
+                        {percentageString}
+                        <span className="new-tab-icon">
+                          <FaExternalLinkAlt />
+                        </span>
+                      </a>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -212,15 +214,19 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
           font-size: 10px;
         }
         .percentage-0 {
+          text-decoration: none;
           color: ${theme.colors.land};
         }
         .percentage-1 {
+          text-decoration: none;
           color: ${theme.colors.ghg};
         }
         .percentage-2 {
+          text-decoration: none;
           color: ${theme.colors.water};
         }
         .percentage-3 {
+          text-decoration: none;
           color: ${theme.colors.eutro};
         }
         .title-download {
@@ -243,6 +249,11 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
         }
         .download-button:hover {
           opacity: 0.7;
+        }
+        .new-tab-icon {
+          display: inline;
+          margin-left: 5px;
+          font-size: 12px;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

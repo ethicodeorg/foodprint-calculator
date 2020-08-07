@@ -30,7 +30,7 @@ const Index = () => {
         </h3>
         <p>
           The Foodprint Calculator determines the environmental impact of a single meal, given a
-          list of its ingredients and their weight.
+          list of its ingredients.
         </p>
         <Link href="/about">
           <a className="about-link">This is how.</a>

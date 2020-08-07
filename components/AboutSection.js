@@ -7,8 +7,8 @@ import Button from './Button';
 import ExpandArrow from './ExpandArrow';
 import Separator from './Separator';
 
-const AboutSection = ({ title, children }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const AboutSection = ({ title, children, isOpen }) => {
+  const [isExpanded, setIsExpanded] = useState(isOpen);
 
   return (
     <div className="about-section">

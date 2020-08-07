@@ -1,9 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import useSWR from 'swr';
 import Select from 'react-select';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
 import Tooltip from '@material-ui/core/Tooltip';
 import {
   getLandUseTotal,
@@ -48,21 +49,21 @@ const MealForm = ({ id, foodData, transportData }) => {
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
-  const [autocompleteValue, setAutocompleteValue] = useState('');
-  const [autocompleteLabel, setAutocompleteLabel] = useState('');
-  const [weight, setWeight] = useState('');
+  const [selectedIngredient, setSelectedIngredient] = useState({});
+  const [amount, setAmount] = useState('');
   const [distance, setDistance] = useState('');
   const [transportMode, setTransportMode] = useState('');
   const [transportType, setTransportType] = useState('');
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
   const [isAdding, setIsAdding] = useState(false);
   const [isAddingTransport, setIsAddingTransport] = useState(false);
-  const weightUnitOptions = [
+  const initialUnits = [
     { value: 'g', label: 'Grams (g)' },
     { value: 'kg', label: 'Kilograms (kg)' },
     { value: 'oz', label: 'Ounces (oz)' },
     { value: 'lbs', label: 'Pounds (lbs)' },
   ];
+  const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
   const distanceUnitOptions = [
     { value: 'km', label: 'Kilometers (km)' },
     { value: 'mi', label: 'Miles (mi)' },
@@ -77,13 +78,18 @@ const MealForm = ({ id, foodData, transportData }) => {
     { value: 'ambient', label: 'Ambient transport' },
     { value: 'temperatureControlled', label: 'Temperature-controlled transport' },
   ];
-  const [weightUnit, setWeightUnit] = useState(weightUnitOptions[0].value);
+  const [amountUnit, setAmountUnit] = useState(amountUnitOptions[0].value);
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
 
   let foodOptions = [];
   for (let i = 0; i < foodData.length; i++) {
     for (let j = 0; j < foodData[i].entities.length; j++) {
-      foodOptions.push({ value: foodData[i].key, label: foodData[i].entities[j] });
+      foodOptions.push({
+        value: foodData[i].key,
+        label: foodData[i].entities[j].label,
+        averageWeight: foodData[i].entities[j].averageWeight,
+        gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
+      });
     }
   }
   foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
@@ -184,65 +190,99 @@ const MealForm = ({ id, foodData, transportData }) => {
   };
 
   const addIngredient = () => {
-    const food = foodData.find((f) => f.key === autocompleteValue);
+    const food = foodData.find((f) => f.key === selectedIngredient.value);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
       distanceUnit,
       transportMode,
       transportType,
-      weight,
-      weightUnit
+      amount,
+      amountUnit,
+      selectedIngredient
     );
+    const amountInKilos = convertToKilograms(amount, amountUnit, selectedIngredient);
     const ghgEmissionBreakdown = {
-      landUseChange:
-        food.ghgEmissions.values.landUseChange * convertToKilograms(weight, weightUnit),
-      animalFeed: food.ghgEmissions.values.animalFeed * convertToKilograms(weight, weightUnit),
-      farm: food.ghgEmissions.values.farm * convertToKilograms(weight, weightUnit),
-      processing: food.ghgEmissions.values.processing * convertToKilograms(weight, weightUnit),
+      landUseChange: food.ghgEmissions.values.landUseChange * amountInKilos,
+      animalFeed: food.ghgEmissions.values.animalFeed * amountInKilos,
+      farm: food.ghgEmissions.values.farm * amountInKilos,
+      processing: food.ghgEmissions.values.processing * amountInKilos,
       transport: transportEmissions
-        ? transportEmissions * convertToKilograms(weight, weightUnit)
-        : food.ghgEmissions.values.transport * convertToKilograms(weight, weightUnit),
-      packaging: food.ghgEmissions.values.packaging * convertToKilograms(weight, weightUnit),
-      retail: food.ghgEmissions.values.retail * convertToKilograms(weight, weightUnit),
+        ? transportEmissions * amountInKilos
+        : food.ghgEmissions.values.transport * amountInKilos,
+      packaging: food.ghgEmissions.values.packaging * amountInKilos,
+      retail: food.ghgEmissions.values.retail * amountInKilos,
     };
     const ingredient = {
-      key: autocompleteValue,
-      label: autocompleteLabel,
-      weight,
-      weightUnit,
+      key: selectedIngredient.value,
+      label: selectedIngredient.label,
+      amount,
+      amountUnit,
       distance,
       distanceUnit,
       transportMode,
       transportType,
       landUse: {
-        value: food.landUse.value * convertToKilograms(weight, weightUnit),
+        value: food.landUse.value * amountInKilos,
         unit: food.landUse.unit,
       },
       ghgEmissions: {
         values: ghgEmissionBreakdown,
-        value:
-          food.ghgEmissions.value * convertToKilograms(weight, weightUnit) + transportEmissions,
+        value: food.ghgEmissions.value * amountInKilos + transportEmissions,
         unit: food.ghgEmissions.unit,
       },
       eutrophyingEmissions: {
-        value: food.eutrophyingEmissions.value * convertToKilograms(weight, weightUnit),
+        value: food.eutrophyingEmissions.value * amountInKilos,
         unit: food.eutrophyingEmissions.unit,
       },
       waterWithdrawals: {
-        value: food.waterWithdrawals.value * convertToKilograms(weight, weightUnit),
+        value: food.waterWithdrawals.value * amountInKilos,
         unit: food.waterWithdrawals.unit,
       },
     };
 
     setIngredients((ingredients) => [...ingredients, ingredient]);
-    setWeight('');
+    setAmount('');
     setDistance('');
-    setAutocompleteValue('');
-    setAutocompleteLabel('');
+    setSelectedIngredient({});
     setIsAdding(false);
     setIsAddingTransport(false);
-    setWeightUnit(weightUnitOptions[0].value);
+    setAmountUnit(amountUnitOptions[0].value);
+  };
+
+  // When ingredient is selected we add quantity and volume options if applicaple
+  // for the selected ingredient.
+  const changeUnitOptions = (val) => {
+    let unitsToAdd = [];
+    let unitsToRemove = [];
+    if (val.averageWeight) {
+      // Don't add it if it's already there
+      if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
+        unitsToAdd.push({ value: 'qty', label: 'Quantity (qty)' });
+      }
+    } else {
+      unitsToRemove.push('qty');
+    }
+
+    if (val.gramsPerLiter) {
+      // Don't add it if it's already there
+      if (!amountUnitOptions.find((unit) => unit.value === 'tsp')) {
+        unitsToAdd = [
+          ...unitsToAdd,
+          { value: 'tsp', label: 'Teaspoons (5 mL)' },
+          { value: 'tbsp', label: 'Tablespoons (15 mL)' },
+          { value: 'cups', label: 'Cups (250 mL)' },
+          { value: 'ltr', label: 'Liters (L)' },
+        ];
+      }
+    } else {
+      unitsToRemove.push('tsp', 'tbsp', 'cups', 'ltr');
+    }
+
+    // Remove options with .filter and add options with .concat
+    setAmountUnitOptions(
+      amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
+    );
   };
 
   return (
@@ -273,7 +313,13 @@ const MealForm = ({ id, foodData, transportData }) => {
             <Card inner>
               <div className="close-container">
                 <Tooltip title="Close" placement="left" arrow>
-                  <button className="close-button" onClick={() => setIsAdding(false)}>
+                  <button
+                    className="close-button"
+                    onClick={() => {
+                      setIsAdding(false);
+                      setIsAddingTransport(false);
+                    }}
+                  >
                     <FaTimes />
                   </button>
                 </Tooltip>
@@ -281,31 +327,31 @@ const MealForm = ({ id, foodData, transportData }) => {
               <div className="required-fields">
                 <div className="select-container ingredient-select">
                   <Select
-                    value={autocompleteValue.value}
+                    value={selectedIngredient?.key}
                     placeholder="Ingredient"
                     onChange={(val) => {
-                      setAutocompleteValue(val.value);
-                      setAutocompleteLabel(val.label);
+                      setSelectedIngredient(val);
+                      changeUnitOptions(val);
                     }}
                     options={foodOptions}
                     instanceId="ingredient"
                   />
                 </div>
                 <input
-                  className="weight-input"
-                  placeholder="Weight"
+                  className="amount-input"
+                  placeholder="Amount"
                   type="number"
-                  name="weight"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
+                  name="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
-                <div className="select-container">
+                <div className="select-container ingredient-unit">
                   <Select
-                    value={weightUnit.value}
+                    value={amountUnit.value}
                     placeholder="Unit"
-                    onChange={(val) => setWeightUnit(val.value)}
-                    options={weightUnitOptions}
-                    instanceId="weight-unit"
+                    onChange={(val) => setAmountUnit(val.value)}
+                    options={amountUnitOptions}
+                    instanceId="amount-unit"
                   />
                 </div>
               </div>
@@ -364,7 +410,18 @@ const MealForm = ({ id, foodData, transportData }) => {
                 </div>
               )}
               <div className="add-button-container">
-                <Button onClick={() => addIngredient()} disabled={!autocompleteValue || !weight}>
+                <Link href="/about?openSection=how-to-use">
+                  <a target="_blank" className="instructions">
+                    How to use
+                    <span className="new-tab-icon">
+                      <FaExternalLinkAlt />
+                    </span>
+                  </a>
+                </Link>
+                <Button
+                  onClick={() => addIngredient()}
+                  disabled={!selectedIngredient.value || !amount}
+                >
                   Add
                 </Button>
               </div>
@@ -448,7 +505,7 @@ const MealForm = ({ id, foodData, transportData }) => {
           .about-meal-input {
             width: calc(100% - 20px);
           }
-          .weight-input,
+          .amount-input,
           .distance-input {
             width: 100%;
             margin: 0 0 20px 0;
@@ -533,7 +590,7 @@ const MealForm = ({ id, foodData, transportData }) => {
           }
           .add-button-container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             width: 100%;
             margin-top: 20px;
           }
@@ -576,6 +633,21 @@ const MealForm = ({ id, foodData, transportData }) => {
           .close-button:hover {
             opacity: 0.7;
           }
+          .ingredient-unit {
+            width: 200px;
+          }
+          .instructions {
+            margin-top: 20px;
+            color: ${theme.colors.water};
+            text-decoration: none;
+            font-size: 16px;
+            text-align: center;
+          }
+          .new-tab-icon {
+            display: inline;
+            margin-left: 5px;
+            font-size: 12px;
+          }
 
           @media only screen and (min-width: ${theme.sizes.mobile}) {
             .required-fields {
@@ -594,7 +666,7 @@ const MealForm = ({ id, foodData, transportData }) => {
             .number-of-servings-select {
               width: 220px;
             }
-            .weight-input,
+            .amount-input,
             .distance-input {
               width: 104px;
               margin: 0 20px 0 0;
@@ -622,6 +694,9 @@ const MealForm = ({ id, foodData, transportData }) => {
             }
             .button-container {
               padding: 0;
+            }
+            .ingredient-unit {
+              width: 200px;
             }
           }
 

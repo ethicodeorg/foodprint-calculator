@@ -19,7 +19,7 @@ const MealPage = () => {
   const meal = data?.meals[0];
 
   return (
-    <Layout title="Edit Meal">
+    <Layout title="Meal">
       <Fragment>
         <Header />
         <Content>{meal ? <Meal key={meal._id} meal={meal} /> : <LoadingOnTop />}</Content>
