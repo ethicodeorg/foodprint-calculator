@@ -25,8 +25,8 @@ const About = () => {
             <CardTitle sub>Why?</CardTitle>
             <p>
               Our global food production systems have huge impacts on the environment, yet it gets
-              very little attention in our growing environmental issues discussions, and concerns.
-              The Foodprint Calculator is here to change that. The mission is to help reduce our
+              very little attention in our growing environmental discussions, and concerns. The
+              Foodprint Calculator is here to change that. The mission is to help reduce our
               environmental impact through our food choices.
             </p>
             <CardTitle sub>How?</CardTitle>
