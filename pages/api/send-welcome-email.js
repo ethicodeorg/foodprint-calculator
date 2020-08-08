@@ -8,8 +8,14 @@ handler.use(middleware);
 // POST api/send-welcome-email
 handler.post(async (req, res) => {
   const { name, email } = req.body;
-  const response = await sendWelcomeEmail({ name, email });
-  res.status(200).end();
+
+  try {
+    const response = await sendWelcomeEmail({ name, email });
+    res.status(200).end();
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).end();
+  }
 });
 
 export default handler;

@@ -32,22 +32,27 @@ handler.get(async (req, res) => {
     filter._id = query.user;
   }
 
-  let users = await req.db.collection('users').find(filter).toArray();
+  try {
+    let users = await req.db.collection('users').find(filter).toArray();
 
-  if (query.publicOnly) {
-    // Only return users that have some public meals
-    users = await asyncFilter(users, async (user) => {
-      const mealFilter = {
-        ownerId: user._id.toString(),
-        visibility: 'public',
-      };
-      const docs = await req.db.collection('meals').find(mealFilter).toArray();
+    if (query.publicOnly) {
+      // Only return users that have some public meals
+      users = await asyncFilter(users, async (user) => {
+        const mealFilter = {
+          ownerId: user._id.toString(),
+          visibility: 'public',
+        };
+        const docs = await req.db.collection('meals').find(mealFilter).toArray();
 
-      return docs.length;
-    });
+        return docs.length;
+      });
+    }
+
+    res.status(200).json({ users });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).end();
   }
-
-  res.status(200).json({ users });
 });
 
 // POST /api/users
@@ -83,25 +88,31 @@ handler.post(async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await req.db
-    .collection('users')
-    .insertOne({
-      email,
-      password: hashedPassword,
-      name,
-      type,
-      subscription,
-      createdAt: new Date(),
-    })
-    .then(({ ops }) => ops[0]);
 
-  req.logIn(user, (err) => {
-    if (err) throw err;
-    // when we finally log in, return the (filtered) user object
-    res.status(201).json({
-      user: extractUser(req.user),
+  try {
+    const user = await req.db
+      .collection('users')
+      .insertOne({
+        email,
+        password: hashedPassword,
+        name,
+        type,
+        subscription,
+        createdAt: new Date(),
+      })
+      .then(({ ops }) => ops[0]);
+
+    req.logIn(user, (err) => {
+      if (err) throw err;
+      // when we finally log in, return the (filtered) user object
+      res.status(201).json({
+        user: extractUser(req.user),
+      });
     });
-  });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).end();
+  }
 });
 
 // PUT /api/users
@@ -143,18 +154,23 @@ handler.put(async (req, res) => {
     setObj.verifiedAt = new Date();
   }
 
-  const response = await req.db.collection('users').findOneAndUpdate(
-    { _id: ObjectId(_id) },
-    {
-      $set: setObj,
-    },
-    {
-      upsert: true,
-      returnOriginal: false,
-    }
-  );
+  try {
+    const response = await req.db.collection('users').findOneAndUpdate(
+      { _id: ObjectId(_id) },
+      {
+        $set: setObj,
+      },
+      {
+        upsert: true,
+        returnOriginal: false,
+      }
+    );
 
-  res.status(201).json({ user: extractUser(response.value) });
+    res.status(201).json({ user: extractUser(response.value) });
+  } catch (error) {
+    console.error(error.message);
+    res.status(400).end();
+  }
 });
 
 export default handler;
