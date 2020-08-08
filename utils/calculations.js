@@ -77,27 +77,29 @@ export function getTransportEmissions(
 }
 
 export function convertToKilograms(amount, unit, selectedIngredient) {
+  const factoredAmount = amount * (selectedIngredient.factor || 1);
+
   switch (unit) {
     case 'qty':
       return (amount * selectedIngredient.averageWeight) / 1000;
     case 'tsp':
-      return (amount * selectedIngredient.gramsPerLiter * (5 / 1000)) / 1000;
+      return (factoredAmount * selectedIngredient.gramsPerLiter * (5 / 1000)) / 1000;
     case 'tbsp':
-      return (amount * selectedIngredient.gramsPerLiter * (15 / 1000)) / 1000;
+      return (factoredAmount * selectedIngredient.gramsPerLiter * (15 / 1000)) / 1000;
     case 'cups':
-      return (amount * selectedIngredient.gramsPerLiter * (250 / 1000)) / 1000;
+      return (factoredAmount * selectedIngredient.gramsPerLiter * (250 / 1000)) / 1000;
     case 'ltr':
-      return (amount * selectedIngredient.gramsPerLiter) / 1000;
+      return (factoredAmount * selectedIngredient.gramsPerLiter) / 1000;
     case 'g':
-      return amount / 1000;
+      return factoredAmount / 1000;
     case 'oz':
-      return amount / 35.274;
+      return (factoredAmount * 28.34952) / 1000;
     case 'lbs':
-      return amount / 2.2046;
+      return (factoredAmount * 453.59237) / 1000;
     case 'kg':
-      return amount;
+      return factoredAmount;
     default:
-      return amount;
+      return factoredAmount;
   }
 }
 

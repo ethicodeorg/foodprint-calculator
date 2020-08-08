@@ -118,33 +118,48 @@ const About = () => {
             </p>
           </AboutSection>
           <AboutSection title="How to use" isOpen={openSection === 'how-to-use'}>
-            <div className="how-to-use">
+            <p>
               When adding ingredients from a recipe, these important considerations should be made:
-              <ol>
-                <li>
-                  Some ingredients contain a bunch of other elements. The most accurate method is to
-                  add an ingredient for each such sub-element. Nevertheless, in many cases, it
-                  should be enough to only add the main ingredient. E.g., most kinds of ketchup
-                  contain some other ingredients than tomatoes, but tomatoes make up the bulk of the
-                  ketchup. Therefore, it should be considered accurate enough to add "Tomatoes" for
-                  ketchup.
-                </li>
-                <li>
-                  When selecting beef, you will notice two entries in the data, beef from dairy
-                  herds and beef specifically grown from beef herds. This is because there is such a
-                  significant difference in their environmental impacts that the researchers decided
-                  to separate them into two categories. Beef from dairy herd has proportionally much
-                  less impact because it also contributes to dairy production. Each of the
-                  categories make up about{' '}
-                  <ExternalLink href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf">
-                    half of the market
-                  </ExternalLink>{' '}
-                  and it's often difficult to differentiate which sector your beef comes from.
-                  However, beef herd beef is generally considered leaner and of higher quality than
-                  dairy herd beef.
-                </li>
-              </ol>
-            </div>
+            </p>
+            <CardTitle sub>Sub-ingredients</CardTitle>
+            <p>
+              Some ingredients contain a bunch of other elements. The most accurate method is to add
+              an ingredient for each such sub-element. Nevertheless, in many cases, it should be
+              enough to only add the main ingredient. E.g., most kinds of ketchup contain some other
+              ingredients than tomatoes, but tomatoes make up the bulk of the ketchup. Therefore, it
+              should be considered accurate enough to add "Tomatoes" for ketchup.
+            </p>
+            <CardTitle sub>Dried ingredients</CardTitle>
+            <p>
+              Adding dried ingredients that are not in our database can be tricky. The most accurate
+              method is too enter the amount needed of the ingredients' fresh version to produce the
+              dried version amount. However, for simplicity, we can use these rules of thumb:
+            </p>
+            <ol>
+              <li>Multiply dried fruits by a factor of 3</li>
+              <li>Multiply leafy herbs and vegetables by a factor of 6</li>
+              <li>Multiply high water content ingredients by a factor of 9</li>
+            </ol>
+            <p>
+              Note that these calculations are not needed when adding quantities, e.g. 1 apple is
+              the same as 1 dried apple and uses the same resources regardless of their weight post
+              dehydration.
+            </p>
+            <CardTitle sub>Beef herds vs. dairy herds</CardTitle>
+            <p>
+              When selecting beef, you will notice two entries in the data, beef from dairy herds
+              and beef specifically grown from beef herds. This is because there is such a
+              significant difference in their environmental impacts that the researchers decided to
+              separate them into two categories. Beef from dairy herd has proportionally much less
+              impact because it also contributes to dairy production. Each of the categories make up
+              about{' '}
+              <ExternalLink href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf">
+                half of the market
+              </ExternalLink>{' '}
+              and it's often difficult to differentiate which sector your beef comes from. However,
+              beef herd beef is generally considered leaner and of higher quality than dairy herd
+              beef.
+            </p>
           </AboutSection>
           <AboutSection title="How accurate is it?" isOpen={openSection === 'accuracy'}>
             <p>

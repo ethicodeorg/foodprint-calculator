@@ -49,7 +49,7 @@ const MealForm = ({ id, foodData, transportData }) => {
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
-  const [selectedIngredient, setSelectedIngredient] = useState({});
+  const [selectedIngredient, setSelectedIngredient] = useState();
   const [amount, setAmount] = useState('');
   const [distance, setDistance] = useState('');
   const [transportMode, setTransportMode] = useState('');
@@ -85,10 +85,12 @@ const MealForm = ({ id, foodData, transportData }) => {
   for (let i = 0; i < foodData.length; i++) {
     for (let j = 0; j < foodData[i].entities.length; j++) {
       foodOptions.push({
-        value: foodData[i].key,
+        key: foodData[i].key,
+        value: `${foodData[i].key}${j}`,
         label: foodData[i].entities[j].label,
         averageWeight: foodData[i].entities[j].averageWeight,
         gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
+        factor: foodData[i].entities[j].factor,
       });
     }
   }
@@ -190,7 +192,7 @@ const MealForm = ({ id, foodData, transportData }) => {
   };
 
   const addIngredient = () => {
-    const food = foodData.find((f) => f.key === selectedIngredient.value);
+    const food = foodData.find((f) => f.key === selectedIngredient.key);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
@@ -214,7 +216,7 @@ const MealForm = ({ id, foodData, transportData }) => {
       retail: food.ghgEmissions.values.retail * amountInKilos,
     };
     const ingredient = {
-      key: selectedIngredient.value,
+      key: selectedIngredient.key,
       label: selectedIngredient.label,
       amount,
       amountUnit,
@@ -244,7 +246,7 @@ const MealForm = ({ id, foodData, transportData }) => {
     setIngredients((ingredients) => [...ingredients, ingredient]);
     setAmount('');
     setDistance('');
-    setSelectedIngredient({});
+    setSelectedIngredient();
     setIsAdding(false);
     setIsAddingTransport(false);
     setAmountUnit(amountUnitOptions[0].value);
@@ -327,7 +329,7 @@ const MealForm = ({ id, foodData, transportData }) => {
               <div className="required-fields">
                 <div className="select-container ingredient-select">
                   <Select
-                    value={selectedIngredient?.key}
+                    value={selectedIngredient}
                     placeholder="Ingredient"
                     onChange={(val) => {
                       setSelectedIngredient(val);
@@ -418,10 +420,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                     </span>
                   </a>
                 </Link>
-                <Button
-                  onClick={() => addIngredient()}
-                  disabled={!selectedIngredient.value || !amount}
-                >
+                <Button onClick={() => addIngredient()} disabled={!selectedIngredient || !amount}>
                   Add
                 </Button>
               </div>
