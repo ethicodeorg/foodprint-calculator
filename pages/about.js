@@ -12,7 +12,7 @@ import theme from '../styles/theme';
 
 const About = () => {
   const router = useRouter();
-  const { openSection = 'sources' } = router.query;
+  const { openSection = 'project' } = router.query;
 
   return (
     <Layout title="About">
@@ -20,6 +20,83 @@ const About = () => {
       <Content>
         <PageTitle>About the Foodprint Calculator</PageTitle>
         <Card>
+          <AboutSection title="The project" isOpen={openSection === 'project'}>
+            <p>The Foodprint Calculator determines how our meals impact the environment.</p>
+            <CardTitle sub>Why?</CardTitle>
+            <p>
+              Our global food production systems have huge impacts on the environment, yet it gets
+              very little attention in our growing environmental issues discussions, and concerns.
+              The Foodprint Calculator is here to change that. The mission is to help reduce our
+              environmental impact through our food choices.
+            </p>
+            <CardTitle sub>How?</CardTitle>
+            <p>
+              We believe that consumers will choose environmentally friendlier meals when confronted
+              with the hard numbers behind each of their options. That's why we built the Foodprint
+              Calculator; a tool for restaurants, ready meals producers, recipe publishers, etc., to
+              evaluate the environmental impact of each of their meals, given a list of its
+              ingredients. The results can then be displayed for their customers.
+            </p>
+            <p>The environmental impact reports consider four ways of impact:</p>
+            <ol>
+              <li>
+                <span style={{ color: theme.colors.land }}>Land use</span>
+                <ul>
+                  <li>
+                    Our food production systems use{' '}
+                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
+                      almost half
+                    </ExternalLink>{' '}
+                    of Earth's habitable land.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span style={{ color: theme.colors.ghg }}>Greenhouse gas emissions</span>
+                <ul>
+                  <li>
+                    Our food production systems are responsible for{' '}
+                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
+                      about 26%
+                    </ExternalLink>{' '}
+                    of our global greenhouse gas emissions.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span style={{ color: theme.colors.water }}>Water withdrawals</span>
+                <ul>
+                  <li>
+                    Our food production systems are responsible for{' '}
+                    <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
+                      about 70%
+                    </ExternalLink>{' '}
+                    of our yearly global water withdrawals.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <span style={{ color: theme.colors.eutro }}>Eutrophying emissions</span>
+                <ul>
+                  <li>
+                    Our food production systems' runoff of nitrogen and other nutrients are{' '}
+                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
+                      a leading contributor
+                    </ExternalLink>{' '}
+                    to the major environmental problem of eutrophying emissions.
+                  </li>
+                </ul>
+              </li>
+            </ol>
+            <CardTitle sub>The story so far</CardTitle>
+            <p>
+              The Foodprint Calculator was built by{' '}
+              <ExternalLink href="http://ethicode.org/">Ethicode</ExternalLink> and deployed in May
+              2020 as a proof of concept. It has since been under active development, and in August
+              2020, there was a significant update, introducing user signup and database storage for
+              their meals.
+            </p>
+          </AboutSection>
           <AboutSection title="Data sources" isOpen={openSection === 'sources'}>
             <p>
               In January 2020, Our World in Data published{' '}
@@ -42,8 +119,8 @@ const About = () => {
           </AboutSection>
           <AboutSection title="Recommended daily amounts" isOpen={openSection === 'rda'}>
             <p>
-              Earth has a finite amount of resources that we all share. Food production takes up a
-              lot of these resources, especially when it comes to land use, greenhouse gas
+              Earth has a finite amount of resources that we all share. Food production takes up
+              many of these resources, especially when it comes to land use, greenhouse gas
               emissions, water withdrawals, and eutrophying emissions. The Foodprint Calculator
               considers an RDA (recommended daily amount) for each of these categories, using the
               following derivation:
@@ -61,8 +138,22 @@ const About = () => {
                 51 million km²
               </ExternalLink>
               . If we divide that by the current population, 7.78 billion people, we get 6.555 m²
-              per person, or about 18 m² per day. Therefore the Foodprint Calculator considers that
+              per person or about 18 m² per day. Therefore the Foodprint Calculator considers that
               to be the RDA for an individual's land use.
+            </p>
+            <CardTitle sub color={theme.colors.ghg}>
+              <span className="header-icon">
+                <FaSmog />
+              </span>
+              Greenhouse gas emissions
+            </CardTitle>
+            <p>
+              Food is responsible for about{' '}
+              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
+                26% of our global greenhouse gas emissions
+              </ExternalLink>
+              , or 13.6 billion tonnes of carbon dioxide equivalents. That calculates to 1.75 tonnes
+              per person or an RDA of about 4.8 kg for each individual.
             </p>
             <CardTitle sub color={theme.colors.water}>
               <span className="header-icon">
@@ -82,21 +173,6 @@ const About = () => {
               . Divided amongst the population, and we get about 360 m³ or an RDA of about one m³
               (1000 liters) of water per individual.
             </p>
-            <CardTitle sub color={theme.colors.ghg}>
-              <span className="header-icon">
-                <FaSmog />
-              </span>
-              Greenhouse gas emissions
-            </CardTitle>
-            <p>
-              Food is responsible for about{' '}
-              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
-                26% of our global greenhouse gas emissions
-              </ExternalLink>
-              , or 13.6 billion tonnes of carbon dioxide equivalents. If we only aim to keep that
-              amount as is, although we should be trying to reduce it, that calculates to 1.75
-              tonnes per person or an RDA of about 4.8 kg for each individual.
-            </p>
             <CardTitle sub color={theme.colors.eutro}>
               <span className="header-icon">
                 <FaTint />
@@ -112,9 +188,13 @@ const About = () => {
               <ExternalLink href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/">
                 2,000 kcal a day for women and 2,500 for men
               </ExternalLink>{' '}
-              or 2,250 on average. Again, if we only aim not to increase this amount, which we
-              should be aiming to reduce, we can consider 28 kgPO₄eq the RDA of eutrophying
+              or 2,250 on average. Therefore, we can consider 28 kgPO₄eq the RDA of eutrophying
               emissions.
+            </p>
+            <p>
+              In each of these four categories, we're only aiming to prevent these global numbers
+              from growing even further, although we should be aiming to reduce them. However, we
+              have to start somewhere!
             </p>
           </AboutSection>
           <AboutSection title="How to use" isOpen={openSection === 'how-to-use'}>
@@ -125,14 +205,15 @@ const About = () => {
             <p>
               Some ingredients contain a bunch of other elements. The most accurate method is to add
               an ingredient for each such sub-element. Nevertheless, in many cases, it should be
-              enough to only add the main ingredient. E.g., most kinds of ketchup contain some other
+              enough only to add the main ingredient. E.g., most kinds of ketchup contain some other
               ingredients than tomatoes, but tomatoes make up the bulk of the ketchup. Therefore, it
-              should be considered accurate enough to add "Tomatoes" for ketchup.
+              should be considered accurate enough to add "Tomatoes" for ketchup, especially for
+              smaller amounts.
             </p>
             <CardTitle sub>Dried ingredients</CardTitle>
             <p>
               Adding dried ingredients that are not in our database can be tricky. The most accurate
-              method is too enter the amount needed of the ingredients' fresh version to produce the
+              method is to enter the amount needed of the ingredients' fresh version to produce the
               dried version amount. However, for simplicity, we can use these rules of thumb:
             </p>
             <ol>
@@ -141,59 +222,44 @@ const About = () => {
               <li>Multiply high water content ingredients by a factor of 9</li>
             </ol>
             <p>
-              Note that these calculations are not needed when adding quantities, e.g. 1 apple is
-              the same as 1 dried apple and uses the same resources regardless of their weight post
-              dehydration.
+              Note that these calculations are not needed when adding quantities, e.g., one apple is
+              the same as one dried apple and uses the same resources regardless of their weight
+              post dehydration.
             </p>
             <CardTitle sub>Beef herds vs. dairy herds</CardTitle>
             <p>
               When selecting beef, you will notice two entries in the data, beef from dairy herds
               and beef specifically grown from beef herds. This is because there is such a
               significant difference in their environmental impacts that the researchers decided to
-              separate them into two categories. Beef from dairy herd has proportionally much less
+              separate them into two categories. Beef from dairy herds has proportionally much less
               impact because it also contributes to dairy production. Each of the categories make up
               about{' '}
               <ExternalLink href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf">
                 half of the market
-              </ExternalLink>{' '}
-              and it's often difficult to differentiate which sector your beef comes from. However,
-              beef herd beef is generally considered leaner and of higher quality than dairy herd
-              beef.
+              </ExternalLink>
+              , and it's often difficult to differentiate from which sector your beef comes.
+              However, beef herd beef is generally considered leaner and of higher quality than
+              dairy herd beef.
             </p>
           </AboutSection>
           <AboutSection title="How accurate is it?" isOpen={openSection === 'accuracy'}>
             <p>
-              Of course, the results accumulated by the Foodprint Calculator should not be regarded
-              as an exact science but rather a rough estimation. The environmental impact of each
-              food product type varies considerably between individual products and productions.
-              However, given that the data being used for the Foodprint Calculator is widely
-              regarded as the most comprehensive and accurate data we have today, we can assume that
-              it is as precise as it gets.
+              The results accumulated by the Foodprint Calculator should not be regarded as an exact
+              science but rather a rough estimation. The environmental impact of each food product
+              type varies considerably between individual products and productions. However, given
+              that the data being used for the Foodprint Calculator is widely regarded as the most
+              comprehensive and accurate data we have today, we can assume that it is as precise as
+              it gets.
             </p>
           </AboutSection>
-          <AboutSection title="The project" isOpen={openSection === 'project'}>
+          <AboutSection title="Support" isOpen={openSection === 'support'}>
             <p>
-              The Foodprint Calculator was built and deployed in May 2020 and is still a work in
-              progress. The idea is that anyone assembling meals (restaurants, cafeterias,
-              ready-meals producers, food bloggers, home cooks, etc.) can use this calculator to get
-              a concise, straightforward summary of how their meals are impacting the environment.
-              All that's needed is the meals's list of ingredients, and the Foodprint Calculator
-              does the rest. The output can then be exported in various formats to display on menus,
-              advertisements, websites, and packaging.
-            </p>
-            <p>
-              The Foodprint Calculator is and always will be free to use for everyone. However, it
-              can be customized, branded, and hosted separately as a white label for restaurants,
-              ready-meals producers, etc., and then linked to the company website, menus, packaging,
-              recipes, ads, etc.
-            </p>
-            <p>
-              If your company is interested in showing your customers the calculated environmental
-              impact for each of their products, please reach out to us at{' '}
+              If you have any questions or feedback, bug reports or feature requests, or require
+              assistance, please reach out to us at{' '}
               <ExternalLink email href="mailto:ethicode@ethicode.org">
                 ethicode@ethicode.org
               </ExternalLink>
-              , we will happily answer any questions you might have.
+              .
             </p>
           </AboutSection>
         </Card>
