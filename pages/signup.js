@@ -19,11 +19,13 @@ const SignupPage = () => {
   const [user, { mutate }] = useUser();
 
   const sendVerificationEmail = async () => {
+    setIsLoading(true);
     const response = await fetch('api/send-verify-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: user.name, email: user.email }),
     });
+    setIsLoading(false);
 
     if (response.status !== 201) {
       setErrorMsg(
