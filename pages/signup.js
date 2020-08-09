@@ -18,9 +18,24 @@ const SignupPage = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
 
-  // call whenever user changes (ex. right after signing up successfully)
+  const sendVerificationEmail = async () => {
+    const response = await fetch('api/send-verify-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: user.name, email: user.email }),
+    });
+
+    if (response.status !== 201) {
+      setErrorMsg(
+        `We encountered a problem when trying to send an email to ${user.email}. Please contact support.`
+      );
+      return;
+    }
+
+    router.replace('/check-email');
+  };
+
   useEffect(() => {
-    // redirect to check-email page if user is authenticated
     if (user) {
       // If there are any meals in local storage, we add them to the database
       const localStorageMeals = getLocalStorageMeals();
@@ -36,15 +51,7 @@ const SignupPage = () => {
       });
 
       clearLocalStorageMeals();
-
-      // Send verification email
-      fetch('api/send-verify-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: user.name, email: user.email }),
-      });
-
-      router.replace('/check-email');
+      sendVerificationEmail();
     }
   }, [user]);
 
