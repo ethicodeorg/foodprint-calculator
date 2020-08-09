@@ -11,7 +11,11 @@ handler.post(async (req, res) => {
 
   try {
     const response = await sendVerifyEmail({ name, email });
-    res.status(200).end();
+
+    if (response.status === 201) {
+      return res.status(201).end();
+    }
+    res.status(400).end();
   } catch (error) {
     console.error(error.message);
     res.status(400).end();
