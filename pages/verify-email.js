@@ -9,7 +9,7 @@ const VerifyEmail = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const [sent, setSent] = useState(false);
-  const [user, { mutate }] = useUser();
+  const [user, { error, mutate }] = useUser();
 
   const verify = async () => {
     const res = await fetch('/api/users', {
@@ -39,6 +39,10 @@ const VerifyEmail = () => {
   };
 
   useEffect(() => {
+    if (error) {
+      router.replace(`/login?reference=verify-email`);
+    }
+
     if (user) {
       // redirect to email-verified when verified
       if (user.verifiedAt) {
@@ -50,7 +54,7 @@ const VerifyEmail = () => {
         verify();
       }
     }
-  }, [user]);
+  }, [user, error]);
 
   return (
     <Layout title="Verify Email">
