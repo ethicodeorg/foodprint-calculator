@@ -8,7 +8,6 @@ import theme from '../styles/theme';
 const VerifyEmail = () => {
   const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
-  const [sent, setSent] = useState(false);
   const [user, { error, mutate }] = useUser();
 
   const verify = async () => {
@@ -41,18 +40,17 @@ const VerifyEmail = () => {
   useEffect(() => {
     if (error) {
       router.replace(`/login?reference=verify-email`);
+      return;
     }
 
     if (user) {
       // redirect to email-verified when verified
       if (user.verifiedAt) {
         router.replace('/email-verified');
+        return;
       }
 
-      if (!sent) {
-        setSent(true);
-        verify();
-      }
+      verify();
     }
   }, [user, error]);
 
