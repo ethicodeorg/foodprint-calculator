@@ -15,8 +15,11 @@ import LoadingOnTop from '../components/LoadingOnTop';
 
 const LoginPage = () => {
   const router = useRouter();
+  const { reference } = router.query;
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState(
+    reference === 'verify-email' ? 'Please log in to verify your email' : ''
+  );
   const [user, { mutate }] = useUser();
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const LoginPage = () => {
 
       clearLocalStorageMeals();
 
-      router.replace('/mymeals');
+      router.replace(`/${reference || 'mymeals'}`);
     }
   }, [user]);
 
