@@ -10,9 +10,8 @@ handler.use(middleware);
 handler.get(async (req, res) => {
   return req.user
     ? res.json({ user: extractUser(req.user) })
-    : res.status(401).json({
+    : res.json({
         error: {
-          status: 401,
           message: 'User is not logged in',
         },
       });
