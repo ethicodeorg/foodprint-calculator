@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import Router from 'next/router';
+import { Router } from '../i18n';
 import useSWR from 'swr';
 import theme from '../styles/theme';
 import { FaSearch } from 'react-icons/fa';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Filters = ({ query }) => {
+const Filters = ({ queries }) => {
   const { data, error } = useSWR('/api/users?publicOnly=true', fetcher);
   const userFilterOptions = [{ value: 'all', label: 'All owners' }].concat(
     data?.users.map((user) => {
@@ -18,7 +18,7 @@ const Filters = ({ query }) => {
     })
   );
   const [userFilter, setUserFilter] = useState(
-    userFilterOptions.find((option) => option?.value === query.user) || userFilterOptions[0]
+    userFilterOptions.find((option) => option?.value === queries.user) || userFilterOptions[0]
   );
   const sortByOptions = [
     { value: 'landUse', label: 'Sort by land use' },
@@ -27,9 +27,9 @@ const Filters = ({ query }) => {
     { value: 'eutrophyingEmissions', label: 'Sort by eutrophying emissions' },
   ];
   const [sortBy, setSortBy] = useState(
-    sortByOptions.find((option) => option.value === query.sortBy) || sortByOptions[0]
+    sortByOptions.find((option) => option.value === queries.sortBy) || sortByOptions[0]
   );
-  const [searchTerm, setSearchTerm] = useState(query.search || '');
+  const [searchTerm, setSearchTerm] = useState(queries.search || '');
 
   const customStyles = {
     control: (provided, state) => ({
@@ -66,7 +66,7 @@ const Filters = ({ query }) => {
             Router.push({
               pathname: '/meals',
               query: {
-                ...query,
+                ...queries,
                 user: val.value,
               },
             });
@@ -93,7 +93,7 @@ const Filters = ({ query }) => {
               Router.push({
                 pathname: '/meals',
                 query: {
-                  ...query,
+                  ...queries,
                   search: e.target.value,
                 },
               });
@@ -110,7 +110,7 @@ const Filters = ({ query }) => {
             Router.push({
               pathname: '/meals',
               query: {
-                ...query,
+                ...queries,
                 sortBy: val.value,
               },
             });

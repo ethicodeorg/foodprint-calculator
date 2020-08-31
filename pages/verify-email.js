@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { Router } from '../i18n';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/MyLayout';
 import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
 
 const VerifyEmail = () => {
-  const router = useRouter();
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { error, mutate }] = useUser();
 
@@ -39,14 +38,14 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     if (error) {
-      router.replace(`/login?reference=verify-email`);
+      Router.replace(`/login?reference=verify-email`);
       return;
     }
 
     if (user) {
       // redirect to email-verified when verified
       if (user.verifiedAt) {
-        router.replace('/email-verified');
+        Router.replace('/email-verified');
         return;
       }
 

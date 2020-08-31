@@ -5,6 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { FaEdit, FaTrash, FaEye, FaEyeSlash, FaQrcode, FaTimes, FaPlus } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
+import { Router } from '../i18n';
 import { removeMealFromComparisons, addMealToComparisons } from '../redux/actions/pageActions';
 import { useUser } from '../lib/hooks';
 import { userTypeMap } from '../utils/constants';
@@ -40,7 +41,7 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
       body: JSON.stringify({ mealId: meal._id, meal }),
     });
 
-    router.push('/mymeals');
+    Router.push('/mymeals');
   };
 
   const downloadQRCode = (meal) => {

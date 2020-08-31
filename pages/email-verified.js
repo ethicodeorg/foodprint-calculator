@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '../i18n';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -21,7 +21,7 @@ const EmailVerified = () => {
         <div className="email-verified-text">Congratulations, your email has been verified!</div>
         <div className="button-container">
           <Button primary animate noPad>
-            <Link href="newmeal">
+            <Link href="/newmeal">
               <a className="lets-calculate">
                 Let's Calculate
                 <span className="calculator-container">

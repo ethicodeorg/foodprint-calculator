@@ -11,13 +11,18 @@ const Meals = () => {
   const router = useRouter();
   const { visibility, user, search, sortBy } = router.query;
   let queryString = `?visibility=${visibility || 'public'}&sortBy=${sortBy || 'landUse'}`;
+  let queries = {
+    sortBy: sortBy || 'landUse',
+  };
 
   if (user) {
     queryString += `&user=${user}`;
+    queries.user = user;
   }
 
   if (search) {
     queryString += `&search=${search}`;
+    queries.search = search;
   }
 
   const { data, error } = useSWR(`/api/meals${queryString}`, fetcher);
@@ -31,7 +36,7 @@ const Meals = () => {
         meals={data?.meals}
         title="All Meals"
         emptyMessage="Could not load meals at this time"
-        query={router.query}
+        queries={queries}
       />
     </Layout>
   );

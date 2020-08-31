@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { Link, Router } from '../i18n';
 import useSWR from 'swr';
 import Select from 'react-select';
 import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
@@ -37,7 +36,6 @@ import theme from '../styles/theme';
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
 const MealForm = ({ id, foodData, transportData }) => {
-  const router = useRouter();
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const localStorageMeals = getLocalStorageMeals();
@@ -182,7 +180,7 @@ const MealForm = ({ id, foodData, transportData }) => {
     }
 
     setIsLoading(false);
-    router.push('/mymeals');
+    Router.push('/mymeals');
   };
 
   const deleteIngredient = (index) => {
@@ -469,7 +467,7 @@ const MealForm = ({ id, foodData, transportData }) => {
           />
         </Card>
         <div className="button-container">
-          <Button onClick={() => router.push('/mymeals')} primary clear>
+          <Button onClick={() => Router.push('/mymeals')} primary clear>
             Cancel
           </Button>
           <Button

@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { FaTractor, FaTint, FaSmog } from 'react-icons/fa';
+import { withTranslation } from '../i18n';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -10,37 +11,34 @@ import ExternalLink from '../components/ExternalLink';
 import AboutSection from '../components/AboutSection';
 import theme from '../styles/theme';
 
-const About = () => {
+const About = ({ t }) => {
   const router = useRouter();
   const { openSection = 'project' } = router.query;
+  const titleTextArr = t('about_fc').split('|');
 
   return (
-    <Layout title="About">
+    <Layout title={t('about')}>
       <Header />
       <Content>
-        <PageTitle>About the Foodprint Calculator</PageTitle>
+        <PageTitle>
+          <span>{titleTextArr[0]}</span>
+          <span>{titleTextArr[1]}</span>
+        </PageTitle>
         <Card>
-          <AboutSection title="The project" isOpen={openSection === 'project'}>
-            <p>The Foodprint Calculator determines how our meals impact the environment.</p>
-            <CardTitle sub>Why?</CardTitle>
+          <AboutSection title={t('project')} isOpen={openSection === 'project'}>
+            <p>{t('fc_function')}</p>
+            <CardTitle sub>{t('why_question')}</CardTitle>
             <p>
-              Our global food production systems have huge impacts on the environment, yet it gets
-              very little attention in our growing environmental discussions, and concerns. The
-              Foodprint Calculator is here to change that. The mission is to help reduce our
-              environmental impact through our food choices.
+              {t('why_answer_1')} {t('why_answer_2')} {t('why_answer_3')}
             </p>
-            <CardTitle sub>How?</CardTitle>
+            <CardTitle sub>{t('how_question')}</CardTitle>
             <p>
-              We believe that consumers will choose environmentally friendlier meals when confronted
-              with the hard numbers behind each of their options. That's why we built the Foodprint
-              Calculator; a tool for restaurants, ready meals producers, recipe publishers, etc., to
-              evaluate the environmental impact of each of their meals, given a list of its
-              ingredients. The results can then be displayed for their customers.
+              {t('how_answer_1')} {t('how_answer_2')} {t('how_answer_3')}
             </p>
-            <p>The environmental impact reports consider four ways of impact:</p>
+            <p>{t('four_ways_impact')}</p>
             <ol>
               <li>
-                <span style={{ color: theme.colors.land }}>Land use</span>
+                <span style={{ color: theme.colors.land }}>{t('land_use')}</span>
                 <ul>
                   <li>
                     Our food production systems use{' '}
@@ -52,7 +50,7 @@ const About = () => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.ghg }}>Greenhouse gas emissions</span>
+                <span style={{ color: theme.colors.ghg }}>{t('ghg_emissions')}</span>
                 <ul>
                   <li>
                     Our food production systems are responsible for{' '}
@@ -64,7 +62,7 @@ const About = () => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.water }}>Water withdrawals</span>
+                <span style={{ color: theme.colors.water }}>{t('water_withdrawals')}</span>
                 <ul>
                   <li>
                     Our food production systems are responsible for{' '}
@@ -76,7 +74,7 @@ const About = () => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.eutro }}>Eutrophying emissions</span>
+                <span style={{ color: theme.colors.eutro }}>{t('eutrophying_emissions')}</span>
                 <ul>
                   <li>
                     Our food production systems' runoff of nitrogen and other nutrients are{' '}
@@ -281,4 +279,8 @@ const About = () => {
   );
 };
 
-export default About;
+About.getInitialProps = async () => ({
+  namespacesRequired: ['common', 'about'],
+});
+
+export default withTranslation('about')(About);

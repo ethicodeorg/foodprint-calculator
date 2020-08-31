@@ -1,0 +1,19 @@
+{
+  "about_fc": "About FUTURE OF FOOD",
+  "about": "About",
+  "project": "The project",
+  "fc_function": "FUTURE OF FOOD determines how our meals impact the environment.",
+  "why_question": "Why?",
+  "why_answer_1": "Our global food production systems have huge impacts on the environment, yet it gets very little attention in our ever growing environmental discussions, and concerns.",
+  "why_answer_2": "FUTURE OF FOOD is here to change that.",
+  "why_answer_3": "The mission is to help reduce our environmental impact through our food choices.",
+  "how_question": "How?",
+  "how_answer_1": "We believe that consumers will choose environmentally friendlier meals when confronted with the hard numbers behind each of their options.",
+  "how_answer_2": "That's why we built FUTURE OF FOOD; a tool for restaurants, ready meals producers, recipe publishers, etc., to evaluate the environmental impact of each of their meals, given a list of its ingredients.",
+  "how_answer_3": "The results can then be displayed for their customers.",
+  "four_ways_impact": "The environmental impact reports consider four ways of impact:",
+  "land_use": "Land use",
+  "ghg_emissions": "Greenhouse gas emissions",
+  "water_withdrawals": "Water withdrawals",
+  "eutrophying_emissions": "Eutrophying emissions"
+}

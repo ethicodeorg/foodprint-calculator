@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import { Link } from '../i18n';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { useUser } from '../lib/hooks';

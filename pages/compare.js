@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';

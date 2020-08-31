@@ -10,7 +10,7 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { Link } from '../i18n';
 
 const Pies = ({ meal, numberOfServings, mealTitle }) => {
   let html2canvas;

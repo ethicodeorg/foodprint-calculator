@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Link, Router } from '../i18n';
 import Select from 'react-select';
 import { FaTimes, FaCheck } from 'react-icons/fa';
 import { useUser } from '../lib/hooks';
@@ -17,7 +16,6 @@ import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
 
 const UserPage = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
@@ -29,7 +27,7 @@ const UserPage = () => {
 
   useEffect(() => {
     // redirect to home if user is logger out
-    if (!user) router.replace('/');
+    if (!user) Router.replace('/');
   }, [user]);
 
   const handleLogout = async () => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '../i18n';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { FaCalculator } from 'react-icons/fa';
@@ -27,7 +27,7 @@ const MealsPage = ({
   emptyMessage,
   removeMeal,
   comparisons,
-  query,
+  queries,
   isValidating,
   mutate,
   addMealToCompare,
@@ -125,7 +125,7 @@ const MealsPage = ({
           </Button>
         </div>
       )}
-      {router.route === '/meals' && <Filters query={query} />}
+      {router.route === '/meals' && <Filters queries={queries} />}
       {router.route === '/compare' && (
         <div className="select-container">
           <Select

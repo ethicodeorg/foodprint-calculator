@@ -7,6 +7,9 @@ const PageTitle = ({ children }) => (
 
     <style jsx>{`
       h3 {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
         margin: 120px 0 0;
         padding: 0 20px;
         font-size: 32px;

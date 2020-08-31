@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
+import { Router } from '../i18n';
 import { useUser } from '../lib/hooks';
 import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';
 import { setUserCookie } from '../utils/userCookie';
@@ -13,7 +13,6 @@ import UserForm from '../components/UserForm';
 import LoadingOnTop from '../components/LoadingOnTop';
 
 const SignupPage = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
@@ -34,7 +33,7 @@ const SignupPage = () => {
       return;
     }
 
-    router.replace('/check-email');
+    Router.replace('/check-email');
   };
 
   useEffect(() => {
