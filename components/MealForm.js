@@ -35,7 +35,7 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const MealForm = ({ id, foodData, transportData }) => {
+const MealForm = ({ id, foodData, transportData, t }) => {
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const localStorageMeals = getLocalStorageMeals();
@@ -56,25 +56,25 @@ const MealForm = ({ id, foodData, transportData }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [isAddingTransport, setIsAddingTransport] = useState(false);
   const initialUnits = [
-    { value: 'g', label: 'Grams (g)' },
-    { value: 'kg', label: 'Kilograms (kg)' },
-    { value: 'oz', label: 'Ounces (oz)' },
-    { value: 'lbs', label: 'Pounds (lbs)' },
+    { value: 'g', label: t('g') },
+    { value: 'kg', label: t('kg') },
+    { value: 'oz', label: t('oz') },
+    { value: 'lbs', label: t('lbs') },
   ];
   const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
   const distanceUnitOptions = [
-    { value: 'km', label: 'Kilometers (km)' },
-    { value: 'mi', label: 'Miles (mi)' },
+    { value: 'km', label: t('km') },
+    { value: 'mi', label: t('mi') },
   ];
   const transportModeOptions = [
-    { value: 'road', label: 'Road Transport' },
-    { value: 'rail', label: 'Rail Transport' },
-    { value: 'water', label: 'Sea / Inland Water Transport' },
-    { value: 'air', label: 'Air Transport' },
+    { value: 'road', label: t('road') },
+    { value: 'rail', label: t('rail') },
+    { value: 'water', label: t('water') },
+    { value: 'air', label: t('air') },
   ];
   const transportTypeOptions = [
-    { value: 'ambient', label: 'Ambient transport' },
-    { value: 'temperatureControlled', label: 'Temperature-controlled transport' },
+    { value: 'ambient', label: t('ambient') },
+    { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
   const [amountUnit, setAmountUnit] = useState(amountUnitOptions[0].value);
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
@@ -85,7 +85,7 @@ const MealForm = ({ id, foodData, transportData }) => {
       foodOptions.push({
         key: foodData[i].key,
         value: `${foodData[i].key}${j}`,
-        label: foodData[i].entities[j].label,
+        label: t(foodData[i].entities[j].label),
         averageWeight: foodData[i].entities[j].averageWeight,
         gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
         factor: foodData[i].entities[j].factor,
@@ -98,7 +98,7 @@ const MealForm = ({ id, foodData, transportData }) => {
   for (let i = 0; i < 10; i++) {
     numberOfServingsOptions.push({
       value: i + 1,
-      label: `Serves ${i + 1} ${i === 0 ? 'person' : 'people'}`,
+      label: i === 0 ? t('serves_1') : t('serves').replace('|number|', i + 1),
     });
   }
   const [numberOfServings, setNumberOfServings] = useState(
@@ -228,7 +228,11 @@ const MealForm = ({ id, foodData, transportData }) => {
       },
       ghgEmissions: {
         values: ghgEmissionBreakdown,
-        value: food.ghgEmissions.value * amountInKilos + transportEmissions,
+        value:
+          food.ghgEmissions.value * amountInKilos +
+          (transportEmissions
+            ? transportEmissions * amountInKilos
+            : food.ghgEmissions.values.transport * amountInKilos),
         unit: food.ghgEmissions.unit,
       },
       eutrophyingEmissions: {
@@ -258,7 +262,7 @@ const MealForm = ({ id, foodData, transportData }) => {
     if (val.averageWeight) {
       // Don't add it if it's already there
       if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
-        unitsToAdd.push({ value: 'qty', label: 'Quantity (qty)' });
+        unitsToAdd.push({ value: 'qty', label: t('qty') });
       }
     } else {
       unitsToRemove.push('qty');
@@ -269,10 +273,10 @@ const MealForm = ({ id, foodData, transportData }) => {
       if (!amountUnitOptions.find((unit) => unit.value === 'tsp')) {
         unitsToAdd = [
           ...unitsToAdd,
-          { value: 'tsp', label: 'Teaspoons (5 mL)' },
-          { value: 'tbsp', label: 'Tablespoons (15 mL)' },
-          { value: 'cups', label: 'Cups (250 mL)' },
-          { value: 'ltr', label: 'Liters (L)' },
+          { value: 'tsp', label: t('tsp') },
+          { value: 'tbsp', label: t('tbsp') },
+          { value: 'cups', label: t('cups') },
+          { value: 'ltr', label: t('ltr') },
         ];
       }
     } else {
@@ -289,13 +293,13 @@ const MealForm = ({ id, foodData, transportData }) => {
     <Fragment>
       <Header />
       <Content>
-        <PageTitle>{id ? 'Edit meal' : 'New Meal Calculation'}</PageTitle>
+        <PageTitle>{id ? t('edit_meal') : t('new_meal')}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card>
           <div className="select-container number-of-servings-select">
             <Select
               value={numberOfServings}
-              placeholder="Number of servings"
+              placeholder={t('no_of_servings')}
               onChange={(val) => setNumberOfServings(val)}
               options={numberOfServingsOptions}
               instanceId="number-of-servings"
@@ -307,12 +311,13 @@ const MealForm = ({ id, foodData, transportData }) => {
             ingredients={ingredients}
             deleteIngredient={deleteIngredient}
             numberOfServings={numberOfServings.value}
+            t={t}
           />
           <Separator />
           {isAdding ? (
             <Card inner>
               <div className="close-container">
-                <Tooltip title="Close" placement="left" arrow>
+                <Tooltip title={t('cancel')} placement="left" arrow>
                   <button
                     className="close-button"
                     onClick={() => {
@@ -328,7 +333,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                 <div className="select-container ingredient-select">
                   <Select
                     value={selectedIngredient}
-                    placeholder="Ingredient"
+                    placeholder={t('ingredient')}
                     onChange={(val) => {
                       setSelectedIngredient(val);
                       changeUnitOptions(val);
@@ -339,7 +344,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                 </div>
                 <input
                   className="amount-input"
-                  placeholder="Amount"
+                  placeholder={t('amount')}
                   type="number"
                   name="amount"
                   value={amount}
@@ -348,7 +353,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                 <div className="select-container ingredient-unit">
                   <Select
                     value={amountUnit.value}
-                    placeholder="Unit"
+                    placeholder={t('unit')}
                     onChange={(val) => setAmountUnit(val.value)}
                     options={amountUnitOptions}
                     instanceId="amount-unit"
@@ -360,7 +365,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                   <div className="select-container transport-mode-select">
                     <Select
                       value={transportMode.value}
-                      placeholder="Transport mode"
+                      placeholder={t('transport_mode')}
                       onChange={(val) => setTransportMode(val.value)}
                       options={transportModeOptions}
                       instanceId="transport-mode"
@@ -369,7 +374,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                   <div className="select-container transport-type-select">
                     <Select
                       value={transportType.value}
-                      placeholder="Transport type"
+                      placeholder={t('transport_type')}
                       onChange={(val) => setTransportType(val.value)}
                       options={transportTypeOptions}
                       instanceId="transport-type"
@@ -377,7 +382,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                   </div>
                   <input
                     className="distance-input"
-                    placeholder="Distance"
+                    placeholder={t('distance')}
                     type="number"
                     name="distance"
                     value={distance}
@@ -386,7 +391,7 @@ const MealForm = ({ id, foodData, transportData }) => {
                   <div className="select-container transport-unit-select">
                     <Select
                       value={distanceUnit.value}
-                      placeholder="Unit"
+                      placeholder={t('unit')}
                       onChange={(val) => setDistanceUnit(val.value)}
                       options={distanceUnitOptions}
                       instanceId="distance-unit"
@@ -395,15 +400,10 @@ const MealForm = ({ id, foodData, transportData }) => {
                 </div>
               ) : (
                 <div className="optional-fields">
-                  <Tooltip
-                    title="If transport is not provided, the average transport emissions for the selected
-                    ingredient will be used"
-                    placement="right"
-                    arrow
-                  >
+                  <Tooltip title={t('transport_not_provided')} placement="right" arrow>
                     <div className="add-transport-button-container">
                       <Button clear onClick={() => setIsAddingTransport(true)}>
-                        Add Transport (optional)
+                        {t('add_transport_optional')}
                       </Button>
                     </div>
                   </Tooltip>
@@ -412,20 +412,20 @@ const MealForm = ({ id, foodData, transportData }) => {
               <div className="add-button-container">
                 <Link href="/about?openSection=how-to-use">
                   <a target="_blank" className="instructions">
-                    How to use
+                    {t('how_to_use')}
                     <span className="new-tab-icon">
                       <FaExternalLinkAlt />
                     </span>
                   </a>
                 </Link>
                 <Button onClick={() => addIngredient()} disabled={!selectedIngredient || !amount}>
-                  Add
+                  {t('add')}
                 </Button>
               </div>
             </Card>
           ) : (
             <div className="add-ingredient-container">
-              <Button onClick={() => setIsAdding(true)}>+ Add Ingredient</Button>
+              <Button onClick={() => setIsAdding(true)}>+ {t('add_ingredient')}</Button>
             </div>
           )}
         </Card>
@@ -435,6 +435,7 @@ const MealForm = ({ id, foodData, transportData }) => {
               meal={getTotalByCategory(ingredients, numberOfServings.value)}
               numberOfServings={numberOfServings.value}
               mealTitle={mealName}
+              t={t}
             />
           </Card>
         )}
@@ -443,7 +444,7 @@ const MealForm = ({ id, foodData, transportData }) => {
             type="text"
             name="meal-name"
             className="meal-input"
-            placeholder="Meal name"
+            placeholder={t('meal_name')}
             value={mealName}
             onChange={(e) => setMealName(e.target.value)}
           />
@@ -453,7 +454,7 @@ const MealForm = ({ id, foodData, transportData }) => {
             rows="4"
             cols="50"
             className="about-meal-input"
-            placeholder="About meal (optional)"
+            placeholder={t('about_meal_optional')}
             value={aboutMeal}
             onChange={(e) => setAboutMeal(e.target.value)}
           />
@@ -461,14 +462,14 @@ const MealForm = ({ id, foodData, transportData }) => {
             type="text"
             name="meal-link"
             className="link-input"
-            placeholder="Link to recipe (optional)"
+            placeholder={t('link_to_recipe_optional')}
             value={mealLink}
             onChange={(e) => setMealLink(e.target.value)}
           />
         </Card>
         <div className="button-container">
           <Button onClick={() => Router.push('/mymeals')} primary clear>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             onClick={() => saveMeal()}
@@ -476,7 +477,7 @@ const MealForm = ({ id, foodData, transportData }) => {
             primary
             animate
           >
-            Save
+            {t('save')}
           </Button>
         </div>
 

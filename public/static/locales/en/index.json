@@ -1,7 +1,8 @@
 {
   "future_begins_now": "The Future Begins Now",
+  "real_price_of_food": "The Real Price Of Food",
   "calculate_environmental_footprint": "Calculate |the environmental foodprint| of your meals",
-  "main_function": "FUTURE OF FOOD is a foodprint calculator; it determines the environmental impact of meals, given a list of their ingredients.",
+  "main_function": "The Foodprint Calculator determines the environmental impact of meals, with regards to land use, greenhouse gas emissions, water withdrawals and eutrophying emissions.",
   "this_is_how": "This is how.",
   "lets_calculate": "Let's calculate"
 }

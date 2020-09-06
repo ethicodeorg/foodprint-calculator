@@ -20,7 +20,7 @@ import FadingIcons from './FadingIcons';
 import Icelandic from '../public/iceland-flag.svg';
 import English from '../public/united-kingdom-flag.svg';
 
-const Header = ({ i18n, t }) => {
+const Header = ({ t, i18n }) => {
   const { language, changeLanguage } = i18n;
   const languageOptions = [
     { value: 'en', label: 'English' },
@@ -96,8 +96,13 @@ const Header = ({ i18n, t }) => {
         <a className="link home">
           {getGlobe()}
           <div className="logo-container">
-            <div className="future">FUTURE OF</div>
-            <div className="food">FOOD</div>
+            {language === 'en' && (
+              <Fragment>
+                <div className="future">FOODPRINT</div>
+                <div className="food">CALCULATOR</div>
+              </Fragment>
+            )}
+            {language === 'is' && <div className="spori">SPORI</div>}
           </div>
         </a>
       </Link>
@@ -261,8 +266,11 @@ const Header = ({ i18n, t }) => {
           line-height: 16px;
         }
         .food {
-          font-size: 26px;
-          line-height: 20px;
+          font-size: 13px;
+          line-height: 15px;
+        }
+        .spori {
+          font-size: 30px;
         }
         .language-container {
           display: flex;
@@ -375,4 +383,4 @@ const Header = ({ i18n, t }) => {
   );
 };
 
-export default withTranslation()(Header);
+export default withTranslation('common')(Header);

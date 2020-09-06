@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from '../i18n';
+import { Link, withTranslation } from '../i18n';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { useUser } from '../lib/hooks';
@@ -13,13 +13,11 @@ import Card from '../components/Card';
 import UserForm from '../components/UserForm';
 import LoadingOnTop from '../components/LoadingOnTop';
 
-const LoginPage = () => {
+const LoginPage = ({ t }) => {
   const router = useRouter();
   const { reference } = router.query;
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState(
-    reference === 'verify-email' ? 'Please log in to verify your email' : ''
-  );
+  const [errorMsg, setErrorMsg] = useState(reference === 'verify-email' ? t('log_in_verify') : '');
   const [user, { mutate }] = useUser();
 
   useEffect(() => {
@@ -63,17 +61,17 @@ const LoginPage = () => {
       mutate({ user: response.user });
       setUserCookie(document, response.user._id);
     } else {
-      setErrorMsg('Incorrect username or password. Try again!');
+      setErrorMsg(t('incorrect_credentials'));
     }
 
     setIsLoading(false);
   }
 
   return (
-    <Layout title="Log in">
+    <Layout title={t('log_in')} t={t}>
       <Header />
       <Content>
-        <PageTitle>Log in</PageTitle>
+        <PageTitle>{t('log_in')}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
           <UserForm
@@ -82,8 +80,9 @@ const LoginPage = () => {
             isLogin
             showPassword
             showForgotPassword
-            buttonText="Log in"
-            passwordPlaceholder="Password"
+            buttonText={t('log_in')}
+            passwordPlaceholder={t('password')}
+            t={t}
           />
         </Card>
       </Content>
@@ -91,4 +90,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default withTranslation('common')(LoginPage);

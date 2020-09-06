@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { FaDivide } from 'react-icons/fa';
+import { withTranslation } from '../../i18n';
 import { useUser } from '../../lib/hooks';
 import { getLocalStorageMeals } from '../../utils/localStorage';
 import Meal from '../../components/Meal';
@@ -12,17 +13,17 @@ import Header from '../../components/Header';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const MealPage = () => {
+const MealPage = ({ t }) => {
   const router = useRouter();
   const { id } = router.query;
   const { data, error } = useSWR(`/api/meals?id=${id}`, fetcher);
   const meal = data?.meals[0];
 
   return (
-    <Layout title="Meal">
+    <Layout title={t('meal')} t={t}>
       <Fragment>
         <Header />
-        <Content>{meal ? <Meal key={meal._id} meal={meal} /> : <LoadingOnTop />}</Content>
+        <Content>{meal ? <Meal key={meal._id} meal={meal} t={t} /> : <LoadingOnTop />}</Content>
       </Fragment>
       <style jsx>{`
         .loading-container {
@@ -35,4 +36,4 @@ const MealPage = () => {
   );
 };
 
-export default MealPage;
+export default withTranslation('common')(MealPage);

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
-import { Link } from '../i18n';
-import { withTranslation } from '../i18n';
+import { Link, withTranslation } from '../i18n';
+import { splitTranslationWithLink } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -10,24 +10,24 @@ import Button from '../components/Button';
 import theme from '../styles/theme';
 
 const Index = ({ t }) => {
-  const calculateTextArr = t('calculate_environmental_footprint').split('|');
+  const calculateText = splitTranslationWithLink(t('calculate_environmental_footprint'));
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
     document.cookie = 'meals=;';
   });
 
   return (
-    <Layout>
+    <Layout t={t}>
       <Header />
       <div className="front-page">
-        <h1>{t('future_begins_now')}</h1>
+        <h1>{t('real_price_of_food')}</h1>
         <h3>
           <span className="calc-container">
             <FaCalculator />
           </span>
-          {calculateTextArr[0]}
-          <span className="environmental">{calculateTextArr[1]}</span>
-          {calculateTextArr[2]}
+          {calculateText.beforeLink}
+          <span className="environmental">{calculateText.linkText}</span>
+          {calculateText.afterLink}
           <span className="utensils-container">
             <FaUtensils />
           </span>
@@ -90,7 +90,8 @@ const Index = ({ t }) => {
         h1 {
           display: flex;
           flex-wrap: wrap;
-          font-size: 56px;
+          max-width: 800px;
+          font-size: 50px;
           font-weight: normal;
           margin-top: 120px;
         }
@@ -136,7 +137,7 @@ const Index = ({ t }) => {
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .front-page {
-            padding: 100px;
+            padding: 60px 200px;
           }
           .button-container {
             margin-top: 60px;

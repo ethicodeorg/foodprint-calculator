@@ -4,25 +4,28 @@ import CardTitle from './CardTitle';
 import theme from '../styles/theme';
 import { FaTrash } from 'react-icons/fa';
 
-const Ingredients = ({ ingredients, deleteIngredient, numberOfServings }) => (
+const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => (
   <div className="ingredients">
-    <CardTitle>Ingredients</CardTitle>
+    <CardTitle>{t('ingredients')}</CardTitle>
     {ingredients.map((ingredient, index) => {
       const transportString = ingredient.distance
-        ? `Transported ${ingredient.distance} ${ingredient.distanceUnit} by ${ingredient.transportMode}`
+        ? t('transported_text')
+            .replace('|distance|', ingredient.distance)
+            .replace('|distanceUnit|', ingredient.distanceUnit)
+            .replace('|transportMode|', t(ingredient.transportMode))
         : '';
       const amountString = `${ingredient.amount} ${
-        ingredient.amountUnit === 'qty' ? '' : ingredient.amountUnit
+        ingredient.amountUnit === 'qty' ? '' : t(`${ingredient.amountUnit}_short`)
       }`;
 
       return (
         <div className="ingredient" key={index}>
           <div className="ingredient-basic">
-            {`${amountString} ${ingredient.label}`}
+            {`${amountString} ${t(ingredient.label)}`}
             <div className="transport">{transportString}</div>
           </div>
           <div className="pies-container">
-            <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} />
+            <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} t={t} />
           </div>
           {deleteIngredient && (
             <Tooltip title="Remove ingredient" placement="left" arrow>

@@ -1,13 +1,13 @@
-import { Link } from '../i18n';
+import { Link, withTranslation } from '../i18n';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 import { FaAt, FaCalculator, FaCheckCircle } from 'react-icons/fa';
 
-const EmailVerified = () => {
+const EmailVerified = ({ t }) => {
   return (
-    <Layout title="Email verified">
+    <Layout title={t('email_verified')} t={t}>
       <Header />
       <div className="email-verified">
         <div className="icons">
@@ -18,12 +18,12 @@ const EmailVerified = () => {
             <FaCheckCircle />
           </span>
         </div>
-        <div className="email-verified-text">Congratulations, your email has been verified!</div>
+        <div className="email-verified-text">{t('email_verified_text')}</div>
         <div className="button-container">
           <Button primary animate noPad>
             <Link href="/newmeal">
               <a className="lets-calculate">
-                Let's Calculate
+                {t('lets_calculate')}
                 <span className="calculator-container">
                   <FaCalculator />
                 </span>
@@ -89,4 +89,4 @@ const EmailVerified = () => {
   );
 };
 
-export default EmailVerified;
+export default withTranslation('common')(EmailVerified);

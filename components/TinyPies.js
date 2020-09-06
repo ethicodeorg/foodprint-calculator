@@ -1,7 +1,7 @@
 import Pie from '../components/Pie';
 import { getIngredientPieData } from '../utils/pieUtils';
 
-const TinyPies = ({ ingredient, numberOfServings }) => {
+const TinyPies = ({ ingredient, numberOfServings, t }) => {
   const pieData = getIngredientPieData(ingredient, numberOfServings);
 
   return pieData.map((category, cIndex) => {
@@ -25,12 +25,12 @@ const TinyPies = ({ ingredient, numberOfServings }) => {
       unit: unit,
       color: color,
     };
-    const percentageString = `${((total / rda) * 100).toFixed(2)}% RDA`;
+    const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
 
     return extraPies
       .concat(lastPie)
       .map((pie, pIndex) => (
-        <Pie key={pIndex} category={pie} isTiny label={`${name}: ${percentageString}`} />
+        <Pie key={pIndex} category={pie} isTiny label={`${t(name)}: ${percentageString}`} />
       ));
   });
 };

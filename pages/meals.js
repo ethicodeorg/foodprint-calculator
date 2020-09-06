@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { withTranslation } from '../i18n';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Meals = () => {
+const Meals = ({ t }) => {
   const router = useRouter();
   const { visibility, user, search, sortBy } = router.query;
   let queryString = `?visibility=${visibility || 'public'}&sortBy=${sortBy || 'landUse'}`;
@@ -27,19 +28,20 @@ const Meals = () => {
 
   const { data, error } = useSWR(`/api/meals${queryString}`, fetcher);
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>{t('error_failed')}</div>;
 
   return (
-    <Layout title="All Meals">
+    <Layout title={t('all_meals')} t={t}>
       <Header />
       <MealsPage
         meals={data?.meals}
-        title="All Meals"
-        emptyMessage="Could not load meals at this time"
+        title={t('all_meals')}
+        emptyMessage={t('error_no_meals')}
         queries={queries}
+        t={t}
       />
     </Layout>
   );
 };
 
-export default Meals;
+export default withTranslation('common')(Meals);

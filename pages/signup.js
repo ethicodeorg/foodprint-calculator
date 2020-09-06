@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Router } from '../i18n';
+import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';
 import { setUserCookie } from '../utils/userCookie';
@@ -12,7 +12,7 @@ import PageTitle from '../components/PageTitle';
 import UserForm from '../components/UserForm';
 import LoadingOnTop from '../components/LoadingOnTop';
 
-const SignupPage = () => {
+const SignupPage = ({ t }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
@@ -27,9 +27,8 @@ const SignupPage = () => {
     setIsLoading(false);
 
     if (response.status !== 201) {
-      setErrorMsg(
-        `We encountered a problem when trying to send an email to ${user.email}. Please contact support.`
-      );
+      setErrorMsg(t('email_error').replace('|email|', user.email));
+
       return;
     }
 
@@ -88,10 +87,10 @@ const SignupPage = () => {
   };
 
   return (
-    <Layout title="Sign up">
+    <Layout title={t('sign_up')} t={t}>
       <Header />
       <Content>
-        <PageTitle>Sign up</PageTitle>
+        <PageTitle>{t('sign_up')}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
           <UserForm
@@ -101,8 +100,9 @@ const SignupPage = () => {
             showPassword
             showRetypedPassword
             showType
-            buttonText="Sign up"
-            passwordPlaceholder="Create a password"
+            buttonText={t('sign_up')}
+            passwordPlaceholder={t('create_password')}
+            t={t}
           />
         </Card>
       </Content>
@@ -110,4 +110,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default withTranslation('common')(SignupPage);

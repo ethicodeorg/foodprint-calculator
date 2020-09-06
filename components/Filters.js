@@ -7,9 +7,9 @@ import { FaSearch } from 'react-icons/fa';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Filters = ({ queries }) => {
+const Filters = ({ queries, t }) => {
   const { data, error } = useSWR('/api/users?publicOnly=true', fetcher);
-  const userFilterOptions = [{ value: 'all', label: 'All owners' }].concat(
+  const userFilterOptions = [{ value: 'all', label: t('all_owners') }].concat(
     data?.users.map((user) => {
       return {
         value: user._id,
@@ -21,10 +21,10 @@ const Filters = ({ queries }) => {
     userFilterOptions.find((option) => option?.value === queries.user) || userFilterOptions[0]
   );
   const sortByOptions = [
-    { value: 'landUse', label: 'Sort by land use' },
-    { value: 'ghgEmissions', label: 'Sort by greenhouse gas emissions' },
-    { value: 'waterWithdrawals', label: 'Sort by water withdrawals' },
-    { value: 'eutrophyingEmissions', label: 'Sort by eutrophying emissions' },
+    { value: 'landUse', label: t('sort_by_land') },
+    { value: 'ghgEmissions', label: t('sort_by_ghg') },
+    { value: 'waterWithdrawals', label: t('sort_by_water') },
+    { value: 'eutrophyingEmissions', label: t('sort_by_eutro') },
   ];
   const [sortBy, setSortBy] = useState(
     sortByOptions.find((option) => option.value === queries.sortBy) || sortByOptions[0]
@@ -60,7 +60,7 @@ const Filters = ({ queries }) => {
       <div className="select-container user-select">
         <Select
           value={userFilter}
-          placeholder="All owners"
+          placeholder={t('all_owners')}
           onChange={(val) => {
             setUserFilter(val);
             Router.push({
@@ -85,7 +85,7 @@ const Filters = ({ queries }) => {
             id="search"
             type="text"
             name="search"
-            placeholder="Search"
+            placeholder={t('search')}
             className="search-input"
             value={searchTerm || ''}
             onChange={(e) => {
@@ -104,7 +104,7 @@ const Filters = ({ queries }) => {
       <div className="select-container sort-select">
         <Select
           value={sortBy}
-          placeholder="Sort by"
+          placeholder={t('sort_by')}
           onChange={(val) => {
             setSortBy(val);
             Router.push({
@@ -175,7 +175,7 @@ const Filters = ({ queries }) => {
             margin: 0 20px;
           }
           .select-container {
-            width: 180px;
+            width: 200px;
             margin: 0 20px;
           }
         }

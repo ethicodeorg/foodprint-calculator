@@ -8,7 +8,6 @@ import QRCode from 'qrcode.react';
 import { Router } from '../i18n';
 import { removeMealFromComparisons, addMealToComparisons } from '../redux/actions/pageActions';
 import { useUser } from '../lib/hooks';
-import { userTypeMap } from '../utils/constants';
 import Card from './Card';
 import CardTitle from './CardTitle';
 import ExternalLink from './ExternalLink';
@@ -18,11 +17,11 @@ import Separator from './Separator';
 import MealLink from './MealLink';
 import theme from '../styles/theme';
 
-const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToCompare }) => {
+const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToCompare, t }) => {
   const router = useRouter();
   const [user] = useUser();
   const userSubtitle = `${meal?.user?.name || ''}${
-    meal?.user?.type && meal?.user?.type !== 'other' ? `, ${userTypeMap[meal?.user?.type]}` : ''
+    meal?.user?.type && meal?.user?.type !== 'other' ? `, ${t(meal?.user?.type)}` : ''
   }`;
 
   const removeFromComparison = (mealId) => {
@@ -71,7 +70,7 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
           </CardTitle>
           {router.route === '/mymeals' && !!user && (
             <Tooltip
-              title={meal.visibility === 'public' ? 'Make private' : 'Publish meal'}
+              title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
               placement="left"
               arrow
             >
@@ -86,14 +85,14 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
             </Tooltip>
           )}
           {router.route === '/compare' && (
-            <Tooltip title="Remove from comparison" placement="left" arrow>
+            <Tooltip title={t('remove_from_comparison')} placement="left" arrow>
               <button className="remove-button" onClick={() => removeFromComparison(meal._id)}>
                 <FaTimes />
               </button>
             </Tooltip>
           )}
           {router.route === '/meals' && !comparisons.includes(meal._id) && (
-            <Tooltip title="Add to compare" placement="left" arrow>
+            <Tooltip title={t('add_to_compare')} placement="left" arrow>
               <button className="add-button" onClick={() => addToComparison(meal._id)}>
                 <FaPlus />
               </button>
@@ -107,23 +106,25 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
             userSubtitle
           )}
         </div>
-        <p className="servings">{`Serves ${meal.numberOfServings} ${
-          meal.numberOfServings === 1 ? 'person' : 'people'
-        }`}</p>
-        {meal.about && <AboutMeal text={meal.about} />}
-        {meal.link && <ExternalLink href={meal.link}>Link to recipe </ExternalLink>}
-        <Pies meal={meal} numberOfServings={meal.numberOfServings} />
+        <p className="servings">
+          {meal.numberOfServings === 1
+            ? t('serves_1')
+            : t('serves').replace('|number|', meal.numberOfServings)}
+        </p>
+        {meal.about && <AboutMeal text={meal.about} t={t} />}
+        {meal.link && <ExternalLink href={meal.link}>{t('link_to_recipe')}</ExternalLink>}
+        <Pies meal={meal} numberOfServings={meal.numberOfServings} t={t} />
         {router.route === '/mymeals' && (
           <Fragment>
             <Separator />
             <div className="footer-button-container">
-              <Tooltip title="Delete meal" placement="right" arrow>
+              <Tooltip title={t('delete_meal')} placement="right" arrow>
                 <button className="delete-button" onClick={() => deleteMeal(meal)}>
                   <FaTrash />
                 </button>
               </Tooltip>
               <div className="right-footer">
-                <Tooltip title="Download QR code" placement="left" arrow>
+                <Tooltip title={t('download_qr')} placement="left" arrow>
                   <button className="download-button" onClick={() => downloadQRCode(meal)}>
                     <FaQrcode />
                     <span id={`qr-${meal._id}`} className="qr-code">
@@ -131,7 +132,7 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
                     </span>
                   </button>
                 </Tooltip>
-                <Tooltip title="Edit meal" placement="top" arrow>
+                <Tooltip title={t('edit_meal')} placement="top" arrow>
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
                       <FaEdit />

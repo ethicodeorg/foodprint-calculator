@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withTranslation } from '../i18n';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Content from '../components/Content';
@@ -7,7 +8,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import UserForm from '../components/UserForm';
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ t }) => {
   const [errorMsg, setErrorMsg] = useState('');
 
   async function onSubmit(e) {
@@ -15,12 +16,17 @@ const ForgotPassword = () => {
   }
 
   return (
-    <Layout title="Forgot password">
+    <Layout title={t('forgot_password')} t={t}>
       <Header />
       <Content>
-        <PageTitle>Forgot password</PageTitle>
+        <PageTitle>{t('forgot_password')}</PageTitle>
         <Card userForm>
-          <UserForm onSubmit={onSubmit} errorMsg={errorMsg} buttonText="Reset password" />
+          <UserForm
+            onSubmit={onSubmit}
+            errorMsg={errorMsg}
+            buttonText={t('reset_password')}
+            t={t}
+          />
         </Card>
       </Content>
 
@@ -33,4 +39,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default withTranslation('common')(ForgotPassword);

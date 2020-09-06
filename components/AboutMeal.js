@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import theme from '../styles/theme';
 import Button from './Button';
 
-const AboutMeal = ({ text }) => {
+const AboutMeal = ({ text, t }) => {
   const router = useRouter();
   const [expanded, setExpanded] = useState(router.route === '/meals/[id]');
 
@@ -12,7 +12,7 @@ const AboutMeal = ({ text }) => {
       {!expanded && (
         <div className="button-container">
           <Button clear small onClick={() => setExpanded(true)}>
-            See more
+            {t('see_more')}
           </Button>
         </div>
       )}

@@ -54,7 +54,7 @@ const VerifyEmail = () => {
   }, [user, error]);
 
   return (
-    <Layout title="Verify Email">
+    <Layout title={t('verify_email')} t={t}>
       <div className="verify-email">
         {errorMsg ? (
           <div className="icon-container">
@@ -66,7 +66,7 @@ const VerifyEmail = () => {
         ) : (
           <div className="verifying">
             <LoadingOnTop />
-            <div className="verify-email-text">Please wait while we verify your email</div>
+            <div className="verify-email-text">{t('verify_email_text')}</div>
           </div>
         )}
       </div>

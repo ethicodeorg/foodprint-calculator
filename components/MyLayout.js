@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { initGA, logPageView } from '../utils/analytics';
-import { FOODPRINT_CALCULATOR } from '../utils/constants';
+import { splitTranslationWithLink } from '../utils/translationUtils';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 
-const Layout = ({ children, title = '' }) => {
+const Layout = ({ children, title = '', t }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -13,7 +13,8 @@ const Layout = ({ children, title = '' }) => {
     }
     logPageView();
   });
-  const headTitle = title ? `${title} | ${FOODPRINT_CALCULATOR}` : FOODPRINT_CALCULATOR;
+  const headTitle = title ? `${title} | ${t('foodprint_calculator')}` : t('foodprint_calculator');
+  const poweredBy = splitTranslationWithLink(t('powered_by'));
 
   return (
     <div className="main">
@@ -31,7 +32,8 @@ const Layout = ({ children, title = '' }) => {
       {children}
       <div className="footer">
         <div>
-          Powered by <span className="ethicode">Ethicode</span>
+          {poweredBy.beforeLink}
+          <span className="ethicode">{poweredBy.linkText}</span>
         </div>
         <div>
           <ExternalLink href="http://ethicode.org/">ethicode.org</ExternalLink>
@@ -94,4 +96,5 @@ const Layout = ({ children, title = '' }) => {
     </div>
   );
 };
+
 export default Layout;
