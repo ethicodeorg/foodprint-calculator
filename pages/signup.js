@@ -12,7 +12,8 @@ import PageTitle from '../components/PageTitle';
 import UserForm from '../components/UserForm';
 import LoadingOnTop from '../components/LoadingOnTop';
 
-const SignupPage = ({ t }) => {
+const SignupPage = ({ t, i18n }) => {
+  const { language } = i18n;
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
@@ -22,7 +23,7 @@ const SignupPage = ({ t }) => {
     const response = await fetch('api/send-verify-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: user.name, email: user.email }),
+      body: JSON.stringify({ name: user.name, email: user.email, lang: language }),
     });
     setIsLoading(false);
 

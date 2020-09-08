@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
+import { withTranslation } from '../i18n';
 import { initGA, logPageView } from '../utils/analytics';
 import { splitTranslationWithLink } from '../utils/translationUtils';
 import theme from '../styles/theme';
@@ -97,4 +98,4 @@ const Layout = ({ children, title = '', t }) => {
   );
 };
 
-export default Layout;
+export default withTranslation('common')(Layout);

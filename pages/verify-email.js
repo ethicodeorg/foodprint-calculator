@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Router } from '../i18n';
+import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/MyLayout';
 import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
 
-const VerifyEmail = () => {
+const VerifyEmail = ({ t, i18n }) => {
+  const { language } = i18n;
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { error, mutate }] = useUser();
 
@@ -29,7 +30,7 @@ const VerifyEmail = () => {
       fetch('api/send-welcome-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: user.name, email: user.email }),
+        body: JSON.stringify({ name: user.name, email: user.email, lang: language }),
       });
     } else {
       setErrorMsg(await res.text());
@@ -88,4 +89,4 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+export default withTranslation('common')(VerifyEmail);
