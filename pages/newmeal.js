@@ -3,7 +3,7 @@ import MealForm from '../components/MealForm';
 import Layout from '../components/MyLayout';
 
 const NewMeal = ({ t }) => (
-  <Layout title="New Meal" t={t}>
+  <Layout title={t('new_meal')} t={t}>
     <MealForm t={t} />
   </Layout>
 );

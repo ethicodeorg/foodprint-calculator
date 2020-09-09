@@ -28,7 +28,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
             <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} t={t} />
           </div>
           {deleteIngredient && (
-            <Tooltip title="Remove ingredient" placement="left" arrow>
+            <Tooltip title={t('remove_ingredient')} placement="left" arrow>
               <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
                 <FaTrash />
               </button>
