@@ -8,4 +8,8 @@ const NewMeal = ({ t }) => (
   </Layout>
 );
 
+NewMeal.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(NewMeal);

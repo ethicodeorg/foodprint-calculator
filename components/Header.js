@@ -98,8 +98,8 @@ const Header = ({ t, i18n }) => {
           <div className="logo-container">
             {language === 'en' && (
               <Fragment>
-                <div className="future">FOODPRINT</div>
-                <div className="food">CALCULATOR</div>
+                <div className="foodprint">FOODPRINT</div>
+                <div className="calculator">CALCULATOR</div>
               </Fragment>
             )}
             {language === 'is' && <div className="spori">SPORI</div>}
@@ -261,11 +261,11 @@ const Header = ({ t, i18n }) => {
           padding-left: 10px;
           color: ${theme.colors.white};
         }
-        .future {
+        .foodprint {
           font-size: 14px;
           line-height: 16px;
         }
-        .food {
+        .calculator {
           font-size: 13px;
           line-height: 15px;
         }

@@ -28,7 +28,7 @@ const SignupPage = ({ t, i18n }) => {
     setIsLoading(false);
 
     if (response.status !== 201) {
-      setErrorMsg(t('email_error').replace('|email|', user.email));
+      setErrorMsg(t('email_error', { email: user.email }));
 
       return;
     }
@@ -110,5 +110,9 @@ const SignupPage = ({ t, i18n }) => {
     </Layout>
   );
 };
+
+SignupPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
 
 export default withTranslation('common')(SignupPage);

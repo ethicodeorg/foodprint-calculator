@@ -98,7 +98,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   for (let i = 0; i < 10; i++) {
     numberOfServingsOptions.push({
       value: i + 1,
-      label: i === 0 ? t('serves_1') : t('serves').replace('|number|', i + 1),
+      label: i === 0 ? t('serves_1') : t('serves', { number: i + 1 }),
     });
   }
   const [numberOfServings, setNumberOfServings] = useState(

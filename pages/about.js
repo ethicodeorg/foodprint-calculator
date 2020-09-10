@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { FaTractor, FaTint, FaSmog } from 'react-icons/fa';
 import { withTranslation } from '../i18n';
-import { splitTranslationWithLink } from '../utils/translationUtils';
+import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -15,18 +15,22 @@ import theme from '../styles/theme';
 const About = ({ t }) => {
   const router = useRouter();
   const { openSection = 'project' } = router.query;
-  const landUseText = splitTranslationWithLink(t('land_use_text'));
-  const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text'));
-  const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text'));
-  const eutrophyingEmissionsText = splitTranslationWithLink(t('eutrophying_emissions_text'));
-  const landUseRDA = splitTranslationWithLink(t('land_use_rda'));
-  const ghgEmissionsRDA = splitTranslationWithLink(t('ghg_emissions_rda'));
-  const waterWithdrawalsRDA = splitTranslationWithLink(t('water_withdrawals_rda'));
-  const eutrophyingEmissionsRDA = splitTranslationWithLink(t('eutrophying_emissions_rda'));
-  const storyText = splitTranslationWithLink(t('story_text'));
-  const dataText = splitTranslationWithLink(t('data_text_1'));
-  const beefDairyHerdsText = splitTranslationWithLink(t('beef_dairy_herds_text'));
-  const supportText = splitTranslationWithLink(t('support_text'));
+  const landUseText = splitTranslationWithLink(t('land_use_text', SPLITTER));
+  const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text', SPLITTER));
+  const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text', SPLITTER));
+  const eutrophyingEmissionsText = splitTranslationWithLink(
+    t('eutrophying_emissions_text', SPLITTER)
+  );
+  const landUseRDA = splitTranslationWithLink(t('land_use_rda', SPLITTER));
+  const ghgEmissionsRDA = splitTranslationWithLink(t('ghg_emissions_rda', SPLITTER));
+  const waterWithdrawalsRDA = splitTranslationWithLink(t('water_withdrawals_rda', SPLITTER));
+  const eutrophyingEmissionsRDA = splitTranslationWithLink(
+    t('eutrophying_emissions_rda', SPLITTER)
+  );
+  const storyText = splitTranslationWithLink(t('story_text', SPLITTER));
+  const dataText = splitTranslationWithLink(t('data_text_1', SPLITTER));
+  const beefDairyHerdsText = splitTranslationWithLink(t('beef_dairy_herds_text', SPLITTER));
+  const supportText = splitTranslationWithLink(t('support_text', SPLITTER));
 
   return (
     <Layout title={t('about')} t={t}>

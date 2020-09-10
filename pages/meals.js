@@ -44,4 +44,8 @@ const Meals = ({ t }) => {
   );
 };
 
+Meals.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(Meals);

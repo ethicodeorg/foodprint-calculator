@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
 import { Link, withTranslation } from '../i18n';
-import { splitTranslationWithLink } from '../utils/translationUtils';
+import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -10,7 +10,7 @@ import Button from '../components/Button';
 import theme from '../styles/theme';
 
 const Index = ({ t }) => {
-  const calculateText = splitTranslationWithLink(t('calculate_environmental_footprint'));
+  const calculateText = splitTranslationWithLink(t('calculate_environmental_footprint', SPLITTER));
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
     document.cookie = 'meals=;';

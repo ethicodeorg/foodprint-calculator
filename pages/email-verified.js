@@ -89,4 +89,8 @@ const EmailVerified = ({ t }) => {
   );
 };
 
+EmailVerified.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(EmailVerified);

@@ -39,4 +39,8 @@ const ForgotPassword = ({ t }) => {
   );
 };
 
+ForgotPassword.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(ForgotPassword);

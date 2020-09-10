@@ -109,7 +109,7 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
         <p className="servings">
           {meal.numberOfServings === 1
             ? t('serves_1')
-            : t('serves').replace('|number|', meal.numberOfServings)}
+            : t('serves', { number: meal.numberOfServings })}
         </p>
         {meal.about && <AboutMeal text={meal.about} t={t} />}
         {meal.link && <ExternalLink href={meal.link}>{t('link_to_recipe')}</ExternalLink>}

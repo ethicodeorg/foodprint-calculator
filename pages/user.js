@@ -272,4 +272,8 @@ const UserPage = ({ t }) => {
   );
 };
 
+UserPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(UserPage);

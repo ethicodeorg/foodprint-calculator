@@ -1,7 +1,7 @@
 {
   "future_begins_now": "Framtíðin byrjar núna",
   "real_price_of_food": "Hið raunverulega verð matar",
-  "calculate_environmental_footprint": "Reiknaðu |umhverfisspor| máltíða þinna",
+  "calculate_environmental_footprint": "Reiknaðu {{link_start}}umhverfisspor{{link_end}} máltíða þinna",
   "main_function": "Spori ákvarðar umhverfisáhrif máltíða, hvað varðar landnotkun, losun gróðurhúsalofttegunda, vatnsnotkun og ofauðgun.",
   "this_is_how": "Svona virkar það.",
   "lets_calculate": "Búa til útreikning"

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import { withTranslation } from '../i18n';
 import { initGA, logPageView } from '../utils/analytics';
-import { splitTranslationWithLink } from '../utils/translationUtils';
+import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 
@@ -15,7 +15,7 @@ const Layout = ({ children, title = '', t }) => {
     logPageView();
   });
   const headTitle = title ? `${title} | ${t('foodprint_calculator')}` : t('foodprint_calculator');
-  const poweredBy = splitTranslationWithLink(t('powered_by'));
+  const poweredBy = splitTranslationWithLink(t('powered_by', SPLITTER));
 
   return (
     <div className="main">

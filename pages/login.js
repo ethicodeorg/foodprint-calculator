@@ -90,4 +90,8 @@ const LoginPage = ({ t }) => {
   );
 };
 
+LoginPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(LoginPage);

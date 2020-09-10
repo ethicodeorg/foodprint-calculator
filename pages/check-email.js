@@ -58,4 +58,8 @@ const CheckEmail = ({ t }) => {
   );
 };
 
+CheckEmail.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(CheckEmail);

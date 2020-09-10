@@ -9,10 +9,11 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
     <CardTitle>{t('ingredients')}</CardTitle>
     {ingredients.map((ingredient, index) => {
       const transportString = ingredient.distance
-        ? t('transported_text')
-            .replace('|distance|', ingredient.distance)
-            .replace('|distanceUnit|', ingredient.distanceUnit)
-            .replace('|transportMode|', t(ingredient.transportMode))
+        ? t('transported_text', {
+            distance: ingredient.distance,
+            distanceUnit: ingredient.distanceUnit,
+            transportMode: t(ingredient.transportMode),
+          })
         : '';
       const amountString = `${ingredient.amount} ${
         ingredient.amountUnit === 'qty' ? '' : t(`${ingredient.amountUnit}_short`)

@@ -31,4 +31,8 @@ const mapStateToProps = (state) => ({
   comparisons: state.comparisons,
 });
 
+Compare.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default connect(mapStateToProps)(withTranslation('common')(Compare));

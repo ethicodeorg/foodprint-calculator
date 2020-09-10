@@ -89,4 +89,8 @@ const VerifyEmail = ({ t, i18n }) => {
   );
 };
 
+VerifyEmail.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
 export default withTranslation('common')(VerifyEmail);
