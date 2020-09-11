@@ -2,9 +2,9 @@
   {
     "key": "app",
     "foods": [
-      { "label": "Apples", "averageWeight": 182, "gramsPerLiter": 460 },
+      { "label": "apples", "averageWeight": 182, "gramsPerLiter": 460 },
       {
-        "label": "Apples (dried)",
+        "label": "apples_dried",
         "averageWeight": 182,
         "gramsPerLiter": 460,
         "factor": 3.04878048780488
@@ -14,440 +14,440 @@
   {
     "key": "ban",
     "foods": [
-      { "label": "Bananas", "averageWeight": 151, "gramsPerLiter": 951 },
-      { "label": "Bananas (dried)", "averageWeight": 151, "gramsPerLiter": 951, "factor": 3.125 }
+      { "label": "bananas", "averageWeight": 151, "gramsPerLiter": 951 },
+      { "label": "bananas_dried", "averageWeight": 151, "gramsPerLiter": 951, "factor": 3.125 }
     ]
   },
   {
     "key": "bar",
-    "foods": [{ "label": "Barley", "gramsPerLiter": 845 }]
+    "foods": [{ "label": "barley", "gramsPerLiter": 845 }]
   },
   {
     "key": "bbh",
-    "foods": [{ "label": "Beef (beef herd)" }]
+    "foods": [{ "label": "beef_beef_herd" }]
   },
   {
     "key": "bdh",
-    "foods": [{ "label": "Beef (dairy herd)" }]
+    "foods": [{ "label": "beef_dairy_herd" }]
   },
   {
     "key": "bes",
-    "foods": [{ "label": "Beet Sugar", "gramsPerLiter": 845 }]
+    "foods": [{ "label": "beet_sugar", "gramsPerLiter": 845 }]
   },
   {
     "key": "ber",
     "foods": [
-      { "label": "Berries & Grapes" },
-      { "label": "Raisins", "factor": 3.59712230215827 },
-      { "label": "Blueberries", "gramsPerLiter": 626 },
-      { "label": "Blueberries (dried)", "gramsPerLiter": 626, "factor": 2.97619047619048 },
-      { "label": "Strawberries", "averageWeight": 18, "gramsPerLiter": 640 },
+      { "label": "berries_grapes" },
+      { "label": "raisins", "factor": 3.59712230215827 },
+      { "label": "blueberries", "gramsPerLiter": 626 },
+      { "label": "blueberries_dried", "gramsPerLiter": 626, "factor": 2.97619047619048 },
+      { "label": "strawberries", "averageWeight": 18, "gramsPerLiter": 640 },
       {
-        "label": "Strawberries (dried)",
+        "label": "strawberries_dried",
         "averageWeight": 18,
         "gramsPerLiter": 640,
         "factor": 3.57142857142857
       },
-      { "label": "Rasperries", "averageWeight": 4, "gramsPerLiter": 520 }
+      { "label": "rasperries", "averageWeight": 4, "gramsPerLiter": 520 }
     ]
   },
   {
     "key": "bra",
     "foods": [
-      { "label": "Brassicas" },
-      { "label": "Broccoli", "gramsPerLiter": 385 },
-      { "label": "Cauliflower", "gramsPerLiter": 452 },
-      { "label": "Cabbage", "gramsPerLiter": 376 },
-      { "label": "Choy sum", "gramsPerLiter": 359 },
-      { "label": "Rutabaga", "gramsPerLiter": 592 },
-      { "label": "Rutabaga (dried)", "gramsPerLiter": 592, "factor": 5.76368876080692 },
-      { "label": "Turnip", "gramsPerLiter": 232 },
-      { "label": "Turnip (dried)", "gramsPerLiter": 232, "factor": 7.93650793650794 },
-      { "label": "Mustard", "gramsPerLiter": 237 },
-      { "label": "Kale", "gramsPerLiter": 89 },
-      { "label": "Garden cress", "gramsPerLiter": 211 },
-      { "label": "Brussels sprouts", "gramsPerLiter": 359 },
-      { "label": "Spinach", "gramsPerLiter": 127 },
-      { "label": "Lettuce", "gramsPerLiter": 152 }
+      { "label": "brassicas" },
+      { "label": "broccoli", "gramsPerLiter": 385 },
+      { "label": "cauliflower", "gramsPerLiter": 452 },
+      { "label": "cabbage", "gramsPerLiter": 376 },
+      { "label": "choy_sum", "gramsPerLiter": 359 },
+      { "label": "rutabaga", "gramsPerLiter": 592 },
+      { "label": "rutabaga_dried", "gramsPerLiter": 592, "factor": 5.76368876080692 },
+      { "label": "turnip", "gramsPerLiter": 232 },
+      { "label": "turnip_dried", "gramsPerLiter": 232, "factor": 7.93650793650794 },
+      { "label": "mustard", "gramsPerLiter": 237 },
+      { "label": "kale", "gramsPerLiter": 89 },
+      { "label": "garden_cress", "gramsPerLiter": 211 },
+      { "label": "brussels_sprouts", "gramsPerLiter": 359 },
+      { "label": "spinach", "gramsPerLiter": 127 },
+      { "label": "lettuce", "gramsPerLiter": 152 }
     ]
   },
   {
     "key": "can",
     "foods": [
-      { "label": "Cane Sugar", "gramsPerLiter": 811 },
-      { "label": "Sugar", "gramsPerLiter": 811 }
+      { "label": "cane_sugar", "gramsPerLiter": 811 },
+      { "label": "sugar", "gramsPerLiter": 811 }
     ]
   },
   {
     "key": "cas",
-    "foods": [{ "label": "Cassava", "gramsPerLiter": 871 }]
+    "foods": [{ "label": "cassava", "gramsPerLiter": 871 }]
   },
   {
     "key": "che",
     "foods": [
-      { "label": "Cheese" },
-      { "label": "Cheese (feta)", "gramsPerLiter": 473 },
-      { "label": "Cheese (cheddar)", "gramsPerLiter": 478 },
-      { "label": "Cheese (mozzarella)", "gramsPerLiter": 478 },
-      { "label": "Cheese (swiss)", "gramsPerLiter": 473 },
-      { "label": "Cheese (jack)", "gramsPerLiter": 478 },
-      { "label": "Cheese (parmesan)", "gramsPerLiter": 423 },
-      { "label": "Cheese (ricotta)", "gramsPerLiter": 1048 }
+      { "label": "cheese" },
+      { "label": "cheese_feta", "gramsPerLiter": 473 },
+      { "label": "cheese_cheddar", "gramsPerLiter": 478 },
+      { "label": "cheese_mozzarella", "gramsPerLiter": 478 },
+      { "label": "cheese_swiss", "gramsPerLiter": 473 },
+      { "label": "cheese_jack", "gramsPerLiter": 478 },
+      { "label": "cheese_parmesan", "gramsPerLiter": 423 },
+      { "label": "cheese_ricotta", "gramsPerLiter": 1048 }
     ]
   },
   {
     "key": "cit",
     "foods": [
-      { "label": "Citrus Fruit" },
-      { "label": "Grapefruits", "gramsPerLiter": 972, "averageWeight": 241 },
-      { "label": "Lemons", "gramsPerLiter": 896, "averageWeight": 71 },
-      { "label": "Limes", "gramsPerLiter": 1023, "averageWeight": 44 },
-      { "label": "Oranges", "gramsPerLiter": 761, "averageWeight": 131 },
-      { "label": "Tangerines", "gramsPerLiter": 824, "averageWeight": 88 },
-      { "label": "Mandarines", "gramsPerLiter": 824, "averageWeight": 77 }
+      { "label": "citrus_fruit" },
+      { "label": "grapefruits", "gramsPerLiter": 972, "averageWeight": 241 },
+      { "label": "lemons", "gramsPerLiter": 896, "averageWeight": 71 },
+      { "label": "limes", "gramsPerLiter": 1023, "averageWeight": 44 },
+      { "label": "oranges", "gramsPerLiter": 761, "averageWeight": 131 },
+      { "label": "tangerines", "gramsPerLiter": 824, "averageWeight": 88 },
+      { "label": "mandarines", "gramsPerLiter": 824, "averageWeight": 77 }
     ]
   },
   {
     "key": "cof",
-    "foods": [{ "label": "Coffee (beans)", "gramsPerLiter": 423 }]
+    "foods": [{ "label": "coffee_beans", "gramsPerLiter": 423 }]
   },
   {
     "key": "cho",
     "foods": [
-      { "label": "Dark Chocolate", "gramsPerLiter": 1098 },
-      { "label": "Chocolate", "gramsPerLiter": 1098 }
+      { "label": "dark_chocolate", "gramsPerLiter": 1098 },
+      { "label": "chocolate", "gramsPerLiter": 1098 }
     ]
   },
   {
     "key": "egg",
-    "foods": [{ "label": "Eggs", "averageWeight": 56 }]
+    "foods": [{ "label": "eggs", "averageWeight": 56 }]
   },
   {
     "key": "fis",
     "foods": [
-      { "label": "Fish (farmed)" },
-      { "label": "Carp (farmed)" },
-      { "label": "Tilapia (farmed)" },
-      { "label": "Salmon (farmed)" },
-      { "label": "Catfish (farmed)" }
+      { "label": "fish_farmed" },
+      { "label": "carp_farmed" },
+      { "label": "tilapia_farmed" },
+      { "label": "salmon_farmed" },
+      { "label": "catfish_farmed" }
     ]
   },
   {
     "key": "gro",
     "foods": [
-      { "label": "Groundnuts", "gramsPerLiter": 617 },
-      { "label": "Peanuts", "gramsPerLiter": 617 }
+      { "label": "groundnuts", "gramsPerLiter": 617 },
+      { "label": "peanuts", "gramsPerLiter": 617 }
     ]
   },
   {
     "key": "lam",
-    "foods": [{ "label": "Lamb & Mutton" }]
+    "foods": [{ "label": "lamb_mutton" }]
   },
   {
     "key": "mai",
     "foods": [
-      { "label": "Maize", "gramsPerLiter": 613 },
-      { "label": "Corn", "gramsPerLiter": 613 },
-      { "label": "Corn (dried)", "gramsPerLiter": 613, "factor": 3.2626427406199 }
+      { "label": "maize", "gramsPerLiter": 613 },
+      { "label": "corn", "gramsPerLiter": 613 },
+      { "label": "corn_dried", "gramsPerLiter": 613, "factor": 3.2626427406199 }
     ]
   },
   {
     "key": "mil",
     "foods": [
-      { "label": "Milk", "gramsPerLiter": 1033 },
-      { "label": "Cows milk", "gramsPerLiter": 1033 },
-      { "label": "Goat milk", "gramsPerLiter": 1033 },
-      { "label": "Sheep milk", "gramsPerLiter": 1033 }
+      { "label": "milk", "gramsPerLiter": 1033 },
+      { "label": "cows_milk", "gramsPerLiter": 1033 },
+      { "label": "goat_milk", "gramsPerLiter": 1033 },
+      { "label": "sheep_milk", "gramsPerLiter": 1033 }
     ]
   },
   {
     "key": "nut",
     "foods": [
-      { "label": "Nuts" },
-      { "label": "Hazelnuts", "gramsPerLiter": 486 },
-      { "label": "Chestnuts", "gramsPerLiter": 613 },
-      { "label": "Almonds", "gramsPerLiter": 583 },
-      { "label": "Pecans", "gramsPerLiter": 418 },
-      { "label": "Pistachios", "gramsPerLiter": 520 },
-      { "label": "Walnuts", "gramsPerLiter": 495 },
-      { "label": "Brazil nuts", "gramsPerLiter": 562 }
+      { "label": "nuts" },
+      { "label": "hazelnuts", "gramsPerLiter": 486 },
+      { "label": "chestnuts", "gramsPerLiter": 613 },
+      { "label": "almonds", "gramsPerLiter": 583 },
+      { "label": "pecans", "gramsPerLiter": 418 },
+      { "label": "pistachios", "gramsPerLiter": 520 },
+      { "label": "walnuts", "gramsPerLiter": 495 },
+      { "label": "brazil_nuts", "gramsPerLiter": 562 }
     ]
   },
   {
     "key": "oat",
     "foods": [
-      { "label": "Oatmeal", "gramsPerLiter": 352 },
-      { "label": "Ground oats", "gramsPerLiter": 352 },
-      { "label": "Steel-cut oats", "gramsPerLiter": 352 },
-      { "label": "Rolled oats", "gramsPerLiter": 352 }
+      { "label": "oatmeal", "gramsPerLiter": 352 },
+      { "label": "ground_oats", "gramsPerLiter": 352 },
+      { "label": "steel_cut_oats", "gramsPerLiter": 352 },
+      { "label": "rolled_oats", "gramsPerLiter": 352 }
     ]
   },
-  { "key": "olo", "foods": [{ "label": "Olive Oil", "gramsPerLiter": 913 }] },
+  { "key": "olo", "foods": [{ "label": "olive_oil", "gramsPerLiter": 913 }] },
   {
     "key": "oni",
     "foods": [
-      { "label": "Onions & Leeks" },
-      { "label": "Garlic", "gramsPerLiter": 575, "averageWeight": 48 },
+      { "label": "onions_leeks" },
+      { "label": "garlic", "gramsPerLiter": 575, "averageWeight": 48 },
       {
-        "label": "Garlic (dried)",
+        "label": "garlic_dried",
         "gramsPerLiter": 575,
         "averageWeight": 48,
         "factor": 6.47249190938511
       },
-      { "label": "Onions", "gramsPerLiter": 676, "averageWeight": 110 },
+      { "label": "onions", "gramsPerLiter": 676, "averageWeight": 110 },
       {
-        "label": "Onions (dried)",
+        "label": "onions_dried",
         "gramsPerLiter": 676,
         "averageWeight": 110,
         "factor": 6.47249190938511
       },
-      { "label": "Shallots", "gramsPerLiter": 676, "averageWeight": 25 },
-      { "label": "Leeks", "gramsPerLiter": 376, "averageWeight": 255 },
+      { "label": "shallots", "gramsPerLiter": 676, "averageWeight": 25 },
+      { "label": "leeks", "gramsPerLiter": 376, "averageWeight": 255 },
       {
-        "label": "Leeks (dried)",
+        "label": "leeks_dried",
         "gramsPerLiter": 376,
         "averageWeight": 255,
         "factor": 6.47249190938511
       },
-      { "label": "Chives", "gramsPerLiter": 203 },
-      { "label": "Chinese onions", "gramsPerLiter": 423 },
-      { "label": "Scallions", "gramsPerLiter": 423 },
-      { "label": "Spring onions", "gramsPerLiter": 423 },
-      { "label": "Green onions", "gramsPerLiter": 423 }
+      { "label": "chives", "gramsPerLiter": 203 },
+      { "label": "chinese_onions", "gramsPerLiter": 423 },
+      { "label": "scallions", "gramsPerLiter": 423 },
+      { "label": "spring_onions", "gramsPerLiter": 423 },
+      { "label": "green_onions", "gramsPerLiter": 423 }
     ]
   },
   {
     "key": "fru",
     "foods": [
-      { "label": "Other Fruit" },
-      { "label": "Avocados", "gramsPerLiter": 617, "averageWeight": 150 },
-      { "label": "Pears", "gramsPerLiter": 592, "averageWeight": 200 },
+      { "label": "other_fruit" },
+      { "label": "avocados", "gramsPerLiter": 617, "averageWeight": 150 },
+      { "label": "pears", "gramsPerLiter": 592, "averageWeight": 200 },
       {
-        "label": "Pears (dried)",
+        "label": "pears_dried",
         "gramsPerLiter": 592,
         "averageWeight": 200,
         "factor": 2.97619047619048
       },
-      { "label": "Dates", "gramsPerLiter": 621, "averageWeight": 24 },
+      { "label": "dates", "gramsPerLiter": 621, "averageWeight": 24 },
       {
-        "label": "Dates (dried)",
+        "label": "dates_dried",
         "gramsPerLiter": 621,
         "averageWeight": 24,
         "factor": 6.89655172413793
       },
-      { "label": "Figs", "gramsPerLiter": 630, "averageWeight": 50 },
-      { "label": "Kiwis", "gramsPerLiter": 748, "averageWeight": 76 },
-      { "label": "Mangos", "gramsPerLiter": 697, "averageWeight": 300 },
+      { "label": "figs", "gramsPerLiter": 630, "averageWeight": 50 },
+      { "label": "kiwis", "gramsPerLiter": 748, "averageWeight": 76 },
+      { "label": "mangos", "gramsPerLiter": 697, "averageWeight": 300 },
       {
-        "label": "Mangos (dried)",
+        "label": "mangos_dried",
         "gramsPerLiter": 697,
         "averageWeight": 300,
         "factor": 2.97619047619048
       },
-      { "label": "Melons", "gramsPerLiter": 719 },
-      { "label": "Passionfruits", "gramsPerLiter": 998, "averageWeight": 43 },
-      { "label": "Peaches", "gramsPerLiter": 651, "averageWeight": 150 },
+      { "label": "melons", "gramsPerLiter": 719 },
+      { "label": "passionfruits", "gramsPerLiter": 998, "averageWeight": 43 },
+      { "label": "peaches", "gramsPerLiter": 651, "averageWeight": 150 },
       {
-        "label": "Peaches (dried)",
+        "label": "peaches_dried",
         "gramsPerLiter": 651,
         "averageWeight": 150,
         "factor": 3.47222222222222
       },
-      { "label": "Plums", "gramsPerLiter": 697, "averageWeight": 66 },
+      { "label": "plums", "gramsPerLiter": 697, "averageWeight": 66 },
       {
-        "label": "Plums (dried)",
+        "label": "plums_dried",
         "gramsPerLiter": 697,
         "averageWeight": 66,
         "factor": 3.28947368421053
       },
-      { "label": "Pineapples", "gramsPerLiter": 732, "averageWeight": 950 },
+      { "label": "pineapples", "gramsPerLiter": 732, "averageWeight": 950 },
       {
-        "label": "Pineapples (dried)",
+        "label": "pineapples_dried",
         "gramsPerLiter": 732,
         "averageWeight": 950,
         "factor": 3.20512820512821
       },
-      { "label": "Pomegranates", "gramsPerLiter": 735, "averageWeight": 275 },
-      { "label": "Bell peppers", "gramsPerLiter": 629, "averageWeight": 128 },
+      { "label": "pomegranates", "gramsPerLiter": 735, "averageWeight": 275 },
+      { "label": "bell_peppers", "gramsPerLiter": 629, "averageWeight": 128 },
       {
-        "label": "Bell peppers (dried)",
+        "label": "bell_peppers_dried",
         "gramsPerLiter": 629,
         "averageWeight": 128,
         "factor": 8.58369098712446
       },
-      { "label": "Chili peppers", "gramsPerLiter": 588, "averageWeight": 45 },
+      { "label": "chili_peppers", "gramsPerLiter": 588, "averageWeight": 45 },
       {
-        "label": "Chili peppers (dried)",
+        "label": "chili_peppers_dried",
         "gramsPerLiter": 588,
         "averageWeight": 45,
         "factor": 8.58369098712446
       },
-      { "label": "Cucumbers", "gramsPerLiter": 503, "averageWeight": 201 },
-      { "label": "Gherkins", "gramsPerLiter": 503, "averageWeight": 25 },
-      { "label": "Eggplants", "gramsPerLiter": 347 },
-      { "label": "Jalapeños", "gramsPerLiter": 380, "averageWeight": 20 },
-      { "label": "Olives", "gramsPerLiter": 571 },
-      { "label": "Pumpkins", "gramsPerLiter": 490 },
-      { "label": "Pumpkins (dried)", "gramsPerLiter": 490, "factor": 6.89655172413793 },
-      { "label": "Squash", "gramsPerLiter": 478 },
-      { "label": "Zucchinis", "gramsPerLiter": 478, "averageWeight": 142 },
+      { "label": "cucumbers", "gramsPerLiter": 503, "averageWeight": 201 },
+      { "label": "gherkins", "gramsPerLiter": 503, "averageWeight": 25 },
+      { "label": "eggplants", "gramsPerLiter": 347 },
+      { "label": "jalapenos", "gramsPerLiter": 380, "averageWeight": 20 },
+      { "label": "olives", "gramsPerLiter": 571 },
+      { "label": "pumpkins", "gramsPerLiter": 490 },
+      { "label": "pumpkins_dried", "gramsPerLiter": 490, "factor": 6.89655172413793 },
+      { "label": "squash", "gramsPerLiter": 478 },
+      { "label": "zucchinis", "gramsPerLiter": 478, "averageWeight": 142 },
       {
-        "label": "Zucchinis (dried)",
+        "label": "zucchinis_dried",
         "gramsPerLiter": 478,
         "averageWeight": 142,
         "factor": 9.34579439252336
       },
-      { "label": "Paprika", "gramsPerLiter": 460 },
-      { "label": "Paprika (dried)", "gramsPerLiter": 460, "factor": 8.58369098712446 }
+      { "label": "paprika", "gramsPerLiter": 460 },
+      { "label": "paprika_dried", "gramsPerLiter": 460, "factor": 8.58369098712446 }
     ]
   },
   {
     "key": "pul",
     "foods": [
-      { "label": "Other Pulses" },
-      { "label": "Chickpeas", "gramsPerLiter": 1014 },
-      { "label": "Cowpeas", "gramsPerLiter": 1014 },
-      { "label": "Pigeon peas", "gramsPerLiter": 1014 },
-      { "label": "Lentils", "gramsPerLiter": 1014 },
-      { "label": "Bambara beans", "gramsPerLiter": 1014 },
-      { "label": "Vetches", "gramsPerLiter": 1014 },
-      { "label": "Lupins", "gramsPerLiter": 1014 },
-      { "label": "Faba beans", "gramsPerLiter": 1014 },
-      { "label": "Black beans", "gramsPerLiter": 1014 },
-      { "label": "Black-eyed peas", "gramsPerLiter": 1014 },
-      { "label": "Green beans", "gramsPerLiter": 423 },
-      { "label": "Kidney beans", "gramsPerLiter": 1082 },
-      { "label": "Pinto beans", "gramsPerLiter": 1014 },
-      { "label": "Split peas", "gramsPerLiter": 828 }
+      { "label": "other_pulses" },
+      { "label": "chickpeas", "gramsPerLiter": 1014 },
+      { "label": "cowpeas", "gramsPerLiter": 1014 },
+      { "label": "pigeon_peas", "gramsPerLiter": 1014 },
+      { "label": "lentils", "gramsPerLiter": 1014 },
+      { "label": "bambara_beans", "gramsPerLiter": 1014 },
+      { "label": "vetches", "gramsPerLiter": 1014 },
+      { "label": "lupins", "gramsPerLiter": 1014 },
+      { "label": "faba_beans", "gramsPerLiter": 1014 },
+      { "label": "black_beans", "gramsPerLiter": 1014 },
+      { "label": "black_eyed_peas-eyed", "gramsPerLiter": 1014 },
+      { "label": "green_beans", "gramsPerLiter": 423 },
+      { "label": "kidney_beans", "gramsPerLiter": 1082 },
+      { "label": "pinto_beans", "gramsPerLiter": 1014 },
+      { "label": "split_peas", "gramsPerLiter": 828 }
     ]
   },
   {
     "key": "veg",
     "foods": [
-      { "label": "Other Vegetables" },
-      { "label": "Celery", "gramsPerLiter": 507 },
-      { "label": "Fennel", "gramsPerLiter": 368 },
-      { "label": "Anise", "gramsPerLiter": 453 },
-      { "label": "Basil", "gramsPerLiter": 142 },
-      { "label": "Basil (dried)", "gramsPerLiter": 142, "factor": 6.09756097560976 },
-      { "label": "Coriander", "gramsPerLiter": 122 },
-      { "label": "Coriander (dried)", "gramsPerLiter": 122, "factor": 6.09756097560976 },
-      { "label": "Chamomile", "gramsPerLiter": 122 },
-      { "label": "Lavender", "gramsPerLiter": 122 },
-      { "label": "Lemongrass", "gramsPerLiter": 283 },
-      { "label": "Oregano", "gramsPerLiter": 203 },
-      { "label": "Oregano (dried)", "gramsPerLiter": 203, "factor": 6.09756097560976 },
-      { "label": "Parsley", "gramsPerLiter": 108 },
-      { "label": "Parsley (dried)", "gramsPerLiter": 108, "factor": 6.09756097560976 },
-      { "label": "Rosemary", "gramsPerLiter": 223 },
-      { "label": "Rosemary (dried)", "gramsPerLiter": 223, "factor": 6.09756097560976 },
-      { "label": "Sage", "gramsPerLiter": 135 },
-      { "label": "Sage (dried)", "gramsPerLiter": 135, "factor": 6.09756097560976 },
-      { "label": "Thyme", "gramsPerLiter": 183 },
-      { "label": "Thyme (dried)", "gramsPerLiter": 183, "factor": 6.09756097560976 },
-      { "label": "Mushrooms", "gramsPerLiter": 296 },
-      { "label": "Mushrooms (dried)", "gramsPerLiter": 296, "factor": 6.89655172413793 }
+      { "label": "other_vegetables" },
+      { "label": "celery", "gramsPerLiter": 507 },
+      { "label": "fennel", "gramsPerLiter": 368 },
+      { "label": "anise", "gramsPerLiter": 453 },
+      { "label": "basil", "gramsPerLiter": 142 },
+      { "label": "basil_dried", "gramsPerLiter": 142, "factor": 6.09756097560976 },
+      { "label": "coriander", "gramsPerLiter": 122 },
+      { "label": "coriander_dried", "gramsPerLiter": 122, "factor": 6.09756097560976 },
+      { "label": "chamomile", "gramsPerLiter": 122 },
+      { "label": "lavender", "gramsPerLiter": 122 },
+      { "label": "lemongrass", "gramsPerLiter": 283 },
+      { "label": "oregano", "gramsPerLiter": 203 },
+      { "label": "oregano_dried", "gramsPerLiter": 203, "factor": 6.09756097560976 },
+      { "label": "parsley", "gramsPerLiter": 108 },
+      { "label": "parsley_dried", "gramsPerLiter": 108, "factor": 6.09756097560976 },
+      { "label": "rosemary", "gramsPerLiter": 223 },
+      { "label": "rosemary_dried", "gramsPerLiter": 223, "factor": 6.09756097560976 },
+      { "label": "sage", "gramsPerLiter": 135 },
+      { "label": "sage_dried", "gramsPerLiter": 135, "factor": 6.09756097560976 },
+      { "label": "thyme", "gramsPerLiter": 183 },
+      { "label": "thyme_dried", "gramsPerLiter": 183, "factor": 6.09756097560976 },
+      { "label": "mushrooms", "gramsPerLiter": 296 },
+      { "label": "mushrooms_dried", "gramsPerLiter": 296, "factor": 6.89655172413793 }
     ]
   },
-  { "key": "pao", "foods": [{ "label": "Palm Oil", "gramsPerLiter": 913 }] },
+  { "key": "pao", "foods": [{ "label": "palm_oil", "gramsPerLiter": 913 }] },
   {
     "key": "pea",
     "foods": [
-      { "label": "Peas", "gramsPerLiter": 1014 },
-      { "label": "Peas (dried)", "gramsPerLiter": 1014, "factor": 3.86100386100386 }
+      { "label": "peas", "gramsPerLiter": 1014 },
+      { "label": "peas_dried", "gramsPerLiter": 1014, "factor": 3.86100386100386 }
     ]
   },
   {
     "key": "pig",
     "foods": [
-      { "label": "Pig Meat" },
-      { "label": "Bacon" },
-      { "label": "Pork" },
-      { "label": "Ham" },
-      { "label": "Pork Sausage" },
-      { "label": "Gammon" },
-      { "label": "Pork chops" }
+      { "label": "pig_meat" },
+      { "label": "bacon" },
+      { "label": "pork" },
+      { "label": "ham" },
+      { "label": "pork_sausage" },
+      { "label": "gammon" },
+      { "label": "pork_chops" }
     ]
   },
   {
     "key": "pot",
     "foods": [
-      { "label": "Potatoes", "gramsPerLiter": 634, "averageWeight": 220 },
+      { "label": "potatoes", "gramsPerLiter": 634, "averageWeight": 220 },
       {
-        "label": "Potatoes (dried)",
+        "label": "potatoes_dried",
         "gramsPerLiter": 634,
         "averageWeight": 220,
         "factor": 4.16666666666667
       },
-      { "label": "Sweet potatoes", "gramsPerLiter": 634 },
-      { "label": "Sweet potatoes (dried)", "gramsPerLiter": 634, "factor": 3.07219662058372 },
-      { "label": "Yams", "gramsPerLiter": 634 },
-      { "label": "Yams (dried)", "gramsPerLiter": 634, "factor": 3.07219662058372 }
+      { "label": "sweet_potatoes", "gramsPerLiter": 634 },
+      { "label": "sweet_potatoes_dried", "gramsPerLiter": 634, "factor": 3.07219662058372 },
+      { "label": "yams", "gramsPerLiter": 634 },
+      { "label": "yams_dried", "gramsPerLiter": 634, "factor": 3.07219662058372 }
     ]
   },
   {
     "key": "pou",
     "foods": [
-      { "label": "Poultry Meat" },
-      { "label": "Chicken" },
-      { "label": "Turkey" },
-      { "label": "Quail" },
-      { "label": "Squabs" }
+      { "label": "poultry_meat" },
+      { "label": "chicken" },
+      { "label": "turkey" },
+      { "label": "quail" },
+      { "label": "squabs" }
     ]
   },
   {
     "key": "pra",
-    "foods": [{ "label": "Prawns (farmed)" }, { "label": "Shrimps (farmed)" }]
+    "foods": [{ "label": "prawns_farmed" }, { "label": "shrimps_farmed" }]
   },
   {
     "key": "rao",
-    "foods": [{ "label": "Rapeseed Oil", "gramsPerLiter": 921 }]
+    "foods": [{ "label": "rapeseed_oil", "gramsPerLiter": 921 }]
   },
   {
     "key": "ric",
-    "foods": [{ "label": "Rice", "gramsPerLiter": 782 }]
+    "foods": [{ "label": "rice", "gramsPerLiter": 782 }]
   },
   {
     "key": "roo",
     "foods": [
-      { "label": "Root Vegetables" },
-      { "label": "Carrots", "gramsPerLiter": 541, "averageWeight": 61 },
+      { "label": "root_vegetables" },
+      { "label": "carrots", "gramsPerLiter": 541, "averageWeight": 61 },
       {
-        "label": "Carrots (dried)",
+        "label": "carrots_dried",
         "gramsPerLiter": 541,
         "averageWeight": 61,
         "factor": 6.09756097560976
       },
-      { "label": "Ginger", "gramsPerLiter": 406 },
-      { "label": "Parsnip", "gramsPerLiter": 562 },
-      { "label": "Radishes", "gramsPerLiter": 490, "averageWeight": 5 }
+      { "label": "ginger", "gramsPerLiter": 406 },
+      { "label": "parsnip", "gramsPerLiter": 562 },
+      { "label": "radishes", "gramsPerLiter": 490, "averageWeight": 5 }
     ]
   },
   {
     "key": "soo",
-    "foods": [{ "label": "Soybean Oil", "gramsPerLiter": 921 }]
+    "foods": [{ "label": "soybean_oil", "gramsPerLiter": 921 }]
   },
   {
     "key": "som",
-    "foods": [{ "label": "Soymilk", "gramsPerLiter": 1021 }]
+    "foods": [{ "label": "soymilk", "gramsPerLiter": 1021 }]
   },
   {
     "key": "suo",
-    "foods": [{ "label": "Sunflower Oil", "gramsPerLiter": 921 }]
+    "foods": [{ "label": "sunflower_oil", "gramsPerLiter": 921 }]
   },
   {
     "key": "tof",
     "foods": [
-      { "label": "Tofu (soybeans)", "gramsPerLiter": 1065 },
-      { "label": "Soy beans", "gramsPerLiter": 1014 }
+      { "label": "tofu_soybeans", "gramsPerLiter": 1065 },
+      { "label": "soy_beans", "gramsPerLiter": 1014 }
     ]
   },
   {
     "key": "tom",
     "foods": [
-      { "label": "Tomatoes", "gramsPerLiter": 761, "averageWeight": 123 },
+      { "label": "tomatoes", "gramsPerLiter": 761, "averageWeight": 123 },
       {
-        "label": "Tomatoes (dried)",
+        "label": "tomatoes_dried",
         "gramsPerLiter": 761,
         "averageWeight": 123,
         "factor": 9.34579439252336
@@ -456,10 +456,10 @@
   },
   {
     "key": "whe",
-    "foods": [{ "label": "Wheat & Rye", "gramsPerLiter": 750 }]
+    "foods": [{ "label": "wheat_rye", "gramsPerLiter": 750 }]
   },
   {
     "key": "win",
-    "foods": [{ "label": "Wine", "gramsPerLiter": 1014 }]
+    "foods": [{ "label": "wine", "gramsPerLiter": 1014 }]
   }
 ]

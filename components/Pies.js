@@ -120,7 +120,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
 
           for (let i = 0; i < numberOfExtraPies; i++) {
             extraPies.push({
-              name: name,
+              name: t(name),
               total: rda,
               rda: rda,
               unit: unit,
@@ -130,7 +130,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           }
 
           const lastPie = {
-            name: name,
+            name: t(name),
             total: total % rda,
             rda: rda,
             unit: unit,

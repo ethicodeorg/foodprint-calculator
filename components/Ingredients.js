@@ -22,7 +22,7 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
       return (
         <div className="ingredient" key={index}>
           <div className="ingredient-basic">
-            {`${amountString} ${t(ingredient.label)}`}
+            {`${amountString} ${t(ingredient.rawLabel)}`}
             <div className="transport">{transportString}</div>
           </div>
           <div className="pies-container">

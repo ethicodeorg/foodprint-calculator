@@ -86,6 +86,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
         key: foodData[i].key,
         value: `${foodData[i].key}${j}`,
         label: t(foodData[i].entities[j].label),
+        rawLabel: foodData[i].entities[j].label,
         averageWeight: foodData[i].entities[j].averageWeight,
         gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
         factor: foodData[i].entities[j].factor,
@@ -215,7 +216,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     };
     const ingredient = {
       key: selectedIngredient.key,
-      label: selectedIngredient.label,
+      rawLabel: selectedIngredient.rawLabel,
       amount,
       amountUnit,
       distance,
