@@ -10,9 +10,9 @@ import Ingredients from '../components/Ingredients';
 import theme from '../styles/theme';
 import Separator from './Separator';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
+import { Link } from '../i18n';
 
-const Pies = ({ meal, numberOfServings, mealTitle }) => {
+const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
   let html2canvas;
   const router = useRouter();
   const pieData = getMealPieData(meal);
@@ -61,7 +61,7 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
         <Fragment>
           <div className="ingredient-button-container">
             <Button clear onClick={() => setShowIngredients(!showIngredients)}>
-              Ingredients
+              {t('ingredients')}
               <span
                 className={classNames('button-icon', {
                   'button-icon-reversed': showIngredients,
@@ -74,7 +74,11 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
           {showIngredients && (
             <Fragment>
               <Separator />
-              <Ingredients ingredients={meal.ingredients} numberOfServings={numberOfServings} />
+              <Ingredients
+                ingredients={meal.ingredients}
+                numberOfServings={numberOfServings}
+                t={t}
+              />
             </Fragment>
           )}
           <Separator />
@@ -82,9 +86,11 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
       )}
       <div className="title-container">
         <div className="title-download">
-          <CardTitle>{`Foodprint${numberOfServings > 1 ? ' - per person' : ''}`}</CardTitle>
+          <CardTitle>{`${t('foodprint')}${
+            numberOfServings > 1 ? ` - ${t('per_person')}` : ''
+          }`}</CardTitle>
           {router.route === '/mymeals' && showDetails && (
-            <Tooltip title="Download report" placement="right" arrow>
+            <Tooltip title={t('download_report')} placement="right" arrow>
               <button className="download-button" onClick={() => downloadReport(meal)}>
                 <FaDownload />
               </button>
@@ -92,7 +98,7 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
           )}
         </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
-          Details
+          {t('details')}
           <span
             className={classNames('button-icon', {
               'button-icon-reversed': showDetails,
@@ -114,7 +120,7 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
 
           for (let i = 0; i < numberOfExtraPies; i++) {
             extraPies.push({
-              name: name,
+              name: t(name),
               total: rda,
               rda: rda,
               unit: unit,
@@ -124,13 +130,13 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
           }
 
           const lastPie = {
-            name: name,
+            name: t(name),
             total: total % rda,
             rda: rda,
             unit: unit,
             color: color,
           };
-          const percentageString = `${((total / rda) * 100).toFixed(2)}% RDA`;
+          const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
 
           return (
             <div
@@ -141,7 +147,7 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
             >
               {showDetails && (
                 <div className="legend-container">
-                  <div className="legend-name">{name}</div>
+                  <div className="legend-name">{t(name)}</div>
                   <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
                   <div className="percentage">
                     <Link href="/about?openSection=rda">
@@ -157,7 +163,7 @@ const Pies = ({ meal, numberOfServings, mealTitle }) => {
               )}
               <div className="pies-container">
                 {extraPies.concat(lastPie).map((pie, pIndex) => (
-                  <Pie key={pIndex} category={pie} label={`${name}: ${percentageString}`} />
+                  <Pie key={pIndex} category={pie} label={`${t(name)}: ${percentageString}`} />
                 ))}
               </div>
             </div>

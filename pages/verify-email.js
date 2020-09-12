@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/MyLayout';
 import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
 
-const VerifyEmail = () => {
-  const router = useRouter();
+const VerifyEmail = ({ t, i18n }) => {
+  const { language } = i18n;
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { error, mutate }] = useUser();
 
@@ -30,7 +30,7 @@ const VerifyEmail = () => {
       fetch('api/send-welcome-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: user.name, email: user.email }),
+        body: JSON.stringify({ name: user.name, email: user.email, lang: language }),
       });
     } else {
       setErrorMsg(await res.text());
@@ -39,14 +39,14 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     if (error) {
-      router.replace(`/login?reference=verify-email`);
+      Router.replace(`/login?reference=verify-email`);
       return;
     }
 
     if (user) {
       // redirect to email-verified when verified
       if (user.verifiedAt) {
-        router.replace('/email-verified');
+        Router.replace('/email-verified');
         return;
       }
 
@@ -55,7 +55,7 @@ const VerifyEmail = () => {
   }, [user, error]);
 
   return (
-    <Layout title="Verify Email">
+    <Layout title={t('verify_email')} t={t}>
       <div className="verify-email">
         {errorMsg ? (
           <div className="icon-container">
@@ -67,7 +67,7 @@ const VerifyEmail = () => {
         ) : (
           <div className="verifying">
             <LoadingOnTop />
-            <div className="verify-email-text">Please wait while we verify your email</div>
+            <div className="verify-email-text">{t('verify_email_text')}</div>
           </div>
         )}
       </div>
@@ -89,4 +89,8 @@ const VerifyEmail = () => {
   );
 };
 
-export default VerifyEmail;
+VerifyEmail.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(VerifyEmail);

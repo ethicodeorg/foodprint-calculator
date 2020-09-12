@@ -2,7 +2,9 @@ import App from 'next/app';
 import { Provider } from 'react-redux';
 import React from 'react';
 import withRedux from 'next-redux-wrapper';
+import 'react-flags-select/css/react-flags-select.css';
 import configureStore from '../redux/store';
+import { appWithTranslation } from '../i18n';
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -30,4 +32,4 @@ class MyApp extends App {
 
 const makeStore = () => configureStore();
 
-export default withRedux(makeStore)(MyApp);
+export default withRedux(makeStore)(appWithTranslation(MyApp));

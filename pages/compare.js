@@ -1,23 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { withTranslation } from '../i18n';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Compare = ({ comparisons }) => {
+const Compare = ({ comparisons, t }) => {
   const ids = comparisons.join(',');
   const { data, error } = useSWR(`/api/meals?id=${ids || 'empty'}`, fetcher);
 
-  if (error) return <div>failed to load</div>;
+  if (error) return <div>{t('error_failed')}</div>;
 
   return (
-    <Layout title="Compare Meals">
+    <Layout title={t('compare_meals')} t={t}>
       <Header />
-      <MealsPage meals={data?.meals} title="Compare Meals" emptyMessage="No meals to compare" />
+      <MealsPage
+        meals={data?.meals}
+        title={t('compare_meals')}
+        emptyMessage={t('no_meals_compare')}
+        t={t}
+      />
     </Layout>
   );
 };
@@ -26,4 +31,8 @@ const mapStateToProps = (state) => ({
   comparisons: state.comparisons,
 });
 
-export default connect(mapStateToProps)(Compare);
+Compare.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default connect(mapStateToProps)(withTranslation('common')(Compare));

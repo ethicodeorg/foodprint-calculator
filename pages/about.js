@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { FaTractor, FaTint, FaSmog } from 'react-icons/fa';
+import { withTranslation } from '../i18n';
+import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -10,256 +12,209 @@ import ExternalLink from '../components/ExternalLink';
 import AboutSection from '../components/AboutSection';
 import theme from '../styles/theme';
 
-const About = () => {
+const About = ({ t }) => {
   const router = useRouter();
   const { openSection = 'project' } = router.query;
+  const landUseText = splitTranslationWithLink(t('land_use_text', SPLITTER));
+  const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text', SPLITTER));
+  const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text', SPLITTER));
+  const eutrophyingEmissionsText = splitTranslationWithLink(
+    t('eutrophying_emissions_text', SPLITTER)
+  );
+  const landUseRDA = splitTranslationWithLink(t('land_use_rda', SPLITTER));
+  const ghgEmissionsRDA = splitTranslationWithLink(t('ghg_emissions_rda', SPLITTER));
+  const waterWithdrawalsRDA = splitTranslationWithLink(t('water_withdrawals_rda', SPLITTER));
+  const eutrophyingEmissionsRDA = splitTranslationWithLink(
+    t('eutrophying_emissions_rda', SPLITTER)
+  );
+  const storyText = splitTranslationWithLink(t('story_text', SPLITTER));
+  const dataText = splitTranslationWithLink(t('data_text_1', SPLITTER));
+  const beefDairyHerdsText = splitTranslationWithLink(t('beef_dairy_herds_text', SPLITTER));
+  const supportText = splitTranslationWithLink(t('support_text', SPLITTER));
 
   return (
-    <Layout title="About">
+    <Layout title={t('about')} t={t}>
       <Header />
       <Content>
-        <PageTitle>About the Foodprint Calculator</PageTitle>
+        <PageTitle>{t('about_fc')}</PageTitle>
         <Card>
-          <AboutSection title="The project" isOpen={openSection === 'project'}>
-            <p>The Foodprint Calculator determines how our meals impact the environment.</p>
-            <CardTitle sub>Why?</CardTitle>
+          <AboutSection title={t('project')} isOpen={openSection === 'project'}>
+            <p>{t('fc_function')}</p>
+            <CardTitle sub>{t('why_question')}</CardTitle>
             <p>
-              Our global food production systems have huge impacts on the environment, yet it gets
-              very little attention in our growing environmental discussions, and concerns. The
-              Foodprint Calculator is here to change that. The mission is to help reduce our
-              environmental impact through our food choices.
+              {t('why_answer_1')} {t('why_answer_2')} {t('why_answer_3')}
             </p>
-            <CardTitle sub>How?</CardTitle>
+            <CardTitle sub>{t('how_question')}</CardTitle>
             <p>
-              We believe that consumers will choose environmentally friendlier meals when confronted
-              with the hard numbers behind each of their options. That's why we built the Foodprint
-              Calculator; a tool for restaurants, ready meals producers, recipe publishers, etc., to
-              evaluate the environmental impact of each of their meals, given a list of its
-              ingredients. The results can then be displayed for their customers.
+              {t('how_answer_1')} {t('how_answer_2')} {t('how_answer_3')}
             </p>
-            <p>The environmental impact reports consider four ways of impact:</p>
+            <p>{t('four_ways_impact')}</p>
             <ol>
               <li>
-                <span style={{ color: theme.colors.land }}>Land use</span>
+                <span style={{ color: theme.colors.land }}>{t('land_use')}</span>
                 <ul>
                   <li>
-                    Our food production systems use{' '}
+                    {landUseText.beforeLink}
                     <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
-                      almost half
+                      {landUseText.linkText}
                     </ExternalLink>{' '}
-                    of Earth's habitable land.
+                    {landUseText.afterLink}
                   </li>
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.ghg }}>Greenhouse gas emissions</span>
+                <span style={{ color: theme.colors.ghg }}>{t('ghg_emissions')}</span>
                 <ul>
                   <li>
-                    Our food production systems are responsible for{' '}
+                    {ghgEmissionsText.beforeLink}
                     <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
-                      about 26%
+                      {ghgEmissionsText.linkText}
                     </ExternalLink>{' '}
-                    of our global greenhouse gas emissions.
+                    {ghgEmissionsText.afterLink}
                   </li>
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.water }}>Water withdrawals</span>
+                <span style={{ color: theme.colors.water }}>{t('water_withdrawals')}</span>
                 <ul>
                   <li>
-                    Our food production systems are responsible for{' '}
+                    {waterWithdrawalsText.beforeLink}
                     <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
-                      about 70%
+                      {waterWithdrawalsText.linkText}
                     </ExternalLink>{' '}
-                    of our yearly global water withdrawals.
+                    {waterWithdrawalsText.afterLink}
                   </li>
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.eutro }}>Eutrophying emissions</span>
+                <span style={{ color: theme.colors.eutro }}>{t('eutrophying_emissions')}</span>
                 <ul>
                   <li>
-                    Our food production systems' runoff of nitrogen and other nutrients are{' '}
+                    {eutrophyingEmissionsText.beforeLink}
                     <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
-                      a leading contributor
+                      {eutrophyingEmissionsText.linkText}
                     </ExternalLink>{' '}
-                    to the major environmental problem of eutrophying emissions.
+                    {eutrophyingEmissionsText.afterLink}
                   </li>
                 </ul>
               </li>
             </ol>
-            <CardTitle sub>The story so far</CardTitle>
+            <CardTitle sub>{t('story_title')}</CardTitle>
             <p>
-              The Foodprint Calculator was built by{' '}
-              <ExternalLink href="http://ethicode.org/">Ethicode</ExternalLink> and deployed in May
-              2020 as a proof of concept. It has since been under active development, and in August
-              2020, there was a significant update, introducing user signup and database storage for
-              their meals.
+              {storyText.beforeLink}
+              <ExternalLink href="http://ethicode.org/">{storyText.linkText}</ExternalLink>
+              {storyText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection title="Data sources" isOpen={openSection === 'sources'}>
+          <AboutSection title={t('data_title')} isOpen={openSection === 'sources'}>
             <p>
-              In January 2020, Our World in Data published{' '}
+              {dataText.beforeLink}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
-                Environmental impacts of food production
-              </ExternalLink>{' '}
-              by Hannah Ritchie and Max Roser, which was primarily based on the research by Joseph
-              Poore and Thomas Nemecek,{' '}
-              <ExternalLink href="https://science.sciencemag.org/content/360/6392/987">
-                Reducing food’s environmental impacts through producers and consumers
+                {dataText.linkText}
               </ExternalLink>
-              . The data set from that research covers ~38,700 commercially viable farms in 119
-              countries and 40 products representing ~90% of global protein and calorie consumption.
+              {dataText.afterLink}
+              <ExternalLink href="https://science.sciencemag.org/content/360/6392/987">
+                {dataText.linkText2}
+              </ExternalLink>
+              {dataText.afterLink2}
             </p>
-            <p>
-              This extensive data has graciously been made available for everyone to use, and the
-              Foodprint Calculator uses it to determine the environmental impact of any meal, given
-              its ingredients.
-            </p>
+            <p>{t('data_text_2')}</p>
           </AboutSection>
-          <AboutSection title="Recommended daily amounts" isOpen={openSection === 'rda'}>
-            <p>
-              Earth has a finite amount of resources that we all share. Food production takes up
-              many of these resources, especially when it comes to land use, greenhouse gas
-              emissions, water withdrawals, and eutrophying emissions. The Foodprint Calculator
-              considers an RDA (recommended daily amount) for each of these categories, using the
-              following derivation:
-            </p>
+          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda'}>
+            <p>{t('rda_text')}</p>
             <CardTitle sub color={theme.colors.land}>
               <span className="header-icon">
                 <FaTractor />
               </span>
-              Land use
+              {t('land_use')}
             </CardTitle>
             <p>
-              Earth has about 104 million km² of habitable land, and almost half of that is used for
-              agriculture or{' '}
+              {landUseRDA.beforeLink}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
-                51 million km²
+                {landUseRDA.linkText}
               </ExternalLink>
-              . If we divide that by the current population, 7.78 billion people, we get 6.555 m²
-              per person or about 18 m² per day. Therefore the Foodprint Calculator considers that
-              to be the RDA for an individual's land use.
+              {landUseRDA.afterLink}
             </p>
             <CardTitle sub color={theme.colors.ghg}>
               <span className="header-icon">
                 <FaSmog />
               </span>
-              Greenhouse gas emissions
+              {t('ghg_emissions')}
             </CardTitle>
             <p>
-              Food is responsible for about{' '}
+              {ghgEmissionsRDA.beforeLink}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
-                26% of our global greenhouse gas emissions
+                {ghgEmissionsRDA.linkText}
               </ExternalLink>
-              , or 13.6 billion tonnes of carbon dioxide equivalents. That calculates to 1.75 tonnes
-              per person or an RDA of about 4.8 kg for each individual.
+              {ghgEmissionsRDA.afterLink}
             </p>
             <CardTitle sub color={theme.colors.water}>
               <span className="header-icon">
                 <FaTint />
               </span>
-              Water withdrawals
+              {t('water_withdrawals')}
             </CardTitle>
             <p>
-              Each year, global water withdrawals are about{' '}
+              {waterWithdrawalsRDA.beforeLink}
               <ExternalLink href="https://ourworldindata.org/water-use-stress#global-freshwater-use">
-                4 trillion m³
+                {waterWithdrawalsRDA.linkText}
               </ExternalLink>{' '}
-              of which{' '}
+              {waterWithdrawalsRDA.afterLink}
               <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
-                our agriculture uses 70%
+                {waterWithdrawalsRDA.linkText2}
               </ExternalLink>
-              . Divided amongst the population, and we get about 360 m³ or an RDA of about one m³
-              (1000 liters) of water per individual.
+              {waterWithdrawalsRDA.afterLink2}
             </p>
             <CardTitle sub color={theme.colors.eutro}>
               <span className="header-icon">
                 <FaTint />
               </span>
-              Eutrophying emissions
+              {t('eutrophying_emissions')}
             </CardTitle>
             <p>
-              Eutrophying emissions are about{' '}
+              {eutrophyingEmissionsRDA.beforeLink}
               <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
-                12.45 kgPO₄eq on average for all food types per 1000 kcal
+                {eutrophyingEmissionsRDA.linkText}
               </ExternalLink>
-              . The recommended daily calorie intake is{' '}
+              {eutrophyingEmissionsRDA.afterLink}
               <ExternalLink href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/">
-                2,000 kcal a day for women and 2,500 for men
+                {eutrophyingEmissionsRDA.linkText2}
               </ExternalLink>{' '}
-              or 2,250 on average. Therefore, we can consider 28 kgPO₄eq the RDA of eutrophying
-              emissions.
+              {eutrophyingEmissionsRDA.afterLink2}
             </p>
-            <p>
-              In each of these four categories, we're only aiming to prevent these global numbers
-              from growing even further, although we should be aiming to reduce them. However, we
-              have to start somewhere!
-            </p>
+            <p>{t('rda_future')}</p>
           </AboutSection>
-          <AboutSection title="How to use" isOpen={openSection === 'how-to-use'}>
-            <p>
-              When adding ingredients from a recipe, these important considerations should be made:
-            </p>
-            <CardTitle sub>Sub-ingredients</CardTitle>
-            <p>
-              Some ingredients contain a bunch of other elements. The most accurate method is to add
-              an ingredient for each such sub-element. Nevertheless, in many cases, it should be
-              enough only to add the main ingredient. E.g., most kinds of ketchup contain some other
-              ingredients than tomatoes, but tomatoes make up the bulk of the ketchup. Therefore, it
-              should be considered accurate enough to add "Tomatoes" for ketchup, especially for
-              smaller amounts.
-            </p>
-            <CardTitle sub>Dried ingredients</CardTitle>
-            <p>
-              Adding dried ingredients that are not in our database can be tricky. The most accurate
-              method is to enter the amount needed of the ingredients' fresh version to produce the
-              dried version amount. However, for simplicity, we can use these rules of thumb:
-            </p>
+          <AboutSection title={t('how_to_use_title')} isOpen={openSection === 'how-to-use'}>
+            <p>{t('how_to_use_text')}</p>
+            <CardTitle sub>{t('sub_ingredients_title')}</CardTitle>
+            <p>{t('sub_ingredients_text')}</p>
+            <CardTitle sub>{t('dried_ingredients_title')}</CardTitle>
+            <p>{t('dried_ingredients_text')}</p>
             <ol>
-              <li>Multiply dried fruits by a factor of 3</li>
-              <li>Multiply leafy herbs and vegetables by a factor of 6</li>
-              <li>Multiply high water content ingredients by a factor of 9</li>
+              <li>{t('dried_ingredients_point_1')}</li>
+              <li>{t('dried_ingredients_point_2')}</li>
+              <li>{t('dried_ingredients_point_3')}</li>
             </ol>
+            <p>{t('dried_ingredients_text_2')}</p>
+            <CardTitle sub>{t('beef_dairy_herds_title')}</CardTitle>
             <p>
-              Note that these calculations are not needed when adding quantities, e.g., one apple is
-              the same as one dried apple and uses the same resources regardless of their weight
-              post dehydration.
-            </p>
-            <CardTitle sub>Beef herds vs. dairy herds</CardTitle>
-            <p>
-              When selecting beef, you will notice two entries in the data, beef from dairy herds
-              and beef specifically grown from beef herds. This is because there is such a
-              significant difference in their environmental impacts that the researchers decided to
-              separate them into two categories. Beef from dairy herds has proportionally much less
-              impact because it also contributes to dairy production. Each of the categories make up
-              about{' '}
+              {beefDairyHerdsText.beforeLink}
               <ExternalLink href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf">
-                half of the market
+                {beefDairyHerdsText.linkText}
               </ExternalLink>
-              , and it's often difficult to differentiate from which sector your beef comes.
-              However, beef herd beef is generally considered leaner and of higher quality than
-              dairy herd beef.
+              {beefDairyHerdsText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection title="How accurate is it?" isOpen={openSection === 'accuracy'}>
-            <p>
-              The results accumulated by the Foodprint Calculator should not be regarded as an exact
-              science but rather a rough estimation. The environmental impact of each food product
-              type varies considerably between individual products and productions. However, given
-              that the data being used for the Foodprint Calculator is widely regarded as the most
-              comprehensive and accurate data we have today, we can assume that it is as precise as
-              it gets.
-            </p>
+          <AboutSection title={t('accuracy_title')} isOpen={openSection === 'accuracy'}>
+            <p>{t('accuracy_text')}</p>
           </AboutSection>
-          <AboutSection title="Support" isOpen={openSection === 'support'}>
+          <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
             <p>
-              If you have any questions or feedback, bug reports or feature requests, or require
-              assistance, please reach out to us at{' '}
+              {supportText.beforeLink}
               <ExternalLink email href="mailto:ethicode@ethicode.org">
-                ethicode@ethicode.org
+                {supportText.linkText}
               </ExternalLink>
-              .
+              {supportText.afterLink}
             </p>
           </AboutSection>
         </Card>
@@ -281,4 +236,8 @@ const About = () => {
   );
 };
 
-export default About;
+About.getInitialProps = async () => ({
+  namespacesRequired: ['common', 'about'],
+});
+
+export default withTranslation('about')(About);

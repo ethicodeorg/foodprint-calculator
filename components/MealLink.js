@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import { Link } from '../i18n';
 import theme from '../styles/theme';
 
 const MealLink = ({ id, children, isEdit }) => {
   const firstParam = isEdit ? 'mymeals' : 'meals';
   return (
-    <Link href={`/${firstParam}/[id]`} as={`/${firstParam}/${id}`}>
+    <Link href={`/${firstParam}/[id]?id=${id}`} as={`/${firstParam}/${id}`}>
       <a className="meal-link">
         {children}
         <style jsx>{`

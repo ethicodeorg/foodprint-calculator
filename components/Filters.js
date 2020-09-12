@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import Router from 'next/router';
+import { Router } from '../i18n';
 import useSWR from 'swr';
 import theme from '../styles/theme';
 import { FaSearch } from 'react-icons/fa';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const Filters = ({ query }) => {
+const Filters = ({ queries, t }) => {
   const { data, error } = useSWR('/api/users?publicOnly=true', fetcher);
-  const userFilterOptions = [{ value: 'all', label: 'All owners' }].concat(
+  const userFilterOptions = [{ value: 'all', label: t('all_owners') }].concat(
     data?.users.map((user) => {
       return {
         value: user._id,
@@ -18,18 +18,18 @@ const Filters = ({ query }) => {
     })
   );
   const [userFilter, setUserFilter] = useState(
-    userFilterOptions.find((option) => option?.value === query.user) || userFilterOptions[0]
+    userFilterOptions.find((option) => option?.value === queries.user) || userFilterOptions[0]
   );
   const sortByOptions = [
-    { value: 'landUse', label: 'Sort by land use' },
-    { value: 'ghgEmissions', label: 'Sort by greenhouse gas emissions' },
-    { value: 'waterWithdrawals', label: 'Sort by water withdrawals' },
-    { value: 'eutrophyingEmissions', label: 'Sort by eutrophying emissions' },
+    { value: 'landUse', label: t('sort_by_land') },
+    { value: 'ghgEmissions', label: t('sort_by_ghg') },
+    { value: 'waterWithdrawals', label: t('sort_by_water') },
+    { value: 'eutrophyingEmissions', label: t('sort_by_eutro') },
   ];
   const [sortBy, setSortBy] = useState(
-    sortByOptions.find((option) => option.value === query.sortBy) || sortByOptions[0]
+    sortByOptions.find((option) => option.value === queries.sortBy) || sortByOptions[0]
   );
-  const [searchTerm, setSearchTerm] = useState(query.search || '');
+  const [searchTerm, setSearchTerm] = useState(queries.search || '');
 
   const customStyles = {
     control: (provided, state) => ({
@@ -60,13 +60,13 @@ const Filters = ({ query }) => {
       <div className="select-container user-select">
         <Select
           value={userFilter}
-          placeholder="All owners"
+          placeholder={t('all_owners')}
           onChange={(val) => {
             setUserFilter(val);
             Router.push({
               pathname: '/meals',
               query: {
-                ...query,
+                ...queries,
                 user: val.value,
               },
             });
@@ -85,7 +85,7 @@ const Filters = ({ query }) => {
             id="search"
             type="text"
             name="search"
-            placeholder="Search"
+            placeholder={t('search')}
             className="search-input"
             value={searchTerm || ''}
             onChange={(e) => {
@@ -93,7 +93,7 @@ const Filters = ({ query }) => {
               Router.push({
                 pathname: '/meals',
                 query: {
-                  ...query,
+                  ...queries,
                   search: e.target.value,
                 },
               });
@@ -104,13 +104,13 @@ const Filters = ({ query }) => {
       <div className="select-container sort-select">
         <Select
           value={sortBy}
-          placeholder="Sort by"
+          placeholder={t('sort_by')}
           onChange={(val) => {
             setSortBy(val);
             Router.push({
               pathname: '/meals',
               query: {
-                ...query,
+                ...queries,
                 sortBy: val.value,
               },
             });
@@ -175,7 +175,7 @@ const Filters = ({ query }) => {
             margin: 0 20px;
           }
           .select-container {
-            width: 180px;
+            width: 200px;
             margin: 0 20px;
           }
         }

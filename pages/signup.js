@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
+import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';
 import { setUserCookie } from '../utils/userCookie';
@@ -12,8 +12,8 @@ import PageTitle from '../components/PageTitle';
 import UserForm from '../components/UserForm';
 import LoadingOnTop from '../components/LoadingOnTop';
 
-const SignupPage = () => {
-  const router = useRouter();
+const SignupPage = ({ t, i18n }) => {
+  const { language } = i18n;
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [user, { mutate }] = useUser();
@@ -23,18 +23,17 @@ const SignupPage = () => {
     const response = await fetch('api/send-verify-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: user.name, email: user.email }),
+      body: JSON.stringify({ name: user.name, email: user.email, lang: language }),
     });
     setIsLoading(false);
 
     if (response.status !== 201) {
-      setErrorMsg(
-        `We encountered a problem when trying to send an email to ${user.email}. Please contact support.`
-      );
+      setErrorMsg(t('email_error', { email: user.email }));
+
       return;
     }
 
-    router.replace('/check-email');
+    Router.replace('/check-email');
   };
 
   useEffect(() => {
@@ -89,10 +88,10 @@ const SignupPage = () => {
   };
 
   return (
-    <Layout title="Sign up">
+    <Layout title={t('sign_up')} t={t}>
       <Header />
       <Content>
-        <PageTitle>Sign up</PageTitle>
+        <PageTitle>{t('sign_up')}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card userForm>
           <UserForm
@@ -102,8 +101,9 @@ const SignupPage = () => {
             showPassword
             showRetypedPassword
             showType
-            buttonText="Sign up"
-            passwordPlaceholder="Create a password"
+            buttonText={t('sign_up')}
+            passwordPlaceholder={t('create_password')}
+            t={t}
           />
         </Card>
       </Content>
@@ -111,4 +111,8 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+SignupPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(SignupPage);

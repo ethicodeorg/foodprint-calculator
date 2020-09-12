@@ -1,5 +1,4 @@
 import React, { useState, Fragment } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import {
@@ -12,12 +11,21 @@ import {
   FaUser,
 } from 'react-icons/fa';
 import classNames from 'classnames';
+import Select from 'react-select';
+import { Link, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import theme from '../styles/theme';
 import Button from './Button';
 import FadingIcons from './FadingIcons';
+import Icelandic from '../public/iceland-flag.svg';
+import English from '../public/united-kingdom-flag.svg';
 
-const Header = () => {
+const Header = ({ t, i18n }) => {
+  const { language, changeLanguage } = i18n;
+  const languageOptions = [
+    { value: 'en', label: 'English' },
+    { value: 'is', label: 'Íslenska' },
+  ];
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user] = useUser();
@@ -46,12 +54,75 @@ const Header = () => {
     }
   };
 
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      borderRadius: 20,
+      padding: '0 5px',
+      backgroundColor: 'transparent',
+      color: theme.colors.white,
+      border: 'none',
+      minHeight: '25px',
+    }),
+    singleValue: (provided, state) => ({
+      ...provided,
+      color: theme.colors.white,
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      backgroundColor: theme.colors.darkBackground,
+      color: theme.colors.white,
+      width: '90px',
+    }),
+    valueContainer: (provided, state) => ({
+      ...provided,
+      opacity: 0,
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? theme.colors.aqua : theme.colors.darkBackground,
+      color: state.isFocused ? theme.colors.darkBackground : theme.colors.white,
+    }),
+    indicatorSeparator: (provided, state) => ({
+      ...provided,
+      width: '0px',
+    }),
+  };
+
   return (
     <div className="header">
       <div className="land" />
       <Link href="/">
-        <a className="link home">{getGlobe()}</a>
+        <a className="link home">
+          {getGlobe()}
+          <div className="logo-container">
+            {language === 'en' && (
+              <Fragment>
+                <div className="foodprint">FOODPRINT</div>
+                <div className="calculator">CALCULATOR</div>
+              </Fragment>
+            )}
+            {language === 'is' && <div className="spori">SPORI</div>}
+          </div>
+        </a>
       </Link>
+      <div className="language-container">
+        <div className="flag">
+          {language === 'is' && <Icelandic />}
+          {language === 'en' && <English />}
+        </div>
+        <div className="language-select">
+          <Select
+            value={languageOptions.find((lang) => lang.value === language)}
+            placeholder="Language"
+            onChange={(val) => changeLanguage(val.value)}
+            options={languageOptions}
+            hideSelectedOptions
+            instanceId="language-select"
+            styles={customStyles}
+          />
+        </div>
+      </div>
       <Link href="/newmeal">
         <a className="link new">
           <FadingIcons />
@@ -64,7 +135,7 @@ const Header = () => {
               active: router.route === '/about',
             })}
           >
-            About
+            {t('about')}
           </a>
         </Link>
         <Link href="/meals">
@@ -73,7 +144,7 @@ const Header = () => {
               active: router.route === '/meals',
             })}
           >
-            All meals
+            {t('all_meals')}
           </a>
         </Link>
         <Link href="/compare">
@@ -82,7 +153,7 @@ const Header = () => {
               active: router.route === '/compare',
             })}
           >
-            Compare
+            {t('compare')}
           </a>
         </Link>
         <Link href="/mymeals">
@@ -91,7 +162,7 @@ const Header = () => {
               active: router.route === '/mymeals',
             })}
           >
-            My Meals
+            {t('my_meals')}
           </a>
         </Link>
         {user ? (
@@ -101,7 +172,7 @@ const Header = () => {
                 active: router.route === '/user',
               })}
             >
-              <span className="user-settings">Settings</span>
+              <span className="user-settings">{t('settings')}</span>
               <span className="user-icon">
                 <FaUser />
               </span>
@@ -115,7 +186,7 @@ const Header = () => {
                   active: router.route === '/login',
                 })}
               >
-                Log In
+                {t('log_in')}
               </a>
             </Link>
             <Link href="/signup">
@@ -124,7 +195,7 @@ const Header = () => {
                   active: router.route === '/signup',
                 })}
               >
-                Sign Up
+                {t('sign_up')}
               </a>
             </Link>
           </Fragment>
@@ -140,8 +211,8 @@ const Header = () => {
           display: flex;
           align-items: center;
           justify-content: flex-end;
-          width: calc(100% - 80px);
-          padding: 20px 40px;
+          width: calc(100% - 40px);
+          padding: 20px;
           background-color: ${theme.colors.darkBackground};
           z-index: 1;
         }
@@ -174,7 +245,6 @@ const Header = () => {
         }
         .home {
           display: flex;
-          margin-right: auto;
           margin-left: 0;
           padding: 0;
           font-size: 48px;
@@ -183,8 +253,42 @@ const Header = () => {
         .home:hover {
           opacity: 1;
         }
-        .new {
+        .logo-container {
           display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding-left: 10px;
+          color: ${theme.colors.white};
+        }
+        .foodprint {
+          font-size: 14px;
+          line-height: 16px;
+        }
+        .calculator {
+          font-size: 13px;
+          line-height: 15px;
+        }
+        .spori {
+          font-size: 30px;
+        }
+        .language-container {
+          display: flex;
+          align-items: center;
+          margin-right: auto;
+          margin-left: 20px;
+        }
+        .language-select {
+          margin-left: -50px;
+          width: 90px;
+        }
+        .flag {
+          width: 35px;
+          height: ${language === 'is' ? '25.2px' : '17.5px'};
+          padding-left: 5px;
+        }
+        .new {
+          display: none;
           position: fixed;
           margin: 0;
           padding: 0;
@@ -203,7 +307,7 @@ const Header = () => {
         }
         .land {
           position: fixed;
-          left: 43px;
+          left: 23px;
           height: 43px;
           width: 43px;
           margin-left: 0;
@@ -221,6 +325,13 @@ const Header = () => {
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .header {
+            width: calc(100% - 80px);
+            padding: 20px 40px;
+          }
+          .land {
+            left: 43px;
+          }
           .menu-items {
             padding: 20px 50px;
           }
@@ -231,6 +342,7 @@ const Header = () => {
             font-size: 48px;
           }
           .new {
+            display: flex;
             font-size: 32px;
           }
           .user {
@@ -257,10 +369,18 @@ const Header = () => {
             display: flex;
             align-items: center;
           }
+          .language-select {
+            margin-right: 0;
+          }
+          .new {
+            position: static;
+            margin-right: auto;
+            margin-left: 40px;
+          }
         }
       `}</style>
     </div>
   );
 };
 
-export default Header;
+export default withTranslation('common')(Header);

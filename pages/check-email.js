@@ -1,10 +1,11 @@
+import { withTranslation } from '../i18n';
 import Layout from '../components/MyLayout';
 import theme from '../styles/theme';
 import { FaPaperPlane, FaEnvelope } from 'react-icons/fa';
 
-const ForgotPassword = () => {
+const CheckEmail = ({ t }) => {
   return (
-    <Layout title="Check email">
+    <Layout title={t('check_email')} t={t}>
       <div className="check-email">
         <div className="icons">
           <span className="email-icon">
@@ -14,13 +15,10 @@ const ForgotPassword = () => {
             <FaPaperPlane />
           </span>
         </div>
-        <h3>Verification email sent!</h3>
+        <h3>{t('verification_email_sent')}</h3>
         <div className="check-email-text">
-          <p>
-            Please check your email inbox and click the "verify email" button within the email we
-            just sent you.
-          </p>
-          <p>If you have not yet received our email, give it a minute or check your spam folder.</p>
+          <p>{t('check_email_text_1')}</p>
+          <p>{t('check_email_text_2')}</p>
         </div>
 
         <style jsx>{`
@@ -60,4 +58,8 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+CheckEmail.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(CheckEmail);

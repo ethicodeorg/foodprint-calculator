@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import { Link } from '../i18n';
 import Select from 'react-select';
-import { userTypes, userTypeMap } from '../utils/constants';
+import { userTypes } from '../utils/constants';
 import theme from '../styles/theme';
 import Button from './Button';
 
@@ -14,20 +14,21 @@ const UserForm = ({
   showForgotPassword,
   buttonText,
   passwordPlaceholder,
+  t,
 }) => {
   const typeOptions = userTypes.map((type) => {
-    return { value: type, label: userTypeMap[type] };
+    return { value: type, label: t(type) };
   });
 
   return (
     <form className="user-form" onSubmit={onSubmit}>
       {errorMsg ? <p style={{ color: 'red' }}>{errorMsg}</p> : null}
       <label htmlFor="email">
-        <input id="email" type="email" name="email" placeholder="Email address" />
+        <input id="email" type="email" name="email" placeholder={t('email')} />
       </label>
       {showName && (
         <label htmlFor="name">
-          <input id="name" name="name" type="text" placeholder="Name" />
+          <input id="name" name="name" type="text" placeholder={t('name')} />
         </label>
       )}
       {showType && (
@@ -35,7 +36,7 @@ const UserForm = ({
           <Select
             inputId="type"
             name="type"
-            placeholder="Type"
+            placeholder={t('type')}
             options={typeOptions}
             instanceId="user-type"
           />
@@ -52,14 +53,14 @@ const UserForm = ({
             id="retypedPassword"
             type="password"
             name="retypedPassword"
-            placeholder="Retype password"
+            placeholder={t('retype_password')}
           />
         </label>
       )}
       <Button type="submit">{buttonText}</Button>
       {showForgotPassword && (
         <Link href="/forgot-password">
-          <a className="forgot-password">Forgot password</a>
+          <a className="forgot-password">{t('forgot_password')}</a>
         </Link>
       )}
 

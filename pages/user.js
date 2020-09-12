@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { Link, Router, withTranslation } from '../i18n';
 import Select from 'react-select';
 import { FaTimes, FaCheck } from 'react-icons/fa';
 import { useUser } from '../lib/hooks';
 import { setUserCookie } from '../utils/userCookie';
-import { userTypes, userTypeMap } from '../utils/constants';
+import { userTypes } from '../utils/constants';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Content from '../components/Content';
@@ -16,20 +15,19 @@ import Button from '../components/Button';
 import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
 
-const UserPage = () => {
-  const router = useRouter();
+const UserPage = ({ t }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [user, { mutate }] = useUser();
   const [tmpUser, setTmpUser] = useState({ _id: user?._id });
   const typeOptions = userTypes.map((type) => {
-    return { value: type, label: userTypeMap[type] };
+    return { value: type, label: t(type) };
   });
 
   useEffect(() => {
     // redirect to home if user is logger out
-    if (!user) router.replace('/');
+    if (!user) Router.replace('/');
   }, [user]);
 
   const handleLogout = async () => {
@@ -63,7 +61,7 @@ const UserPage = () => {
         const response = await res.json();
         // writing our user object to the state
         mutate({ user: response.user });
-        setSuccessMsg('Successfully saved!');
+        setSuccessMsg(t('successfully_saved'));
       } else {
         setErrorMsg(await res.text());
       }
@@ -73,18 +71,18 @@ const UserPage = () => {
   };
 
   return (
-    <Layout title="Settings">
+    <Layout title={t('settings')} t={t}>
       <Header />
       <Content>
-        <PageTitle>Settings</PageTitle>
+        <PageTitle>{t('settings')}</PageTitle>
         <Card>
           <div className="input-container">
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="name">{t('name')}:</label>
             <input
               id="name"
               name="name"
               type="text"
-              placeholder="Your name, e.g. brand name, company name, cook name, etc."
+              placeholder={t('name_placeholder')}
               value={tmpUser.name || user?.name || ''}
               onChange={(e) =>
                 setTmpUser({
@@ -95,12 +93,12 @@ const UserPage = () => {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="homepage">Homepage:</label>
+            <label htmlFor="homepage">{t('homepage')}:</label>
             <input
               id="homepage"
               name="homepage"
               type="text"
-              placeholder="Your homepage"
+              placeholder={t('homepage_placeholder')}
               value={tmpUser.homepage || user?.homepage || ''}
               onChange={(e) =>
                 setTmpUser({
@@ -111,7 +109,7 @@ const UserPage = () => {
             />
           </div>
           <div className="type-container">
-            <label>Type:</label>
+            <label>{t('type')}:</label>
             <div className="select-container">
               <Select
                 value={
@@ -119,7 +117,7 @@ const UserPage = () => {
                   typeOptions.find((t) => t.value === user?.type) ||
                   typeOptions[5]
                 }
-                placeholder="User type"
+                placeholder={t('user_type')}
                 onChange={(val) =>
                   setTmpUser({
                     ...tmpUser,
@@ -132,12 +130,12 @@ const UserPage = () => {
             </div>
           </div>
           <div className="input-container">
-            <label htmlFor="password">Change password:</label>
+            <label htmlFor="password">{t('change_password')}:</label>
             <input
               id="password"
               name="password"
               type="password"
-              placeholder="New password"
+              placeholder={t('new_password')}
               value={tmpUser.password || ''}
               onChange={(e) =>
                 setTmpUser({
@@ -148,12 +146,12 @@ const UserPage = () => {
             />
           </div>
           <div className="input-container">
-            <label htmlFor="confirm-password">Retype password:</label>
+            <label htmlFor="confirm-password">{t('retype_password')}:</label>
             <input
               id="confirm-password"
               name="confirm-password"
               type="password"
-              placeholder="Confirm new password"
+              placeholder={t('confirm_new_password')}
               value={tmpUser.retypedPassword || ''}
               onChange={(e) =>
                 setTmpUser({
@@ -181,9 +179,9 @@ const UserPage = () => {
           )}
           <div className="buttons-container">
             <Button remove onClick={handleLogout}>
-              Log Out
+              {t('log_out')}
             </Button>
-            <Button onClick={saveUser}>Save Changes</Button>
+            <Button onClick={saveUser}>{t('save_changes')}</Button>
           </div>
           {isLoading && <LoadingOnTop blockUI />}
         </Card>
@@ -274,4 +272,8 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+UserPage.getInitialProps = async () => ({
+  namespacesRequired: ['common'],
+});
+
+export default withTranslation('common')(UserPage);

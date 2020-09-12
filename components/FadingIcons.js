@@ -12,11 +12,15 @@ const FadingIcons = () => (
     </span>
     <style jsx>{`
       .utensils-icon-container {
+        display: flex;
+        align-items: center;
         margin: 0 5px;
         color: ${theme.colors.land};
         animation: colorfade2 30s linear 0s infinite;
       }
       .calculator-icon-container {
+        display: flex;
+        align-items: center;
         margin: 0 5px;
         color: ${theme.colors.land};
         animation: colorfade 30s linear 0s infinite;

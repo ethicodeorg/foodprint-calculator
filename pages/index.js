@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { FaCalculator, FaUtensils } from 'react-icons/fa';
-import Link from 'next/link';
+import { Link, withTranslation } from '../i18n';
+import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -8,38 +9,38 @@ import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 
-const Index = () => {
+const Index = ({ t }) => {
+  const calculateText = splitTranslationWithLink(t('calculate_environmental_footprint', SPLITTER));
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
     document.cookie = 'meals=;';
   });
 
   return (
-    <Layout>
+    <Layout t={t}>
       <Header />
       <div className="front-page">
-        <h1>The Foodprint Calculator</h1>
+        <h1>{t('real_price_of_food')}</h1>
         <h3>
           <span className="calc-container">
             <FaCalculator />
           </span>
-          Calculate the <span className="environmental">environmental</span> footprint of your meals
+          {calculateText.beforeLink}
+          <span className="environmental">{calculateText.linkText}</span>
+          {calculateText.afterLink}
           <span className="utensils-container">
             <FaUtensils />
           </span>
         </h3>
-        <p>
-          The Foodprint Calculator determines the environmental impact of a single meal, given a
-          list of its ingredients.
-        </p>
-        <Link href="/about">
-          <a className="about-link">This is how.</a>
+        <p>{t('main_function')}</p>
+        <Link href="/about?openSection=sources">
+          <a className="about-link">{t('this_is_how')}</a>
         </Link>
         <div className="button-container">
           <Button primary animate noPad>
-            <Link href="newmeal">
+            <Link href="/newmeal">
               <a className="lets-calculate">
-                Let's Calculate
+                {t('lets_calculate')}
                 <span className="calculator-container">
                   <FaCalculator />
                 </span>
@@ -87,7 +88,10 @@ const Index = () => {
           color: ${theme.colors.lightGreen};
         }
         h1 {
-          font-size: 60px;
+          display: flex;
+          flex-wrap: wrap;
+          max-width: 800px;
+          font-size: 50px;
           font-weight: normal;
           margin-top: 120px;
         }
@@ -133,7 +137,7 @@ const Index = () => {
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .front-page {
-            padding: 100px;
+            padding: 60px 200px;
           }
           .button-container {
             margin-top: 60px;
@@ -155,4 +159,8 @@ const Index = () => {
   );
 };
 
-export default Index;
+Index.getInitialProps = async () => ({
+  namespacesRequired: ['common', 'index'],
+});
+
+export default withTranslation('index')(Index);

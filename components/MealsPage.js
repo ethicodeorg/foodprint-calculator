@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '../i18n';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { FaCalculator } from 'react-icons/fa';
@@ -27,10 +27,11 @@ const MealsPage = ({
   emptyMessage,
   removeMeal,
   comparisons,
-  query,
+  queries,
   isValidating,
   mutate,
   addMealToCompare,
+  t,
 }) => {
   const [user] = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +117,7 @@ const MealsPage = ({
           <Button primary animate noPad>
             <Link href="/newmeal">
               <a className="create-meal">
-                Create meal
+                {t('create_meal')}
                 <span className="calculator-container">
                   <FaCalculator />
                 </span>
@@ -125,11 +126,11 @@ const MealsPage = ({
           </Button>
         </div>
       )}
-      {router.route === '/meals' && <Filters query={query} />}
+      {router.route === '/meals' && <Filters queries={queries} t={t} />}
       {router.route === '/compare' && (
         <div className="select-container">
           <Select
-            placeholder="Add meal to compare"
+            placeholder={t('add_to_compare')}
             onChange={(val) => addToComparisons(val.value)}
             options={mealOptions}
             styles={customStyles}
@@ -142,7 +143,7 @@ const MealsPage = ({
         {meals ? (
           meals.length ? (
             meals.map((meal) => {
-              return <Meal key={meal._id} meal={meal} deleteMeal={deleteMeal} />;
+              return <Meal key={meal._id} meal={meal} deleteMeal={deleteMeal} t={t} />;
             })
           ) : (
             <div className="no-results">{emptyMessage}</div>
@@ -169,13 +170,13 @@ const MealsPage = ({
         contentLabel="Example Modal"
         closeTimeoutMS={modalAnimationTime}
       >
-        <div className="confirm-message">Are you sure you want to delete this meal?</div>
+        <div className="confirm-message">{t('delete_sure')}</div>
         <div className="modal-button-container">
           <Button primary onClick={() => setShowConfirmModal(false)}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button primary remove onClick={() => confirmDelete()}>
-            Delete
+            {t('delete')}
           </Button>
         </div>
       </Modal>
