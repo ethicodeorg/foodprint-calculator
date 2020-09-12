@@ -82,15 +82,20 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   let foodOptions = [];
   for (let i = 0; i < foodData.length; i++) {
     for (let j = 0; j < foodData[i].entities.length; j++) {
-      foodOptions.push({
-        key: foodData[i].key,
-        value: `${foodData[i].key}${j}`,
-        label: t(foodData[i].entities[j].label),
-        rawLabel: foodData[i].entities[j].label,
-        averageWeight: foodData[i].entities[j].averageWeight,
-        gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
-        factor: foodData[i].entities[j].factor,
-      });
+      const label = t(foodData[i].entities[j].label);
+
+      // No need to add the same entry twice
+      if (!foodOptions.find((option) => option.label === label)) {
+        foodOptions.push({
+          key: foodData[i].key,
+          value: `${foodData[i].key}${j}`,
+          label,
+          rawLabel: foodData[i].entities[j].label,
+          averageWeight: foodData[i].entities[j].averageWeight,
+          gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
+          factor: foodData[i].entities[j].factor,
+        });
+      }
     }
   }
   foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
