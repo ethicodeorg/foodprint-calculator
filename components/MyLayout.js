@@ -27,16 +27,20 @@ const Layout = ({ children, title = '', t }) => {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <div className="behind-background" />
       <div className="background" />
       {children}
       <div className="footer">
-        <div>
+        <div className="powered-by">
           {poweredBy.beforeLink}
-          <span className="ethicode">{poweredBy.linkText}</span>
+          <img className="ethicode" src="/ethicode-logo-white.png" />
         </div>
-        <div>
+        <div className="ethicode-link">
           <ExternalLink href="http://ethicode.org/">ethicode.org</ExternalLink>
         </div>
       </div>
@@ -71,9 +75,14 @@ const Layout = ({ children, title = '', t }) => {
           background-color: ${theme.colors.darkBackground};
           color: #fff;
         }
+        .powered-by,
+        .ethicode-link {
+          display: flex;
+          align-items: center;
+        }
         .ethicode {
-          color: ${theme.colors.eutro};
-          animation: colorfade 30s linear 0s infinite;
+          height: 30px;
+          margin-left: 10px;
         }
 
         @keyframes colorfade {

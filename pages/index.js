@@ -90,7 +90,7 @@ const Index = ({ t }) => {
         h1 {
           display: flex;
           flex-wrap: wrap;
-          max-width: 800px;
+          max-width: 792px;
           font-size: 50px;
           font-weight: normal;
           margin-top: 120px;
