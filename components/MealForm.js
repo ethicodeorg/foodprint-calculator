@@ -80,7 +80,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
 
   let foodOptions = [];
-  for (let i = 0; i < foodData.length; i++) {
+  for (let i = 0; i < foodData?.length; i++) {
     for (let j = 0; j < foodData[i].entities.length; j++) {
       const label = t(foodData[i].entities[j].label);
 
@@ -195,8 +195,12 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIngredients(temp);
   };
 
-  const addIngredient = () => {
-    const food = foodData.find((f) => f.key === selectedIngredient.key);
+  const addIngredient = async () => {
+    setIsLoading(true);
+    const res = await fetch(`api/foods?key=${selectedIngredient.key}`);
+    const json = await res.json();
+    const food = json.foods[0];
+    console.log(food);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
@@ -258,6 +262,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIsAdding(false);
     setIsAddingTransport(false);
     setAmountUnit(amountUnitOptions[0].value);
+    setIsLoading(false);
   };
 
   // When ingredient is selected we add quantity and volume options if applicaple
@@ -716,7 +721,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
 };
 
 const mapStateToProps = (state) => ({
-  foodData: state.foodData,
   transportData: state.transportEmissions,
 });
 
