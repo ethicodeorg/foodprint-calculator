@@ -31,16 +31,13 @@ const Index = ({ t }) => {
         <div className="purpose-container">
           <div className="purpose">
             <Card seeThrough dark>
-              <p>{t('foody_purpose')}</p>
+              <p>{t('food_e_purpose')}</p>
               <p>{t('idea')}</p>
-              <p>{t('foody_function')}</p>
-              <p>
-                {t('how_possible')}{' '}
-                <Link href="/about">
-                  <a className="about-link">{t('read_more')}</a>
-                </Link>
-                .
-              </p>
+              <p>{t('food_e_function')}</p>
+              <Link href="/about">
+                <a className="about-link">{t('read_more')}</a>
+              </Link>
+              .
             </Card>
           </div>
         </div>
@@ -108,7 +105,6 @@ const Index = ({ t }) => {
           color: ${theme.colors.aqua};
           text-decoration: none;
           font-size: 16px;
-          font-style: italic;
         }
         .about-link:hover {
           opacity: 0.7;
@@ -139,7 +135,6 @@ const Index = ({ t }) => {
         }
         p {
           font-size: 16px;
-          font-style: italic;
           margin: 0 0 20px;
         }
 

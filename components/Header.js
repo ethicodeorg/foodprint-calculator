@@ -68,7 +68,7 @@ const Header = ({ t, i18n }) => {
           <div className="logo-container">
             <img
               className="earth-logo"
-              src={`/${language === 'is' ? 'spori' : 'foody'}-logo.png`}
+              src={`/${language === 'is' ? 'spori' : 'foode'}-logo.png`}
             />
           </div>
         </a>
