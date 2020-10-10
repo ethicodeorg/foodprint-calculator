@@ -1,5 +1,6 @@
 import { FaChevronDown } from 'react-icons/fa';
 import classNames from 'classnames';
+import theme from '../styles/theme';
 
 const ExpandArrow = ({ isReversed, big }) => (
   <span
