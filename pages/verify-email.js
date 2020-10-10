@@ -74,7 +74,6 @@ const VerifyEmail = ({ t, i18n }) => {
 
       <style jsx>{`
         .verify-email {
-          height: 100vh;
           padding: 150px 20px;
           text-align: center;
         }

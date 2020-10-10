@@ -59,8 +59,7 @@ const Index = ({ t }) => {
 
       <style jsx>{`
         .front-page {
-          min-height: calc(100vh - 170px);
-          padding: 40px 0;
+          padding: 40px 0 150px;
           margin: 0 auto;
           color: #fff;
         }
@@ -174,7 +173,7 @@ const Index = ({ t }) => {
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .front-page {
             max-width: 1320px;
-            padding: 60px 40px;
+            padding: 60px 40px 150px;
           }
           .headline {
             margin: 150px 0 50px;
@@ -193,7 +192,7 @@ const Index = ({ t }) => {
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .front-page {
-            padding: 60px 100px;
+            padding: 60px 100px 150px;
           }
           .button-container {
             margin-top: 60px;

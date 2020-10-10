@@ -46,7 +46,8 @@ const Layout = ({ children, title = '', t }) => {
       </div>
       <style jsx>{`
         .main {
-          min-height: calc(100vh - 198px);
+          position: relative;
+          min-height: 100vh;
           font-family: ${theme.fontFamily.default};
           color: ${theme.colors.text};
           background-color: transparent;
@@ -70,10 +71,13 @@ const Layout = ({ children, title = '', t }) => {
           background-size: cover;
         }
         .footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 20px 40px;
+          padding: 20px 0;
           background-color: ${theme.colors.darkBackground};
           color: #fff;
         }
@@ -81,6 +85,12 @@ const Layout = ({ children, title = '', t }) => {
         .ethicode-link {
           display: flex;
           flex-direction: column;
+        }
+        .powered-by {
+          padding-left: 40px;
+        }
+        .ethicode-link {
+          padding-right: 40px;
         }
         .ethicode {
           height: 30px;
