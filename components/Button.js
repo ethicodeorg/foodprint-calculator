@@ -56,7 +56,8 @@ const Button = ({
         font-size: 16px;
       }
       .button-primary {
-        font-size: 20px;
+        flex-wrap: wrap;
+        font-size: 22px;
         margin: 0;
         min-width: 130px;
         padding: ${noPad ? '0' : '10px 20px'};
@@ -73,8 +74,7 @@ const Button = ({
         border-radius: 100%;
       }
       .button-small {
-        min-width: auto;
-        font-size: inherit;
+        font-size: 16px;
       }
       .button:hover {
         opacity: 0.7;

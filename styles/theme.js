@@ -1,6 +1,6 @@
 const theme = {
   fontFamily: {
-    default: 'Ubuntu, sans-serif',
+    default: 'Montserrat, sans-serif',
   },
   colors: {
     text: '#222',
@@ -8,6 +8,7 @@ const theme = {
     darkBackground: '#222',
     link: '#1eaaf1',
     border: '#ccc',
+    darkBorder: '#444',
     land: '#3D9970',
     ghg: '#FF4136',
     water: '#0074D9',

@@ -193,7 +193,7 @@ const MealsPage = ({
           font-size: 14px;
         }
         .meals-page {
-          min-height: 100vh;
+          min-height: calc(100vh - 130px);
           padding: 2px 0;
           margin: 0 auto;
         }

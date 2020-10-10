@@ -8,13 +8,14 @@ const Content = ({ children }) => (
       .content {
         padding: 2px 0;
         margin: 0 auto;
-        min-height: 100vh;
+        min-height: calc(100vh - 94px);
       }
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {
         .content {
           padding: 30px;
           max-width: 800px;
+          min-height: calc(100vh - 150px);
         }
       }
     `}</style>

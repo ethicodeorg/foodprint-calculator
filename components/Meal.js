@@ -173,7 +173,7 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
           padding: 0;
           font-size: 22px;
           color: ${theme.colors.eutro};
-          background-color: #fff;
+          background-color: transparent;
           opacity: 1;
           transition: opacity 0.2s;
           cursor: pointer;

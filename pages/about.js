@@ -14,7 +14,7 @@ import theme from '../styles/theme';
 
 const About = ({ t }) => {
   const router = useRouter();
-  const { openSection = 'project' } = router.query;
+  const { openSection } = router.query;
   const landUseText = splitTranslationWithLink(t('land_use_text', SPLITTER));
   const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text', SPLITTER));
   const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text', SPLITTER));
@@ -37,14 +37,18 @@ const About = ({ t }) => {
       <Header />
       <Content>
         <PageTitle>{t('about_fc')}</PageTitle>
-        <Card>
-          <AboutSection title={t('project')} isOpen={openSection === 'project'}>
+        <Card seeThrough dark>
+          <AboutSection title={t('project')} isOpen={openSection === 'project' || !openSection}>
             <p>{t('fc_function')}</p>
-            <CardTitle sub>{t('why_question')}</CardTitle>
+            <CardTitle sub color={theme.colors.white}>
+              {t('why_question')}
+            </CardTitle>
             <p>
               {t('why_answer_1')} {t('why_answer_2')} {t('why_answer_3')}
             </p>
-            <CardTitle sub>{t('how_question')}</CardTitle>
+            <CardTitle sub color={theme.colors.white}>
+              {t('how_question')}
+            </CardTitle>
             <p>
               {t('how_answer_1')} {t('how_answer_2')} {t('how_answer_3')}
             </p>
@@ -55,7 +59,10 @@ const About = ({ t }) => {
                 <ul>
                   <li>
                     {landUseText.beforeLink}
-                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
+                    <ExternalLink
+                      color={theme.colors.aqua}
+                      href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
+                    >
                       {landUseText.linkText}
                     </ExternalLink>{' '}
                     {landUseText.afterLink}
@@ -67,7 +74,10 @@ const About = ({ t }) => {
                 <ul>
                   <li>
                     {ghgEmissionsText.beforeLink}
-                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
+                    <ExternalLink
+                      color={theme.colors.aqua}
+                      href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
+                    >
                       {ghgEmissionsText.linkText}
                     </ExternalLink>{' '}
                     {ghgEmissionsText.afterLink}
@@ -79,7 +89,10 @@ const About = ({ t }) => {
                 <ul>
                   <li>
                     {waterWithdrawalsText.beforeLink}
-                    <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
+                    <ExternalLink
+                      color={theme.colors.aqua}
+                      href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
+                    >
                       {waterWithdrawalsText.linkText}
                     </ExternalLink>{' '}
                     {waterWithdrawalsText.afterLink}
@@ -91,7 +104,10 @@ const About = ({ t }) => {
                 <ul>
                   <li>
                     {eutrophyingEmissionsText.beforeLink}
-                    <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
+                    <ExternalLink
+                      color={theme.colors.aqua}
+                      href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
+                    >
                       {eutrophyingEmissionsText.linkText}
                     </ExternalLink>{' '}
                     {eutrophyingEmissionsText.afterLink}
@@ -99,28 +115,28 @@ const About = ({ t }) => {
                 </ul>
               </li>
             </ol>
-            <CardTitle sub>{t('story_title')}</CardTitle>
-            <p>
-              {storyText.beforeLink}
-              <ExternalLink href="http://ethicode.org/">{storyText.linkText}</ExternalLink>
-              {storyText.afterLink}
-            </p>
           </AboutSection>
-          <AboutSection title={t('data_title')} isOpen={openSection === 'sources'}>
+          <AboutSection title={t('data_title')} isOpen={openSection === 'sources' || !openSection}>
             <p>
               {dataText.beforeLink}
-              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food"
+              >
                 {dataText.linkText}
               </ExternalLink>
               {dataText.afterLink}
-              <ExternalLink href="https://science.sciencemag.org/content/360/6392/987">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://science.sciencemag.org/content/360/6392/987"
+              >
                 {dataText.linkText2}
               </ExternalLink>
               {dataText.afterLink2}
             </p>
             <p>{t('data_text_2')}</p>
           </AboutSection>
-          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda'}>
+          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda' || !openSection}>
             <p>{t('rda_text')}</p>
             <CardTitle sub color={theme.colors.land}>
               <span className="header-icon">
@@ -130,7 +146,10 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {landUseRDA.beforeLink}
-              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
+              >
                 {landUseRDA.linkText}
               </ExternalLink>
               {landUseRDA.afterLink}
@@ -143,7 +162,10 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {ghgEmissionsRDA.beforeLink}
-              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
+              >
                 {ghgEmissionsRDA.linkText}
               </ExternalLink>
               {ghgEmissionsRDA.afterLink}
@@ -156,11 +178,17 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {waterWithdrawalsRDA.beforeLink}
-              <ExternalLink href="https://ourworldindata.org/water-use-stress#global-freshwater-use">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/water-use-stress#global-freshwater-use"
+              >
                 {waterWithdrawalsRDA.linkText}
               </ExternalLink>{' '}
               {waterWithdrawalsRDA.afterLink}
-              <ExternalLink href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
+              >
                 {waterWithdrawalsRDA.linkText2}
               </ExternalLink>
               {waterWithdrawalsRDA.afterLink2}
@@ -173,22 +201,35 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {eutrophyingEmissionsRDA.beforeLink}
-              <ExternalLink href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
+              >
                 {eutrophyingEmissionsRDA.linkText}
               </ExternalLink>
               {eutrophyingEmissionsRDA.afterLink}
-              <ExternalLink href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/"
+              >
                 {eutrophyingEmissionsRDA.linkText2}
               </ExternalLink>{' '}
               {eutrophyingEmissionsRDA.afterLink2}
             </p>
             <p>{t('rda_future')}</p>
           </AboutSection>
-          <AboutSection title={t('how_to_use_title')} isOpen={openSection === 'how-to-use'}>
+          <AboutSection
+            title={t('how_to_use_title')}
+            isOpen={openSection === 'how-to-use' || !openSection}
+          >
             <p>{t('how_to_use_text')}</p>
-            <CardTitle sub>{t('sub_ingredients_title')}</CardTitle>
+            <CardTitle sub color={theme.colors.white}>
+              {t('sub_ingredients_title')}
+            </CardTitle>
             <p>{t('sub_ingredients_text')}</p>
-            <CardTitle sub>{t('dried_ingredients_title')}</CardTitle>
+            <CardTitle sub color={theme.colors.white}>
+              {t('dried_ingredients_title')}
+            </CardTitle>
             <p>{t('dried_ingredients_text')}</p>
             <ol>
               <li>{t('dried_ingredients_point_1')}</li>
@@ -196,22 +237,42 @@ const About = ({ t }) => {
               <li>{t('dried_ingredients_point_3')}</li>
             </ol>
             <p>{t('dried_ingredients_text_2')}</p>
-            <CardTitle sub>{t('beef_dairy_herds_title')}</CardTitle>
+            <CardTitle sub color={theme.colors.white}>
+              {t('beef_dairy_herds_title')}
+            </CardTitle>
             <p>
               {beefDairyHerdsText.beforeLink}
-              <ExternalLink href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf">
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf"
+              >
                 {beefDairyHerdsText.linkText}
               </ExternalLink>
               {beefDairyHerdsText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection title={t('accuracy_title')} isOpen={openSection === 'accuracy'}>
+          <AboutSection
+            title={t('accuracy_title')}
+            isOpen={openSection === 'accuracy' || !openSection}
+          >
             <p>{t('accuracy_text')}</p>
           </AboutSection>
-          <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
+          <AboutSection title={t('story_title')} isOpen={openSection === 'story' || !openSection}>
+            <p>
+              {storyText.beforeLink}
+              <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
+                {storyText.linkText}
+              </ExternalLink>
+              {storyText.afterLink}
+            </p>
+          </AboutSection>
+          <AboutSection
+            title={t('support_title')}
+            isOpen={openSection === 'support' || !openSection}
+          >
             <p>
               {supportText.beforeLink}
-              <ExternalLink email href="mailto:ethicode@ethicode.org">
+              <ExternalLink color={theme.colors.aqua} email href="mailto:ethicode@ethicode.org">
                 {supportText.linkText}
               </ExternalLink>
               {supportText.afterLink}
@@ -230,6 +291,9 @@ const About = ({ t }) => {
         }
         li {
           margin-bottom: 10px;
+        }
+        p {
+          margin-bottom: 30px;
         }
       `}</style>
     </Layout>

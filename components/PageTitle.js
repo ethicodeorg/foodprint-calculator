@@ -15,7 +15,7 @@ const PageTitle = ({ children }) => (
         font-size: 32px;
         font-weight: normal;
         text-align: center;
-        color: #fff;
+        color: ${theme.colors.white};
       }
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {

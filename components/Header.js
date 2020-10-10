@@ -66,9 +66,7 @@ const Header = ({ t, i18n }) => {
       <Link href="/">
         <a className="link home">
           <div className="logo-container">
-            {language === 'en' && (
-              <img className="earth-logo" src="/foodprint-calculator-logo.png" />
-            )}
+            {language === 'en' && <img className="earth-logo" src="/foody-logo.png" />}
             {language === 'is' && <img className="earth-logo" src="/spori-logo.png" />}
           </div>
         </a>
@@ -190,7 +188,7 @@ const Header = ({ t, i18n }) => {
           display: block;
           position: fixed;
           top: 88px;
-          right: ${isMenuOpen ? '0' : '-220px'};
+          right: ${isMenuOpen ? '0' : '-230px'};
           padding: 10px 40px;
           background-color: ${theme.colors.darkBackground};
           transition: right 0.5s;

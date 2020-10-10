@@ -13,11 +13,18 @@ const AboutSection = ({ title, children, isOpen }) => {
   return (
     <div className="about-section">
       <Button clear title onClick={() => setIsExpanded(!isExpanded)}>
-        <CardTitle>{title}</CardTitle>
         <ExpandArrow isReversed={isExpanded} big />
+        <CardTitle color={theme.colors.white}>{title}</CardTitle>
       </Button>
       {isExpanded && children}
-      <Separator />
+      <Separator dark />
+
+      <style jsx>{`
+        .about-section {
+          margin: 0;
+          color: #fff;
+        }
+      `}</style>
     </div>
   );
 };

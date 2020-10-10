@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { withTranslation } from '../i18n';
 import { initGA, logPageView } from '../utils/analytics';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
@@ -16,6 +17,7 @@ const Layout = ({ children, title = '', t }) => {
   });
   const headTitle = title ? `${title} | ${t('foodprint_calculator')}` : t('foodprint_calculator');
   const poweredBy = splitTranslationWithLink(t('powered_by', SPLITTER));
+  const router = useRouter();
 
   return (
     <div className="main">
@@ -24,11 +26,7 @@ const Layout = ({ children, title = '', t }) => {
         <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
         <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;1,300&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap"
           rel="stylesheet"
         />
       </Head>
@@ -41,15 +39,19 @@ const Layout = ({ children, title = '', t }) => {
           <img className="ethicode" src="/ethicode-logo-white.png" />
         </div>
         <div className="ethicode-link">
-          <ExternalLink href="http://ethicode.org/">ethicode.org</ExternalLink>
+          <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
+            ethicode.org
+          </ExternalLink>
         </div>
       </div>
       <style jsx>{`
         .main {
-          min-height: 100vh;
+          min-height: calc(100vh - 198px);
           font-family: ${theme.fontFamily.default};
           color: ${theme.colors.text};
           background-color: transparent;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: auto;
         }
         .behind-background {
           position: fixed;
@@ -70,37 +72,18 @@ const Layout = ({ children, title = '', t }) => {
         .footer {
           display: flex;
           justify-content: space-between;
-          padding: 40px;
-          margin-top: 50px;
+          align-items: center;
+          padding: 20px 40px;
           background-color: ${theme.colors.darkBackground};
           color: #fff;
         }
         .powered-by,
         .ethicode-link {
           display: flex;
-          align-items: center;
+          flex-direction: column;
         }
         .ethicode {
           height: 30px;
-          margin-left: 10px;
-        }
-
-        @keyframes colorfade {
-          0% {
-            color: ${theme.colors.eutro};
-          }
-          20% {
-            color: ${theme.colors.fuchsia};
-          }
-          40% {
-            color: ${theme.colors.orange};
-          }
-          80% {
-            color: ${theme.colors.ghg};
-          }
-          100% {
-            color: ${theme.colors.eutro};
-          }
         }
       `}</style>
     </div>

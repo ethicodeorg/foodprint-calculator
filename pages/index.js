@@ -8,9 +8,10 @@ import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
+import Card from '../components/Card';
 
 const Index = ({ t }) => {
-  const calculateText = splitTranslationWithLink(t('calculate_environmental_footprint', SPLITTER));
+  const headlineText = splitTranslationWithLink(t('real_price_of_food', SPLITTER));
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
     document.cookie = 'meals=;';
@@ -20,29 +21,35 @@ const Index = ({ t }) => {
     <Layout t={t}>
       <Header />
       <div className="front-page">
-        <h1>{t('real_price_of_food')}</h1>
-        <h3>
-          <span className="calc-container">
-            <FaCalculator />
-          </span>
-          {calculateText.beforeLink}
-          <span className="environmental">{calculateText.linkText}</span>
-          {calculateText.afterLink}
-          <span className="utensils-container">
-            <FaUtensils />
-          </span>
-        </h3>
-        <p>{t('main_function')}</p>
-        <Link href="/about?openSection=sources">
-          <a className="about-link">{t('this_is_how')}</a>
-        </Link>
+        <div className="headline">
+          <h1>
+            {headlineText.beforeLink}
+            <span className="true">{headlineText.linkText}</span>
+            {headlineText.afterLink}
+          </h1>
+        </div>
+        <div className="purpose-container">
+          <div className="purpose">
+            <Card seeThrough dark>
+              <p>{t('foody_purpose')}</p>
+              <p>{t('idea')}</p>
+              <p>{t('foody_function')}</p>
+              <Link href="/about">
+                <a className="about-link">{t('this_is_how')}</a>
+              </Link>
+            </Card>
+          </div>
+        </div>
         <div className="button-container">
           <Button primary animate noPad>
             <Link href="/newmeal">
-              <a className="lets-calculate">
-                {t('lets_calculate')}
-                <span className="calculator-container">
+              <a className="calculate">
+                <span className="calc-container">
                   <FaCalculator />
+                </span>
+                {t('calculate_environmental_footprint')}
+                <span className="utensils-container">
+                  <FaUtensils />
                 </span>
               </a>
             </Link>
@@ -52,16 +59,28 @@ const Index = ({ t }) => {
 
       <style jsx>{`
         .front-page {
-          min-height: 90vh;
-          padding: 40px 20px;
+          min-height: calc(100vh - 170px);
+          padding: 40px 0;
           margin: 0 auto;
           color: #fff;
+        }
+        .headline {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 120px;
+          padding: 0 20px;
+        }
+        .purpose-container {
+          display: flex;
+          justify-content: space-around;
         }
         .button-container {
           display: flex;
           justify-content: space-around;
-          margin-top: 40px;
-          width: 100%;
+          margin: 40px 0;
+          padding: 0 20px;
+          width: calc(100% - 40px);
+          animation: pulse 10s linear 0s infinite;
         }
         .calculator-container {
           display: flex;
@@ -69,79 +88,117 @@ const Index = ({ t }) => {
           font-size: 14px;
         }
         .utensils-container {
+          display: flex;
           font-size: 20px;
           margin-left: 10px;
         }
         .calc-container {
+          display: flex;
           font-size: 20px;
           margin-right: 10px;
         }
+        .link-container {
+          display: flex;
+          justify-content: space-around;
+        }
         .about-link {
-          color: ${theme.colors.lightGreen};
+          color: ${theme.colors.aqua};
           text-decoration: none;
           font-size: 16px;
+          font-style: italic;
         }
         .about-link:hover {
           opacity: 0.7;
         }
+        .true {
+          color: ${theme.colors.eutro};
+          animation: colorfade 10s linear 0s infinite;
+        }
         .environmental {
-          color: ${theme.colors.lightGreen};
+          margin: 0 6px;
         }
         h1 {
-          display: flex;
-          flex-wrap: wrap;
-          max-width: 792px;
+          margin: 0 auto;
           font-size: 50px;
           font-weight: normal;
-          margin-top: 120px;
+          text-align: center;
         }
-        h3 {
-          font-size: 24px;
+        .calculate {
+          display: flex;
+          align-items: center;
+          margin: 20px;
           font-weight: normal;
+          color: ${theme.colors.white};
+          text-decoration: none;
+          text-align: center;
         }
         p {
           font-size: 16px;
-          margin: 20px 0;
+          font-style: italic;
+          margin: 0 0 20px;
         }
-        .lets-calculate {
-          display: flex;
-          align-items: center;
-          padding: 10px 20px;
-          color: #fff;
-          text-decoration: none;
+
+        @keyframes colorfade {
+          0% {
+            color: ${theme.colors.eutro};
+          }
+          20% {
+            color: ${theme.colors.fuchsia};
+          }
+          40% {
+            color: ${theme.colors.orange};
+          }
+          80% {
+            color: ${theme.colors.ghg};
+          }
+          100% {
+            color: ${theme.colors.eutro};
+          }
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+          }
+          94%,
+          97%,
+          100% {
+            transform: scale(1);
+          }
+          95.5%,
+          98.5% {
+            transform: scale(1.03);
+          }
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .front-page {
-            max-width: 1520px;
+            max-width: 1320px;
             padding: 60px 40px;
+          }
+          .headline {
+            margin: 150px 0 50px;
           }
           .about-link {
             font-size: 20px;
           }
           h1 {
             font-size: 72px;
-            margin-top: 150px;
-          }
-          h3 {
-            font-size: 32px;
           }
           p {
-            max-width: 900px;
+            max-width: 700px;
             font-size: 20px;
-          }
-          .lets-calculate {
-            padding: 15px 40px;
           }
         }
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .front-page {
-            padding: 60px 200px;
+            padding: 60px 100px;
           }
           .button-container {
             margin-top: 60px;
-            width: 70%;
+            padding: 0;
+            width: 100%;
           }
           .utensils-container,
           .calc-container {
@@ -151,7 +208,8 @@ const Index = ({ t }) => {
             font-size: 104px;
           }
           h3 {
-            font-size: 40px;
+            font-size: 36px;
+            text-align: center;
           }
         }
       `}</style>
