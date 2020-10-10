@@ -20,7 +20,7 @@ const Layout = ({ children, title = '', t }) => {
   return (
     <div className="main">
       <Head>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/earth.png" />
         <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
         <link
