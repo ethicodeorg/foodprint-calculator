@@ -66,8 +66,10 @@ const Header = ({ t, i18n }) => {
       <Link href="/">
         <a className="link home">
           <div className="logo-container">
-            {language === 'en' && <img className="earth-logo" src="/foody-logo.png" />}
-            {language === 'is' && <img className="earth-logo" src="/spori-logo.png" />}
+            <img
+              className="earth-logo"
+              src={`/${language === 'is' ? 'spori' : 'foody'}-logo.png`}
+            />
           </div>
         </a>
       </Link>
@@ -88,11 +90,6 @@ const Header = ({ t, i18n }) => {
           />
         </div>
       </div>
-      <Link href="/newmeal">
-        <a className="link new">
-          <FadingIcons />
-        </a>
-      </Link>
       <div className="menu-items">
         <Link href="/about">
           <a
@@ -253,15 +250,6 @@ const Header = ({ t, i18n }) => {
           height: ${language === 'is' ? '25.2px' : '17.5px'};
           padding-left: 5px;
         }
-        .new {
-          display: none;
-          position: fixed;
-          margin: 0;
-          padding: 0;
-          left: calc(50% - 42px);
-          top: 28px;
-          font-size: 32px;
-        }
         .user {
           display: flex;
           padding: 0;
@@ -295,8 +283,6 @@ const Header = ({ t, i18n }) => {
           .home {
             font-size: 48px;
           }
-          .new {
-          }
           .user {
             font-size: 24px;
           }
@@ -326,8 +312,6 @@ const Header = ({ t, i18n }) => {
           }
           .language-select {
             margin-right: 0;
-          }
-          .new {
           }
         }
       `}</style>

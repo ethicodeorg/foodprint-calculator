@@ -22,7 +22,7 @@ const AboutSection = ({ title, children, isOpen }) => {
       <style jsx>{`
         .about-section {
           margin: 0;
-          color: #fff;
+          color: ${theme.colors.white};
         }
       `}</style>
     </div>

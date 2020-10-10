@@ -59,14 +59,14 @@ const Index = ({ t }) => {
 
       <style jsx>{`
         .front-page {
-          padding: 40px 0 150px;
+          padding: 40px 0 130px;
           margin: 0 auto;
           color: #fff;
         }
         .headline {
           display: flex;
           justify-content: space-between;
-          margin-top: 120px;
+          margin-top: 80px;
           padding: 0 20px;
         }
         .purpose-container {
@@ -88,12 +88,12 @@ const Index = ({ t }) => {
         }
         .utensils-container {
           display: flex;
-          font-size: 20px;
+          font-size: 26px;
           margin-left: 10px;
         }
         .calc-container {
           display: flex;
-          font-size: 20px;
+          font-size: 26px;
           margin-right: 10px;
         }
         .link-container {
@@ -173,10 +173,10 @@ const Index = ({ t }) => {
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .front-page {
             max-width: 1320px;
-            padding: 60px 40px 150px;
+            padding: 60px 40px 130px;
           }
           .headline {
-            margin: 150px 0 50px;
+            margin: 100px 0 50px;
           }
           .about-link {
             font-size: 20px;
@@ -192,7 +192,7 @@ const Index = ({ t }) => {
 
         @media only screen and (min-width: ${theme.sizes.tablet}) {
           .front-page {
-            padding: 60px 100px 150px;
+            padding: 60px 100px 130px;
           }
           .button-container {
             margin-top: 60px;

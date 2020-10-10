@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { withTranslation } from '../i18n';
 import { initGA, logPageView } from '../utils/analytics';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
@@ -17,7 +16,6 @@ const Layout = ({ children, title = '', t }) => {
   });
   const headTitle = title ? `${title} | ${t('foodprint_calculator')}` : t('foodprint_calculator');
   const poweredBy = splitTranslationWithLink(t('powered_by', SPLITTER));
-  const router = useRouter();
 
   return (
     <div className="main">
