@@ -1,11 +1,9 @@
 {
-  "future_begins_now": "The Future Begins Now",
-  "real_price_of_food": "The {{link_start}}True{{link_end}} Price Of Food",
-  "foody_purpose": "Foody is here to help us take better care of our planet through our food choices.",
-  "idea": "The idea is to give consumers a glimpse of the environmental impact of their meal options when confronted with selecting their next meal.",
-  "foody_function": "Foody is a tool for all kinds of meal creators to evaluate the environmental impact of their meals and present that information for their consumers.",
-  "calculate_environmental_footprint": "The Foodprint Calculator",
-  "main_function": "Foody determines the environmental impact of meals, with regards to land use, greenhouse gas emissions, water withdrawals and eutrophying emissions.",
-  "this_is_how": "This is how.",
-  "lets_calculate": "Let's calculate"
+  "start": "Start",
+  "true_price_of_food": "The {{link_start}}True{{link_end}} Price Of Food",
+  "foody_purpose": "Foody helps us take better care of our planet through our food choices.",
+  "idea": "The idea is to give consumers a glimpse of their meal options' environmental impact when selecting their next meal.",
+  "foody_function": "Foody is a new and innovative tool for all kinds of meal creators to evaluate their meals' environmental impact and present that information for their consumers.",
+  "how_possible": "How is that even possible?",
+  "read_more": "Read more"
 }

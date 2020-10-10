@@ -24,7 +24,7 @@ const Layout = ({ children, title = '', t }) => {
         <title>{headTitle}</title>
         <link href="https://fonts.googleapis.com/css?family=Nunito Sans" rel="stylesheet" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;1,500&family=Righteous&display=swap"
           rel="stylesheet"
         />
       </Head>

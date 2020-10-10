@@ -11,7 +11,7 @@ import theme from '../styles/theme';
 import Card from '../components/Card';
 
 const Index = ({ t }) => {
-  const headlineText = splitTranslationWithLink(t('real_price_of_food', SPLITTER));
+  const headlineText = splitTranslationWithLink(t('true_price_of_food', SPLITTER));
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
     document.cookie = 'meals=;';
@@ -34,9 +34,13 @@ const Index = ({ t }) => {
               <p>{t('foody_purpose')}</p>
               <p>{t('idea')}</p>
               <p>{t('foody_function')}</p>
-              <Link href="/about">
-                <a className="about-link">{t('this_is_how')}</a>
-              </Link>
+              <p>
+                {t('how_possible')}{' '}
+                <Link href="/about">
+                  <a className="about-link">{t('read_more')}</a>
+                </Link>
+                .
+              </p>
             </Card>
           </div>
         </div>
@@ -47,7 +51,7 @@ const Index = ({ t }) => {
                 <span className="calc-container">
                   <FaCalculator />
                 </span>
-                {t('calculate_environmental_footprint')}
+                {t('start').toUpperCase()}
                 <span className="utensils-container">
                   <FaUtensils />
                 </span>
@@ -89,12 +93,12 @@ const Index = ({ t }) => {
         .utensils-container {
           display: flex;
           font-size: 26px;
-          margin-left: 10px;
+          margin-left: 20px;
         }
         .calc-container {
           display: flex;
           font-size: 26px;
-          margin-right: 10px;
+          margin-right: 20px;
         }
         .link-container {
           display: flex;
@@ -126,6 +130,8 @@ const Index = ({ t }) => {
           display: flex;
           align-items: center;
           margin: 20px;
+          font-family: Righteous, cursive;
+          font-size: 36px;
           font-weight: normal;
           color: ${theme.colors.white};
           text-decoration: none;
