@@ -222,7 +222,7 @@ const Index = ({ t }) => {
             font-size: 72px;
           }
           p {
-            max-width: 700px;
+            max-width: 650px;
             font-size: 20px;
           }
         }
