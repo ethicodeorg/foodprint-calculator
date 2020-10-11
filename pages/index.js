@@ -97,8 +97,8 @@ const Index = ({ t }) => {
           display: flex;
         }
         .icon-container {
-          margin: 5px 15px 0 0;
-          font-size: 20px;
+          margin: 5px 25px 0 0;
+          font-size: 28px;
         }
         .globe-icon {
           color: ${theme.colors.aqua};
@@ -137,7 +137,7 @@ const Index = ({ t }) => {
           justify-content: space-around;
         }
         .about-link {
-          padding-left: 35px;
+          padding-left: 53px;
           color: ${theme.colors.aqua};
           text-decoration: none;
           font-size: 16px;
