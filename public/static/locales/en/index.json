@@ -1,8 +1,8 @@
 {
-  "future_begins_now": "The Future Begins Now",
-  "real_price_of_food": "The Real Price Of Food",
-  "calculate_environmental_footprint": "Calculate {{link_start}}the environmental foodprint{{link_end}} of your meals",
-  "main_function": "The Foodprint Calculator determines the environmental impact of meals, with regards to land use, greenhouse gas emissions, water withdrawals and eutrophying emissions.",
-  "this_is_how": "This is how.",
-  "lets_calculate": "Let's calculate"
+  "start": "Start",
+  "true_price_of_food": "The {{link_start}}True{{link_end}} Price Of Food",
+  "food_e_purpose": "FOOD·E helps us take better care of our planet through our food choices.",
+  "idea": "The idea is that given a glimpse of their meal options' environmental impact when selecting their next meal, consumers will choose environmentally friendlier meals more often.",
+  "food_e_function": "FOOD·E enables meal creators of all kinds and sizes to evaluate their meals' environmental impact and clearly present it for their consumers.",
+  "read_more": "Read more"
 }

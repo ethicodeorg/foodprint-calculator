@@ -35,7 +35,6 @@ const EmailVerified = ({ t }) => {
 
       <style jsx>{`
         .email-verified {
-          height: 100vh;
           padding: 150px 20px;
           text-align: center;
         }

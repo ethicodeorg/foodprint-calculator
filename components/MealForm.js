@@ -679,7 +679,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
               margin: 0 20px 20px 0;
             }
             .transport-mode-select {
-              min-width: 170px;
+              min-width: 182px;
               margin: 0 20px 20px 0;
             }
             .transport-type-select {
@@ -687,7 +687,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
               margin: 0 20px 20px 0;
             }
             .transport-unit-select {
-              min-width: 100px;
+              width: 158px;
               margin: 0 0 20px 0;
             }
             .add-button-container {

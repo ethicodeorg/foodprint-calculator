@@ -89,7 +89,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           <CardTitle>{`${t('foodprint')}${
             numberOfServings > 1 ? ` - ${t('per_person')}` : ''
           }`}</CardTitle>
-          {router.route === '/mymeals' && showDetails && (
+          {router.route === '/mymeals' && (
             <Tooltip title={t('download_report')} placement="right" arrow>
               <button className="download-button" onClick={() => downloadReport(meal)}>
                 <FaDownload />
@@ -246,7 +246,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           padding: 0;
           font-size: 22px;
           color: ${theme.colors.water};
-          background-color: #fff;
+          background-color: transparent;
           opacity: 1;
           transition: opacity 0.2s;
           cursor: pointer;
@@ -267,7 +267,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
             font-size: 14px;
           }
           .legend-name {
-            font-size: 18px;
+            font-size: 16px;
           }
           .value {
             font-size: 14px;

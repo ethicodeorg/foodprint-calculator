@@ -16,7 +16,7 @@ const CardTitle = ({ children, sub, color }) => (
 
       @media only screen and (min-width: ${theme.sizes.mobile}) {
         .card-title {
-          font-size: ${sub ? '24px' : '32px'};
+          font-size: ${sub ? '24px' : '28px'};
         }
       }
     `}</style>

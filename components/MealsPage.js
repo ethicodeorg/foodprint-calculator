@@ -193,8 +193,7 @@ const MealsPage = ({
           font-size: 14px;
         }
         .meals-page {
-          min-height: 100vh;
-          padding: 2px 0;
+          padding: 2px 0 120px;
           margin: 0 auto;
         }
         .meals-container {
@@ -254,7 +253,7 @@ const MealsPage = ({
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .meals-page {
-            padding: 20px;
+            padding: 20px 20px 120px;
             max-width: 1280px;
           }
           .create-meal {

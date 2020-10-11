@@ -1,15 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
-import {
-  FaGlobeEurope,
-  FaGlobeAfrica,
-  FaGlobeAsia,
-  FaGlobeAmericas,
-  FaHamburger,
-  FaPizzaSlice,
-  FaUser,
-} from 'react-icons/fa';
+import { FaHamburger, FaPizzaSlice, FaUser } from 'react-icons/fa';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Link, withTranslation } from '../i18n';
@@ -29,30 +21,6 @@ const Header = ({ t, i18n }) => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user] = useUser();
-
-  const getGlobe = () => {
-    switch (router.route) {
-      case '/':
-      case '/user':
-      case '/email-verified':
-        return <FaGlobeAmericas />;
-      case '/meals':
-      case '/meals/[id]':
-      case '/mymeals':
-      case '/mymeals/[id]':
-        return <FaGlobeAsia />;
-      case '/newmeal':
-      case '/signup':
-      case '/compare':
-        return <FaGlobeAfrica />;
-      case '/about':
-      case '/login':
-      case '/forgot-password':
-        return <FaGlobeEurope />;
-      default:
-        return <FaGlobeEurope />;
-    }
-  };
 
   const customStyles = {
     control: (provided, state) => ({
@@ -87,22 +55,21 @@ const Header = ({ t, i18n }) => {
       ...provided,
       width: '0px',
     }),
+    indicatorsContainer: (provided, state) => ({
+      ...provided,
+      display: typeof window !== 'undefined' && window.innerWidth < 600 ? 'none' : 'block',
+    }),
   };
 
   return (
     <div className="header">
-      <div className="land" />
       <Link href="/">
         <a className="link home">
-          {getGlobe()}
           <div className="logo-container">
-            {language === 'en' && (
-              <Fragment>
-                <div className="foodprint">FOODPRINT</div>
-                <div className="calculator">CALCULATOR</div>
-              </Fragment>
-            )}
-            {language === 'is' && <div className="spori">SPORI</div>}
+            <img
+              className="earth-logo"
+              src={`/${language === 'is' ? 'spori' : 'foode'}-logo.png`}
+            />
           </div>
         </a>
       </Link>
@@ -123,11 +90,6 @@ const Header = ({ t, i18n }) => {
           />
         </div>
       </div>
-      <Link href="/newmeal">
-        <a className="link new">
-          <FadingIcons />
-        </a>
-      </Link>
       <div className="menu-items">
         <Link href="/about">
           <a
@@ -216,11 +178,14 @@ const Header = ({ t, i18n }) => {
           background-color: ${theme.colors.darkBackground};
           z-index: 1;
         }
+        .earth-logo {
+          height: 48px;
+        }
         .menu-items {
           display: block;
           position: fixed;
           top: 88px;
-          right: ${isMenuOpen ? '0' : '-220px'};
+          right: ${isMenuOpen ? '0' : '-230px'};
           padding: 10px 40px;
           background-color: ${theme.colors.darkBackground};
           transition: right 0.5s;
@@ -246,6 +211,7 @@ const Header = ({ t, i18n }) => {
         .home {
           display: flex;
           margin-left: 0;
+          margin-right: auto;
           padding: 0;
           font-size: 48px;
           color: ${theme.colors.water};
@@ -258,7 +224,6 @@ const Header = ({ t, i18n }) => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding-left: 10px;
           color: ${theme.colors.white};
         }
         .foodprint {
@@ -275,26 +240,15 @@ const Header = ({ t, i18n }) => {
         .language-container {
           display: flex;
           align-items: center;
-          margin-right: auto;
-          margin-left: 20px;
         }
         .language-select {
           margin-left: -50px;
-          width: 90px;
+          width: 65px;
         }
         .flag {
           width: 35px;
           height: ${language === 'is' ? '25.2px' : '17.5px'};
           padding-left: 5px;
-        }
-        .new {
-          display: none;
-          position: fixed;
-          margin: 0;
-          padding: 0;
-          left: calc(50% - 42px);
-          top: 28px;
-          font-size: 32px;
         }
         .user {
           display: flex;
@@ -302,18 +256,9 @@ const Header = ({ t, i18n }) => {
         }
         .burger-container {
           display: flex;
+          margin-left: 10px;
           font-size: 32px;
           color: ${theme.colors.green};
-        }
-        .land {
-          position: fixed;
-          left: 23px;
-          height: 43px;
-          width: 43px;
-          margin-left: 0;
-          border-radius: 100%;
-          background-color: ${theme.colors.green};
-          z-index: -1;
         }
         .user-settings {
           display: inline;
@@ -329,9 +274,6 @@ const Header = ({ t, i18n }) => {
             width: calc(100% - 80px);
             padding: 20px 40px;
           }
-          .land {
-            left: 43px;
-          }
           .menu-items {
             padding: 20px 50px;
           }
@@ -341,12 +283,11 @@ const Header = ({ t, i18n }) => {
           .home {
             font-size: 48px;
           }
-          .new {
-            display: flex;
-            font-size: 32px;
-          }
           .user {
             font-size: 24px;
+          }
+          .language-select {
+            width: 90px;
           }
         }
 
@@ -371,11 +312,6 @@ const Header = ({ t, i18n }) => {
           }
           .language-select {
             margin-right: 0;
-          }
-          .new {
-            position: static;
-            margin-right: auto;
-            margin-left: 40px;
           }
         }
       `}</style>

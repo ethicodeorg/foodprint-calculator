@@ -20,7 +20,7 @@ const LoadingOnTop = ({ blockUI }) => (
         position: absolute;
         display: flex;
         justify-content: center;
-        left: calc(50% - 50px);
+        left: calc(50% - 75px);
         top: calc(50% - 100px);
       }
     `}</style>

@@ -1,5 +1,6 @@
 import { FaChevronDown } from 'react-icons/fa';
 import classNames from 'classnames';
+import theme from '../styles/theme';
 
 const ExpandArrow = ({ isReversed, big }) => (
   <span
@@ -11,8 +12,9 @@ const ExpandArrow = ({ isReversed, big }) => (
     <style jsx>{`
       .expand-arrow {
         display: flex;
-        margin-left: 10px;
+        margin-right: 10px;
         font-size: ${big ? '16px' : '10px'};
+        color: ${theme.colors.white};
         transition: 0.3s ease-in-out;
       }
       .expand-arrow-reversed {

@@ -5,7 +5,7 @@ import Button from './Button';
 
 const AboutMeal = ({ text, t }) => {
   const router = useRouter();
-  const [expanded, setExpanded] = useState(router.route === '/meals/[id]');
+  const [expanded, setExpanded] = useState(true);
 
   return (
     <div className="about-meal">

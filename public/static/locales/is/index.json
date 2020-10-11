@@ -1,8 +1,8 @@
 {
-  "future_begins_now": "Framtíðin byrjar núna",
-  "real_price_of_food": "Hið raunverulega verð matar",
-  "calculate_environmental_footprint": "Reiknaðu {{link_start}}umhverfisspor{{link_end}} máltíða þinna",
-  "main_function": "Spori ákvarðar umhverfisáhrif máltíða, hvað varðar landnotkun, losun gróðurhúsalofttegunda, vatnsnotkun og ofauðgun.",
-  "this_is_how": "Svona virkar það.",
-  "lets_calculate": "Búa til útreikning"
+  "start": "Byrja",
+  "true_price_of_food": "Hið {{link_start}}sanna{{link_end}} matarverð",
+  "food_e_purpose": "Spori hjálpar okkur að sjá betur um plánetuna okkar með matarvali.",
+  "idea": "Hugmyndin er að ef neytendum er gefin innsýn inn í umhverfisáhrif þeirra valkosta sem í boði eru, þegar staðið er frammi fyrir vali á næstu máltíð, munu umhverfisvænni máltíðir oftar verða fyrir valinu.",
+  "food_e_function": "Spori gerir sköpuðum máltíða af öllum stærðum og gerðum kleift að meta umhverfisáhrif rétta sinna og birta þau skilmerkilega fyrir neytendur sína.",
+  "read_more": "Lesa meira"
 }

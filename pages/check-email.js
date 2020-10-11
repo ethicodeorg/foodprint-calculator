@@ -32,7 +32,6 @@ const CheckEmail = ({ t }) => {
             font-size: 32px;
           }
           .check-email-text {
-            height: 100vh;
             max-width: 800px;
             padding: 20px 50px;
             margin: 0 auto;
