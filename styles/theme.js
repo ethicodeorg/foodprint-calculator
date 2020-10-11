@@ -20,6 +20,7 @@ const theme = {
     orange: '#FF851B',
     fuchsia: '#F012BE',
     white: '#FFF',
+    yellow: '#FFDC00',
   },
   sizes: {
     mobile: '600px',

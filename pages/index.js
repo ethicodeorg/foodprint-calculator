@@ -1,5 +1,11 @@
 import { useEffect } from 'react';
-import { FaCalculator, FaUtensils } from 'react-icons/fa';
+import {
+  FaCalculator,
+  FaUtensils,
+  FaGlobeAmericas,
+  FaLightbulb,
+  FaCheckCircle,
+} from 'react-icons/fa';
 import { Link, withTranslation } from '../i18n';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
@@ -28,18 +34,31 @@ const Index = ({ t }) => {
             {headlineText.afterLink}
           </h1>
         </div>
-        <div className="purpose-container">
-          <div className="purpose">
-            <Card seeThrough dark>
+        <div className="intro-container">
+          <Card seeThrough dark>
+            <div className="intro-item">
+              <div className="icon-container globe-icon">
+                <FaGlobeAmericas />
+              </div>
               <p>{t('food_e_purpose')}</p>
+            </div>
+            <div className="intro-item">
+              <div className="icon-container bulb-icon">
+                <FaLightbulb />
+              </div>
               <p>{t('idea')}</p>
+            </div>
+            <div className="intro-item">
+              <div className="icon-container check-icon">
+                <FaCheckCircle />
+              </div>
               <p>{t('food_e_function')}</p>
-              <Link href="/about">
-                <a className="about-link">{t('read_more')}</a>
-              </Link>
-              .
-            </Card>
-          </div>
+            </div>
+            <Link href="/about">
+              <a className="about-link">{t('read_more')}</a>
+            </Link>
+            .
+          </Card>
         </div>
         <div className="button-container">
           <Button primary animate noPad>
@@ -70,9 +89,25 @@ const Index = ({ t }) => {
           margin-top: 80px;
           padding: 0 20px;
         }
-        .purpose-container {
+        .intro-container {
           display: flex;
           justify-content: space-around;
+        }
+        .intro-item {
+          display: flex;
+        }
+        .icon-container {
+          margin: 5px 15px 0 0;
+          font-size: 20px;
+        }
+        .globe-icon {
+          color: ${theme.colors.aqua};
+        }
+        .bulb-icon {
+          color: ${theme.colors.yellow};
+        }
+        .check-icon {
+          color: ${theme.colors.green};
         }
         .button-container {
           display: flex;
@@ -102,6 +137,7 @@ const Index = ({ t }) => {
           justify-content: space-around;
         }
         .about-link {
+          padding-left: 35px;
           color: ${theme.colors.aqua};
           text-decoration: none;
           font-size: 16px;
