@@ -20,7 +20,7 @@ const MyMeals = ({ t }) => {
   const meals = userId ? data?.meals : localStorageMeals;
 
   return (
-    <Layout title={t('my_meals')} t={t}>
+    <Layout title={t('my_meals')} t={t} showFloater>
       <Header />
       <MealsPage
         isValidating={isValidating}

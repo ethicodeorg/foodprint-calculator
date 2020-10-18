@@ -69,8 +69,8 @@ const Button = ({
         background-color: ${theme.colors.eutro};
       }
       .button-round {
-        width: auto;
-        min-width: 63px;
+        width: 66px;
+        min-width: 66px;
         border-radius: 100%;
       }
       .button-small {
@@ -92,7 +92,7 @@ const Button = ({
       .animate:enabled:after {
         background: #fff;
         content: '';
-        height: 155px;
+        height: 162px;
         left: -75px;
         opacity: 0.2;
         position: absolute;
@@ -121,6 +121,9 @@ const Button = ({
           font-size: 24px;
           min-width: 180px;
           padding: ${noPad ? '0' : '15px 40px'};
+        }
+        .button-round {
+          min-width: 66px;
         }
       }
     `}</style>

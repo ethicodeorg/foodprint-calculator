@@ -33,7 +33,7 @@ const About = ({ t }) => {
   const supportText = splitTranslationWithLink(t('support_text', SPLITTER));
 
   return (
-    <Layout title={t('about')} t={t}>
+    <Layout title={t('about')} t={t} showFloater>
       <Header />
       <Content>
         <PageTitle>{t('about_fc')}</PageTitle>

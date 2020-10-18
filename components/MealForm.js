@@ -496,6 +496,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             border-radius: 4px;
             font-family: ${theme.fontFamily.default};
             font-size: 16px;
+            resize: none;
           }
           .meal-input {
             width: calc(100% - 20px);

@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
-import { withTranslation } from '../i18n';
+import { FaCalculator } from 'react-icons/fa';
+import { Link, withTranslation } from '../i18n';
 import { initGA, logPageView } from '../utils/analytics';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
+import Button from './Button';
 
-const Layout = ({ children, title = '', t }) => {
+const Layout = ({ children, title = '', t, showFloater }) => {
   useEffect(() => {
     if (!window.GA_INITIALIZED) {
       initGA();
@@ -31,6 +33,17 @@ const Layout = ({ children, title = '', t }) => {
       <div className="behind-background" />
       <div className="background" />
       {children}
+      {showFloater && <div className="create-button">
+        <Button primary animate noPad round>
+          <Link href="/newmeal">
+            <a className="calculate">
+              <span className="calc-container">
+                <FaCalculator />
+              </span>
+            </a>
+          </Link>
+        </Button>
+      </div>}
       <div className="footer">
         <div className="powered-by">
           {poweredBy.beforeLink}
@@ -68,6 +81,24 @@ const Layout = ({ children, title = '', t }) => {
           background: url('/earth-cover.jpg') no-repeat 50%;
           background-size: cover;
         }
+        .create-button {
+          position: fixed;
+          bottom: 60px;
+          right: calc(50% - 33px);
+          z-index: 1;
+          border-radius: 50%;
+          box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.25);
+        }
+        .calculate {
+          display: flex;
+          align-items: center;
+          margin: 20px;
+          color: ${theme.colors.white};
+        }
+        .calc-container {
+          display: flex;
+          font-size: 26px;
+        }
         .footer {
           position: absolute;
           bottom: 0;
@@ -92,6 +123,13 @@ const Layout = ({ children, title = '', t }) => {
         }
         .ethicode {
           height: 30px;
+        }
+
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .create-button {
+            bottom: 70px;
+            right: 50px;
+          }
         }
       `}</style>
     </div>

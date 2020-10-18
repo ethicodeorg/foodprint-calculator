@@ -71,7 +71,7 @@ const UserPage = ({ t }) => {
   };
 
   return (
-    <Layout title={t('settings')} t={t}>
+    <Layout title={t('settings')} t={t} showFloater>
       <Header />
       <Content>
         <PageTitle>{t('settings')}</PageTitle>

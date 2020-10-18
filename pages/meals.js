@@ -31,7 +31,7 @@ const Meals = ({ t }) => {
   if (error) return <div>{t('error_failed')}</div>;
 
   return (
-    <Layout title={t('all_meals')} t={t}>
+    <Layout title={t('all_meals')} t={t} showFloater>
       <Header />
       <MealsPage
         meals={data?.meals}

@@ -221,6 +221,7 @@ const MealsPage = ({
         .no-results {
           margin-top: 50px;
           font-size: 24px;
+          text-align: center;
           color: #fff;
         }
         .select-container {

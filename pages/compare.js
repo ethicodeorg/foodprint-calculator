@@ -15,7 +15,7 @@ const Compare = ({ comparisons, t }) => {
   if (error) return <div>{t('error_failed')}</div>;
 
   return (
-    <Layout title={t('compare_meals')} t={t}>
+    <Layout title={t('compare_meals')} t={t} showFloater>
       <Header />
       <MealsPage
         meals={data?.meals}
