@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
@@ -16,7 +16,10 @@ const MyMeals = ({ t }) => {
     user ? `/api/meals?user=${userId}` : null,
     fetcher
   );
-  const localStorageMeals = getLocalStorageMeals();
+  const [localStorageMeals, setLocalMeals] = useState([]);
+  useEffect(() => {
+    setLocalMeals(getLocalStorageMeals());
+  }, []);
   const meals = userId ? data?.meals : localStorageMeals;
 
   return (
@@ -25,6 +28,7 @@ const MyMeals = ({ t }) => {
       <MealsPage
         isValidating={isValidating}
         mutate={mutate}
+        setLocalMeals={setLocalMeals}
         meals={meals}
         title={t('my_meals')}
         emptyMessage={t('no_meals')}

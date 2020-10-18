@@ -1,10 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import Tooltip from '@material-ui/core/Tooltip';
-import { FaEdit, FaTrash, FaEye, FaEyeSlash, FaQrcode, FaTimes, FaPlus } from 'react-icons/fa';
+import {
+  FaEdit,
+  FaTrash,
+  FaEye,
+  FaEyeSlash,
+  FaQrcode,
+  FaTimes,
+  FaPlus,
+  FaCopy,
+} from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
+import { addLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorage';
 import { Router } from '../i18n';
 import { removeMealFromComparisons, addMealToComparisons } from '../redux/actions/pageActions';
 import { useUser } from '../lib/hooks';
@@ -17,7 +27,16 @@ import Separator from './Separator';
 import MealLink from './MealLink';
 import theme from '../styles/theme';
 
-const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToCompare, t }) => {
+const Meal = ({
+  meal,
+  comparisons,
+  deleteMeal,
+  removeMealFromCompare,
+  addMealToCompare,
+  t,
+  mutate,
+  setLocalMeals,
+}) => {
   const router = useRouter();
   const [user] = useUser();
   const userSubtitle = `${meal?.user?.name || ''}${
@@ -55,6 +74,24 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
       .replace(/ /g, '-')}-qr-code.png`;
     link.href = dataURL;
     link.click();
+  };
+
+  const duplicateMeal = async (meal) => {
+    delete meal._id;
+    meal.title += ' copy';
+
+    if (user) {
+      await fetch('api/meals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ meal }),
+      });
+
+      mutate();
+    } else {
+      addLocalStorageMeal(meal);
+      setLocalMeals(getLocalStorageMeals());
+    }
   };
 
   return (
@@ -132,6 +169,11 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
                     </span>
                   </button>
                 </Tooltip>
+                <Tooltip title={t('duplicate_meal')} placement="top" arrow>
+                  <button className="duplicate-button" onClick={() => duplicateMeal(meal)}>
+                    <FaCopy />
+                  </button>
+                </Tooltip>
                 <Tooltip title={t('edit_meal')} placement="top" arrow>
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
@@ -204,10 +246,11 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
         .visibility-button-public {
           color: ${theme.colors.land};
         }
-        .download-button {
+        .download-button,
+        .duplicate-button {
           display: flex;
           align-items: center;
-          margin: 0 20px;
+          margin-right: 20px;
           padding: 0;
           font-size: 22px;
           color: ${theme.colors.text};
@@ -217,6 +260,9 @@ const Meal = ({ meal, comparisons, deleteMeal, removeMealFromCompare, addMealToC
           cursor: pointer;
           border: none;
           outline: none;
+        }
+        .duplicate-button {
+          color: ${theme.colors.land};
         }
         .download-button:hover {
           opacity: 0.7;

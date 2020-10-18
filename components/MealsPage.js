@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import Select from 'react-select';
 import useSWR from 'swr';
 import { addMealToComparisons } from '../redux/actions/pageActions';
-import { deleteLocalStorageMeal } from '../utils/localStorage';
+import { deleteLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorage';
 import { useUser } from '../lib/hooks';
 import Button from './Button';
 import PageTitle from './PageTitle';
@@ -25,11 +25,11 @@ const MealsPage = ({
   meals,
   title,
   emptyMessage,
-  removeMeal,
   comparisons,
   queries,
   isValidating,
   mutate,
+  setLocalMeals,
   addMealToCompare,
   t,
 }) => {
@@ -59,12 +59,14 @@ const MealsPage = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ mealId: mealIdToDelete, userId: user._id }),
       });
+
+      mutate();
     } else {
       deleteLocalStorageMeal(mealIdToDelete);
+      setLocalMeals(getLocalStorageMeals());
     }
 
     setIsLoading(false);
-    mutate();
   };
 
   const deleteMeal = (meal) => {
@@ -142,9 +144,16 @@ const MealsPage = ({
       <div className="meals-container">
         {meals ? (
           meals.length ? (
-            meals.map((meal) => {
-              return <Meal key={meal._id} meal={meal} deleteMeal={deleteMeal} t={t} />;
-            })
+            meals.map((meal) => (
+              <Meal
+                key={meal._id}
+                meal={meal}
+                deleteMeal={deleteMeal}
+                t={t}
+                mutate={mutate}
+                setLocalMeals={setLocalMeals}
+              />
+            ))
           ) : (
             <div className="no-results">{emptyMessage}</div>
           )
