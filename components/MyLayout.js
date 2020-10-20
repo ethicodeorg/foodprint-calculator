@@ -33,17 +33,19 @@ const Layout = ({ children, title = '', t, showFloater }) => {
       <div className="behind-background" />
       <div className="background" />
       {children}
-      {showFloater && <div className="create-button">
-        <Button primary animate noPad round>
-          <Link href="/newmeal">
-            <a className="calculate">
-              <span className="calc-container">
-                <FaCalculator />
-              </span>
-            </a>
-          </Link>
-        </Button>
-      </div>}
+      {showFloater && (
+        <div className="create-button">
+          <Button primary animate noPad round>
+            <Link href="/newmeal">
+              <a className="calculate">
+                <span className="calc-container">
+                  <FaCalculator />
+                </span>
+              </a>
+            </Link>
+          </Button>
+        </div>
+      )}
       <div className="footer">
         <div className="powered-by">
           {poweredBy.beforeLink}
