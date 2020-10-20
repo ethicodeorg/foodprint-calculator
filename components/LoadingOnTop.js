@@ -17,7 +17,7 @@ const LoadingOnTop = ({ blockUI }) => (
         z-index: 2;
       }
       .loading-container {
-        position: absolute;
+        position: fixed;
         display: flex;
         justify-content: center;
         left: calc(50% - 75px);

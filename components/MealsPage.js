@@ -113,7 +113,7 @@ const MealsPage = ({
   return (
     <div className="meals-page">
       <PageTitle>{title}</PageTitle>
-      {(isLoading || isValidating) && <LoadingOnTop />}
+      {(isLoading || isValidating) && <LoadingOnTop blockUI />}
       {router.route === '/mymeals' && (
         <div className="buttons-container">
           <Button primary animate noPad>
@@ -144,16 +144,18 @@ const MealsPage = ({
       <div className="meals-container">
         {meals ? (
           meals.length ? (
-            meals.map((meal) => (
-              <Meal
-                key={meal._id}
-                meal={meal}
-                deleteMeal={deleteMeal}
-                t={t}
-                mutate={mutate}
-                setLocalMeals={setLocalMeals}
-              />
-            ))
+            meals.map((meal) => {
+              return (
+                <Meal
+                  key={meal._id || meal.createdAt}
+                  meal={meal}
+                  deleteMeal={deleteMeal}
+                  t={t}
+                  mutate={mutate}
+                  setLocalMeals={setLocalMeals}
+                />
+              );
+            })
           ) : (
             <div className="no-results">{emptyMessage}</div>
           )
