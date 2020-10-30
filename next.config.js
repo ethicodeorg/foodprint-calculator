@@ -3,6 +3,7 @@ const { nextI18NextRewrites } = require('next-i18next/rewrites');
 const localeSubpaths = {
   is: 'is',
   en: 'en',
+  fr: 'fr',
 };
 
 module.exports = {
