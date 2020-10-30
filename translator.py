@@ -19,4 +19,4 @@ with open(args.input, newline='') as csvfile:
 with open(args.output, 'w') as outfile:
     json.dump(translations, outfile, ensure_ascii=False)
 
-print('All done.')
+print('All done here.')
