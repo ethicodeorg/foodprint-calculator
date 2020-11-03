@@ -115,7 +115,7 @@
   "how_to_use": "How to use",
   "add": "Add",
   "add_ingredient": "Add ingredient",
-  "meal_name": "Meal name",
+  "meal_name": "Meal name (required)",
   "about_meal_optional": "About meal (optional)",
   "link_to_recipe_optional": "Link to recipe (optional)",
   "save": "Save",
