@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';

@@ -15,7 +15,6 @@ import Meal from './Meal';
 import LoadingOnTop from './LoadingOnTop';
 import Filters from './Filters';
 import theme from '../styles/theme';
-import MealLink from './MealLink';
 
 Modal.setAppElement('#__next');
 

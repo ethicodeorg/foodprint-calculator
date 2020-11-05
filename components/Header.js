@@ -1,22 +1,19 @@
 import React, { useState, Fragment } from 'react';
 import { useRouter } from 'next/router';
-import { connect } from 'react-redux';
 import { FaHamburger, FaPizzaSlice, FaUser } from 'react-icons/fa';
+import Flags from 'country-flag-icons/react/3x2';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { Link, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
 import theme from '../styles/theme';
-import Button from './Button';
-import FadingIcons from './FadingIcons';
-import Icelandic from '../public/iceland-flag.svg';
-import English from '../public/united-kingdom-flag.svg';
 
 const Header = ({ t, i18n }) => {
   const { language, changeLanguage } = i18n;
   const languageOptions = [
     { value: 'en', label: 'English' },
     { value: 'is', label: 'Íslenska' },
+    { value: 'fr', label: 'Français' },
   ];
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,8 +72,9 @@ const Header = ({ t, i18n }) => {
       </Link>
       <div className="language-container">
         <div className="flag">
-          {language === 'is' && <Icelandic />}
-          {language === 'en' && <English />}
+          {language === 'is' && <Flags.IS />}
+          {language === 'en' && <Flags.GB />}
+          {language === 'fr' && <Flags.FR />}
         </div>
         <div className="language-select">
           <Select
@@ -246,8 +244,8 @@ const Header = ({ t, i18n }) => {
           width: 65px;
         }
         .flag {
-          width: 35px;
-          height: ${language === 'is' ? '25.2px' : '17.5px'};
+          width: 36px;
+          height: 24px;
           padding-left: 5px;
         }
         .user {
