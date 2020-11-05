@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { withTranslation } from '../i18n';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Card from '../components/Card';
-import Button from '../components/Button';
 import UserForm from '../components/UserForm';
 
 const ForgotPassword = ({ t }) => {

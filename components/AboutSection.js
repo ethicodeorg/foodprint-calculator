@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { FaChevronDown } from 'react-icons/fa';
-import classNames from 'classnames';
 import theme from '../styles/theme';
 import CardTitle from './CardTitle';
 import Button from './Button';
