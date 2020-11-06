@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { withTranslation } from '../i18n';
+import { Link, withTranslation } from '../i18n';
 import { useRouter } from 'next/router';
+import { connect } from 'react-redux';
 import { useUser } from '../lib/hooks';
 import { setUserCookie } from '../utils/userCookie';
 import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';

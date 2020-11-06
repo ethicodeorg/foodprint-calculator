@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import theme from '../styles/theme';
 
 const PageTitle = ({ children }) => (
