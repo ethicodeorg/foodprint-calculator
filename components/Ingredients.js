@@ -3,10 +3,12 @@ import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
 import theme from '../styles/theme';
 import { FaTrash } from 'react-icons/fa';
+import Separator from './Separator';
 
 const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => (
   <div className="ingredients">
     <CardTitle>{t('ingredients')}</CardTitle>
+    {!ingredients.length ? (<><Separator /><div className="ingredient-basic">{t('no_ingredient')}</div></>) : '' }
     {ingredients.map((ingredient, index) => {
       const transportString = ingredient.distance
         ? t('transported_text', {
