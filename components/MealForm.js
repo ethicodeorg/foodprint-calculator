@@ -344,6 +344,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                       setSelectedIngredient(val);
                       changeUnitOptions(val);
                     }}
+                    defaultMenuIsOpen="true"
                     options={foodOptions}
                     instanceId="ingredient"
                   />
