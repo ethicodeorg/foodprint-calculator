@@ -1,7 +1,5 @@
 import nextConnect from 'next-connect';
 import { ObjectId } from 'mongodb';
-import isEmail from 'validator/lib/isEmail';
-import normalizeEmail from 'validator/lib/normalizeEmail';
 import middleware from '../../middlewares/middleware';
 import { extractUser } from '../../lib/apiHelpers';
 
