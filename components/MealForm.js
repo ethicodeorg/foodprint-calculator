@@ -19,9 +19,7 @@ import {
   editLocalStorageMeal,
   addLocalStorageMeal,
 } from '../utils/localStorage';
-import {
-  setFocus
-} from '../utils/ui'
+import { setFocus } from '../utils/ui'
 import { useUser } from '../lib/hooks';
 import Header from './Header';
 import Card from './Card';
