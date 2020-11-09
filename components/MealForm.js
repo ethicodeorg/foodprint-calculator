@@ -296,7 +296,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     );
   };
 
-  // https://app.asana.com/0/1192620845659633/1199082523477129 - Automatically move the focus to the next input when an ingredient has been selected
+  // Automatically focus the next input when an ingredient has been selected
   // react reference for the "amount" field.
   const refAmount = useRef();
 
