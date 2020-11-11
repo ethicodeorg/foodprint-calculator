@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link, Router } from '../i18n';
 import useSWR from 'swr';
@@ -19,6 +19,7 @@ import {
   editLocalStorageMeal,
   addLocalStorageMeal,
 } from '../utils/localStorage';
+import { setFocus } from '../utils/ui'
 import { useUser } from '../lib/hooks';
 import Header from './Header';
 import Card from './Card';
@@ -293,6 +294,10 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     );
   };
 
+  // Automatically focus the next input when an ingredient has been selected
+  // react reference for the "amount" field.
+  const refAmount = useRef();
+
   return (
     <Fragment>
       <Header />
@@ -341,6 +346,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                     onChange={(val) => {
                       setSelectedIngredient(val);
                       changeUnitOptions(val);
+                      setFocus(refAmount)
                     }}
                     options={foodOptions}
                     instanceId="ingredient"
@@ -353,6 +359,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                   name="amount"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
+                  ref={refAmount}
                 />
                 <div className="select-container ingredient-unit">
                   <Select
