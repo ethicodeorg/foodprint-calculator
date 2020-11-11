@@ -1,10 +1,7 @@
 import { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import { FaDivide } from 'react-icons/fa';
 import { withTranslation } from '../../i18n';
-import { useUser } from '../../lib/hooks';
-import { getLocalStorageMeals } from '../../utils/localStorage';
 import Meal from '../../components/Meal';
 import Layout from '../../components/MyLayout';
 import LoadingOnTop from '../../components/LoadingOnTop';

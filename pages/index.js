@@ -10,8 +10,6 @@ import { Link, withTranslation } from '../i18n';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
-import Content from '../components/Content';
-import PageTitle from '../components/PageTitle';
 import Button from '../components/Button';
 import theme from '../styles/theme';
 import Card from '../components/Card';

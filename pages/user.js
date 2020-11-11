@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Router, withTranslation } from '../i18n';
+import { Router, withTranslation } from '../i18n';
 import Select from 'react-select';
 import { FaTimes, FaCheck } from 'react-icons/fa';
 import { useUser } from '../lib/hooks';
@@ -10,7 +10,6 @@ import Header from '../components/Header';
 import Content from '../components/Content';
 import PageTitle from '../components/PageTitle';
 import Card from '../components/Card';
-import UserForm from '../components/UserForm';
 import Button from '../components/Button';
 import LoadingOnTop from '../components/LoadingOnTop';
 import theme from '../styles/theme';
