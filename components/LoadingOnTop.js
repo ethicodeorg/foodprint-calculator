@@ -1,3 +1,4 @@
+import theme from '../styles/theme';
 import Loading from './Loading';
 
 const LoadingOnTop = ({ blockUI }) => (
