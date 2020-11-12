@@ -4,6 +4,7 @@ const localeSubpaths = {
   is: 'is',
   en: 'en',
   fr: 'fr',
+  it: 'it',
 };
 
 module.exports = {
