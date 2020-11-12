@@ -350,6 +350,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                     }}
                     options={foodOptions}
                     instanceId="ingredient"
+                    autoFocus
                   />
                 </div>
                 <input
