@@ -7,6 +7,7 @@ import { FaTrash } from 'react-icons/fa';
 const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => (
   <div className="ingredients">
     <CardTitle>{t('ingredients')}</CardTitle>
+    {!ingredients.length && <div className="ingredient-basic ingredient-basic-none">{t('no_ingredient')}</div>}
     {ingredients.map((ingredient, index) => {
       const transportString = ingredient.distance
         ? t('transported_text', {
@@ -47,6 +48,9 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
       .ingredient-basic {
         min-width: 50%;
         font-size: 14px;
+      }
+      .ingredient-basic-none {
+        padding-top: 7px;
       }
       .pies-container {
         display: flex;
