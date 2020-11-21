@@ -39,18 +39,12 @@ const About = ({ t }) => {
         <PageTitle>{t('about_fc')}</PageTitle>
         <Card seeThrough dark>
           <AboutSection title={t('project')} isOpen={openSection === 'project' || !openSection}>
-            <p>{t('fc_function')}</p>
+            <p>{t('food_e_purpose')}</p>
             <CardTitle sub color={theme.colors.white}>
               {t('why_question')}
             </CardTitle>
             <p>
-              {t('why_answer_1')} {t('why_answer_2')} {t('why_answer_3')}
-            </p>
-            <CardTitle sub color={theme.colors.white}>
-              {t('how_question')}
-            </CardTitle>
-            <p>
-              {t('how_answer_1')} {t('how_answer_2')} {t('how_answer_3')}
+              {t('why_answer_1')} {t('why_answer_2')}
             </p>
             <p>{t('four_ways_impact')}</p>
             <ol>
@@ -115,6 +109,30 @@ const About = ({ t }) => {
                 </ul>
               </li>
             </ol>
+          </AboutSection>
+          <AboutSection
+            title={t('how_does_it_work')}
+            isOpen={openSection === 'function' || !openSection}
+          >
+            <p>{t('function')}</p>
+            <ol>
+              <li>{t('land_use_units')}</li>
+              <li>{t('ghg_units')}</li>
+              <li>{t('water_units')}</li>
+              <li>{t('eutro_units')}</li>
+            </ol>
+            <p>{t('ghg_complecity')}</p>
+            <ul>
+              <li>{t('land_use_change')}</li>
+              <li>{t('farm')}</li>
+              <li>{t('animal_feed')}</li>
+              <li>{t('processing')}</li>
+              <li>{t('transport')}</li>
+              <li>{t('retail')}</li>
+              <li>{t('packaging')}</li>
+            </ul>
+            <p>{t('function_in_action')}</p>
+            <p>{t('optional_transport')}</p>
           </AboutSection>
           <AboutSection title={t('data_title')} isOpen={openSection === 'sources' || !openSection}>
             <p>
@@ -291,9 +309,10 @@ const About = ({ t }) => {
         }
         li {
           margin-bottom: 10px;
+          line-height: 1.4;
         }
         p {
-          margin-bottom: 30px;
+          line-height: 1.4;
         }
       `}</style>
     </Layout>
