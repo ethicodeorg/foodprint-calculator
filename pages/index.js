@@ -10,6 +10,8 @@ import Card from '../components/Card';
 
 const Index = ({ t }) => {
   const headlineText = splitTranslationWithLink(t('slogan', SPLITTER));
+  const functionText = splitTranslationWithLink(t('food_e_function', SPLITTER));
+
   useEffect(() => {
     // Clear the deprecated meals cookie so the user won't have a huge cookie
     document.cookie = 'meals=;';
@@ -29,7 +31,11 @@ const Index = ({ t }) => {
         <div className="intro-container">
           <Card seeThrough dark>
             <div className="intro-item">
-              <p>{t('food_e_function')}</p>
+              <p>
+                {functionText.beforeLink}
+                <span className="function">{functionText.linkText}</span>
+                {functionText.afterLink}
+              </p>
             </div>
           </Card>
         </div>
@@ -88,8 +94,11 @@ const Index = ({ t }) => {
           margin-left: 20px;
         }
         .true {
-          color: ${theme.colors.eutro};
-          animation: colorfade 10s linear 0s infinite;
+          color: ${theme.colors.lightGreen};
+        }
+        .function {
+          color: ${theme.colors.aqua};
+          font-style: italic;
         }
         h1 {
           margin: 0 auto;
@@ -159,7 +168,7 @@ const Index = ({ t }) => {
             font-size: 72px;
           }
           p {
-            max-width: 700px;
+            max-width: 720px;
             font-size: 22px;
           }
         }

@@ -1,6 +1,6 @@
 {
   "start": "Start",
   "slogan": "Making Good Food {{link_start}}Sustainable{{link_end}}",
-  "food_e_function": "Whether you're a big restaurant or a young food blogger, a global ready meals producer, or a passionate home cook, with FOOD·E, you can evaluate the environmental footprints of your meals and share them with the world!",
+  "food_e_function": "Whether you're an established restaurant or a promising food blogger, a global ready meals producer, or a passionate home cook, with FOOD·E, you can {{link_start}}evaluate the environmental footprints of your meals and share them with your consumers!{{link_end}}",
   "read_more": "Read more"
 }
