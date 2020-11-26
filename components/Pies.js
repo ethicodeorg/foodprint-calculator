@@ -16,7 +16,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
   let html2canvas;
   const router = useRouter();
   const pieData = getMealPieData(meal);
-  const [showDetails, setShowDetails] = useState(router.route === '/meals/[id]');
+  const [showDetails, setShowDetails] = useState(true);
   const [showIngredients, setShowIngredients] = useState(false);
 
   useEffect(() => {
@@ -152,10 +152,14 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
                   <div className="percentage">
                     <Link href="/about?openSection=rda">
                       <a className={`percentage-${cIndex}`} target="_blank">
-                        {percentageString}
-                        <span className="new-tab-icon">
-                          <FaExternalLinkAlt />
-                        </span>
+                        <Tooltip title={t('daily_earth_share')} placement="right" arrow>
+                          <span>
+                            {percentageString}
+                            <span className="new-tab-icon">
+                              <FaExternalLinkAlt />
+                            </span>
+                          </span>
+                        </Tooltip>
                       </a>
                     </Link>
                   </div>

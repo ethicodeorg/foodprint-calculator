@@ -94,10 +94,10 @@ const Index = ({ t }) => {
           margin-left: 20px;
         }
         .true {
-          color: ${theme.colors.lightGreen};
+          color: ${theme.colors.orange};
         }
         .function {
-          color: ${theme.colors.aqua};
+          color: ${theme.colors.lightGreen};
           font-style: italic;
         }
         h1 {
@@ -169,7 +169,7 @@ const Index = ({ t }) => {
           }
           p {
             max-width: 720px;
-            font-size: 22px;
+            font-size: 20px;
           }
         }
 
