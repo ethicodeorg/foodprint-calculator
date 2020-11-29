@@ -1,6 +1,6 @@
 import { PieChart } from 'react-minimal-pie-chart';
 import classNames from 'classnames';
-import { Tooltip } from '@material-ui/core';
+import MyTooltip from './MyTooltip';
 
 const Pie = ({ category, isTiny, label }) => {
   const { name, total, unit, color, rda } = category;
@@ -12,7 +12,7 @@ const Pie = ({ category, isTiny, label }) => {
   }
 
   return (
-    <Tooltip title={label} placement="top" arrow>
+    <MyTooltip title={label} placement="top" arrow>
       <div
         className={classNames('pie', {
           'tiny-pie': isTiny,
@@ -36,7 +36,7 @@ const Pie = ({ category, isTiny, label }) => {
           }
         `}</style>
       </div>
-    </Tooltip>
+    </MyTooltip>
   );
 };
 

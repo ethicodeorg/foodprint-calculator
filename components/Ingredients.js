@@ -1,13 +1,15 @@
-import Tooltip from '@material-ui/core/Tooltip';
+import { FaTrash } from 'react-icons/fa';
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
+import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
-import { FaTrash } from 'react-icons/fa';
 
 const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => (
   <div className="ingredients">
     <CardTitle>{t('ingredients')}</CardTitle>
-    {!ingredients.length && <div className="ingredient-basic ingredient-basic-none">{t('no_ingredient')}</div>}
+    {!ingredients.length && (
+      <div className="ingredient-basic ingredient-basic-none">{t('no_ingredient')}</div>
+    )}
     {ingredients.map((ingredient, index) => {
       const transportString = ingredient.distance
         ? t('transported_text', {
@@ -30,11 +32,11 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
             <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} t={t} />
           </div>
           {deleteIngredient && (
-            <Tooltip title={t('remove_ingredient')} placement="left" arrow>
+            <MyTooltip title={t('remove_ingredient')} placement="left" arrow>
               <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
                 <FaTrash />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
         </div>
       );

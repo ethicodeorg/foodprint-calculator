@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
-import Tooltip from '@material-ui/core/Tooltip';
 import {
   FaEdit,
   FaTrash,
@@ -25,6 +24,7 @@ import AboutMeal from './AboutMeal';
 import Pies from './Pies';
 import Separator from './Separator';
 import MealLink from './MealLink';
+import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
 
 const Meal = ({
@@ -106,7 +106,7 @@ const Meal = ({
             )}
           </CardTitle>
           {router.route === '/mymeals' && !!user && (
-            <Tooltip
+            <MyTooltip
               title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
               placement="left"
               arrow
@@ -119,21 +119,21 @@ const Meal = ({
               >
                 {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
           {router.route === '/compare' && (
-            <Tooltip title={t('remove_from_comparison')} placement="left" arrow>
+            <MyTooltip title={t('remove_from_comparison')} placement="left" arrow>
               <button className="remove-button" onClick={() => removeFromComparison(meal._id)}>
                 <FaTimes />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
           {router.route === '/meals' && !comparisons.includes(meal._id) && (
-            <Tooltip title={t('add_to_compare')} placement="left" arrow>
+            <MyTooltip title={t('add_to_compare')} placement="left" arrow>
               <button className="add-button" onClick={() => addToComparison(meal._id)}>
                 <FaPlus />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
         </div>
         <div className="subtitle">
@@ -155,32 +155,32 @@ const Meal = ({
           <Fragment>
             <Separator />
             <div className="footer-button-container">
-              <Tooltip title={t('delete_meal')} placement="right" arrow>
+              <MyTooltip title={t('delete_meal')} placement="right" arrow>
                 <button className="delete-button" onClick={() => deleteMeal(meal)}>
                   <FaTrash />
                 </button>
-              </Tooltip>
+              </MyTooltip>
               <div className="right-footer">
-                <Tooltip title={t('download_qr')} placement="left" arrow>
+                <MyTooltip title={t('download_qr')} placement="left" arrow>
                   <button className="download-button" onClick={() => downloadQRCode(meal)}>
                     <FaQrcode />
                     <span id={`qr-${meal._id}`} className="qr-code">
                       <QRCode value={`https://foodprintcalculator.com/meals/${meal._id}`} />
                     </span>
                   </button>
-                </Tooltip>
-                <Tooltip title={t('duplicate_meal')} placement="top" arrow>
+                </MyTooltip>
+                <MyTooltip title={t('duplicate_meal')} placement="top" arrow>
                   <button className="duplicate-button" onClick={() => duplicateMeal(meal)}>
                     <FaCopy />
                   </button>
-                </Tooltip>
-                <Tooltip title={t('edit_meal')} placement="top" arrow>
+                </MyTooltip>
+                <MyTooltip title={t('edit_meal')} placement="top" arrow>
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
                       <FaEdit />
                     </MealLink>
                   </div>
-                </Tooltip>
+                </MyTooltip>
               </div>
             </div>
           </Fragment>
