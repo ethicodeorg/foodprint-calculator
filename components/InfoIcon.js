@@ -4,7 +4,7 @@ import theme from '../styles/theme';
 
 const InfoIcon = ({ title, placement }) => {
   return (
-    <MyTooltip title={title} placement={placement} arrow>
+    <MyTooltip title={title} placement={placement} arrow disableTouchListener>
       <div className="info-icon">
         <FaInfo />
         <style jsx>{`
