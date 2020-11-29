@@ -15,6 +15,7 @@ const Header = ({ t, i18n }) => {
     { value: 'is', label: 'Íslenska' },
     { value: 'fr', label: 'Français' },
     { value: 'it', label: 'Italiano' },
+    { value: 'pt', label: 'Português' },
   ];
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const Header = ({ t, i18n }) => {
       ...provided,
       backgroundColor: theme.colors.darkBackground,
       color: theme.colors.white,
-      width: '90px',
+      width: '110px',
     }),
     valueContainer: (provided, state) => ({
       ...provided,
@@ -77,6 +78,7 @@ const Header = ({ t, i18n }) => {
           {language === 'en' && <Flags.GB />}
           {language === 'fr' && <Flags.FR />}
           {language === 'it' && <Flags.IT />}
+          {language === 'pt' && <Flags.PT />}
         </div>
         <div className="language-select">
           <Select
