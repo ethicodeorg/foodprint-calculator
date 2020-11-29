@@ -108,8 +108,10 @@ const Meal = ({
           {router.route === '/mymeals' && !!user && (
             <MyTooltip
               title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
-              placement="left"
+              placement="top"
               arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={4000}
             >
               <button
                 className={classNames('visibility-button', {
@@ -122,14 +124,26 @@ const Meal = ({
             </MyTooltip>
           )}
           {router.route === '/compare' && (
-            <MyTooltip title={t('remove_from_comparison')} placement="left" arrow>
+            <MyTooltip
+              title={t('remove_from_comparison')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
               <button className="remove-button" onClick={() => removeFromComparison(meal._id)}>
                 <FaTimes />
               </button>
             </MyTooltip>
           )}
           {router.route === '/meals' && !comparisons.includes(meal._id) && (
-            <MyTooltip title={t('add_to_compare')} placement="left" arrow>
+            <MyTooltip
+              title={t('add_to_compare')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
               <button className="add-button" onClick={() => addToComparison(meal._id)}>
                 <FaPlus />
               </button>
@@ -155,13 +169,25 @@ const Meal = ({
           <Fragment>
             <Separator />
             <div className="footer-button-container">
-              <MyTooltip title={t('delete_meal')} placement="right" arrow>
+              <MyTooltip
+                title={t('delete_meal')}
+                placement="top"
+                arrow
+                enterTouchDelay={0}
+                leaveTouchDelay={3000}
+              >
                 <button className="delete-button" onClick={() => deleteMeal(meal)}>
                   <FaTrash />
                 </button>
               </MyTooltip>
               <div className="right-footer">
-                <MyTooltip title={t('download_qr')} placement="left" arrow>
+                <MyTooltip
+                  title={t('download_qr')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button className="download-button" onClick={() => downloadQRCode(meal)}>
                     <FaQrcode />
                     <span id={`qr-${meal._id}`} className="qr-code">
@@ -169,12 +195,24 @@ const Meal = ({
                     </span>
                   </button>
                 </MyTooltip>
-                <MyTooltip title={t('duplicate_meal')} placement="top" arrow>
+                <MyTooltip
+                  title={t('duplicate_meal')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button className="duplicate-button" onClick={() => duplicateMeal(meal)}>
                     <FaCopy />
                   </button>
                 </MyTooltip>
-                <MyTooltip title={t('edit_meal')} placement="top" arrow>
+                <MyTooltip
+                  title={t('edit_meal')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
                       <FaEdit />

@@ -92,7 +92,13 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           }`}</CardTitle>
           {router.route === '/mymeals' ||
             (router.route === '/newmeal' && (
-              <MyTooltip title={t('download_report')} placement="right" arrow>
+              <MyTooltip
+                title={t('download_report')}
+                placement="top"
+                arrow
+                enterTouchDelay={0}
+                leaveTouchDelay={3000}
+              >
                 <button className="download-button" onClick={() => downloadReport(meal)}>
                   <FaDownload />
                 </button>
@@ -156,14 +162,12 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
                     <div className="percentage">
                       <Link href="/about?openSection=rda">
                         <a className={`percentage-${cIndex}`} target="_blank">
-                          {/* <Tooltip title={t('daily_earth_share')} placement="right" arrow> */}
                           <span>
                             {percentageString}
                             <span className="new-tab-icon">
                               <FaExternalLinkAlt />
                             </span>
                           </span>
-                          {/* </Tooltip> */}
                         </a>
                       </Link>
                       <InfoIcon title={t('des_tooltip')} placement="right" />

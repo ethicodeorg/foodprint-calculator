@@ -12,7 +12,7 @@ const Pie = ({ category, isTiny, label }) => {
   }
 
   return (
-    <MyTooltip title={label} placement="top" arrow>
+    <MyTooltip title={label} placement="top" arrow enterTouchDelay={0} leaveTouchDelay={3000}>
       <div
         className={classNames('pie', {
           'tiny-pie': isTiny,

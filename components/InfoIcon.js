@@ -2,9 +2,9 @@ import { FaInfo } from 'react-icons/fa';
 import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
 
-const InfoIcon = ({ title, placement }) => {
+const InfoIcon = ({ title }) => {
   return (
-    <MyTooltip title={title} placement={placement} arrow disableTouchListener>
+    <MyTooltip title={title} placement="top" arrow enterTouchDelay={0} leaveTouchDelay={5000}>
       <div className="info-icon">
         <FaInfo />
         <style jsx>{`

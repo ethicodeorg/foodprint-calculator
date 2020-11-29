@@ -316,7 +316,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                 instanceId="number-of-servings"
               />
             </div>
-            <InfoIcon title={t('servings_tooltip')} placement="right" />
+            <InfoIcon title={t('servings_tooltip')} />
           </div>
         </Card>
         <Card>
@@ -330,7 +330,13 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           {isAdding ? (
             <Card inner>
               <div className="close-container">
-                <MyTooltip title={t('cancel')} placement="left" arrow>
+                <MyTooltip
+                  title={t('cancel')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button
                     className="close-button"
                     onClick={() => {
@@ -421,7 +427,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                       {t('add_transport_optional')}
                     </Button>
                   </div>
-                  <InfoIcon title={t('transport_not_provided')} placement="right" />
+                  <InfoIcon title={t('transport_not_provided')} />
                 </div>
               )}
               <div className="add-button-container">
