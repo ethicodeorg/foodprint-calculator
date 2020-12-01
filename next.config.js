@@ -5,6 +5,7 @@ const localeSubpaths = {
   en: 'en',
   fr: 'fr',
   it: 'it',
+  pt: 'pt',
 };
 
 module.exports = {
