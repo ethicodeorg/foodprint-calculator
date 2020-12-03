@@ -121,7 +121,8 @@ const About = ({ t }) => {
               <li>{t('water_units')}</li>
               <li>{t('eutro_units')}</li>
             </ol>
-            <p>{t('ghg_complecity')}</p>
+            <p>{t('function_in_action')}</p>
+            <p>{t('ghg_complexity')}</p>
             <ul>
               <li>{t('land_use_change')}</li>
               <li>{t('farm')}</li>
@@ -131,7 +132,6 @@ const About = ({ t }) => {
               <li>{t('retail')}</li>
               <li>{t('packaging')}</li>
             </ul>
-            <p>{t('function_in_action')}</p>
             <p>{t('optional_transport')}</p>
           </AboutSection>
           <AboutSection title={t('data_title')} isOpen={openSection === 'sources' || !openSection}>
@@ -234,6 +234,7 @@ const About = ({ t }) => {
               </ExternalLink>{' '}
               {eutrophyingEmissionsRDA.afterLink2}
             </p>
+            <p>{t('pie-chart-explanation')}</p>
             <p>{t('rda_future')}</p>
           </AboutSection>
           <AboutSection
