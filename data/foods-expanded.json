@@ -37,7 +37,8 @@
   {
     "key": "ber",
     "foods": [
-      { "label": "berries_grapes" },
+      { "label": "other_berries" },
+      { "label": "grapes" },
       { "label": "raisins", "factor": 3.59712230215827 },
       { "label": "blueberries", "gramsPerLiter": 626 },
       { "label": "blueberries_dried", "gramsPerLiter": 626, "factor": 2.97619047619048 },
@@ -68,7 +69,8 @@
       { "label": "garden_cress", "gramsPerLiter": 211 },
       { "label": "brussels_sprouts", "gramsPerLiter": 359 },
       { "label": "spinach", "gramsPerLiter": 127 },
-      { "label": "lettuce", "gramsPerLiter": 152 }
+      { "label": "lettuce", "gramsPerLiter": 152 },
+      { "label": "radishes", "gramsPerLiter": 490, "averageWeight": 5 }
     ]
   },
   {
@@ -269,12 +271,6 @@
       },
       { "label": "pomegranates", "gramsPerLiter": 735, "averageWeight": 275 },
       { "label": "bell_peppers", "gramsPerLiter": 629, "averageWeight": 128 },
-      {
-        "label": "bell_peppers_dried",
-        "gramsPerLiter": 629,
-        "averageWeight": 128,
-        "factor": 8.58369098712446
-      },
       { "label": "chili_peppers", "gramsPerLiter": 588, "averageWeight": 45 },
       {
         "label": "chili_peppers_dried",
@@ -297,8 +293,14 @@
         "averageWeight": 142,
         "factor": 9.34579439252336
       },
-      { "label": "paprika", "gramsPerLiter": 460 },
-      { "label": "paprika_dried", "gramsPerLiter": 460, "factor": 8.58369098712446 }
+      { "label": "courgettes", "gramsPerLiter": 478, "averageWeight": 142 },
+      {
+        "label": "courgettes_dried",
+        "gramsPerLiter": 478,
+        "averageWeight": 142,
+        "factor": 9.34579439252336
+      },
+      { "label": "paprika", "gramsPerLiter": 460, "factor": 8.58369098712446 }
     ]
   },
   {
@@ -313,6 +315,7 @@
       { "label": "vetches", "gramsPerLiter": 1014 },
       { "label": "lupins", "gramsPerLiter": 1014 },
       { "label": "faba_beans", "gramsPerLiter": 1014 },
+      { "label": "fava_beans", "gramsPerLiter": 1014 },
       { "label": "black_beans", "gramsPerLiter": 1014 },
       { "label": "black_eyed_peas", "gramsPerLiter": 1014 },
       { "label": "green_beans", "gramsPerLiter": 423 },
@@ -328,10 +331,13 @@
       { "label": "celery", "gramsPerLiter": 507 },
       { "label": "fennel", "gramsPerLiter": 368 },
       { "label": "anise", "gramsPerLiter": 453 },
+      { "label": "dill", "gramsPerLiter": 453 },
       { "label": "basil", "gramsPerLiter": 142 },
       { "label": "basil_dried", "gramsPerLiter": 142, "factor": 6.09756097560976 },
       { "label": "coriander", "gramsPerLiter": 122 },
       { "label": "coriander_dried", "gramsPerLiter": 122, "factor": 6.09756097560976 },
+      { "label": "cilantro", "gramsPerLiter": 122 },
+      { "label": "cilantro_dried", "gramsPerLiter": 122, "factor": 6.09756097560976 },
       { "label": "chamomile", "gramsPerLiter": 122 },
       { "label": "lavender", "gramsPerLiter": 122 },
       { "label": "lemongrass", "gramsPerLiter": 283 },
@@ -392,7 +398,8 @@
       { "label": "chicken" },
       { "label": "turkey" },
       { "label": "quail" },
-      { "label": "squabs" }
+      { "label": "squabs" },
+      { "label": "pigeons" }
     ]
   },
   {
@@ -419,8 +426,7 @@
         "factor": 6.09756097560976
       },
       { "label": "ginger", "gramsPerLiter": 406 },
-      { "label": "parsnip", "gramsPerLiter": 562 },
-      { "label": "radishes", "gramsPerLiter": 490, "averageWeight": 5 }
+      { "label": "parsnip", "gramsPerLiter": 562 }
     ]
   },
   {
