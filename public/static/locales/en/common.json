@@ -35,6 +35,8 @@
   "foodprint": "Foodprint",
   "per_person": "per person",
   "details": "Details",
+  "example_pie": "Pie chart explanation",
+  "one_pie": "One full pie represents an individuals' Daily Earth Share",
   "land_use": "Land use",
   "greenhouse_gas_emissions": "Greenhouse gas emissions",
   "ghg_emissions": "GHG emissions",

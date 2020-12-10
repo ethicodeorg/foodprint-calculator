@@ -10,6 +10,13 @@ const RDAs = {
 export function getMealPieData(meal) {
   return [
     {
+      name: 'example_pie',
+      total: 0.99999,
+      rda: 1,
+      unit: 'unit',
+      color: theme.colors.orange,
+    },
+    {
       name: 'land_use',
       total: meal.landUse,
       rda: RDAs.landUse,
