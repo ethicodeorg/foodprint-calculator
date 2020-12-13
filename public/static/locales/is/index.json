@@ -1,5 +1,5 @@
 {
   "start": "Byrja",
-  "slogan": "",
-  "food_e_function": ""
+  "slogan": "Gerir góðan mat {{link_start}}umhverfisvænni{{link_end}}",
+  "food_e_function": "Hvort sem þú ert að reka rótgróinn veitingastað eða efnilegt matarblogg, framleiða tilbúna rétti á heimsvísu eða að elda eitthvað gómsætt heima, gerir Spori þér kleift að {{link_start}}ákvarða umhverfisspor rétta þinna og deila þeim með fólkinu sem hefur yndi af matnum þínum{{link_end}}."
 }
