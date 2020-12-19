@@ -1,5 +1,5 @@
 {
   "start": "Início",
-  "slogan": "",
-  "food_e_function": ""
+  "slogan": "Tornando Sua Comida {{link_start}}Sustentável{{link_end}}",
+  "food_e_function": "Quer você seja um cozinheiro amador apaixonado ou um restaurante bem estabelecido, um blogueiro de culinária promissor ou um fornecedir mundial de comida pronta, o FOOD·E permite que você {{link_start}}avalie o impacto ambiental de suas refeições e o compartilhe com as pessoas que gostam sua comida {{link_end}}."
 }

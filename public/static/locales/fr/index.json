@@ -1,5 +1,5 @@
 {
   "start": "Démarrer",
-  "slogan": "",
-  "food_e_function": ""
+  "slogan": "Pour une alimentation saine et {{link_start}}durable{{link_end}}",
+  "food_e_function": "Que vous soyez un cuisinier amateur passionné ou un restaurateur de renom, un blogueur culinaire prometteur ou un producteur mondial de plats préparés, FOOD·E vous permet {{link_start}}d'évaluer l'empreinte écologique de vos repas et de partager cette information avec les personnes qui apprécieront votre cuisine{{link_end}}."
 }
