@@ -65,10 +65,7 @@ const Header = ({ t, i18n }) => {
       <Link href="/">
         <a className="link home">
           <div className="logo-container">
-            <img
-              className="earth-logo"
-              src={`/${language === 'is' ? 'spori' : 'foode-sliced'}-logo.png`}
-            />
+            <img className="earth-logo" src={`/earthslice${language === 'is' ? '-is' : ''}.png`} />
           </div>
         </a>
       </Link>
@@ -175,13 +172,13 @@ const Header = ({ t, i18n }) => {
           display: flex;
           align-items: center;
           justify-content: flex-end;
-          width: calc(100% - 40px);
-          padding: 20px;
+          width: calc(100% - 26px);
+          padding: 13px 20px 13px 6px;
           background-color: ${theme.colors.darkBackground};
           z-index: 1;
         }
         .earth-logo {
-          height: 48px;
+          height: 62px;
         }
         .menu-items {
           display: block;
@@ -273,8 +270,11 @@ const Header = ({ t, i18n }) => {
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .header {
-            width: calc(100% - 80px);
-            padding: 20px 40px;
+            width: calc(100% - 48px);
+            padding: 6px 24px;
+          }
+          .earth-logo {
+            height: 76px;
           }
           .menu-items {
             padding: 20px 50px;
