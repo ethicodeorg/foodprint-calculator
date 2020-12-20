@@ -102,7 +102,7 @@ const Index = ({ t }) => {
         }
         h1 {
           margin: 0 auto;
-          font-size: 50px;
+          font-size: 32px;
           font-weight: normal;
           text-align: center;
         }
@@ -165,7 +165,7 @@ const Index = ({ t }) => {
             margin: 80px 0 20px;
           }
           h1 {
-            font-size: 72px;
+            font-size: 60px;
           }
           p {
             max-width: 720px;
