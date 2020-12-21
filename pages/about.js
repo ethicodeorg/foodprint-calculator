@@ -14,7 +14,7 @@ import theme from '../styles/theme';
 
 const About = ({ t }) => {
   const router = useRouter();
-  const { openSection } = router.query;
+  const { openSection = 'project' } = router.query;
   const landUseText = splitTranslationWithLink(t('land_use_text', SPLITTER));
   const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text', SPLITTER));
   const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text', SPLITTER));
@@ -38,7 +38,7 @@ const About = ({ t }) => {
       <Content>
         <PageTitle>{t('about_fc')}</PageTitle>
         <Card seeThrough dark>
-          <AboutSection title={t('project')} isOpen={openSection === 'project' || !openSection}>
+          <AboutSection title={t('project')} isOpen={openSection === 'project'}>
             <p>{t('food_e_purpose')}</p>
             <CardTitle sub color={theme.colors.white}>
               {t('why_question')}
@@ -110,10 +110,7 @@ const About = ({ t }) => {
               </li>
             </ol>
           </AboutSection>
-          <AboutSection
-            title={t('how_does_it_work')}
-            isOpen={openSection === 'function' || !openSection}
-          >
+          <AboutSection title={t('how_does_it_work')} isOpen={openSection === 'function'}>
             <p>{t('function')}</p>
             <ol>
               <li>{t('land_use_units')}</li>
@@ -134,27 +131,7 @@ const About = ({ t }) => {
             </ul>
             <p>{t('optional_transport')}</p>
           </AboutSection>
-          <AboutSection title={t('data_title')} isOpen={openSection === 'sources' || !openSection}>
-            <p>
-              {dataText.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food"
-              >
-                {dataText.linkText}
-              </ExternalLink>
-              {dataText.afterLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://science.sciencemag.org/content/360/6392/987"
-              >
-                {dataText.linkText2}
-              </ExternalLink>
-              {dataText.afterLink2}
-            </p>
-            <p>{t('data_text_2')}</p>
-          </AboutSection>
-          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda' || !openSection}>
+          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda'}>
             <p>{t('rda_text')}</p>
             <CardTitle sub color={theme.colors.land}>
               <span className="header-icon">
@@ -237,10 +214,7 @@ const About = ({ t }) => {
             <p>{t('pie-chart-explanation')}</p>
             <p>{t('rda_future')}</p>
           </AboutSection>
-          <AboutSection
-            title={t('how_to_use_title')}
-            isOpen={openSection === 'how-to-use' || !openSection}
-          >
+          <AboutSection title={t('how_to_use_title')} isOpen={openSection === 'how-to-use'}>
             <p>{t('how_to_use_text')}</p>
             <CardTitle sub color={theme.colors.white}>
               {t('sub_ingredients_title')}
@@ -270,13 +244,30 @@ const About = ({ t }) => {
               {beefDairyHerdsText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection
-            title={t('accuracy_title')}
-            isOpen={openSection === 'accuracy' || !openSection}
-          >
+          <AboutSection title={t('data_title')} isOpen={openSection === 'sources'}>
+            <p>
+              {dataText.beforeLink}
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food"
+              >
+                {dataText.linkText}
+              </ExternalLink>
+              {dataText.afterLink}
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://science.sciencemag.org/content/360/6392/987"
+              >
+                {dataText.linkText2}
+              </ExternalLink>
+              {dataText.afterLink2}
+            </p>
+            <p>{t('data_text_2')}</p>
+          </AboutSection>
+          <AboutSection title={t('accuracy_title')} isOpen={openSection === 'accuracy'}>
             <p>{t('accuracy_text')}</p>
           </AboutSection>
-          <AboutSection title={t('story_title')} isOpen={openSection === 'story' || !openSection}>
+          <AboutSection title={t('story_title')} isOpen={openSection === 'story'}>
             <p>
               {storyText.beforeLink}
               <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
@@ -285,10 +276,7 @@ const About = ({ t }) => {
               {storyText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection
-            title={t('support_title')}
-            isOpen={openSection === 'support' || !openSection}
-          >
+          <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
             <p>
               {supportText.beforeLink}
               <ExternalLink color={theme.colors.aqua} email href="mailto:ethicode@ethicode.org">
