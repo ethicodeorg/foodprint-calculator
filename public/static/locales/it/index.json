@@ -1,5 +1,5 @@
 {
   "start": "Inizia",
-  "slogan": "",
-  "food_e_function": ""
+  "slogan": "Rendiamo il buon cibo {{link_start}} sostenibile {{link_end}}",
+  "food_e_function": "Che tu sia un cuoco dilettante o un consolidato ristorante, una promettente food blogger o un’azienda che produce piatti pronti, FOOD·E ti fornisce gli strumenti necessari per {{link_start}} valutare l’impatto ambientale di ogni tua ricetta e condividerlo con le persone che amano i tuoi piatti {{link_end}}."
 }
