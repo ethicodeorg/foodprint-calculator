@@ -49,7 +49,7 @@ const About = ({ t }) => {
             <p>{t('four_ways_impact')}</p>
             <ol>
               <li>
-                <span style={{ color: theme.colors.land }}>{t('land_use')}</span>
+                <span style={{ color: theme.colors.green }}>{t('land_use')}</span>
                 <ul>
                   <li>
                     {landUseText.beforeLink}
@@ -79,7 +79,7 @@ const About = ({ t }) => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.water }}>{t('water_withdrawals')}</span>
+                <span style={{ color: theme.colors.aqua }}>{t('water_withdrawals')}</span>
                 <ul>
                   <li>
                     {waterWithdrawalsText.beforeLink}
@@ -94,7 +94,7 @@ const About = ({ t }) => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.eutro }}>{t('eutrophying_emissions')}</span>
+                <span style={{ color: theme.colors.fuchsia }}>{t('eutrophying_emissions')}</span>
                 <ul>
                   <li>
                     {eutrophyingEmissionsText.beforeLink}
@@ -133,7 +133,7 @@ const About = ({ t }) => {
           </AboutSection>
           <AboutSection title={t('rda_title')} isOpen={openSection === 'rda'}>
             <p>{t('rda_text')}</p>
-            <CardTitle sub color={theme.colors.land}>
+            <CardTitle sub color={theme.colors.green}>
               <span className="header-icon">
                 <FaTractor />
               </span>
@@ -165,7 +165,7 @@ const About = ({ t }) => {
               </ExternalLink>
               {ghgEmissionsRDA.afterLink}
             </p>
-            <CardTitle sub color={theme.colors.water}>
+            <CardTitle sub color={theme.colors.aqua}>
               <span className="header-icon">
                 <FaTint />
               </span>
@@ -188,7 +188,7 @@ const About = ({ t }) => {
               </ExternalLink>
               {waterWithdrawalsRDA.afterLink2}
             </p>
-            <CardTitle sub color={theme.colors.eutro}>
+            <CardTitle sub color={theme.colors.fuchsia}>
               <span className="header-icon">
                 <FaTint />
               </span>
