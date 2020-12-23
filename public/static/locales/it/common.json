@@ -120,7 +120,7 @@
   "add_ingredient": "Aggiungi ingrediente",
   "no_ingredient": "Nessun ingrediente",
   "meal_name": "Nome ricetta",
-  "about_meal_optional": "Informazioni sul ricetta (opzionale)",
+  "about_meal_optional": "Informazioni sulla ricetta (opzionale)",
   "link_to_recipe_optional": "Link alla ricetta (opzionale)",
   "save": "Salva",
   "powered_by": "Offerto da {{link_start}}Ethicode{{link_end}}",
