@@ -3,9 +3,9 @@ const theme = {
     default: 'Montserrat, sans-serif',
   },
   colors: {
-    text: '#222',
+    text: '#000',
     background: '#f1f5f6',
-    darkBackground: '#222',
+    darkBackground: '#000',
     link: '#1eaaf1',
     border: '#ccc',
     darkBorder: '#444',
