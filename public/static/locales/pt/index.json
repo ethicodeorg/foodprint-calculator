@@ -1,8 +1,5 @@
 {
   "start": "Início",
-  "true_price_of_food": "O {{link_start}}Verdadeiro{{link_end}} Preço da Comida",
-  "food_e_purpose": "FOOD·E nos ajuda a cuidar melhor do nosso planeta por meio de nossas escolhas alimentares.",
-  "idea": "A ideia é que ao tomarem conhecimento do impacto ambiental de suas opções alimentares, consumidores escolherão refeições mais sustentáveis com mais frequência.",
-  "food_e_function": "FOOD·E possibilita que todos que criam e oferecem refeições possam avaliar o impacto ambiental de seus pratos e apresentá-lo de forma clara aos seus consumidores.",
-  "read_more": "Leia mais"
+  "slogan": "Tornando Nossa Comida {{link_start}}Sustentável{{link_end}}",
+  "food_e_function": "Seja você um cozinheiro amador ou um restaurante bem estabelecido, um blogueiro de culinária promissor ou um fornecedor de refeições prontas, o FOOD·E permite que você {{link_start}}avalie os impactos ambientais das suas refeições e os compartilhes com as pessoas que gostam sua comida {{link_end}}."
 }

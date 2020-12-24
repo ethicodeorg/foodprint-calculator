@@ -14,7 +14,7 @@ import theme from '../styles/theme';
 
 const About = ({ t }) => {
   const router = useRouter();
-  const { openSection } = router.query;
+  const { openSection = 'project' } = router.query;
   const landUseText = splitTranslationWithLink(t('land_use_text', SPLITTER));
   const ghgEmissionsText = splitTranslationWithLink(t('ghg_emissions_text', SPLITTER));
   const waterWithdrawalsText = splitTranslationWithLink(t('water_withdrawals_text', SPLITTER));
@@ -38,24 +38,18 @@ const About = ({ t }) => {
       <Content>
         <PageTitle>{t('about_fc')}</PageTitle>
         <Card seeThrough dark>
-          <AboutSection title={t('project')} isOpen={openSection === 'project' || !openSection}>
-            <p>{t('fc_function')}</p>
+          <AboutSection title={t('project')} isOpen={openSection === 'project'}>
+            <p>{t('food_e_purpose')}</p>
             <CardTitle sub color={theme.colors.white}>
               {t('why_question')}
             </CardTitle>
             <p>
-              {t('why_answer_1')} {t('why_answer_2')} {t('why_answer_3')}
-            </p>
-            <CardTitle sub color={theme.colors.white}>
-              {t('how_question')}
-            </CardTitle>
-            <p>
-              {t('how_answer_1')} {t('how_answer_2')} {t('how_answer_3')}
+              {t('why_answer_1')} {t('why_answer_2')}
             </p>
             <p>{t('four_ways_impact')}</p>
             <ol>
               <li>
-                <span style={{ color: theme.colors.land }}>{t('land_use')}</span>
+                <span style={{ color: theme.colors.green }}>{t('land_use')}</span>
                 <ul>
                   <li>
                     {landUseText.beforeLink}
@@ -85,7 +79,7 @@ const About = ({ t }) => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.water }}>{t('water_withdrawals')}</span>
+                <span style={{ color: theme.colors.aqua }}>{t('water_withdrawals')}</span>
                 <ul>
                   <li>
                     {waterWithdrawalsText.beforeLink}
@@ -100,7 +94,7 @@ const About = ({ t }) => {
                 </ul>
               </li>
               <li>
-                <span style={{ color: theme.colors.eutro }}>{t('eutrophying_emissions')}</span>
+                <span style={{ color: theme.colors.fuchsia }}>{t('eutrophying_emissions')}</span>
                 <ul>
                   <li>
                     {eutrophyingEmissionsText.beforeLink}
@@ -116,29 +110,30 @@ const About = ({ t }) => {
               </li>
             </ol>
           </AboutSection>
-          <AboutSection title={t('data_title')} isOpen={openSection === 'sources' || !openSection}>
-            <p>
-              {dataText.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food"
-              >
-                {dataText.linkText}
-              </ExternalLink>
-              {dataText.afterLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://science.sciencemag.org/content/360/6392/987"
-              >
-                {dataText.linkText2}
-              </ExternalLink>
-              {dataText.afterLink2}
-            </p>
-            <p>{t('data_text_2')}</p>
+          <AboutSection title={t('how_does_it_work')} isOpen={openSection === 'function'}>
+            <p>{t('function')}</p>
+            <ol>
+              <li>{t('land_use_units')}</li>
+              <li>{t('ghg_units')}</li>
+              <li>{t('water_units')}</li>
+              <li>{t('eutro_units')}</li>
+            </ol>
+            <p>{t('function_in_action')}</p>
+            <p>{t('ghg_complexity')}</p>
+            <ul>
+              <li>{t('land_use_change')}</li>
+              <li>{t('farm')}</li>
+              <li>{t('animal_feed')}</li>
+              <li>{t('processing')}</li>
+              <li>{t('transport')}</li>
+              <li>{t('retail')}</li>
+              <li>{t('packaging')}</li>
+            </ul>
+            <p>{t('optional_transport')}</p>
           </AboutSection>
-          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda' || !openSection}>
+          <AboutSection title={t('rda_title')} isOpen={openSection === 'rda'}>
             <p>{t('rda_text')}</p>
-            <CardTitle sub color={theme.colors.land}>
+            <CardTitle sub color={theme.colors.green}>
               <span className="header-icon">
                 <FaTractor />
               </span>
@@ -170,7 +165,7 @@ const About = ({ t }) => {
               </ExternalLink>
               {ghgEmissionsRDA.afterLink}
             </p>
-            <CardTitle sub color={theme.colors.water}>
+            <CardTitle sub color={theme.colors.aqua}>
               <span className="header-icon">
                 <FaTint />
               </span>
@@ -193,7 +188,7 @@ const About = ({ t }) => {
               </ExternalLink>
               {waterWithdrawalsRDA.afterLink2}
             </p>
-            <CardTitle sub color={theme.colors.eutro}>
+            <CardTitle sub color={theme.colors.fuchsia}>
               <span className="header-icon">
                 <FaTint />
               </span>
@@ -216,12 +211,10 @@ const About = ({ t }) => {
               </ExternalLink>{' '}
               {eutrophyingEmissionsRDA.afterLink2}
             </p>
+            <p>{t('pie-chart-explanation')}</p>
             <p>{t('rda_future')}</p>
           </AboutSection>
-          <AboutSection
-            title={t('how_to_use_title')}
-            isOpen={openSection === 'how-to-use' || !openSection}
-          >
+          <AboutSection title={t('how_to_use_title')} isOpen={openSection === 'how-to-use'}>
             <p>{t('how_to_use_text')}</p>
             <CardTitle sub color={theme.colors.white}>
               {t('sub_ingredients_title')}
@@ -251,13 +244,30 @@ const About = ({ t }) => {
               {beefDairyHerdsText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection
-            title={t('accuracy_title')}
-            isOpen={openSection === 'accuracy' || !openSection}
-          >
+          <AboutSection title={t('data_title')} isOpen={openSection === 'sources'}>
+            <p>
+              {dataText.beforeLink}
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://ourworldindata.org/environmental-impacts-of-food"
+              >
+                {dataText.linkText}
+              </ExternalLink>
+              {dataText.afterLink}
+              <ExternalLink
+                color={theme.colors.aqua}
+                href="https://science.sciencemag.org/content/360/6392/987"
+              >
+                {dataText.linkText2}
+              </ExternalLink>
+              {dataText.afterLink2}
+            </p>
+            <p>{t('data_text_2')}</p>
+          </AboutSection>
+          <AboutSection title={t('accuracy_title')} isOpen={openSection === 'accuracy'}>
             <p>{t('accuracy_text')}</p>
           </AboutSection>
-          <AboutSection title={t('story_title')} isOpen={openSection === 'story' || !openSection}>
+          <AboutSection title={t('story_title')} isOpen={openSection === 'story'}>
             <p>
               {storyText.beforeLink}
               <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
@@ -266,10 +276,7 @@ const About = ({ t }) => {
               {storyText.afterLink}
             </p>
           </AboutSection>
-          <AboutSection
-            title={t('support_title')}
-            isOpen={openSection === 'support' || !openSection}
-          >
+          <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
             <p>
               {supportText.beforeLink}
               <ExternalLink color={theme.colors.aqua} email href="mailto:ethicode@ethicode.org">
@@ -291,9 +298,10 @@ const About = ({ t }) => {
         }
         li {
           margin-bottom: 10px;
+          line-height: 1.4;
         }
         p {
-          margin-bottom: 30px;
+          line-height: 1.4;
         }
       `}</style>
     </Layout>

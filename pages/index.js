@@ -1,11 +1,5 @@
 import { useEffect } from 'react';
-import {
-  FaCalculator,
-  FaUtensils,
-  FaGlobeAmericas,
-  FaLightbulb,
-  FaCheckCircle,
-} from 'react-icons/fa';
+import { FaCalculator, FaUtensils } from 'react-icons/fa';
 import { Link, withTranslation } from '../i18n';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import Header from '../components/Header';
@@ -15,9 +9,11 @@ import theme from '../styles/theme';
 import Card from '../components/Card';
 
 const Index = ({ t }) => {
-  const headlineText = splitTranslationWithLink(t('true_price_of_food', SPLITTER));
+  const headlineText = splitTranslationWithLink(t('slogan', SPLITTER));
+  const functionText = splitTranslationWithLink(t('food_e_function', SPLITTER));
+
   useEffect(() => {
-    // Clear the deprecated meals cookie so the user won't have a huge cookie not even in use
+    // Clear the deprecated meals cookie so the user won't have a huge cookie
     document.cookie = 'meals=;';
   });
 
@@ -35,27 +31,12 @@ const Index = ({ t }) => {
         <div className="intro-container">
           <Card seeThrough dark>
             <div className="intro-item">
-              <div className="icon-container globe-icon">
-                <FaGlobeAmericas />
-              </div>
-              <p>{t('food_e_purpose')}</p>
+              <p>
+                {functionText.beforeLink}
+                <span className="function">{functionText.linkText}</span>
+                {functionText.afterLink}
+              </p>
             </div>
-            <div className="intro-item">
-              <div className="icon-container bulb-icon">
-                <FaLightbulb />
-              </div>
-              <p>{t('idea')}</p>
-            </div>
-            <div className="intro-item">
-              <div className="icon-container check-icon">
-                <FaCheckCircle />
-              </div>
-              <p>{t('food_e_function')}</p>
-            </div>
-            <Link href="/about">
-              <a className="about-link">{t('read_more')}</a>
-            </Link>
-            .
           </Card>
         </div>
         <div className="button-container">
@@ -84,7 +65,7 @@ const Index = ({ t }) => {
         .headline {
           display: flex;
           justify-content: space-between;
-          margin-top: 80px;
+          margin: 80px 0 20px;
           padding: 0 20px;
         }
         .intro-container {
@@ -94,19 +75,6 @@ const Index = ({ t }) => {
         .intro-item {
           display: flex;
         }
-        .icon-container {
-          margin: 5px 25px 0 0;
-          font-size: 28px;
-        }
-        .globe-icon {
-          color: ${theme.colors.aqua};
-        }
-        .bulb-icon {
-          color: ${theme.colors.yellow};
-        }
-        .check-icon {
-          color: ${theme.colors.green};
-        }
         .button-container {
           display: flex;
           justify-content: space-around;
@@ -115,44 +83,26 @@ const Index = ({ t }) => {
           width: calc(100% - 40px);
           animation: pulse 10s linear 0s infinite;
         }
-        .calculator-container {
+        .calc-container {
           display: flex;
-          margin-left: 10px;
-          font-size: 14px;
+          font-size: 26px;
+          margin-right: 20px;
         }
         .utensils-container {
           display: flex;
           font-size: 26px;
           margin-left: 20px;
         }
-        .calc-container {
-          display: flex;
-          font-size: 26px;
-          margin-right: 20px;
-        }
-        .link-container {
-          display: flex;
-          justify-content: space-around;
-        }
-        .about-link {
-          padding-left: 53px;
-          color: ${theme.colors.aqua};
-          text-decoration: none;
-          font-size: 16px;
-        }
-        .about-link:hover {
-          opacity: 0.7;
-        }
         .true {
-          color: ${theme.colors.eutro};
-          animation: colorfade 10s linear 0s infinite;
+          color: ${theme.colors.orange};
         }
-        .environmental {
-          margin: 0 6px;
+        .function {
+          color: ${theme.colors.lightGreen};
+          font-style: italic;
         }
         h1 {
           margin: 0 auto;
-          font-size: 50px;
+          font-size: 32px;
           font-weight: normal;
           text-align: center;
         }
@@ -168,8 +118,9 @@ const Index = ({ t }) => {
           text-align: center;
         }
         p {
-          font-size: 16px;
-          margin: 0 0 20px;
+          margin: 0 0 10px;
+          font-size: 18px;
+          line-height: 1.5;
         }
 
         @keyframes colorfade {
@@ -211,16 +162,13 @@ const Index = ({ t }) => {
             padding: 60px 40px 130px;
           }
           .headline {
-            margin: 100px 0 50px;
-          }
-          .about-link {
-            font-size: 20px;
+            margin: 80px 0 20px;
           }
           h1 {
-            font-size: 72px;
+            font-size: 60px;
           }
           p {
-            max-width: 650px;
+            max-width: 720px;
             font-size: 20px;
           }
         }

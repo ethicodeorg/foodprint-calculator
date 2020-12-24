@@ -1,8 +1,5 @@
 {
   "start": "Byrja",
-  "true_price_of_food": "Hið {{link_start}}sanna{{link_end}} matarverð",
-  "food_e_purpose": "Spori hjálpar okkur að sjá betur um plánetuna okkar með matarvali.",
-  "idea": "Hugmyndin er að ef neytendum er gefin innsýn inn í umhverfisáhrif þeirra valkosta sem í boði eru, þegar staðið er frammi fyrir vali á næstu máltíð, munu umhverfisvænni máltíðir oftar verða fyrir valinu.",
-  "food_e_function": "Spori gerir sköpuðum máltíða af öllum stærðum og gerðum kleift að meta umhverfisáhrif rétta sinna og birta þau skilmerkilega fyrir neytendur sína.",
-  "read_more": "Lesa meira"
+  "slogan": "Gerir góðan mat {{link_start}}umhverfisvænni{{link_end}}",
+  "food_e_function": "Hvort sem þú ert að reka rótgróinn veitingastað eða efnilegt matarblogg, framleiða tilbúna rétti á heimsvísu eða að elda eitthvað gómsætt heima, gerir Spori þér kleift að {{link_start}}ákvarða umhverfisspor rétta þinna og deila þeim með fólkinu sem hefur yndi af matnum þínum{{link_end}}."
 }

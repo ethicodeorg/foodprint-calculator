@@ -1,8 +1,5 @@
 {
   "start": "Inizia",
-  "true_price_of_food": "Il {{link_start}}Vero{{link_end}} Prezzo Del Cibo",
-  "food_e_purpose": "FOOD·E ci aiuta a prenderci cura del nostro pianeta attraverso le nostre scelte alimentari.",
-  "idea": "L'idea è quella di mettere il consumatore in una posizione tale da poter osservare l'impatto ambientale di ogni suo pasto, spronandolo ad optare più frequentemente per pasti meno impattanti.",
-  "food_e_function": "FOOD·E conferisce a chiunque crei ed offra pasti la possibilità di valutare l'impatto ambientale delle proprie ricette e mostrarlo chiaramente ai propri clienti.",
-  "read_more": "Leggi tutto"
+  "slogan": "Rendiamo il buon cibo {{link_start}} sostenibile {{link_end}}",
+  "food_e_function": "Che tu sia un cuoco dilettante o un consolidato ristorante, una promettente food blogger o un’azienda che produce piatti pronti, FOOD·E ti fornisce gli strumenti necessari per {{link_start}} valutare l’impatto ambientale di ogni tua ricetta e condividerlo con le persone che amano i tuoi piatti {{link_end}}."
 }

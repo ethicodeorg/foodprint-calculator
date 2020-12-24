@@ -1,8 +1,5 @@
 {
   "start": "Start",
-  "true_price_of_food": "The {{link_start}}True{{link_end}} Price Of Food",
-  "food_e_purpose": "FOOD·E helps us take better care of our planet through our food choices.",
-  "idea": "The idea is that given a glimpse of their meal options' environmental impact when selecting their next meal, consumers will choose environmentally friendlier meals more often.",
-  "food_e_function": "FOOD·E enables meal creators of all kinds and sizes to evaluate their meals' environmental impact and clearly present it for their consumers.",
-  "read_more": "Read more"
+  "slogan": "Making Good Food {{link_start}}Sustainable{{link_end}}",
+  "food_e_function": "Whether you are a passionate home cook or a well-established restaurant, a promising food blogger, or a global producer of ready meals, FOOD·E allows you to {{link_start}}evaluate your meals' environmental footprints and share them with people enjoying your food{{link_end}}."
 }

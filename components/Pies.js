@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { FaChevronDown, FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaChevronDown, FaDownload, FaExternalLinkAlt, FaLongArrowAltLeft } from 'react-icons/fa';
 import classNames from 'classnames';
 import { Tooltip } from '@material-ui/core';
 import { getMealPieData } from '../utils/pieUtils';
@@ -16,7 +16,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
   let html2canvas;
   const router = useRouter();
   const pieData = getMealPieData(meal);
-  const [showDetails, setShowDetails] = useState(router.route === '/meals/[id]');
+  const [showDetails, setShowDetails] = useState(true);
   const [showIngredients, setShowIngredients] = useState(false);
 
   useEffect(() => {
@@ -113,62 +113,76 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           'flex-container': !showDetails,
         })}
       >
-        {pieData.map((category, cIndex) => {
-          const { total, rda, name, unit, color } = category;
-          const numberOfExtraPies = Math.floor(total / rda);
-          const extraPies = [];
+        {pieData
+          .filter((_, i) => i > 0 || showDetails)
+          .map((category, cIndex) => {
+            const { total, rda, name, unit, color } = category;
+            const numberOfExtraPies = Math.floor(total / rda);
+            const extraPies = [];
 
-          for (let i = 0; i < numberOfExtraPies; i++) {
-            extraPies.push({
+            for (let i = 0; i < numberOfExtraPies; i++) {
+              extraPies.push({
+                name: t(name),
+                total: rda,
+                rda: rda,
+                unit: unit,
+                color: color,
+                isExtra: true,
+              });
+            }
+
+            const lastPie = {
               name: t(name),
-              total: rda,
+              total: total % rda,
               rda: rda,
               unit: unit,
               color: color,
-              isExtra: true,
-            });
-          }
+            };
+            const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
 
-          const lastPie = {
-            name: t(name),
-            total: total % rda,
-            rda: rda,
-            unit: unit,
-            color: color,
-          };
-          const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
-
-          return (
-            <div
-              className={classNames('category-container', {
-                'flex-container': showDetails,
-              })}
-              key={cIndex}
-            >
-              {showDetails && (
-                <div className="legend-container">
-                  <div className="legend-name">{t(name)}</div>
-                  <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
-                  <div className="percentage">
-                    <Link href="/about?openSection=rda">
-                      <a className={`percentage-${cIndex}`} target="_blank">
-                        {percentageString}
-                        <span className="new-tab-icon">
-                          <FaExternalLinkAlt />
-                        </span>
-                      </a>
-                    </Link>
+            return (
+              <div
+                className={classNames('category-container', {
+                  'flex-container': showDetails,
+                })}
+                key={cIndex}
+              >
+                {showDetails && (
+                  <div className="legend-container">
+                    <div className="legend-name">{t(name)}</div>
+                    {cIndex > 0 && <div className="value">{`${total.toFixed(2)} ${unit}`}</div>}
+                    <div className="percentage">
+                      <Link href="/about?openSection=rda">
+                        <a className={`percentage-${cIndex}`} target="_blank">
+                          <Tooltip title={t('daily_earth_share')} placement="right" arrow>
+                            <span>
+                              {percentageString}
+                              <span className="new-tab-icon">
+                                <FaExternalLinkAlt />
+                              </span>
+                            </span>
+                          </Tooltip>
+                        </a>
+                      </Link>
+                    </div>
                   </div>
+                )}
+                <div className={`pies-container pies-container-${cIndex}`}>
+                  {extraPies.concat(lastPie).map((pie, pIndex) => (
+                    <Pie key={pIndex} category={pie} label={`${t(name)}: ${percentageString}`} />
+                  ))}
                 </div>
-              )}
-              <div className="pies-container">
-                {extraPies.concat(lastPie).map((pie, pIndex) => (
-                  <Pie key={pIndex} category={pie} label={`${t(name)}: ${percentageString}`} />
-                ))}
+                {showDetails && cIndex === 0 && (
+                  <div className="explainer-container">
+                    <div className="arrow-container">
+                      <FaLongArrowAltLeft />
+                    </div>
+                    <div className="explainer-label">{t('one_pie')}</div>
+                  </div>
+                )}
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
       <style jsx>{`
         .title-container {
@@ -196,9 +210,19 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
         }
         .category-container {
           display: flex;
-          align-items: center;
           margin: 0;
           transition: 0.3s ease-in-out;
+        }
+        .explainer-container {
+          display: flex;
+          align-items: center;
+        }
+        .explainer-label {
+          font-size: 8px;
+          margin-left: 10px;
+        }
+        .arrow-container {
+          display: none;
         }
         .legend-container {
           min-width: 50%;
@@ -209,6 +233,9 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           flex-wrap: ${!showDetails ? 'nowrap' : 'wrap'};
           margin-top: 10px;
           min-width: 50%;
+        }
+        .pies-container-0 {
+          min-width: ${showDetails ? '80px' : 'unset'};
         }
         .legend-name {
           font-size: 14px;
@@ -221,17 +248,21 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
         }
         .percentage-0 {
           text-decoration: none;
-          color: ${theme.colors.land};
+          color: ${theme.colors.orange};
         }
         .percentage-1 {
           text-decoration: none;
-          color: ${theme.colors.ghg};
+          color: ${theme.colors.land};
         }
         .percentage-2 {
           text-decoration: none;
-          color: ${theme.colors.water};
+          color: ${theme.colors.ghg};
         }
         .percentage-3 {
+          text-decoration: none;
+          color: ${theme.colors.water};
+        }
+        .percentage-4 {
           text-decoration: none;
           color: ${theme.colors.eutro};
         }
@@ -274,6 +305,12 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           }
           .percentage {
             font-size: 14px;
+          }
+          .explainer-label {
+            font-size: 10px;
+          }
+          .arrow-container {
+            display: block;
           }
         }
       `}</style>

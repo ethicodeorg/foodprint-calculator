@@ -79,7 +79,7 @@ const Layout = ({ children, title = '', t, showFloater }) => {
           height: 100vh;
           width: 100vw;
           z-index: -1;
-          opacity: 0.6;
+          opacity: 0.9;
           background: url('/earth-cover.jpg') no-repeat 50%;
           background-size: cover;
         }
