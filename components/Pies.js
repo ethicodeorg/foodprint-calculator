@@ -106,7 +106,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
             ))}
         </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
-          {t('details')}
+          {showDetails ? t('less') : t('more')}
           <span
             className={classNames('button-icon', {
               'button-icon-reversed': showDetails,
@@ -170,7 +170,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
                           </span>
                         </a>
                       </Link>
-                      <InfoIcon title={t('des_tooltip')} placement="right" />
+                      <InfoIcon title={t(`des_tooltip_${name}`)} placement="right" />
                     </div>
                   </div>
                 )}

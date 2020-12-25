@@ -44,7 +44,7 @@ handler.get(async (req, res) => {
       })
     );
 
-    res.status(200).json({ meals: mealsWithUserInfo.sort((a, b) => a[sortBy] - b[sortBy]) });
+    res.status(200).json({ meals: mealsWithUserInfo.sort((a, b) => b[sortBy] - a[sortBy]) });
   } catch (error) {
     console.error(error.message);
     res.status(400).end();

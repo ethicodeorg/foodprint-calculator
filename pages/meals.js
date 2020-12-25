@@ -13,7 +13,7 @@ const Meals = ({ t }) => {
   const { visibility, user, search, sortBy } = router.query;
   let queryString = `?visibility=${visibility || 'public'}&sortBy=${sortBy || 'landUse'}`;
   let queries = {
-    sortBy: sortBy || 'landUse',
+    sortBy: sortBy || 'waterWithdrawals',
   };
 
   if (user) {
