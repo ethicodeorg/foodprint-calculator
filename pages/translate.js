@@ -79,17 +79,9 @@ const Translate = ({ t }) => {
         .select-container {
           width: 100%;
         }
-        .language-select {
-          width: 265px;
-        }
         .flag {
           width: 36px;
           padding-left: 15px;
-        }
-        .new-translations {
-          padding: 100px 20px;
-          text-align: center;
-          background-color: ${theme.colors.white};
         }
         label {
           min-width: 100%;
@@ -105,13 +97,6 @@ const Translate = ({ t }) => {
             min-width: 180px;
             margin-bottom: 0;
             font-size: 16px;
-          }
-          input {
-            width: 430px;
-          }
-          .input-container,
-          .type-container {
-            flex-wrap: nowrap;
           }
           .select-container {
             width: 452px;

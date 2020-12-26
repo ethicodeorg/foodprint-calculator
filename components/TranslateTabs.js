@@ -13,13 +13,15 @@ const TranslateTabs = ({ selectedLang }) => {
     },
   }));
   const classes = useStyles();
-  const handleChange = (event, newValue) => {
+  const handleChange = (_, newValue) => {
     setSelectedTab(newValue);
   };
+
+  // Add the translation ids that need to be translated in the PR here:
   const changes = {
-    frontPage: ['start', 'slogan'],
+    frontPage: [],
     aboutPage: [],
-    other: ['transport_mode', 'transport_type'],
+    other: [],
   };
 
   return (
