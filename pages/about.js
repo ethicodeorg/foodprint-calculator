@@ -209,7 +209,7 @@ const About = ({ t }) => {
               >
                 {eutrophyingEmissionsRDA.linkText2}
               </ExternalLink>{' '}
-              {eutrophyingEmissionsRDA.afterLink2}
+              {eutrophyingEmissionsRDA.afterLink2} {t('eutrophying_emissions_method')}
             </p>
             <p>{t('pie-chart-explanation')}</p>
             <p>{t('rda_future')}</p>
