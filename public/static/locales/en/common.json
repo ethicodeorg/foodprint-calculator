@@ -5,7 +5,7 @@
   "compare": "Compare",
   "compare_meals": "Compare Meals",
   "my_meals": "My meals",
-  "tooltip_all_meals": "This page displays all the public meals in the FOOD·E database. You can filter by meal creator, search by meal name and sort by different values.",
+  "tooltip_all_meals": "This page displays all the public meals in the FOOD·E database. You can filter by meal creator, search by meal name, and sort by different values.",
   "tooltip_compare": "This page displays selected meals for side-by-side comparisons. You can add or remove meals as desired.",
   "settings": "Settings",
   "log_in": "Log in",
