@@ -13,12 +13,13 @@ const InfoIcon = ({ title }) => {
             align-items: center;
             justify-content: center;
             margin-left: 10px;
-            height: 14px;
-            width: 14px;
+            height: 12px;
+            width: 12px;
+            font-size: 8px;
             border-radius: 20px;
-            border: 2px solid ${theme.colors.water};
-            font-size: 10px;
-            color: ${theme.colors.water};
+            border: 2px solid ${theme.colors.orange};
+            color: ${theme.colors.orange};
+            cursor: pointer;
           }
         `}</style>
       </div>

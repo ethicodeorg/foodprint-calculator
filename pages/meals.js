@@ -39,6 +39,7 @@ const Meals = ({ t }) => {
         emptyMessage={t('error_no_meals')}
         queries={queries}
         t={t}
+        tooltipText={t('tooltip_all_meals')}
       />
     </Layout>
   );

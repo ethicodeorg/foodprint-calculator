@@ -9,6 +9,7 @@ const PageTitle = ({ children }) => (
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
         margin: 120px 0 0;
         padding: 0 20px;
         font-size: 32px;

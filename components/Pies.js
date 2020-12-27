@@ -90,20 +90,19 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           <CardTitle>{`${t('foodprint')}${
             numberOfServings > 1 ? ` - ${t('per_person')}` : ''
           }`}</CardTitle>
-          {router.route === '/mymeals' ||
-            (router.route === '/newmeal' && (
-              <MyTooltip
-                title={t('download_report')}
-                placement="top"
-                arrow
-                enterTouchDelay={0}
-                leaveTouchDelay={3000}
-              >
-                <button className="download-button" onClick={() => downloadReport(meal)}>
-                  <FaDownload />
-                </button>
-              </MyTooltip>
-            ))}
+          {(router.route === '/mymeals' || router.route === '/newmeal') && (
+            <MyTooltip
+              title={t('download_report')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
+              <button className="download-button" onClick={() => downloadReport(meal)}>
+                <FaDownload />
+              </button>
+            </MyTooltip>
+          )}
         </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
           {showDetails ? t('less') : t('more')}
@@ -170,7 +169,7 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
                           </span>
                         </a>
                       </Link>
-                      <InfoIcon title={t(`des_tooltip_${name}`)} placement="right" />
+                      <InfoIcon title={t(`des_tooltip_${name}`)} />
                     </div>
                   </div>
                 )}

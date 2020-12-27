@@ -10,6 +10,7 @@ import {
   FaTimes,
   FaPlus,
   FaCopy,
+  FaExclamationTriangle,
 } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
@@ -121,6 +122,19 @@ const Meal = ({
               >
                 {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
               </button>
+            </MyTooltip>
+          )}
+          {router.route === '/mymeals' && !user && (
+            <MyTooltip
+              title={t('warning_not_logged_in')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={4000}
+            >
+              <div className="warning-icon">
+                <FaExclamationTriangle />
+              </div>
             </MyTooltip>
           )}
           {router.route === '/compare' && (
@@ -302,6 +316,8 @@ const Meal = ({
         .duplicate-button {
           color: ${theme.colors.land};
         }
+        .duplicate-button:hover,
+        .warning-icon:hover,
         .download-button:hover {
           opacity: 0.7;
         }
@@ -310,6 +326,11 @@ const Meal = ({
         }
         .qr-code {
           display: none;
+        }
+        .warning-icon {
+          color: ${theme.colors.orange};
+          font-size: 18px;
+          cursor: pointer;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

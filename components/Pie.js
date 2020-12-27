@@ -30,6 +30,7 @@ const Pie = ({ category, isTiny, label }) => {
             max-width: 60px;
             font-size: 14px;
             margin: 5px;
+            cursor: pointer;
           }
           .tiny-pie {
             max-width: 20px;
