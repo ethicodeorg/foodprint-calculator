@@ -7,6 +7,7 @@ import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
 import theme from '../styles/theme';
 import ExternalLink from './ExternalLink';
 import Button from './Button';
+import MyTooltip from './MyTooltip';
 
 const Layout = ({ children, title = '', t, showFloater }) => {
   useEffect(() => {
@@ -34,17 +35,25 @@ const Layout = ({ children, title = '', t, showFloater }) => {
       <div className="background" />
       {children}
       {showFloater && (
-        <div className="create-button">
-          <Button primary animate noPad round>
-            <Link href="/newmeal">
-              <a className="calculate">
-                <span className="calc-container">
-                  <FaCalculator />
-                </span>
-              </a>
-            </Link>
-          </Button>
-        </div>
+        <MyTooltip
+          title={t('create_meal')}
+          placement="top"
+          arrow
+          enterTouchDelay={0}
+          leaveTouchDelay={3000}
+        >
+          <div className="create-button">
+            <Button primary animate noPad round>
+              <Link href="/newmeal">
+                <a className="calculate">
+                  <span className="calc-container">
+                    <FaCalculator />
+                  </span>
+                </a>
+              </Link>
+            </Button>
+          </div>
+        </MyTooltip>
       )}
       <div className="footer">
         <div className="powered-by">
