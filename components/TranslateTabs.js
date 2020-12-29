@@ -20,7 +20,7 @@ const TranslateTabs = ({ selectedLang }) => {
   // Add the translation ids that need to be translated in the PR here:
   const changes = {
     frontPage: [],
-    aboutPage: ['eutrophying_emissions_method'],
+    aboutPage: ['eutrophying_emissions_rda', 'eutrophying_emissions_method'],
     other: [
       'more',
       'less',
