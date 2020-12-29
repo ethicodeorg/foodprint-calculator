@@ -13,6 +13,9 @@ import OtherFrench from '../public/static/locales/fr/common.json';
 import FrontPortuguese from '../public/static/locales/pt/index.json';
 import AboutPortuguese from '../public/static/locales/pt/about.json';
 import OtherPortuguese from '../public/static/locales/pt/common.json';
+import FrontGerman from '../public/static/locales/de/index.json';
+import AboutGerman from '../public/static/locales/de/about.json';
+import OtherGerman from '../public/static/locales/de/common.json';
 
 export function getTranslationJSON(lang, index) {
   const filesMap = {
@@ -40,6 +43,11 @@ export function getTranslationJSON(lang, index) {
       0: FrontPortuguese,
       1: AboutPortuguese,
       2: OtherPortuguese,
+    },
+    de: {
+      0: FrontGerman,
+      1: AboutGerman,
+      2: OtherGerman,
     },
   };
 
@@ -69,6 +77,11 @@ export function getSubmitTextByIndex(index) {
 export function getUploadTextByIndex(index) {
   const fileName = getFileNameByIndex(index);
   return `Upload ${fileName}.json`;
+}
+
+export function getAllTranslationIds(index) {
+  const enJSON = getTranslationJSON('en', index);
+  return Object.keys(enJSON);
 }
 
 export function splitTranslationWithLink(translation) {
