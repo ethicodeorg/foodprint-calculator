@@ -20,6 +20,7 @@ const Translate = ({ t }) => {
     { value: 'fr', label: 'Français' },
     { value: 'it', label: 'Italiano' },
     { value: 'pt', label: 'Português' },
+    { value: 'es', label: 'Español' },
   ];
 
   return (
@@ -51,6 +52,7 @@ const Translate = ({ t }) => {
                   {selectedLang.value === 'fr' && <Flags.FR />}
                   {selectedLang.value === 'it' && <Flags.IT />}
                   {selectedLang.value === 'pt' && <Flags.PT />}
+                  {selectedLang.value === 'es' && <Flags.ES />}
                 </div>
               </div>
               <div className="button-container">
