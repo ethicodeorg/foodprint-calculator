@@ -267,13 +267,17 @@ const About = ({ t }) => {
           <AboutSection title={t('accuracy_title')} isOpen={openSection === 'accuracy'}>
             <p>{t('accuracy_text')}</p>
           </AboutSection>
+          <AboutSection title={t('origin_title')} isOpen={openSection === 'origin'}>
+            <p>
+              <span className="quote">"{t('origin')}"</span> — {t('origin_quote_by')}
+            </p>
+          </AboutSection>
           <AboutSection title={t('story_title')} isOpen={openSection === 'story'}>
             <p>
-              {storyText.beforeLink}
-              <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
-                {storyText.linkText}
+              {t('story_text')} {t('story_text_2')}{' '}
+              <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/team">
+                {t('meet_the_team')}
               </ExternalLink>
-              {storyText.afterLink}
             </p>
           </AboutSection>
           <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
@@ -295,6 +299,9 @@ const About = ({ t }) => {
           display: flex;
           align-items: center;
           margin-right: 10px;
+        }
+        .quote {
+          font-style: italic;
         }
         li {
           margin-bottom: 10px;

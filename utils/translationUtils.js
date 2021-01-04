@@ -73,6 +73,7 @@ export function getUploadTextByIndex(index) {
 
 export function splitTranslationWithLink(translation) {
   const translationArr = translation.split('{{link_start}}');
+  if (translationArr.length === 1) return translation;
   const beforeLink = translationArr[0];
   const firstSplitArr = translationArr[1].split('{{link_end}}');
   const linkText = firstSplitArr[0];
