@@ -3,7 +3,7 @@ import { withTranslation } from '../i18n';
 import { useRouter } from 'next/router';
 import { useUser } from '../lib/hooks';
 import { setUserCookie } from '../utils/userCookie';
-import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';
+import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorageMeals';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';
 import Content from '../components/Content';

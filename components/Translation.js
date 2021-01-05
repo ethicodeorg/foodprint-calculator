@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  addLocalStorageTranslation,
+  getLocalStorageTranslation,
+} from '../utils/localStorageTranslations';
 import theme from '../styles/theme';
 
-const Translation = ({ translations, setTranslations, english, id, translation }) => {
-  const [trans, setTrans] = useState(translation);
+const Translation = ({ context, english, id, loaded }) => {
+  const [current, setCurrent] = useState(getLocalStorageTranslation(context, id));
   const updateTranslation = (id, value) => {
-    const indexToUpdate = translations.findIndex((t) => t.id === id);
-    translations[indexToUpdate].translation = value;
-    setTrans(value);
-    setTranslations(translations);
+    setCurrent(value);
+    addLocalStorageTranslation(context, id, value);
   };
+
+  useEffect(() => {
+    if (loaded) {
+      setCurrent(loaded);
+    }
+  }, [loaded]);
 
   return (
     <div className="textbox">
@@ -21,11 +29,15 @@ const Translation = ({ translations, setTranslations, english, id, translation }
             : 'Your translation'
         }
         onChange={(e) => updateTranslation(id, e.target.value)}
-        value={trans}
+        value={current}
       ></textarea>
 
       <style jsx>{`
+        .textbox {
+          text-align: center;
+        }
         textarea {
+          width: 96%;
           margin-top: 5px;
           padding: 7px 10px;
           border: 1px solid ${theme.colors.border};
