@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
-import { getLocalStorageMeals } from '../utils/localStorage';
+import { getLocalStorageMeals } from '../utils/localStorageMeals';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import MealsPage from '../components/MealsPage';

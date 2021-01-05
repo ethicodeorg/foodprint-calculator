@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Router, withTranslation } from '../i18n';
 import { useUser } from '../lib/hooks';
-import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorage';
+import { clearLocalStorageMeals, getLocalStorageMeals } from '../utils/localStorageMeals';
 import { setUserCookie } from '../utils/userCookie';
 import Layout from '../components/MyLayout';
 import Header from '../components/Header';

@@ -14,7 +14,7 @@ import {
 } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
-import { addLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorage';
+import { addLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorageMeals';
 import { Router } from '../i18n';
 import { removeMealFromComparisons, addMealToComparisons } from '../redux/actions/pageActions';
 import { useUser } from '../lib/hooks';

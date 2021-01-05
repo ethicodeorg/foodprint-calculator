@@ -63,7 +63,12 @@ export function getSubmitTextByIndex(index) {
     2: 'Other',
   };
 
-  return `Submit ${submitTextMap[index]} translations`;
+  return `Download ${submitTextMap[index]} translations`;
+}
+
+export function getUploadTextByIndex(index) {
+  const fileName = getFileNameByIndex(index);
+  return `Upload ${fileName}.json`;
 }
 
 export function splitTranslationWithLink(translation) {

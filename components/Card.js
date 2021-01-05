@@ -9,7 +9,7 @@ const Card = ({ children, inner, userForm, seeThrough, dark, noBorderRadius }) =
         border: none;
         border-radius: 0;
         box-shadow: none;
-        padding: ${inner ? '0' : '20px'};
+        padding: ${inner && !noBorderRadius ? '0' : '20px'};
         margin: ${inner ? '0' : '20px'} auto 0;
         background-color: ${dark ? theme.colors.darkBackground : theme.colors.white};
         opacity: ${seeThrough ? '0.9' : '1'};

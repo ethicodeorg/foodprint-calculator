@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import Select from 'react-select';
 import useSWR from 'swr';
 import { addMealToComparisons } from '../redux/actions/pageActions';
-import { deleteLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorage';
+import { deleteLocalStorageMeal, getLocalStorageMeals } from '../utils/localStorageMeals';
 import { useUser } from '../lib/hooks';
 import Button from './Button';
 import PageTitle from './PageTitle';

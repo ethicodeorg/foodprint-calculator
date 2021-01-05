@@ -18,8 +18,8 @@ import {
   getLocalStorageMeals,
   editLocalStorageMeal,
   addLocalStorageMeal,
-} from '../utils/localStorage';
-import { setFocus } from '../utils/ui'
+} from '../utils/localStorageMeals';
+import { setFocus } from '../utils/ui';
 import { useUser } from '../lib/hooks';
 import Header from './Header';
 import Card from './Card';
@@ -346,7 +346,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                     onChange={(val) => {
                       setSelectedIngredient(val);
                       changeUnitOptions(val);
-                      setFocus(refAmount)
+                      setFocus(refAmount);
                     }}
                     options={foodOptions}
                     instanceId="ingredient"
