@@ -20,21 +20,8 @@ const TranslateTabs = ({ selectedLang }) => {
   // Add the translation ids that need to be translated in the PR here:
   const changes = {
     frontPage: [],
-    aboutPage: ['eutrophying_emissions_rda', 'eutrophying_emissions_method'],
-    other: [
-      'more',
-      'less',
-      'one_pie',
-      'des_tooltip_example_pie',
-      'des_tooltip_land_use',
-      'des_tooltip_greenhouse_gas_emissions',
-      'des_tooltip_water_withdrawals',
-      'des_tooltip_eutrophying_emissions',
-      'servings_tooltip',
-      'tooltip_all_meals',
-      'tooltip_compare',
-      'warning_not_logged_in',
-    ],
+    aboutPage: [],
+    other: [],
   };
 
   return (
