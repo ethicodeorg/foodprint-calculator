@@ -52,6 +52,7 @@ const About = ({ t }) => {
               <li>
                 <strong>{t('land_use')}</strong>
                 <TextAndChart
+                  total={104}
                   data={[
                     {
                       name: 'Global habitable land',
@@ -61,7 +62,7 @@ const About = ({ t }) => {
                   ]}
                   text={landUseText}
                   source="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-                  xLabel="million km²"
+                  unit="million km²"
                   fill={theme.colors.land}
                   interval={2}
                 />
@@ -69,6 +70,7 @@ const About = ({ t }) => {
               <li>
                 <strong>{t('ghg_emissions')}</strong>
                 <TextAndChart
+                  total={52.3}
                   data={[
                     {
                       name: 'Global annual emissions',
@@ -78,14 +80,15 @@ const About = ({ t }) => {
                   ]}
                   text={ghgEmissionsText}
                   source="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-                  xLabel="billion tonnes"
-                  fill={theme.colors.ghg}
+                  unit="billion tonnes"
+                  fill={theme.colors.red}
                   interval={2}
                 />
               </li>
               <li>
                 <strong>{t('water_withdrawals')}</strong>
                 <TextAndChart
+                  total={4}
                   data={[
                     {
                       name: 'Global annual withdrawals',
@@ -95,7 +98,7 @@ const About = ({ t }) => {
                   ]}
                   text={waterWithdrawalsText}
                   source="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-                  xLabel="trillion m³"
+                  unit="trillion m³"
                   fill={theme.colors.water}
                   interval={3}
                 />
@@ -103,6 +106,7 @@ const About = ({ t }) => {
               <li>
                 <strong>{t('eutrophying_emissions')}</strong>
                 <TextAndChart
+                  total={100}
                   data={[
                     {
                       name: 'Global annual emissions',
@@ -112,7 +116,7 @@ const About = ({ t }) => {
                   ]}
                   text={eutrophyingEmissionsText}
                   source="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-                  xLabel="percent"
+                  unit="percent"
                   fill={theme.colors.eutro}
                   interval={3}
                 />
