@@ -11,6 +11,7 @@ import CardTitle from '../components/CardTitle';
 import ExternalLink from '../components/ExternalLink';
 import AboutSection from '../components/AboutSection';
 import theme from '../styles/theme';
+import TextAndChart from '../components/TextAndChart';
 
 const About = ({ t }) => {
   const router = useRouter();
@@ -50,63 +51,67 @@ const About = ({ t }) => {
             <ol>
               <li>
                 <span style={{ color: theme.colors.green }}>{t('land_use')}</span>
-                <ul>
-                  <li>
-                    {landUseText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-                    >
-                      {landUseText.linkText}
-                    </ExternalLink>{' '}
-                    {landUseText.afterLink}
-                  </li>
-                </ul>
+                <TextAndChart
+                  data={[
+                    {
+                      name: 'Global habitable land',
+                      food: 51,
+                      other: 53,
+                    },
+                  ]}
+                  text={landUseText}
+                  xLabel="million km²"
+                  fill={theme.colors.green}
+                  interval={2}
+                />
               </li>
               <li>
                 <span style={{ color: theme.colors.ghg }}>{t('ghg_emissions')}</span>
-                <ul>
-                  <li>
-                    {ghgEmissionsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-                    >
-                      {ghgEmissionsText.linkText}
-                    </ExternalLink>{' '}
-                    {ghgEmissionsText.afterLink}
-                  </li>
-                </ul>
+                <TextAndChart
+                  data={[
+                    {
+                      name: 'Global annual emissions',
+                      food: 13.6,
+                      other: 38.7,
+                    },
+                  ]}
+                  text={ghgEmissionsText}
+                  xLabel="billion tonnes"
+                  fill={theme.colors.ghg}
+                  interval={2}
+                />
               </li>
               <li>
                 <span style={{ color: theme.colors.aqua }}>{t('water_withdrawals')}</span>
-                <ul>
-                  <li>
-                    {waterWithdrawalsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-                    >
-                      {waterWithdrawalsText.linkText}
-                    </ExternalLink>{' '}
-                    {waterWithdrawalsText.afterLink}
-                  </li>
-                </ul>
+                <TextAndChart
+                  data={[
+                    {
+                      name: 'Global annual withdrawals',
+                      food: 2.8,
+                      other: 1.2,
+                    },
+                  ]}
+                  text={waterWithdrawalsText}
+                  xLabel="trillion m³"
+                  fill={theme.colors.water}
+                  interval={3}
+                />
               </li>
               <li>
                 <span style={{ color: theme.colors.fuchsia }}>{t('eutrophying_emissions')}</span>
-                <ul>
-                  <li>
-                    {eutrophyingEmissionsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-                    >
-                      {eutrophyingEmissionsText.linkText}
-                    </ExternalLink>{' '}
-                    {eutrophyingEmissionsText.afterLink}
-                  </li>
-                </ul>
+                <TextAndChart
+                  data={[
+                    {
+                      name: 'Global annual emissions',
+                      food: 78,
+                      other: 22,
+                    },
+                  ]}
+                  text={eutrophyingEmissionsText}
+                  xLabel="percent"
+                  fill={theme.colors.fuchsia}
+                  interval={3}
+                />
               </li>
             </ol>
           </AboutSection>
