@@ -3,16 +3,13 @@ import { BarChart, Bar, Label, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import ExternalLink from './ExternalLink';
 import theme from '../styles/theme';
 
-const TextAndChart = ({ data, text, xLabel, fill, interval }) => {
+const TextAndChart = ({ data, text, source, xLabel, fill, interval }) => {
   return (
     <div className="textAndChart">
       <ul>
         <li>
           {text.beforeLink}
-          <ExternalLink
-            color={theme.colors.aqua}
-            href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-          >
+          <ExternalLink color={theme.colors.aqua} href={source}>
             {text.linkText}
           </ExternalLink>{' '}
           {text.afterLink}
