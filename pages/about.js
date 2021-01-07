@@ -50,7 +50,7 @@ const About = ({ t }) => {
             <p>{t('four_ways_impact')}</p>
             <ol>
               <li>
-                <span style={{ color: theme.colors.green }}>{t('land_use')}</span>
+                <strong>{t('land_use')}</strong>
                 <TextAndChart
                   data={[
                     {
@@ -61,12 +61,12 @@ const About = ({ t }) => {
                   ]}
                   text={landUseText}
                   xLabel="million km²"
-                  fill={theme.colors.green}
+                  fill={theme.colors.land}
                   interval={2}
                 />
               </li>
               <li>
-                <span style={{ color: theme.colors.ghg }}>{t('ghg_emissions')}</span>
+                <strong>{t('ghg_emissions')}</strong>
                 <TextAndChart
                   data={[
                     {
@@ -82,7 +82,7 @@ const About = ({ t }) => {
                 />
               </li>
               <li>
-                <span style={{ color: theme.colors.aqua }}>{t('water_withdrawals')}</span>
+                <strong>{t('water_withdrawals')}</strong>
                 <TextAndChart
                   data={[
                     {
@@ -98,7 +98,7 @@ const About = ({ t }) => {
                 />
               </li>
               <li>
-                <span style={{ color: theme.colors.fuchsia }}>{t('eutrophying_emissions')}</span>
+                <strong>{t('eutrophying_emissions')}</strong>
                 <TextAndChart
                   data={[
                     {
@@ -109,7 +109,7 @@ const About = ({ t }) => {
                   ]}
                   text={eutrophyingEmissionsText}
                   xLabel="percent"
-                  fill={theme.colors.fuchsia}
+                  fill={theme.colors.eutro}
                   interval={3}
                 />
               </li>
