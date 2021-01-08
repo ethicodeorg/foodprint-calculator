@@ -48,80 +48,82 @@ const About = ({ t }) => {
               {t('why_answer_1')} {t('why_answer_2')}
             </p>
             <p>{t('four_ways_impact')}</p>
-            <ol>
-              <li>
-                <strong>{t('land_use')}</strong>
-                <TextAndChart
-                  total={104}
-                  data={[
-                    {
-                      name: 'Global habitable land',
-                      food: 51,
-                      other: 53,
-                    },
-                  ]}
-                  text={landUseText}
-                  source="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-                  unit="million km²"
-                  fill={theme.colors.land}
-                  interval={2}
-                />
-              </li>
-              <li>
-                <strong>{t('ghg_emissions')}</strong>
-                <TextAndChart
-                  total={52.3}
-                  data={[
-                    {
-                      name: 'Global annual emissions',
-                      food: 13.6,
-                      other: 38.7,
-                    },
-                  ]}
-                  text={ghgEmissionsText}
-                  source="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-                  unit="billion tonnes"
-                  fill={theme.colors.red}
-                  interval={2}
-                />
-              </li>
-              <li>
-                <strong>{t('water_withdrawals')}</strong>
-                <TextAndChart
-                  total={4}
-                  data={[
-                    {
-                      name: 'Global annual withdrawals',
-                      food: 2.8,
-                      other: 1.2,
-                    },
-                  ]}
-                  text={waterWithdrawalsText}
-                  source="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-                  unit="trillion m³"
-                  fill={theme.colors.water}
-                  interval={3}
-                />
-              </li>
-              <li>
-                <strong>{t('eutrophying_emissions')}</strong>
-                <TextAndChart
-                  total={100}
-                  data={[
-                    {
-                      name: 'Global annual emissions',
-                      food: 78,
-                      other: 22,
-                    },
-                  ]}
-                  text={eutrophyingEmissionsText}
-                  source="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-                  unit="percent"
-                  fill={theme.colors.eutro}
-                  interval={3}
-                />
-              </li>
-            </ol>
+            <div>
+              <h4>1. {t('land_use')}</h4>
+              <TextAndChart
+                total={104}
+                data={[
+                  {
+                    name: 'Global habitable land',
+                    food: 51,
+                    other: 53,
+                  },
+                ]}
+                title="Global habitable land"
+                text={landUseText}
+                source="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
+                unit="million km²"
+                fill={theme.colors.land}
+                interval={2}
+              />
+            </div>
+            <div>
+              <h4>2. {t('ghg_emissions')}</h4>
+              <TextAndChart
+                total={52.3}
+                data={[
+                  {
+                    name: 'Global annual emissions',
+                    food: 13.6,
+                    other: 38.7,
+                  },
+                ]}
+                title="Global annual emissions"
+                text={ghgEmissionsText}
+                source="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
+                unit="billion tonnes"
+                fill={theme.colors.red}
+                interval={2}
+              />
+            </div>
+            <div>
+              <h4>3. {t('water_withdrawals')}</h4>
+              <TextAndChart
+                total={4}
+                data={[
+                  {
+                    name: 'Global annual withdrawals',
+                    food: 2.8,
+                    other: 1.2,
+                  },
+                ]}
+                title="Global annual withdrawals"
+                text={waterWithdrawalsText}
+                source="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
+                unit="trillion m³"
+                fill={theme.colors.water}
+                interval={3}
+              />
+            </div>
+            <div>
+              <h4>4. {t('eutrophying_emissions')}</h4>
+              <TextAndChart
+                total={100}
+                data={[
+                  {
+                    name: 'Global annual emissions',
+                    food: 78,
+                    other: 22,
+                  },
+                ]}
+                title="Global annual emissions"
+                text={eutrophyingEmissionsText}
+                source="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
+                unit="percent"
+                fill={theme.colors.eutro}
+                interval={3}
+              />
+            </div>
           </AboutSection>
           <AboutSection title={t('how_does_it_work')} isOpen={openSection === 'function'}>
             <p>{t('function')}</p>
@@ -322,6 +324,9 @@ const About = ({ t }) => {
         }
         p {
           line-height: 1.4;
+        }
+        h4 {
+          margin-top: 30px;
         }
       `}</style>
     </Layout>
