@@ -13,7 +13,7 @@ const Meals = ({ t }) => {
   const { visibility, user, search, sortBy } = router.query;
   let queryString = `?visibility=${visibility || 'public'}&sortBy=${sortBy || 'landUse'}`;
   let queries = {
-    sortBy: sortBy || 'landUse',
+    sortBy: sortBy || 'waterWithdrawals',
   };
 
   if (user) {
@@ -39,6 +39,7 @@ const Meals = ({ t }) => {
         emptyMessage={t('error_no_meals')}
         queries={queries}
         t={t}
+        tooltipText={t('tooltip_all_meals')}
       />
     </Layout>
   );

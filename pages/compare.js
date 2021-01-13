@@ -22,6 +22,7 @@ const Compare = ({ comparisons, t }) => {
         title={t('compare_meals')}
         emptyMessage={t('no_meals_compare')}
         t={t}
+        tooltipText={t('tooltip_compare')}
       />
     </Layout>
   );

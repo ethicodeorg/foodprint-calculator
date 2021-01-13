@@ -15,6 +15,7 @@ import Meal from './Meal';
 import LoadingOnTop from './LoadingOnTop';
 import Filters from './Filters';
 import theme from '../styles/theme';
+import InfoIcon from './InfoIcon';
 
 Modal.setAppElement('#__next');
 
@@ -31,6 +32,7 @@ const MealsPage = ({
   setLocalMeals,
   addMealToCompare,
   t,
+  tooltipText,
 }) => {
   const [user] = useUser();
   const [isLoading, setIsLoading] = useState(false);
@@ -111,7 +113,10 @@ const MealsPage = ({
 
   return (
     <div className="meals-page">
-      <PageTitle>{title}</PageTitle>
+      <PageTitle>
+        {title}
+        {tooltipText && <InfoIcon title={tooltipText} />}
+      </PageTitle>
       {(isLoading || isValidating) && <LoadingOnTop blockUI />}
       {router.route === '/mymeals' && (
         <div className="buttons-container">

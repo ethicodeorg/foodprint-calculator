@@ -27,7 +27,7 @@ const Filters = ({ queries, t }) => {
     { value: 'eutrophyingEmissions', label: t('sort_by_eutro') },
   ];
   const [sortBy, setSortBy] = useState(
-    sortByOptions.find((option) => option.value === queries.sortBy) || sortByOptions[0]
+    sortByOptions.find((option) => option.value === queries.sortBy) || sortByOptions[2]
   );
   const [searchTerm, setSearchTerm] = useState(queries.search || '');
 

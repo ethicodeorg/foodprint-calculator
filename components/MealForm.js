@@ -4,7 +4,6 @@ import { Link, Router } from '../i18n';
 import useSWR from 'swr';
 import Select from 'react-select';
 import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
-import Tooltip from '@material-ui/core/Tooltip';
 import {
   getLandUseTotal,
   getGHGTotal,
@@ -30,6 +29,8 @@ import PageTitle from './PageTitle';
 import Button from './Button';
 import Separator from './Separator';
 import LoadingOnTop from './LoadingOnTop';
+import InfoIcon from './InfoIcon';
+import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
@@ -305,14 +306,17 @@ const MealForm = ({ id, foodData, transportData, t }) => {
         <PageTitle>{id ? t('edit_meal') : t('new_meal')}</PageTitle>
         {isLoading && <LoadingOnTop blockUI />}
         <Card>
-          <div className="select-container number-of-servings-select">
-            <Select
-              value={numberOfServings}
-              placeholder={t('no_of_servings')}
-              onChange={(val) => setNumberOfServings(val)}
-              options={numberOfServingsOptions}
-              instanceId="number-of-servings"
-            />
+          <div className="servings-container">
+            <div className="select-container number-of-servings-select">
+              <Select
+                value={numberOfServings}
+                placeholder={t('no_of_servings')}
+                onChange={(val) => setNumberOfServings(val)}
+                options={numberOfServingsOptions}
+                instanceId="number-of-servings"
+              />
+            </div>
+            <InfoIcon title={t('servings_tooltip')} />
           </div>
         </Card>
         <Card>
@@ -326,7 +330,13 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           {isAdding ? (
             <Card inner>
               <div className="close-container">
-                <Tooltip title={t('cancel')} placement="left" arrow>
+                <MyTooltip
+                  title={t('cancel')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button
                     className="close-button"
                     onClick={() => {
@@ -336,7 +346,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                   >
                     <FaTimes />
                   </button>
-                </Tooltip>
+                </MyTooltip>
               </div>
               <div className="required-fields">
                 <div className="select-container ingredient-select">
@@ -412,13 +422,12 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                 </div>
               ) : (
                 <div className="optional-fields">
-                  <Tooltip title={t('transport_not_provided')} placement="right" arrow>
-                    <div className="add-transport-button-container">
-                      <Button clear onClick={() => setIsAddingTransport(true)}>
-                        {t('add_transport_optional')}
-                      </Button>
-                    </div>
-                  </Tooltip>
+                  <div className="add-transport-button-container">
+                    <Button clear onClick={() => setIsAddingTransport(true)}>
+                      {t('add_transport_optional')}
+                    </Button>
+                  </div>
+                  <InfoIcon title={t('transport_not_provided')} />
                 </div>
               )}
               <div className="add-button-container">
@@ -538,6 +547,10 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           .optional-fields {
             margin-top: 20px;
           }
+          .servings-container {
+            display: flex;
+            align-items: center;
+          }
           .select-container {
             width: 100%;
           }
@@ -596,7 +609,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             opacity: 0.7;
           }
           .add-transport-button-container {
-            margin-right: 20px;
             min-width: 160px;
           }
           .add-button-container {
@@ -675,7 +687,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
               margin: 0 20px 0 0;
             }
             .number-of-servings-select {
-              width: 220px;
+              width: 300px;
             }
             .amount-input,
             .distance-input {

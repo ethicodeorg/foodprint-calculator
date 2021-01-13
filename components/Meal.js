@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
-import Tooltip from '@material-ui/core/Tooltip';
 import {
   FaEdit,
   FaTrash,
@@ -11,6 +10,7 @@ import {
   FaTimes,
   FaPlus,
   FaCopy,
+  FaExclamationTriangle,
 } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
@@ -25,6 +25,7 @@ import AboutMeal from './AboutMeal';
 import Pies from './Pies';
 import Separator from './Separator';
 import MealLink from './MealLink';
+import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
 
 const Meal = ({
@@ -106,10 +107,12 @@ const Meal = ({
             )}
           </CardTitle>
           {router.route === '/mymeals' && !!user && (
-            <Tooltip
+            <MyTooltip
               title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
-              placement="left"
+              placement="top"
               arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={4000}
             >
               <button
                 className={classNames('visibility-button', {
@@ -119,21 +122,46 @@ const Meal = ({
               >
                 {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
               </button>
-            </Tooltip>
+            </MyTooltip>
+          )}
+          {router.route === '/mymeals' && !user && (
+            <MyTooltip
+              title={t('warning_not_logged_in')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={4000}
+            >
+              <div className="warning-icon">
+                <FaExclamationTriangle />
+              </div>
+            </MyTooltip>
           )}
           {router.route === '/compare' && (
-            <Tooltip title={t('remove_from_comparison')} placement="left" arrow>
+            <MyTooltip
+              title={t('remove_from_comparison')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
               <button className="remove-button" onClick={() => removeFromComparison(meal._id)}>
                 <FaTimes />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
           {router.route === '/meals' && !comparisons.includes(meal._id) && (
-            <Tooltip title={t('add_to_compare')} placement="left" arrow>
+            <MyTooltip
+              title={t('add_to_compare')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
               <button className="add-button" onClick={() => addToComparison(meal._id)}>
                 <FaPlus />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
         </div>
         <div className="subtitle">
@@ -155,32 +183,56 @@ const Meal = ({
           <Fragment>
             <Separator />
             <div className="footer-button-container">
-              <Tooltip title={t('delete_meal')} placement="right" arrow>
+              <MyTooltip
+                title={t('delete_meal')}
+                placement="top"
+                arrow
+                enterTouchDelay={0}
+                leaveTouchDelay={3000}
+              >
                 <button className="delete-button" onClick={() => deleteMeal(meal)}>
                   <FaTrash />
                 </button>
-              </Tooltip>
+              </MyTooltip>
               <div className="right-footer">
-                <Tooltip title={t('download_qr')} placement="left" arrow>
+                <MyTooltip
+                  title={t('download_qr')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button className="download-button" onClick={() => downloadQRCode(meal)}>
                     <FaQrcode />
                     <span id={`qr-${meal._id}`} className="qr-code">
                       <QRCode value={`https://foodprintcalculator.com/meals/${meal._id}`} />
                     </span>
                   </button>
-                </Tooltip>
-                <Tooltip title={t('duplicate_meal')} placement="top" arrow>
+                </MyTooltip>
+                <MyTooltip
+                  title={t('duplicate_meal')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <button className="duplicate-button" onClick={() => duplicateMeal(meal)}>
                     <FaCopy />
                   </button>
-                </Tooltip>
-                <Tooltip title={t('edit_meal')} placement="top" arrow>
+                </MyTooltip>
+                <MyTooltip
+                  title={t('edit_meal')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
                   <div className="edit-button-container">
                     <MealLink id={meal._id} isEdit>
                       <FaEdit />
                     </MealLink>
                   </div>
-                </Tooltip>
+                </MyTooltip>
               </div>
             </div>
           </Fragment>
@@ -264,6 +316,8 @@ const Meal = ({
         .duplicate-button {
           color: ${theme.colors.land};
         }
+        .duplicate-button:hover,
+        .warning-icon:hover,
         .download-button:hover {
           opacity: 0.7;
         }
@@ -272,6 +326,11 @@ const Meal = ({
         }
         .qr-code {
           display: none;
+        }
+        .warning-icon {
+          color: ${theme.colors.orange};
+          font-size: 18px;
+          cursor: pointer;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

@@ -1,16 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { FaChevronDown, FaDownload, FaExternalLinkAlt, FaLongArrowAltLeft } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
-import { Tooltip } from '@material-ui/core';
+import { Link } from '../i18n';
 import { getMealPieData } from '../utils/pieUtils';
 import Pie from '../components/Pie';
 import Button from '../components/Button';
 import CardTitle from '../components/CardTitle';
 import Ingredients from '../components/Ingredients';
-import theme from '../styles/theme';
 import Separator from './Separator';
-import { useRouter } from 'next/router';
-import { Link } from '../i18n';
+import MyTooltip from './MyTooltip';
+import InfoIcon from './InfoIcon';
+import theme from '../styles/theme';
 
 const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
   let html2canvas;
@@ -89,16 +90,22 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           <CardTitle>{`${t('foodprint')}${
             numberOfServings > 1 ? ` - ${t('per_person')}` : ''
           }`}</CardTitle>
-          {router.route === '/mymeals' && (
-            <Tooltip title={t('download_report')} placement="right" arrow>
+          {(router.route === '/mymeals' || router.route === '/newmeal') && (
+            <MyTooltip
+              title={t('download_report')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
               <button className="download-button" onClick={() => downloadReport(meal)}>
                 <FaDownload />
               </button>
-            </Tooltip>
+            </MyTooltip>
           )}
         </div>
         <Button small clear onClick={() => setShowDetails(!showDetails)}>
-          {t('details')}
+          {showDetails ? t('less') : t('more')}
           <span
             className={classNames('button-icon', {
               'button-icon-reversed': showDetails,
@@ -154,16 +161,15 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
                     <div className="percentage">
                       <Link href="/about?openSection=rda">
                         <a className={`percentage-${cIndex}`} target="_blank">
-                          <Tooltip title={t('daily_earth_share')} placement="right" arrow>
-                            <span>
-                              {percentageString}
-                              <span className="new-tab-icon">
-                                <FaExternalLinkAlt />
-                              </span>
+                          <span>
+                            {percentageString}
+                            <span className="new-tab-icon">
+                              <FaExternalLinkAlt />
                             </span>
-                          </Tooltip>
+                          </span>
                         </a>
                       </Link>
+                      <InfoIcon title={t(`des_tooltip_${name}`)} />
                     </div>
                   </div>
                 )}
@@ -244,6 +250,8 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           font-size: 10px;
         }
         .percentage {
+          display: flex;
+          align-items: center;
           font-size: 10px;
         }
         .percentage-0 {
