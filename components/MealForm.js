@@ -316,7 +316,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                 instanceId="number-of-servings"
               />
             </div>
-            <InfoIcon title={t('servings_tooltip')} />
+            <InfoIcon title={t('servings_tooltip')} color={theme.colors.water} />
           </div>
         </Card>
         <Card>
@@ -427,7 +427,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                       {t('add_transport_optional')}
                     </Button>
                   </div>
-                  <InfoIcon title={t('transport_not_provided')} />
+                  <InfoIcon title={t('transport_not_provided')} color={theme.colors.water} />
                 </div>
               )}
               <div className="add-button-container">

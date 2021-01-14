@@ -1,10 +1,9 @@
 import { FaInfo } from 'react-icons/fa';
 import MyTooltip from './MyTooltip';
-import theme from '../styles/theme';
 
-const InfoIcon = ({ title }) => {
+const InfoIcon = ({ title, color }) => {
   return (
-    <MyTooltip title={title} placement="top" arrow enterTouchDelay={0} leaveTouchDelay={5000}>
+    <MyTooltip title={title} placement="top" arrow enterTouchDelay={0} leaveTouchDelay={10000}>
       <div className="info-icon">
         <FaInfo />
         <style jsx>{`
@@ -17,8 +16,8 @@ const InfoIcon = ({ title }) => {
             width: 12px;
             font-size: 8px;
             border-radius: 20px;
-            border: 2px solid ${theme.colors.orange};
-            color: ${theme.colors.orange};
+            border: 1px solid ${color};
+            color: ${color};
             cursor: pointer;
           }
         `}</style>

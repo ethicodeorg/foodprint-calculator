@@ -115,7 +115,7 @@ const MealsPage = ({
     <div className="meals-page">
       <PageTitle>
         {title}
-        {tooltipText && <InfoIcon title={tooltipText} />}
+        {tooltipText && <InfoIcon title={tooltipText} color={theme.colors.white} />}
       </PageTitle>
       {(isLoading || isValidating) && <LoadingOnTop blockUI />}
       {router.route === '/mymeals' && (
