@@ -130,7 +130,7 @@ const Meal = ({
               placement="top"
               arrow
               enterTouchDelay={0}
-              leaveTouchDelay={4000}
+              leaveTouchDelay={10000}
             >
               <div className="warning-icon">
                 <FaExclamationTriangle />
