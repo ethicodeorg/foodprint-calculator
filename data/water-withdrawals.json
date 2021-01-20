@@ -2,302 +2,266 @@
   {
     "entity": "Apples",
     "code": "app",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 180.1,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 180.1
   },
   {
     "entity": "Bananas",
     "code": "ban",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 114.5,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 114.5
   },
   {
     "entity": "Barley",
     "code": "bar",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 17.1,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 17.1
   },
   {
     "entity": "Beef (beef herd)",
     "code": "bbh",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 1451.2,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 1451.2
   },
   {
     "entity": "Beef (dairy herd)",
     "code": "bdh",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 2714.3,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 2714.3
   },
   {
     "entity": "Beet Sugar",
     "code": "bes",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 217.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 217.7
   },
   {
     "entity": "Berries & Grapes",
     "code": "ber",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 419.6,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 419.6
   },
   {
     "entity": "Brassicas",
     "code": "bra",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 119.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 119.4
   },
   {
     "entity": "Cane Sugar",
     "code": "can",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 620.1,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 620.1
   },
   {
     "entity": "Cassava",
     "code": "cas",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 0,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 0
   },
   {
     "entity": "Cheese",
     "code": "che",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 5605.2,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 5605.2
   },
   {
     "entity": "Citrus Fruit",
     "code": "cit",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 82.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 82.7
   },
   {
     "entity": "Coffee",
     "code": "cof",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 25.9,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 25.9
   },
   {
-    "entity": "Dark Chocolate",
+    "entity": "Chocolate",
     "code": "cho",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 540.6,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 540.6
   },
   {
     "entity": "Eggs",
     "code": "egg",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 577.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 577.7
   },
   {
     "entity": "Fish (farmed)",
     "code": "fis",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 3691.3,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 3691.3
   },
   {
     "entity": "Groundnuts",
     "code": "gro",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 1852.3,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 1852.3
   },
   {
     "entity": "Lamb & Mutton",
     "code": "lam",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 1802.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 1802.8
   },
   {
     "entity": "Maize",
     "code": "mai",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 215.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 215.7
   },
   {
     "entity": "Milk",
     "code": "mil",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 628.2,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 628.2
   },
   {
     "entity": "Nuts",
     "code": "nut",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 4133.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 4133.8
   },
   {
     "entity": "Oatmeal",
     "code": "oat",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 482.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 482.4
   },
   {
     "entity": "Olive Oil",
     "code": "olo",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 2141.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 2141.8
   },
   {
     "entity": "Onions & Leeks",
     "code": "oni",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 14.3,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 14.3
   },
   {
     "entity": "Other Fruit",
     "code": "fru",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 153.5,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 153.5
   },
   {
     "entity": "Other Pulses",
     "code": "pul",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 435.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 435.7
   },
   {
     "entity": "Other Vegetables",
     "code": "veg",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 102.5,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 102.5
   },
   {
     "entity": "Palm Oil",
     "code": "pao",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 6.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 6.4
   },
   {
     "entity": "Peas",
     "code": "pea",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 396.6,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 396.6
   },
   {
     "entity": "Pig Meat",
     "code": "pig",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 1795.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 1795.8
   },
   {
     "entity": "Potatoes",
     "code": "pot",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 59.1,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 59.1
   },
   {
     "entity": "Poultry Meat",
     "code": "pou",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 660,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 660
   },
   {
     "entity": "Prawns (farmed)",
     "code": "pra",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 3515.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 3515.4
   },
   {
     "entity": "Rapeseed Oil",
     "code": "rao",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 237.7,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 237.7
   },
   {
     "entity": "Rice",
     "code": "ric",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 2248.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 2248.4
   },
   {
     "entity": "Root Vegetables",
     "code": "roo",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 28.4,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 28.4
   },
   {
     "entity": "Soybean Oil",
     "code": "soo",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 414.6,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 414.6
   },
   {
     "entity": "Soymilk",
     "code": "som",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 27.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 27.8
   },
   {
     "entity": "Sunflower Oil",
     "code": "suo",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 1007.9,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 1007.9
   },
   {
     "entity": "Tofu (soybeans)",
     "code": "tof",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 148.6,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 148.6
   },
   {
     "entity": "Tomatoes",
     "code": "tom",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 369.8,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 369.8
   },
   {
     "entity": "Wheat & Rye",
     "code": "whe",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 647.5,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 647.5
   },
   {
     "entity": "Wine",
     "code": "win",
-    "year": 2018,
-    "freshwaterWithdrawalsPerKilogram": 78.9,
-    "unit": "liters"
+    "freshwaterWithdrawalsPerUnit": 78.9
+  },
+  {
+    "entity": "Almond milk",
+    "code": "alm",
+    "freshwaterWithdrawalsPerUnit": 371.459
+  },
+  {
+    "entity": "Avocado",
+    "code": "avo",
+    "freshwaterWithdrawalsPerUnit": 563.922
+  },
+  {
+    "entity": "Beef (average)",
+    "code": "bee",
+    "freshwaterWithdrawalsPerUnit": 2004.267
+  },
+  {
+    "entity": "Dark Chocolate",
+    "code": "dch",
+    "freshwaterWithdrawalsPerUnit": 564.45
+  },
+  {
+    "entity": "Milk Chocolate",
+    "code": "mch",
+    "freshwaterWithdrawalsPerUnit": 1650.818
+  },
+  {
+    "entity": "Lentils",
+    "code": "len",
+    "freshwaterWithdrawalsPerUnit": 1245.736
+  },
+  {
+    "entity": "Oat milk",
+    "code": "oam",
+    "freshwaterWithdrawalsPerUnit": 48.24
+  },
+  {
+    "entity": "Pasta",
+    "code": "pas",
+    "freshwaterWithdrawalsPerUnit": 769.034
+  },
+  {
+    "entity": "Rice milk",
+    "code": "rim",
+    "freshwaterWithdrawalsPerUnit": 269.808
+  },
+  {
+    "entity": "Tea",
+    "code": "tea",
+    "freshwaterWithdrawalsPerUnit": 20.0
   }
 ]

@@ -76,6 +76,29 @@ export function getTransportEmissions(
     : 0;
 }
 
+export function convertToBaseUnit(amount, unit, selectedIngredient) {
+  if (selectedIngredient.baseUnit === 'kg') {
+    return convertToKilograms(amount, unit, selectedIngredient);
+  }
+
+  return convertToLiters(amount, unit);
+}
+
+function convertToLiters(amount, unit) {
+  switch (unit) {
+    case 'tsp':
+      return amount * (5 / 1000);
+    case 'tbsp':
+      return amount * (15 / 1000);
+    case 'cups':
+      return amount * (250 / 1000);
+    case 'ltr':
+      return amount;
+    default:
+      return amount;
+  }
+}
+
 export function convertToKilograms(amount, unit, selectedIngredient) {
   const factoredAmount = amount * (selectedIngredient.factor || 1);
 

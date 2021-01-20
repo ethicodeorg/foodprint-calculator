@@ -10,7 +10,7 @@ import {
   getWaterTotal,
   getEutroTotal,
   getTransportEmissions,
-  convertToKilograms,
+  convertToBaseUnit,
   getTotalByCategory,
 } from '../utils/calculations';
 import {
@@ -55,13 +55,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
   const [isAdding, setIsAdding] = useState(false);
   const [isAddingTransport, setIsAddingTransport] = useState(false);
-  const initialUnits = [
-    { value: 'g', label: t('g') },
-    { value: 'kg', label: t('kg') },
-    { value: 'oz', label: t('oz') },
-    { value: 'lbs', label: t('lbs') },
-  ];
-  const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
+  const [amountUnitOptions, setAmountUnitOptions] = useState([]);
   const distanceUnitOptions = [
     { value: 'km', label: t('km') },
     { value: 'mi', label: t('mi') },
@@ -76,7 +70,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     { value: 'ambient', label: t('ambient') },
     { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
-  const [amountUnit, setAmountUnit] = useState(amountUnitOptions[0].value);
+  const [amountUnit, setAmountUnit] = useState();
   const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
 
   let foodOptions = [];
@@ -89,6 +83,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
         foodOptions.push({
           key: foodData[i].key,
           value: `${foodData[i].key}${j}`,
+          baseUnit: foodData[i].baseUnit,
           label,
           rawLabel: foodData[i].entities[j].label,
           averageWeight: foodData[i].entities[j].averageWeight,
@@ -204,49 +199,49 @@ const MealForm = ({ id, foodData, transportData, t }) => {
       transportMode,
       transportType,
       amount,
-      amountUnit,
+      amountUnit.value,
       selectedIngredient
     );
-    const amountInKilos = convertToKilograms(amount, amountUnit, selectedIngredient);
+    const amountInBaseUnit = convertToBaseUnit(amount, amountUnit.value, selectedIngredient);
     const ghgEmissionBreakdown = {
-      landUseChange: food.ghgEmissions.values.landUseChange * amountInKilos,
-      animalFeed: food.ghgEmissions.values.animalFeed * amountInKilos,
-      farm: food.ghgEmissions.values.farm * amountInKilos,
-      processing: food.ghgEmissions.values.processing * amountInKilos,
+      landUseChange: food.ghgEmissions.values.landUseChange * amountInBaseUnit,
+      animalFeed: food.ghgEmissions.values.animalFeed * amountInBaseUnit,
+      farm: food.ghgEmissions.values.farm * amountInBaseUnit,
+      processing: food.ghgEmissions.values.processing * amountInBaseUnit,
       transport: transportEmissions
-        ? transportEmissions * amountInKilos
-        : food.ghgEmissions.values.transport * amountInKilos,
-      packaging: food.ghgEmissions.values.packaging * amountInKilos,
-      retail: food.ghgEmissions.values.retail * amountInKilos,
+        ? transportEmissions * amountInBaseUnit
+        : food.ghgEmissions.values.transport * amountInBaseUnit,
+      packaging: food.ghgEmissions.values.packaging * amountInBaseUnit,
+      retail: food.ghgEmissions.values.retail * amountInBaseUnit,
     };
     const ingredient = {
       key: selectedIngredient.key,
       rawLabel: selectedIngredient.rawLabel,
       amount,
-      amountUnit,
+      amountUnit: amountUnit.value,
       distance,
       distanceUnit,
       transportMode,
       transportType,
       landUse: {
-        value: food.landUse.value * amountInKilos,
+        value: food.landUse.value * amountInBaseUnit,
         unit: food.landUse.unit,
       },
       ghgEmissions: {
         values: ghgEmissionBreakdown,
         value:
-          food.ghgEmissions.value * amountInKilos +
+          food.ghgEmissions.value * amountInBaseUnit +
           (transportEmissions
-            ? transportEmissions * amountInKilos
-            : food.ghgEmissions.values.transport * amountInKilos),
+            ? transportEmissions * amountInBaseUnit
+            : food.ghgEmissions.values.transport * amountInBaseUnit),
         unit: food.ghgEmissions.unit,
       },
       eutrophyingEmissions: {
-        value: food.eutrophyingEmissions.value * amountInKilos,
+        value: food.eutrophyingEmissions.value * amountInBaseUnit,
         unit: food.eutrophyingEmissions.unit,
       },
       waterWithdrawals: {
-        value: food.waterWithdrawals.value * amountInKilos,
+        value: food.waterWithdrawals.value * amountInBaseUnit,
         unit: food.waterWithdrawals.unit,
       },
     };
@@ -257,42 +252,47 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setSelectedIngredient();
     setIsAdding(false);
     setIsAddingTransport(false);
-    setAmountUnit(amountUnitOptions[0].value);
+    setAmountUnit();
+    setAmountUnitOptions([]);
   };
 
-  // When ingredient is selected we add quantity and volume options if applicaple
-  // for the selected ingredient.
+  // When ingredient is selected we add the appropriate unit options for the selected ingredient.
   const changeUnitOptions = (val) => {
-    let unitsToAdd = [];
-    let unitsToRemove = [];
-    if (val.averageWeight) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
-        unitsToAdd.push({ value: 'qty', label: t('qty') });
-      }
+    const quantityUnits = [{ value: 'qty', label: t('qty') }];
+    const weightUnits = [
+      { value: 'g', label: t('g') },
+      { value: 'kg', label: t('kg') },
+      { value: 'oz', label: t('oz') },
+      { value: 'lbs', label: t('lbs') },
+    ];
+    const volumeUnits = [
+      { value: 'tsp', label: t('tsp') },
+      { value: 'tbsp', label: t('tbsp') },
+      { value: 'cups', label: t('cups') },
+      { value: 'ltr', label: t('ltr') },
+    ];
+    let newUnits;
+
+    if (val.baseUnit === 'l') {
+      newUnits = volumeUnits;
     } else {
-      unitsToRemove.push('qty');
+      if (val.averageWeight && val.gramsPerLiter) {
+        newUnits = quantityUnits.concat(weightUnits).concat(volumeUnits);
+      } else if (val.averageWeight) {
+        newUnits = quantityUnits.concat(weightUnits);
+      } else if (val.gramsPerLiter) {
+        newUnits = weightUnits.concat(volumeUnits);
+      } else {
+        newUnits = weightUnits;
+      }
     }
 
-    if (val.gramsPerLiter) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'tsp')) {
-        unitsToAdd = [
-          ...unitsToAdd,
-          { value: 'tsp', label: t('tsp') },
-          { value: 'tbsp', label: t('tbsp') },
-          { value: 'cups', label: t('cups') },
-          { value: 'ltr', label: t('ltr') },
-        ];
-      }
-    } else {
-      unitsToRemove.push('tsp', 'tbsp', 'cups', 'ltr');
-    }
+    setAmountUnitOptions(newUnits);
 
-    // Remove options with .filter and add options with .concat
-    setAmountUnitOptions(
-      amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
-    );
+    // If the currently selected unit is unavailable for the ingredient, we clear it.
+    if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
+      setAmountUnit('');
+    }
   };
 
   // Automatically focus the next input when an ingredient has been selected
@@ -367,6 +367,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                   className="amount-input"
                   placeholder={t('amount')}
                   type="number"
+                  min="0"
                   name="amount"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
@@ -374,9 +375,9 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                 />
                 <div className="select-container ingredient-unit">
                   <Select
-                    value={amountUnit.value}
+                    value={amountUnit}
                     placeholder={t('unit')}
-                    onChange={(val) => setAmountUnit(val.value)}
+                    onChange={(val) => setAmountUnit(val)}
                     options={amountUnitOptions}
                     instanceId="amount-unit"
                   />

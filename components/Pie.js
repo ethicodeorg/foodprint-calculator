@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import MyTooltip from './MyTooltip';
 
 const Pie = ({ category, isTiny, label }) => {
-  const { name, total, unit, color, rda } = category;
+  const { total, color, rda } = category;
   let data = [{ value: total, color: color }];
 
   // Add grey filler to last pie of each category

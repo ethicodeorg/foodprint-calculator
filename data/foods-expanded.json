@@ -1,6 +1,7 @@
 [
   {
     "key": "app",
+    "baseUnit": "kg",
     "foods": [
       { "label": "apples", "averageWeight": 182, "gramsPerLiter": 460 },
       {
@@ -13,6 +14,7 @@
   },
   {
     "key": "ban",
+    "baseUnit": "kg",
     "foods": [
       { "label": "bananas", "averageWeight": 151, "gramsPerLiter": 951 },
       { "label": "bananas_dried", "averageWeight": 151, "gramsPerLiter": 951, "factor": 3.125 }
@@ -20,22 +22,27 @@
   },
   {
     "key": "bar",
-    "foods": [{ "label": "barley", "gramsPerLiter": 845 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "barley" }]
   },
   {
     "key": "bbh",
+    "baseUnit": "kg",
     "foods": [{ "label": "beef_beef_herd" }]
   },
   {
     "key": "bdh",
+    "baseUnit": "kg",
     "foods": [{ "label": "beef_dairy_herd" }]
   },
   {
     "key": "bes",
+    "baseUnit": "kg",
     "foods": [{ "label": "beet_sugar", "gramsPerLiter": 845 }]
   },
   {
     "key": "ber",
+    "baseUnit": "kg",
     "foods": [
       { "label": "other_berries" },
       { "label": "grapes" },
@@ -54,6 +61,7 @@
   },
   {
     "key": "bra",
+    "baseUnit": "kg",
     "foods": [
       { "label": "brassicas" },
       { "label": "broccoli", "gramsPerLiter": 385 },
@@ -75,6 +83,7 @@
   },
   {
     "key": "can",
+    "baseUnit": "kg",
     "foods": [
       { "label": "cane_sugar", "gramsPerLiter": 811 },
       { "label": "sugar", "gramsPerLiter": 811 }
@@ -82,10 +91,12 @@
   },
   {
     "key": "cas",
+    "baseUnit": "kg",
     "foods": [{ "label": "cassava", "gramsPerLiter": 871 }]
   },
   {
     "key": "che",
+    "baseUnit": "kg",
     "foods": [
       { "label": "cheese" },
       { "label": "cheese_feta", "gramsPerLiter": 473 },
@@ -99,6 +110,7 @@
   },
   {
     "key": "cit",
+    "baseUnit": "kg",
     "foods": [
       { "label": "citrus_fruit" },
       { "label": "grapefruits", "gramsPerLiter": 972, "averageWeight": 241 },
@@ -111,21 +123,22 @@
   },
   {
     "key": "cof",
+    "baseUnit": "kg",
     "foods": [{ "label": "coffee_beans", "gramsPerLiter": 423 }]
   },
   {
     "key": "cho",
-    "foods": [
-      { "label": "dark_chocolate", "gramsPerLiter": 1098 },
-      { "label": "chocolate", "gramsPerLiter": 1098 }
-    ]
+    "baseUnit": "kg",
+    "foods": [{ "label": "chocolate", "gramsPerLiter": 1098 }]
   },
   {
     "key": "egg",
+    "baseUnit": "kg",
     "foods": [{ "label": "eggs", "averageWeight": 56 }]
   },
   {
     "key": "fis",
+    "baseUnit": "kg",
     "foods": [
       { "label": "fish_farmed" },
       { "label": "carp_farmed" },
@@ -136,6 +149,7 @@
   },
   {
     "key": "gro",
+    "baseUnit": "kg",
     "foods": [
       { "label": "groundnuts", "gramsPerLiter": 617 },
       { "label": "peanuts", "gramsPerLiter": 617 }
@@ -143,10 +157,12 @@
   },
   {
     "key": "lam",
+    "baseUnit": "kg",
     "foods": [{ "label": "lamb_mutton" }]
   },
   {
     "key": "mai",
+    "baseUnit": "kg",
     "foods": [
       { "label": "maize", "gramsPerLiter": 613 },
       { "label": "corn", "gramsPerLiter": 613 },
@@ -155,15 +171,17 @@
   },
   {
     "key": "mil",
+    "baseUnit": "l",
     "foods": [
-      { "label": "milk", "gramsPerLiter": 1033 },
-      { "label": "cows_milk", "gramsPerLiter": 1033 },
-      { "label": "goat_milk", "gramsPerLiter": 1033 },
-      { "label": "sheep_milk", "gramsPerLiter": 1033 }
+      { "label": "milk" },
+      { "label": "cows_milk" },
+      { "label": "goat_milk" },
+      { "label": "sheep_milk" }
     ]
   },
   {
     "key": "nut",
+    "baseUnit": "kg",
     "foods": [
       { "label": "nuts" },
       { "label": "hazelnuts", "gramsPerLiter": 486 },
@@ -177,6 +195,7 @@
   },
   {
     "key": "oat",
+    "baseUnit": "kg",
     "foods": [
       { "label": "oatmeal", "gramsPerLiter": 352 },
       { "label": "ground_oats", "gramsPerLiter": 352 },
@@ -184,9 +203,14 @@
       { "label": "rolled_oats", "gramsPerLiter": 352 }
     ]
   },
-  { "key": "olo", "foods": [{ "label": "olive_oil", "gramsPerLiter": 913 }] },
+  {
+    "key": "olo",
+    "baseUnit": "l",
+    "foods": [{ "label": "olive_oil" }]
+  },
   {
     "key": "oni",
+    "baseUnit": "kg",
     "foods": [
       { "label": "onions_leeks" },
       { "label": "garlic", "gramsPerLiter": 575, "averageWeight": 48 },
@@ -220,9 +244,9 @@
   },
   {
     "key": "fru",
+    "baseUnit": "kg",
     "foods": [
       { "label": "other_fruit" },
-      { "label": "avocados", "gramsPerLiter": 617, "averageWeight": 150 },
       { "label": "pears", "gramsPerLiter": 592, "averageWeight": 200 },
       {
         "label": "pears_dried",
@@ -305,12 +329,12 @@
   },
   {
     "key": "pul",
+    "baseUnit": "kg",
     "foods": [
       { "label": "other_pulses" },
       { "label": "chickpeas", "gramsPerLiter": 1014 },
       { "label": "cowpeas", "gramsPerLiter": 1014 },
       { "label": "pigeon_peas", "gramsPerLiter": 1014 },
-      { "label": "lentils", "gramsPerLiter": 1014 },
       { "label": "bambara_beans", "gramsPerLiter": 1014 },
       { "label": "vetches", "gramsPerLiter": 1014 },
       { "label": "lupins", "gramsPerLiter": 1014 },
@@ -326,6 +350,7 @@
   },
   {
     "key": "veg",
+    "baseUnit": "kg",
     "foods": [
       { "label": "other_vegetables" },
       { "label": "celery", "gramsPerLiter": 507 },
@@ -355,9 +380,14 @@
       { "label": "mushrooms_dried", "gramsPerLiter": 296, "factor": 6.89655172413793 }
     ]
   },
-  { "key": "pao", "foods": [{ "label": "palm_oil", "gramsPerLiter": 913 }] },
+  {
+    "key": "pao",
+    "baseUnit": "l",
+    "foods": [{ "label": "palm_oil" }]
+  },
   {
     "key": "pea",
+    "baseUnit": "kg",
     "foods": [
       { "label": "peas", "gramsPerLiter": 1014 },
       { "label": "peas_dried", "gramsPerLiter": 1014, "factor": 3.86100386100386 }
@@ -365,6 +395,7 @@
   },
   {
     "key": "pig",
+    "baseUnit": "kg",
     "foods": [
       { "label": "pig_meat" },
       { "label": "bacon" },
@@ -377,6 +408,7 @@
   },
   {
     "key": "pot",
+    "baseUnit": "kg",
     "foods": [
       { "label": "potatoes", "gramsPerLiter": 634, "averageWeight": 220 },
       {
@@ -393,6 +425,7 @@
   },
   {
     "key": "pou",
+    "baseUnit": "kg",
     "foods": [
       { "label": "poultry_meat" },
       { "label": "chicken" },
@@ -404,18 +437,22 @@
   },
   {
     "key": "pra",
+    "baseUnit": "kg",
     "foods": [{ "label": "prawns_farmed" }, { "label": "shrimps_farmed" }]
   },
   {
     "key": "rao",
-    "foods": [{ "label": "rapeseed_oil", "gramsPerLiter": 921 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "rapeseed_oil" }]
   },
   {
     "key": "ric",
+    "baseUnit": "kg",
     "foods": [{ "label": "rice", "gramsPerLiter": 782 }]
   },
   {
     "key": "roo",
+    "baseUnit": "kg",
     "foods": [
       { "label": "root_vegetables" },
       { "label": "carrots", "gramsPerLiter": 541, "averageWeight": 61 },
@@ -431,18 +468,22 @@
   },
   {
     "key": "soo",
-    "foods": [{ "label": "soybean_oil", "gramsPerLiter": 921 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "soybean_oil" }]
   },
   {
     "key": "som",
-    "foods": [{ "label": "soymilk", "gramsPerLiter": 1021 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "soymilk" }]
   },
   {
     "key": "suo",
-    "foods": [{ "label": "sunflower_oil", "gramsPerLiter": 921 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "sunflower_oil" }]
   },
   {
     "key": "tof",
+    "baseUnit": "kg",
     "foods": [
       { "label": "tofu_soybeans", "gramsPerLiter": 1065 },
       { "label": "soy_beans", "gramsPerLiter": 1014 }
@@ -450,6 +491,7 @@
   },
   {
     "key": "tom",
+    "baseUnit": "kg",
     "foods": [
       { "label": "tomatoes", "gramsPerLiter": 761, "averageWeight": 123 },
       {
@@ -462,10 +504,62 @@
   },
   {
     "key": "whe",
+    "baseUnit": "kg",
     "foods": [{ "label": "wheat_rye", "gramsPerLiter": 750 }]
   },
   {
     "key": "win",
-    "foods": [{ "label": "wine", "gramsPerLiter": 1014 }]
+    "baseUnit": "l",
+    "foods": [{ "label": "wine" }]
+  },
+  {
+    "key": "alm",
+    "baseUnit": "l",
+    "foods": [{ "label": "almond_milk" }]
+  },
+  {
+    "key": "avo",
+    "baseUnit": "kg",
+    "foods": [{ "label": "avocados", "gramsPerLiter": 617, "averageWeight": 150 }]
+  },
+  {
+    "key": "bee",
+    "baseUnit": "kg",
+    "foods": [{ "label": "beef" }]
+  },
+  {
+    "key": "dch",
+    "baseUnit": "kg",
+    "foods": [{ "label": "dark_chocolate" }]
+  },
+  {
+    "key": "mch",
+    "baseUnit": "kg",
+    "foods": [{ "label": "milk_chocolate" }]
+  },
+  {
+    "key": "len",
+    "baseUnit": "kg",
+    "foods": [{ "label": "lentils" }]
+  },
+  {
+    "key": "oam",
+    "baseUnit": "l",
+    "foods": [{ "label": "oat_milk" }]
+  },
+  {
+    "key": "pas",
+    "baseUnit": "kg",
+    "foods": [{ "label": "pasta" }]
+  },
+  {
+    "key": "rim",
+    "baseUnit": "l",
+    "foods": [{ "label": "rice_milk" }]
+  },
+  {
+    "key": "tea",
+    "baseUnit": "kg",
+    "foods": [{ "label": "tea" }]
   }
 ]

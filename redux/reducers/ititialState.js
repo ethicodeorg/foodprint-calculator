@@ -23,17 +23,19 @@ function getFoodData() {
     const foodEutro = eutrophyingEmissions.find((e) => e.code === food.key);
     const foodGHG = ghgEmissions.find((g) => g.code === food.key);
     const foodWater = waterWithdrawals.find((w) => w.code === food.key);
+    /* console.log(food.key);
+    console.log(sumUpGHG(foodGHG));
+    console.log(foodGHG.ghgEmissionsPerUnit); */
 
     return {
       key: food.key,
       entities: food.foods,
+      baseUnit: food.baseUnit,
       landUse: {
-        value: foodLandUse.landUsePerKilogram,
-        unit: foodLandUse.unit,
+        value: foodLandUse.landUsePerUnit,
       },
       eutrophyingEmissions: {
-        value: foodEutro.eutrophyingEmissionsPerKilogram,
-        unit: foodEutro.unit,
+        value: foodEutro.eutrophyingEmissionsPerUnit,
       },
       ghgEmissions: {
         values: {
@@ -45,12 +47,10 @@ function getFoodData() {
           packaging: foodGHG.packaging,
           retail: foodGHG.retail,
         },
-        value: sumUpGHG(foodGHG),
-        unit: foodGHG.unit,
+        value: foodGHG.ghgEmissionsPerUnit,
       },
       waterWithdrawals: {
-        value: foodWater.freshwaterWithdrawalsPerKilogram,
-        unit: foodWater.unit,
+        value: foodWater.freshwaterWithdrawalsPerUnit,
       },
     };
   });

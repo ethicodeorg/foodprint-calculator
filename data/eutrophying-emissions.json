@@ -2,302 +2,266 @@
   {
     "entity": "Apples",
     "code": "app",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 1.45,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 1.45
   },
   {
     "entity": "Bananas",
     "code": "ban",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 3.29,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 3.29
   },
   {
     "entity": "Barley",
     "code": "bar",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 2.33,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 2.33
   },
   {
     "entity": "Beef (beef herd)",
     "code": "bbh",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 301.41,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 301.41
   },
   {
     "entity": "Beef (dairy herd)",
     "code": "bdh",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 365.29,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 365.29
   },
   {
     "entity": "Beet Sugar",
     "code": "bes",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 5.41,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 5.41
   },
   {
     "entity": "Berries & Grapes",
     "code": "ber",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 6.12,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 6.12
   },
   {
     "entity": "Brassicas",
     "code": "bra",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 5.01,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 5.01
   },
   {
     "entity": "Cane Sugar",
     "code": "can",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 16.92,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 16.92
   },
   {
     "entity": "Cassava",
     "code": "cas",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 0.69,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 0.69
   },
   {
     "entity": "Cheese",
     "code": "che",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 98.37,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 98.37
   },
   {
     "entity": "Citrus Fruit",
     "code": "cit",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 2.24,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 2.24
   },
   {
     "entity": "Coffee",
     "code": "cof",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 110.52,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 110.52
   },
   {
-    "entity": "Dark Chocolate",
+    "entity": "Chocolate",
     "code": "cho",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 87.08,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 87.08
   },
   {
     "entity": "Eggs",
     "code": "egg",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 21.76,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 21.76
   },
   {
     "entity": "Fish (farmed)",
     "code": "fis",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 235.12,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 235.12
   },
   {
     "entity": "Groundnuts",
     "code": "gro",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 14.14,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 14.14
   },
   {
     "entity": "Lamb & Mutton",
     "code": "lam",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 97.13,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 97.13
   },
   {
     "entity": "Maize",
     "code": "mai",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 4.03,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 4.03
   },
   {
     "entity": "Milk",
     "code": "mil",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 10.65,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 10.65
   },
   {
     "entity": "Nuts",
     "code": "nut",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 19.15,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 19.15
   },
   {
     "entity": "Oatmeal",
     "code": "oat",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 11.23,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 11.23
   },
   {
     "entity": "Olive Oil",
     "code": "olo",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 37.26,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 37.26
   },
   {
     "entity": "Onions & Leeks",
     "code": "oni",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 3.24,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 3.24
   },
   {
     "entity": "Other Fruit",
     "code": "fru",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 2.43,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 2.43
   },
   {
     "entity": "Other Pulses",
     "code": "pul",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 17.08,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 17.08
   },
   {
     "entity": "Other Vegetables",
     "code": "veg",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 2.27,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 2.27
   },
   {
     "entity": "Palm Oil",
     "code": "pao",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 10.67,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 10.67
   },
   {
     "entity": "Peas",
     "code": "pea",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 7.52,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 7.52
   },
   {
     "entity": "Pig Meat",
     "code": "pig",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 76.38,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 76.38
   },
   {
     "entity": "Potatoes",
     "code": "pot",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 3.48,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 3.48
   },
   {
     "entity": "Poultry Meat",
     "code": "pou",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 48.7,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 48.7
   },
   {
     "entity": "Prawns (farmed)",
     "code": "pra",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 227.22,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 227.22
   },
   {
     "entity": "Rapeseed Oil",
     "code": "rao",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 19.19,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 19.19
   },
   {
     "entity": "Rice",
     "code": "ric",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 35.07,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 35.07
   },
   {
     "entity": "Root Vegetables",
     "code": "roo",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 1.61,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 1.61
   },
   {
     "entity": "Soybean Oil",
     "code": "soo",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 11.69,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 11.69
   },
   {
     "entity": "Soymilk",
     "code": "som",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 1.06,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 1.06
   },
   {
     "entity": "Sunflower Oil",
     "code": "suo",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 50.66,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 50.66
   },
   {
     "entity": "Tofu (soybeans)",
     "code": "tof",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 6.16,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 6.16
   },
   {
     "entity": "Tomatoes",
     "code": "tom",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 7.51,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 7.51
   },
   {
     "entity": "Wheat & Rye",
     "code": "whe",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 7.16,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 7.16
   },
   {
     "entity": "Wine",
     "code": "win",
-    "year": 2018,
-    "eutrophyingEmissionsPerKilogram": 4.57,
-    "unit": "kgPO₄eq"
+    "eutrophyingEmissionsPerUnit": 4.57
+  },
+  {
+    "entity": "Almond milk",
+    "code": "alm",
+    "eutrophyingEmissionsPerUnit": 1.503
+  },
+  {
+    "entity": "Avocado",
+    "code": "avo",
+    "eutrophyingEmissionsPerUnit": 5.202
+  },
+  {
+    "entity": "Beef (average)",
+    "code": "bee",
+    "eutrophyingEmissionsPerUnit": 329.381
+  },
+  {
+    "entity": "Dark Chocolate",
+    "code": "dch",
+    "eutrophyingEmissionsPerUnit": 66.335
+  },
+  {
+    "entity": "Milk Chocolate",
+    "code": "mch",
+    "eutrophyingEmissionsPerUnit": 57.975
+  },
+  {
+    "entity": "Lentils",
+    "code": "len",
+    "eutrophyingEmissionsPerUnit": 25.477
+  },
+  {
+    "entity": "Oat milk",
+    "code": "oam",
+    "eutrophyingEmissionsPerUnit": 1.623
+  },
+  {
+    "entity": "Pasta",
+    "code": "pas",
+    "eutrophyingEmissionsPerUnit": 9.498
+  },
+  {
+    "entity": "Rice milk",
+    "code": "rim",
+    "eutrophyingEmissionsPerUnit": 4.693
+  },
+  {
+    "entity": "Tea",
+    "code": "tea",
+    "eutrophyingEmissionsPerUnit": 81.35
   }
 ]

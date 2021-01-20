@@ -148,7 +148,7 @@
   "apples_dried": "Apples (dried)",
   "bananas": "Bananas",
   "bananas_dried": "Bananas (dried)",
-  "barley": "Barley",
+  "barley": "Barley (beer)",
   "beef_beef_herd": "Beef (beef herd)",
   "beef_dairy_herd": "Beef (dairy herd)",
   "beet_sugar": "Beet Sugar",
@@ -355,6 +355,13 @@
   "soy_beans": "Soy beans",
   "tomatoes": "Tomatoes",
   "tomatoes_dried": "Tomatoes (dried)",
-  "wheat_rye": "Wheat & Rye",
-  "wine": "Wine"
+  "wheat_rye": "Wheat & Rye (bread)",
+  "wine": "Wine",
+  "almond_milk": "Almond milk",
+  "beef": "Beef (average)",
+  "milk_chocolate": "Milk Chocolate",
+  "oat_milk": "Oat milk",
+  "pasta": "Pasta",
+  "rice_milk": "Rice milk",
+  "tea": "Tea"
 }
