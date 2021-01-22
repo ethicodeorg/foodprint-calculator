@@ -84,7 +84,7 @@
   "verify_email_text": "Veuillez patienter pendant la vérification de votre email",
   "transported_text": "{{transportMode}}: {{distance}} {{distanceUnit}}",
   "remove_ingredient": "Supprimer l’ingrédient",
-  "update_ingredient": " ",
+  "edit_ingredient": " ",
   "lets_calculate": "Calculons !",
   "restaurant": "Restaurant",
   "cafeteria": "Cafétéria",
