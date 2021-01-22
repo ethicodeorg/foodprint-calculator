@@ -34,6 +34,7 @@ const TranslateTabs = ({ selectedLang }) => {
       'tooltip_all_meals',
       'tooltip_compare',
       'warning_not_logged_in',
+      'update_ingredient',
     ],
   };
 

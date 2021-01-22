@@ -84,6 +84,7 @@
   "verify_email_text": "Vinsamlega bíðið á meðan við staðfestum tölvupóstfangið þitt",
   "transported_text": "{{transportMode}}: {{distance}} {{distanceUnit}}",
   "remove_ingredient": "Fjarlægja innihald",
+  "update_ingredient": " ",
   "lets_calculate": "Búa til útreikning",
   "restaurant": "Veitingastaður",
   "cafeteria": "Mötuneyti",
