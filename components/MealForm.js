@@ -407,6 +407,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
                     className="distance-input"
                     placeholder={t('distance')}
                     type="number"
+                    min="0"
                     name="distance"
                     value={distance}
                     onChange={(e) => setDistance(e.target.value)}
