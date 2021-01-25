@@ -56,7 +56,24 @@
         "gramsPerLiter": 640,
         "factor": 3.57142857142857
       },
-      { "label": "raspberries", "averageWeight": 4, "gramsPerLiter": 520 }
+      { "label": "raspberries", "averageWeight": 4, "gramsPerLiter": 520 },
+      { "label": "redcurrants" },
+      { "label": "blackcurrants" },
+      { "label": "mulberries" },
+      { "label": "gooseberries" },
+      { "label": "jostaberries" },
+      { "label": "blackberries" },
+      { "label": "honeyberries" },
+      { "label": "goji_berries" },
+      { "label": "açaí_berries" },
+      { "label": "cranberries" },
+      { "label": "aronia_berries" },
+      { "label": "elderberries" },
+      { "label": "barberries" },
+      { "label": "amla_berries" },
+      { "label": "acerola" },
+      { "label": "jabuticaba" },
+      { "label": "guarana" }
     ]
   },
   {
@@ -78,7 +95,18 @@
       { "label": "brussels_sprouts", "gramsPerLiter": 359 },
       { "label": "spinach", "gramsPerLiter": 127 },
       { "label": "lettuce", "gramsPerLiter": 152 },
-      { "label": "radishes", "gramsPerLiter": 490, "averageWeight": 5 }
+      { "label": "radishes", "gramsPerLiter": 490, "averageWeight": 5 },
+      { "label": "arugula_rocket" },
+      { "label": "bok_choy_pak_choi" },
+      { "label": "turnip_greens" },
+      { "label": "savoy_cabbage" },
+      { "label": "kohlrabi" },
+      { "label": "mizuna" },
+      { "label": "water_cress" },
+      { "label": "romanesco_broccoli" },
+      { "label": "collard_greens" },
+      { "label": "daikon" },
+      { "label": "horseradish" }
     ]
   },
   {
@@ -105,7 +133,33 @@
       { "label": "cheese_swiss", "gramsPerLiter": 473 },
       { "label": "cheese_jack", "gramsPerLiter": 478 },
       { "label": "cheese_parmesan", "gramsPerLiter": 423 },
-      { "label": "cheese_ricotta", "gramsPerLiter": 1048 }
+      { "label": "cheese_ricotta", "gramsPerLiter": 1048 },
+      { "label": "gorgonzola" },
+      { "label": "pecorino_cheese" },
+      { "label": "goat_cheese" },
+      { "label": "stracchino_crescenza_cheese" },
+      { "label": "brie_cheese" },
+      { "label": "philadelphia_cream_cheese" },
+      { "label": "caciotta_cheese" },
+      { "label": "emmental" },
+      { "label": "camembert" },
+      { "label": "cottage_cheese" },
+      { "label": "gouda_cheese" },
+      { "label": "gruyere" },
+      { "label": "mascarpone" },
+      { "label": "roquefort" },
+      { "label": "stilton" },
+      { "label": "wensleydale_cheese" },
+      { "label": "jarlsberg_cheese" },
+      { "label": "havarti_cheese" },
+      { "label": "caciocavallo_cheese" },
+      { "label": "provola_provolone_cheese" },
+      { "label": "processed_cheese_slices " },
+      { "label": "manchego_cheese" },
+      { "label": "epoisses_cheese" },
+      { "label": "muenster_cheese" },
+      { "label": "edam_cheese " },
+      { "label": "colby_cheese" }
     ]
   },
   {
@@ -118,7 +172,13 @@
       { "label": "limes", "gramsPerLiter": 1023, "averageWeight": 44 },
       { "label": "oranges", "gramsPerLiter": 761, "averageWeight": 131 },
       { "label": "tangerines", "gramsPerLiter": 824, "averageWeight": 88 },
-      { "label": "mandarines", "gramsPerLiter": 824, "averageWeight": 77 }
+      { "label": "mandarines", "gramsPerLiter": 824, "averageWeight": 77 },
+      { "label": "pomelo" },
+      { "label": "kumquat" },
+      { "label": "clementines" },
+      { "label": "bergamot" },
+      { "label": "mangaba" },
+      { "label": "cupuaçu" }
     ]
   },
   {
@@ -144,7 +204,17 @@
       { "label": "carp_farmed" },
       { "label": "tilapia_farmed" },
       { "label": "salmon_farmed" },
-      { "label": "catfish_farmed" }
+      { "label": "catfish_farmed" },
+      { "label": "trout_farmed" },
+      { "label": "cod_farmed" },
+      { "label": "eel_farmed" },
+      { "label": "sturgeon_farmed" },
+      { "label": "seabass_farmed" },
+      { "label": "sea_bream_farmed" },
+      { "label": "milkfish_farmed" },
+      { "label": "tuna_farmed" },
+      { "label": "goldfish_farmed" },
+      { "label": "corvina_fish_farmed" }
     ]
   },
   {
@@ -176,7 +246,11 @@
       { "label": "milk" },
       { "label": "cows_milk" },
       { "label": "goat_milk" },
-      { "label": "sheep_milk" }
+      { "label": "sheep_milk" },
+      { "label": "yogurt" },
+      { "label": "butter", "factor": 25 },
+      { "label": "ghee_butter", "factor": 25 },
+      { "label": "cream", "factor": 9 }
     ]
   },
   {
@@ -190,7 +264,14 @@
       { "label": "pecans", "gramsPerLiter": 418 },
       { "label": "pistachios", "gramsPerLiter": 520 },
       { "label": "walnuts", "gramsPerLiter": 495 },
-      { "label": "brazil_nuts", "gramsPerLiter": 562 }
+      { "label": "brazil_nuts", "gramsPerLiter": 562 },
+      { "label": "cashews" },
+      { "label": "macadamia_nuts" },
+      { "label": "pine_nuts" },
+      { "label": "acorns" },
+      { "label": "beech_nuts" },
+      { "label": "kola_nuts" },
+      { "label": "coconut" }
     ]
   },
   {
@@ -324,7 +405,36 @@
         "averageWeight": 142,
         "factor": 9.34579439252336
       },
-      { "label": "paprika", "gramsPerLiter": 460, "factor": 8.58369098712446 }
+      { "label": "paprika", "gramsPerLiter": 460, "factor": 8.58369098712446 },
+      { "label": "plantains" },
+      { "label": "jackfruits" },
+      { "label": "durians" },
+      { "label": "guavas" },
+      { "label": "mangosteens" },
+      { "label": "starfruits_carambolas" },
+      { "label": "tamarind" },
+      { "label": "rambutan" },
+      { "label": "sapote" },
+      { "label": "sapodilla" },
+      { "label": "dragon_fruit_pitaya" },
+      { "label": "papaya" },
+      { "label": "watermelon" },
+      { "label": "apricots" },
+      { "label": "medlars" },
+      { "label": "nectarines" },
+      { "label": "cherimoya_annona_cherimola" },
+      { "label": "sugar_apple_annona_squamosa" },
+      { "label": "chayote" },
+      { "label": "kiwano" },
+      { "label": "atemoya" },
+      { "label": "soursop_graviola" },
+      { "label": "langsats" },
+      { "label": "loquat" },
+      { "label": "noni_fruit" },
+      { "label": "prickly_pear" },
+      { "label": "longans" },
+      { "label": "cherries" },
+      { "label": "genipapo" }
     ]
   },
   {
@@ -345,7 +455,14 @@
       { "label": "green_beans", "gramsPerLiter": 423 },
       { "label": "kidney_beans", "gramsPerLiter": 1082 },
       { "label": "pinto_beans", "gramsPerLiter": 1014 },
-      { "label": "split_peas", "gramsPerLiter": 828 }
+      { "label": "split_peas", "gramsPerLiter": 828 },
+      { "label": "borlotti_beans_cranberry_beans" },
+      { "label": "cannellini_beans" },
+      { "label": "grass_peas_cicerchie" },
+      { "label": "edamame_beans" },
+      { "label": "lima_beans" },
+      { "label": "mung_means" },
+      { "label": "adzuki_beans" }
     ]
   },
   {
@@ -377,7 +494,51 @@
       { "label": "thyme", "gramsPerLiter": 183 },
       { "label": "thyme_dried", "gramsPerLiter": 183, "factor": 6.09756097560976 },
       { "label": "mushrooms", "gramsPerLiter": 296 },
-      { "label": "mushrooms_dried", "gramsPerLiter": 296, "factor": 6.89655172413793 }
+      { "label": "mushrooms_dried", "gramsPerLiter": 296, "factor": 6.89655172413793 },
+      { "label": "belgian_endive" },
+      { "label": "radicchio" },
+      { "label": "wild_chicory" },
+      { "label": "swiss_chard " },
+      { "label": "artichokes" },
+      { "label": "asparagus" },
+      { "label": "dandelion_greens" },
+      { "label": "corn_salad_valerianella" },
+      { "label": "thistle" },
+      { "label": "sorrel" },
+      { "label": "escarole" },
+      { "label": "catalonian_chicory_puntarelle" },
+      { "label": "okra" },
+      { "label": "tomatillos" },
+      { "label": "friggitelli_peppers" },
+      { "label": "bamboo_shoots" },
+      { "label": "moringa_leaves" },
+      { "label": "borage" },
+      { "label": "savory" },
+      { "label": "lemon_balm" },
+      { "label": "stevia" },
+      { "label": "marjoram" },
+      { "label": "bay_leaf" },
+      { "label": "hyssop" },
+      { "label": "pepper" },
+      { "label": "turmeric" },
+      { "label": "mint" },
+      { "label": "juniper_berries" },
+      { "label": "nutmeg" },
+      { "label": "cumin" },
+      { "label": "saffron" },
+      { "label": "gingseng" },
+      { "label": "cloves" },
+      { "label": "tarragon" },
+      { "label": "wild_fennel" },
+      { "label": "mustard_seeds" },
+      { "label": "cardamom" },
+      { "label": "cinnammon" },
+      { "label": "fenugreek" },
+      { "label": "licorice" },
+      { "label": "vanille" },
+      { "label": "curry " },
+      { "label": "lemon_pepper" },
+      { "label": "black_pepper" }
     ]
   },
   {
@@ -403,7 +564,15 @@
       { "label": "ham" },
       { "label": "pork_sausage" },
       { "label": "gammon" },
-      { "label": "pork_chops" }
+      { "label": "pork_chops" },
+      { "label": "pig_feet" },
+      { "label": "pork_jowl" },
+      { "label": "salami_pig" },
+      { "label": "wurstel" },
+      { "label": "pork_steak" },
+      { "label": "pork_tenderloin" },
+      { "label": "pork_loin" },
+      { "label": "pork_spareribs" }
     ]
   },
   {
@@ -432,13 +601,30 @@
       { "label": "turkey" },
       { "label": "quail" },
       { "label": "squabs" },
-      { "label": "pigeons" }
+      { "label": "pigeons" },
+      { "label": "chicken_breast" },
+      { "label": "chicken_thighs" },
+      { "label": "chicken_nuggets" },
+      { "label": "chicken_wings" },
+      { "label": "wurstel_chicken" },
+      { "label": "turkey_breast" },
+      { "label": "geese" },
+      { "label": "ducks" },
+      { "label": "guinea_fowls" },
+      { "label": "pheasant" },
+      { "label": "ostriches" }
     ]
   },
   {
     "key": "pra",
     "baseUnit": "kg",
-    "foods": [{ "label": "prawns_farmed" }, { "label": "shrimps_farmed" }]
+    "foods": [
+      { "label": "prawns_farmed" },
+      { "label": "shrimps_farmed" },
+      { "label": "lobstersz" },
+      { "label": "crabs" },
+      { "label": "octopus" }
+    ]
   },
   {
     "key": "rao",
@@ -463,7 +649,15 @@
         "factor": 6.09756097560976
       },
       { "label": "ginger", "gramsPerLiter": 406 },
-      { "label": "parsnip", "gramsPerLiter": 562 }
+      { "label": "parsnip", "gramsPerLiter": 562 },
+      { "label": "jerusalem_artichokes_sunchokes" },
+      { "label": "celeriacs" },
+      { "label": "taro_roots" },
+      { "label": "tigernut_chufa" },
+      { "label": "beets" },
+      { "label": "parsley_root" },
+      { "label": "chicory_root" },
+      { "label": "dandelion_root" }
     ]
   },
   {
@@ -525,7 +719,17 @@
   {
     "key": "bee",
     "baseUnit": "kg",
-    "foods": [{ "label": "beef" }]
+    "foods": [
+      { "label": "beef" },
+      { "label": "speck" },
+      { "label": "salami_beef" },
+      { "label": "bresaola_beef" },
+      { "label": "roast_beef" },
+      { "label": "florentine_steak" },
+      { "label": "beef_tenderloin" },
+      { "label": "sirloin_steak" },
+      { "label": "beef_ribs" }
+    ]
   },
   {
     "key": "dch",

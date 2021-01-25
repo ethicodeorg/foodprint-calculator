@@ -81,21 +81,23 @@ export function convertToBaseUnit(amount, unit, selectedIngredient) {
     return convertToKilograms(amount, unit, selectedIngredient);
   }
 
-  return convertToLiters(amount, unit);
+  return convertToLiters(amount, unit, selectedIngredient);
 }
 
-function convertToLiters(amount, unit) {
+function convertToLiters(amount, unit, selectedIngredient) {
+  const factoredAmount = amount * (selectedIngredient.factor || 1);
+
   switch (unit) {
     case 'tsp':
-      return amount * (5 / 1000);
+      return factoredAmount * (5 / 1000);
     case 'tbsp':
-      return amount * (15 / 1000);
+      return factoredAmount * (15 / 1000);
     case 'cups':
-      return amount * (250 / 1000);
+      return factoredAmount * (250 / 1000);
     case 'ltr':
-      return amount;
+      return factoredAmount;
     default:
-      return amount;
+      return factoredAmount;
   }
 }
 
