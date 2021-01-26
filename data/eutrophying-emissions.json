@@ -263,5 +263,10 @@
     "entity": "Tea",
     "code": "tea",
     "eutrophyingEmissionsPerUnit": 81.35
+  },
+  {
+    "entity": "Unsupported ingredient",
+    "code": "uns",
+    "eutrophyingEmissionsPerUnit": 0
   }
 ]

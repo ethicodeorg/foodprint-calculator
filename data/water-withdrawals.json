@@ -263,5 +263,10 @@
     "entity": "Tea",
     "code": "tea",
     "freshwaterWithdrawalsPerUnit": 20.0
+  },
+  {
+    "entity": "Unsupported ingredient",
+    "code": "uns",
+    "freshwaterWithdrawalsPerUnit": 0
   }
 ]

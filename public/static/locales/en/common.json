@@ -421,7 +421,7 @@
   "guavas": "Guavas",
   "mangosteens": "Mangosteens",
   "starfruits_carambolas": "Starfruits/Carambolas",
-  "tamarind ": "Tamarind ",
+  "tamarind": "Tamarind",
   "rambutan": "Rambutan",
   "sapote": "Sapote",
   "sapodilla": "Sapodilla",
@@ -508,7 +508,7 @@
   "octopus": "Octopus",
   "mortadella": "Mortadella",
   "pig_feet": "Pig feet",
-  "pork_jowl ": "Pork Jowl ",
+  "pork_jowl": "Pork Jowl",
   "salami_pig": "Salami (pig)",
   "wurstel": "Würstel (pig)",
   "pork_steak": "Pork steak",
@@ -564,5 +564,6 @@
   "ghee_butter": "Ghee butter",
   "cream": "Cream",
   "yogurt": "Yogurt",
-  "kefir": "Kefir"
+  "unsupported_ingredient": "Unsupported ingredient",
+  "other_berries": "Other berries"
 }

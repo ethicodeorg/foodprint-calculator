@@ -634,5 +634,17 @@
     "packaging": 0,
     "retail": 0,
     "ghgEmissionsPerUnit": 21
+  },
+  {
+    "entity": "Unsupported ingredient",
+    "code": "uns",
+    "landUseChange": 0,
+    "animalFeed": 0,
+    "farm": 0,
+    "processing": 0,
+    "transport": 0,
+    "packaging": 0,
+    "retail": 0,
+    "ghgEmissionsPerUnit": 0
   }
 ]

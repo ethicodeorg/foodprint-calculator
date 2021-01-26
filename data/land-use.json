@@ -263,5 +263,10 @@
     "entity": "Tea",
     "code": "tea",
     "landUsePerUnit": 28.129
+  },
+  {
+    "entity": "Unsupported ingredient",
+    "code": "uns",
+    "landUsePerUnit": 0
   }
 ]

@@ -498,7 +498,7 @@
       { "label": "belgian_endive" },
       { "label": "radicchio" },
       { "label": "wild_chicory" },
-      { "label": "swiss_chard " },
+      { "label": "swiss_chard" },
       { "label": "artichokes" },
       { "label": "asparagus" },
       { "label": "dandelion_greens" },
@@ -765,5 +765,10 @@
     "key": "tea",
     "baseUnit": "kg",
     "foods": [{ "label": "tea" }]
+  },
+  {
+    "key": "uns",
+    "baseUnit": "kg",
+    "foods": [{ "label": "unsupported_ingredient" }]
   }
 ]
