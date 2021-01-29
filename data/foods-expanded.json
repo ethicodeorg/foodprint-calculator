@@ -343,7 +343,6 @@
         "factor": 6.89655172413793
       },
       { "label": "figs", "gramsPerLiter": 630, "averageWeight": 50 },
-      { "label": "kiwis", "gramsPerLiter": 748, "averageWeight": 76 },
       { "label": "mangos", "gramsPerLiter": 697, "averageWeight": 300 },
       {
         "label": "mangos_dried",
@@ -366,13 +365,6 @@
         "gramsPerLiter": 697,
         "averageWeight": 66,
         "factor": 3.28947368421053
-      },
-      { "label": "pineapples", "gramsPerLiter": 732, "averageWeight": 950 },
-      {
-        "label": "pineapples_dried",
-        "gramsPerLiter": 732,
-        "averageWeight": 950,
-        "factor": 3.20512820512821
       },
       { "label": "pomegranates", "gramsPerLiter": 735, "averageWeight": 275 },
       { "label": "bell_peppers", "gramsPerLiter": 629, "averageWeight": 128 },
@@ -765,6 +757,24 @@
     "key": "tea",
     "baseUnit": "kg",
     "foods": [{ "label": "tea" }]
+  },
+  {
+    "key": "pin",
+    "baseUnit": "kg",
+    "foods": [
+      { "label": "pineapples", "gramsPerLiter": 732, "averageWeight": 950 },
+      {
+        "label": "pineapples_dried",
+        "gramsPerLiter": 732,
+        "averageWeight": 950,
+        "factor": 3.20512820512821
+      }
+    ]
+  },
+  {
+    "key": "kiw",
+    "baseUnit": "kg",
+    "foods": [{ "label": "kiwis", "gramsPerLiter": 748, "averageWeight": 76 }]
   },
   {
     "key": "uns",

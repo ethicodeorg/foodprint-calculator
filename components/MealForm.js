@@ -204,15 +204,9 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     );
     const amountInBaseUnit = convertToBaseUnit(amount, amountUnit.value, selectedIngredient);
     const ghgEmissionBreakdown = {
-      landUseChange: food.ghgEmissions.values.landUseChange * amountInBaseUnit,
-      animalFeed: food.ghgEmissions.values.animalFeed * amountInBaseUnit,
-      farm: food.ghgEmissions.values.farm * amountInBaseUnit,
-      processing: food.ghgEmissions.values.processing * amountInBaseUnit,
       transport: transportEmissions
         ? transportEmissions * amountInBaseUnit
         : food.ghgEmissions.values.transport * amountInBaseUnit,
-      packaging: food.ghgEmissions.values.packaging * amountInBaseUnit,
-      retail: food.ghgEmissions.values.retail * amountInBaseUnit,
     };
     const ingredient = {
       key: selectedIngredient.key,
@@ -276,7 +270,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     if (val.baseUnit === 'l') {
       newUnits = volumeUnits;
     } else {
-      if (val.averageWeight && val.gramsPerLiter) {
+      if ((val.averageWeight && val.gramsPerLiter) || val.key === 'uns') {
         newUnits = quantityUnits.concat(weightUnits).concat(volumeUnits);
       } else if (val.averageWeight) {
         newUnits = quantityUnits.concat(weightUnits);

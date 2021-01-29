@@ -7,87 +7,87 @@
   {
     "entity": "Bananas",
     "code": "ban",
-    "landUsePerUnit": 1.93
+    "landUsePerUnit": 1.929
   },
   {
     "entity": "Barley",
     "code": "bar",
-    "landUsePerUnit": 1.11
+    "landUsePerUnit": 1.111
   },
   {
     "entity": "Beef (beef herd)",
     "code": "bbh",
-    "landUsePerUnit": 326.21
+    "landUsePerUnit": 326.212
   },
   {
     "entity": "Beef (dairy herd)",
     "code": "bdh",
-    "landUsePerUnit": 43.24
+    "landUsePerUnit": 43.237
   },
   {
     "entity": "Beet Sugar",
     "code": "bes",
-    "landUsePerUnit": 1.83
+    "landUsePerUnit": 1.832
   },
   {
     "entity": "Berries & Grapes",
     "code": "ber",
-    "landUsePerUnit": 2.41
+    "landUsePerUnit": 2.412
   },
   {
     "entity": "Brassicas",
     "code": "bra",
-    "landUsePerUnit": 0.55
+    "landUsePerUnit": 0.551
   },
   {
     "entity": "Cane Sugar",
     "code": "can",
-    "landUsePerUnit": 2.04
+    "landUsePerUnit": 2.041
   },
   {
     "entity": "Cassava",
     "code": "cas",
-    "landUsePerUnit": 1.81
+    "landUsePerUnit": 1.811
   },
   {
     "entity": "Cheese",
     "code": "che",
-    "landUsePerUnit": 87.79
+    "landUsePerUnit": 87.793
   },
   {
     "entity": "Citrus Fruit",
     "code": "cit",
-    "landUsePerUnit": 0.86
+    "landUsePerUnit": 0.857
   },
   {
     "entity": "Coffee",
     "code": "cof",
-    "landUsePerUnit": 21.62
+    "landUsePerUnit": 18.096
   },
   {
     "entity": "Chocolate",
     "code": "cho",
-    "landUsePerUnit": 68.96
+    "landUsePerUnit": 56.618
   },
   {
     "entity": "Eggs",
     "code": "egg",
-    "landUsePerUnit": 6.27
+    "landUsePerUnit": 6.271
   },
   {
     "entity": "Fish (farmed)",
     "code": "fis",
-    "landUsePerUnit": 8.41
+    "landUsePerUnit": 8.408
   },
   {
     "entity": "Groundnuts",
     "code": "gro",
-    "landUsePerUnit": 9.11
+    "landUsePerUnit": 9.114
   },
   {
     "entity": "Lamb & Mutton",
     "code": "lam",
-    "landUsePerUnit": 369.81
+    "landUsePerUnit": 369.805
   },
   {
     "entity": "Maize",
@@ -97,37 +97,37 @@
   {
     "entity": "Milk",
     "code": "mil",
-    "landUsePerUnit": 8.95
+    "landUsePerUnit": 8.949
   },
   {
     "entity": "Nuts",
     "code": "nut",
-    "landUsePerUnit": 12.96
+    "landUsePerUnit": 12.956
   },
   {
     "entity": "Oatmeal",
     "code": "oat",
-    "landUsePerUnit": 7.6
+    "landUsePerUnit": 7.604
   },
   {
     "entity": "Olive Oil",
     "code": "olo",
-    "landUsePerUnit": 26.31
+    "landUsePerUnit": 26.307
   },
   {
     "entity": "Onions & Leeks",
     "code": "oni",
-    "landUsePerUnit": 0.39
+    "landUsePerUnit": 0.387
   },
   {
     "entity": "Other Fruit",
     "code": "fru",
-    "landUsePerUnit": 0.89
+    "landUsePerUnit": 0.885
   },
   {
     "entity": "Other Pulses",
     "code": "pul",
-    "landUsePerUnit": 15.57
+    "landUsePerUnit": 15.574
   },
   {
     "entity": "Other Vegetables",
@@ -137,27 +137,27 @@
   {
     "entity": "Palm Oil",
     "code": "pao",
-    "landUsePerUnit": 2.42
+    "landUsePerUnit": 2.419
   },
   {
     "entity": "Peas",
     "code": "pea",
-    "landUsePerUnit": 7.46
+    "landUsePerUnit": 7.463
   },
   {
     "entity": "Pig Meat",
     "code": "pig",
-    "landUsePerUnit": 17.36
+    "landUsePerUnit": 17.364
   },
   {
     "entity": "Potatoes",
     "code": "pot",
-    "landUsePerUnit": 0.88
+    "landUsePerUnit": 0.878
   },
   {
     "entity": "Poultry Meat",
     "code": "pou",
-    "landUsePerUnit": 12.22
+    "landUsePerUnit": 12.219
   },
   {
     "entity": "Prawns (farmed)",
@@ -172,37 +172,37 @@
   {
     "entity": "Rice",
     "code": "ric",
-    "landUsePerUnit": 2.8
+    "landUsePerUnit": 2.802
   },
   {
     "entity": "Root Vegetables",
     "code": "roo",
-    "landUsePerUnit": 0.33
+    "landUsePerUnit": 0.326
   },
   {
     "entity": "Soybean Oil",
     "code": "soo",
-    "landUsePerUnit": 10.52
+    "landUsePerUnit": 10.522
   },
   {
     "entity": "Soymilk",
     "code": "som",
-    "landUsePerUnit": 0.66
+    "landUsePerUnit": 0.661
   },
   {
     "entity": "Sunflower Oil",
     "code": "suo",
-    "landUsePerUnit": 17.66
+    "landUsePerUnit": 17.665
   },
   {
     "entity": "Tofu (soybeans)",
     "code": "tof",
-    "landUsePerUnit": 3.52
+    "landUsePerUnit": 3.519
   },
   {
     "entity": "Tomatoes",
     "code": "tom",
-    "landUsePerUnit": 0.8
+    "landUsePerUnit": 0.801
   },
   {
     "entity": "Wheat & Rye",
@@ -262,7 +262,17 @@
   {
     "entity": "Tea",
     "code": "tea",
-    "landUsePerUnit": 28.129
+    "landUsePerUnit": 22
+  },
+  {
+    "entity": "Pineapple",
+    "code": "pin",
+    "landUsePerUnit": 0.406
+  },
+  {
+    "entity": "Kiwi",
+    "code": "kiw",
+    "landUsePerUnit": 0.546
   },
   {
     "entity": "Unsupported ingredient",

@@ -265,6 +265,16 @@
     "eutrophyingEmissionsPerUnit": 81.35
   },
   {
+    "entity": "Pineapple",
+    "code": "pin",
+    "eutrophyingEmissionsPerUnit": 2.43
+  },
+  {
+    "entity": "Kiwi",
+    "code": "kiw",
+    "eutrophyingEmissionsPerUnit": 2.43
+  },
+  {
     "entity": "Unsupported ingredient",
     "code": "uns",
     "eutrophyingEmissionsPerUnit": 0

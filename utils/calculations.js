@@ -108,13 +108,13 @@ export function convertToKilograms(amount, unit, selectedIngredient) {
     case 'qty':
       return (amount * selectedIngredient.averageWeight) / 1000;
     case 'tsp':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (5 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (5 / 1000)) / 1000;
     case 'tbsp':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (15 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (15 / 1000)) / 1000;
     case 'cups':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (250 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (250 / 1000)) / 1000;
     case 'ltr':
-      return (factoredAmount * selectedIngredient.gramsPerLiter) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000)) / 1000;
     case 'g':
       return factoredAmount / 1000;
     case 'oz':

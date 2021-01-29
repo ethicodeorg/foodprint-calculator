@@ -62,12 +62,12 @@
   {
     "entity": "Coffee",
     "code": "cof",
-    "freshwaterWithdrawalsPerUnit": 25.9
+    "freshwaterWithdrawalsPerUnit": 21.5
   },
   {
     "entity": "Chocolate",
     "code": "cho",
-    "freshwaterWithdrawalsPerUnit": 540.6
+    "freshwaterWithdrawalsPerUnit": 426.9
   },
   {
     "entity": "Eggs",
@@ -263,6 +263,16 @@
     "entity": "Tea",
     "code": "tea",
     "freshwaterWithdrawalsPerUnit": 20.0
+  },
+  {
+    "entity": "Pineapple",
+    "code": "pin",
+    "freshwaterWithdrawalsPerUnit": 23.6
+  },
+  {
+    "entity": "Kiwi",
+    "code": "kiw",
+    "freshwaterWithdrawalsPerUnit": 205.8
   },
   {
     "entity": "Unsupported ingredient",

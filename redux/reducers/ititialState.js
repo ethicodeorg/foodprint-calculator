@@ -5,27 +5,12 @@ import ghgEmissions from '../../data/ghg-emissions.json';
 import waterWithdrawals from '../../data/water-withdrawals.json';
 import transportEmissions from '../../data/transport-emissions.json';
 
-function sumUpGHG(foodGHG) {
-  return (
-    foodGHG.landUseChange +
-    foodGHG.animalFeed +
-    foodGHG.farm +
-    foodGHG.processing +
-    foodGHG.transport +
-    foodGHG.packaging +
-    foodGHG.retail
-  );
-}
-
 function getFoodData() {
   return foods.map((food) => {
     const foodLandUse = landUse.find((l) => l.code === food.key);
     const foodEutro = eutrophyingEmissions.find((e) => e.code === food.key);
     const foodGHG = ghgEmissions.find((g) => g.code === food.key);
     const foodWater = waterWithdrawals.find((w) => w.code === food.key);
-    /* console.log(food.key);
-    console.log(sumUpGHG(foodGHG));
-    console.log(foodGHG.ghgEmissionsPerUnit); */
 
     return {
       key: food.key,
@@ -39,13 +24,7 @@ function getFoodData() {
       },
       ghgEmissions: {
         values: {
-          landUseChange: foodGHG.landUseChange,
-          animalFeed: foodGHG.animalFeed,
-          farm: foodGHG.farm,
-          processing: foodGHG.processing,
           transport: foodGHG.transport,
-          packaging: foodGHG.packaging,
-          retail: foodGHG.retail,
         },
         value: foodGHG.ghgEmissionsPerUnit,
       },
