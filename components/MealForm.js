@@ -47,11 +47,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
-  const [selectedIngredient, setSelectedIngredient] = useState();
-  const [amount, setAmount] = useState('');
-  const [distance, setDistance] = useState('');
-  const [transportMode, setTransportMode] = useState('');
-  const [transportType, setTransportType] = useState('');
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
   const [isAdding, setIsAdding] = useState(false);
   const [isAddingTransport, setIsAddingTransport] = useState(false);
@@ -271,12 +266,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     };
 
     setIngredients((ingredients) => [...ingredients, ingredient]);
-    setAmount('');
-    setDistance('');
-    setSelectedIngredient();
     setIsAdding(false);
-    setIsAddingTransport(false);
-    setAmountUnit(amountUnitOptions[0].value);
   };
 
   return (
@@ -392,18 +382,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           .about-meal-input {
             width: calc(100% - 20px);
           }
-          .amount-input,
-          .distance-input {
-            width: 100%;
-            margin: 0 0 20px 0;
-          }
-          .add-ingredient {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-            border: 1px solid ${theme.colors.border};
-            border-radius: 4px;
-          }
           .required-fields,
           .optional-fields {
             display: flex;
@@ -424,72 +402,8 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           .number-of-servings-select {
             width: 100%;
           }
-          .ingredient-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-mode-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-type-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-unit-select {
-            width: 100%;
-            margin-right: 0;
-          }
-          .add-button {
-            font-size: 16px;
-            font-weight: bold;
-            width: 180px;
-            margin: 20px 0 0;
-            padding: 10px;
-            background-color: ${theme.colors.land};
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: #fff;
-          }
-          .add-transport-button {
-            font-size: 16px;
-            font-weight: bold;
-            width: 180px;
-            margin-right: 20px;
-            padding: 10px;
-            background-color: ${theme.colors.land};
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: #fff;
-          }
-          .add-button:disabled {
-            opacity: 0.7;
-            cursor: default;
-          }
-          .add-button:hover {
-            opacity: 0.7;
-          }
-          .add-transport-button-container {
-            min-width: 160px;
-          }
-          .add-button-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 20px;
-          }
           .add-ingredient-container {
             margin-top: 20px;
-          }
-          .add-button {
-            width: 100px;
-            margin-bottom: 0;
           }
           .optional-text {
             margin: 10px 0 0;
@@ -500,43 +414,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             padding: 0 20px;
             display: flex;
             justify-content: space-between;
-          }
-          .close-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
-            height: 30px;
-          }
-          .close-button {
-            display: flex;
-            align-items: center;
-            padding: 0;
-            font-size: 22px;
-            color: ${theme.colors.text};
-            background-color: #fff;
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border: none;
-            outline: none;
-          }
-          .close-button:hover {
-            opacity: 0.7;
-          }
-          .ingredient-unit {
-            width: 200px;
-          }
-          .instructions {
-            margin-top: 20px;
-            color: ${theme.colors.water};
-            text-decoration: none;
-            font-size: 16px;
-            text-align: center;
-          }
-          .new-tab-icon {
-            display: inline;
-            margin-left: 5px;
-            font-size: 12px;
           }
 
           @media only screen and (min-width: ${theme.sizes.mobile}) {
@@ -549,35 +426,8 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             .select-container {
               width: 170px;
             }
-            .ingredient-select {
-              width: 220px;
-              margin: 0 20px 0 0;
-            }
             .number-of-servings-select {
               width: 300px;
-            }
-            .amount-input,
-            .distance-input {
-              width: 104px;
-              margin: 0 20px 0 0;
-            }
-            .distance-input {
-              margin: 0 20px 20px 0;
-            }
-            .transport-mode-select {
-              min-width: 182px;
-              margin: 0 20px 20px 0;
-            }
-            .transport-type-select {
-              min-width: 170px;
-              margin: 0 20px 20px 0;
-            }
-            .transport-unit-select {
-              width: 158px;
-              margin: 0 0 20px 0;
-            }
-            .add-button-container {
-              margin-top: 0;
             }
             .optional-text {
               margin: 10px 0;
@@ -585,15 +435,10 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             .button-container {
               padding: 0;
             }
-            .ingredient-unit {
-              width: 200px;
-            }
           }
 
           @media only screen and (min-width: ${theme.sizes.ipad}) {
-            .close-container {
-              height: 0;
-            }
+            
           }
         `}</style>
       </Content>

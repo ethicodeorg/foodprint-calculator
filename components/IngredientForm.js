@@ -259,29 +259,10 @@ return (
     font-size: 16px;
     resize: none;
   }
-  .meal-input {
-    width: calc(100% - 20px);
-    max-width: 400px;
-    margin-bottom: 20px;
-  }
-  .link-input {
-    width: calc(100% - 20px);
-    margin-top: 20px;
-  }
-  .about-meal-input {
-    width: calc(100% - 20px);
-  }
   .amount-input,
   .distance-input {
     width: 100%;
     margin: 0 0 20px 0;
-  }
-  .add-ingredient {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-    border: 1px solid ${theme.colors.border};
-    border-radius: 4px;
   }
   .required-fields,
   .optional-fields {
@@ -293,14 +274,7 @@ return (
   .optional-fields {
     margin-top: 20px;
   }
-  .servings-container {
-    display: flex;
-    align-items: center;
-  }
   .select-container {
-    width: 100%;
-  }
-  .number-of-servings-select {
     width: 100%;
   }
   .ingredient-select {
@@ -319,41 +293,6 @@ return (
     width: 100%;
     margin-right: 0;
   }
-  .add-button {
-    font-size: 16px;
-    font-weight: bold;
-    width: 180px;
-    margin: 20px 0 0;
-    padding: 10px;
-    background-color: ${theme.colors.land};
-    opacity: 1;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-  }
-  .add-transport-button {
-    font-size: 16px;
-    font-weight: bold;
-    width: 180px;
-    margin-right: 20px;
-    padding: 10px;
-    background-color: ${theme.colors.land};
-    opacity: 1;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    border-radius: 4px;
-    border: none;
-    color: #fff;
-  }
-  .add-button:disabled {
-    opacity: 0.7;
-    cursor: default;
-  }
-  .add-button:hover {
-    opacity: 0.7;
-  }
   .add-transport-button-container {
     min-width: 160px;
   }
@@ -363,22 +302,9 @@ return (
     width: 100%;
     margin-top: 20px;
   }
-  .add-ingredient-container {
-    margin-top: 20px;
-  }
-  .add-button {
-    width: 100px;
-    margin-bottom: 0;
-  }
   .optional-text {
     margin: 10px 0 0;
     font-size: 14px;
-  }
-  .button-container {
-    margin-top: 20px;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between;
   }
   .close-container {
     display: flex;
@@ -432,9 +358,6 @@ return (
       width: 220px;
       margin: 0 20px 0 0;
     }
-    .number-of-servings-select {
-      width: 300px;
-    }
     .amount-input,
     .distance-input {
       width: 104px;
@@ -460,9 +383,6 @@ return (
     }
     .optional-text {
       margin: 10px 0;
-    }
-    .button-container {
-      padding: 0;
     }
     .ingredient-unit {
       width: 200px;
