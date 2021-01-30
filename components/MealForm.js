@@ -18,12 +18,12 @@ import {
   editLocalStorageMeal,
   addLocalStorageMeal,
 } from '../utils/localStorageMeals';
-import { setFocus } from '../utils/ui';
 import { useUser } from '../lib/hooks';
 import Header from './Header';
 import Card from './Card';
 import Content from './Content';
 import Pies from './Pies';
+import IngredientForm from './IngredientForm';
 import Ingredients from './Ingredients';
 import PageTitle from './PageTitle';
 import Button from './Button';
@@ -195,8 +195,27 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIngredients(temp);
   };
 
-  const addIngredient = () => {
+  const editIngredient = (index) => {
+    const temp = [...ingredients];
+  }
+
+  const cancelIngredient = () => {
+    setIsAdding(false);
+    setIsAddingTransport(false);
+  }
+
+  const addIngredient = (selectedIngredient, amount, amountUnit, distance, distanceUnit, transportMode, transportType) => {
     const food = foodData.find((f) => f.key === selectedIngredient.key);
+    /* console.log(foodData)
+    console.log('selectedIngredient:', selectedIngredient)
+    console.log('selectedIngredient.key:', selectedIngredient.key)
+    console.log('food:', food)
+    console.log('amount:', amount)
+    console.log('amountUnit:', amountUnit)
+    console.log('distance:', distance)
+    console.log('distanceUnit:', distanceUnit)
+    console.log('transportMode:', transportMode)
+    console.log('transportType:', transportType) */
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
@@ -260,45 +279,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setAmountUnit(amountUnitOptions[0].value);
   };
 
-  // When ingredient is selected we add quantity and volume options if applicaple
-  // for the selected ingredient.
-  const changeUnitOptions = (val) => {
-    let unitsToAdd = [];
-    let unitsToRemove = [];
-    if (val.averageWeight) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
-        unitsToAdd.push({ value: 'qty', label: t('qty') });
-      }
-    } else {
-      unitsToRemove.push('qty');
-    }
-
-    if (val.gramsPerLiter) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'tsp')) {
-        unitsToAdd = [
-          ...unitsToAdd,
-          { value: 'tsp', label: t('tsp') },
-          { value: 'tbsp', label: t('tbsp') },
-          { value: 'cups', label: t('cups') },
-          { value: 'ltr', label: t('ltr') },
-        ];
-      }
-    } else {
-      unitsToRemove.push('tsp', 'tbsp', 'cups', 'ltr');
-    }
-
-    // Remove options with .filter and add options with .concat
-    setAmountUnitOptions(
-      amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
-    );
-  };
-
-  // Automatically focus the next input when an ingredient has been selected
-  // react reference for the "amount" field.
-  const refAmount = useRef();
-
   return (
     <Fragment>
       <Header />
@@ -323,127 +303,14 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           <Ingredients
             ingredients={ingredients}
             deleteIngredient={deleteIngredient}
+            editIngredient={editIngredient}
             numberOfServings={numberOfServings.value}
             t={t}
           />
           <Separator />
           {isAdding ? (
-            <Card inner>
-              <div className="close-container">
-                <MyTooltip
-                  title={t('cancel')}
-                  placement="top"
-                  arrow
-                  enterTouchDelay={0}
-                  leaveTouchDelay={3000}
-                >
-                  <button
-                    className="close-button"
-                    onClick={() => {
-                      setIsAdding(false);
-                      setIsAddingTransport(false);
-                    }}
-                  >
-                    <FaTimes />
-                  </button>
-                </MyTooltip>
-              </div>
-              <div className="required-fields">
-                <div className="select-container ingredient-select">
-                  <Select
-                    value={selectedIngredient}
-                    placeholder={t('ingredient')}
-                    onChange={(val) => {
-                      setSelectedIngredient(val);
-                      changeUnitOptions(val);
-                      setFocus(refAmount);
-                    }}
-                    options={foodOptions}
-                    instanceId="ingredient"
-                    autoFocus
-                  />
-                </div>
-                <input
-                  className="amount-input"
-                  placeholder={t('amount')}
-                  type="number"
-                  name="amount"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  ref={refAmount}
-                />
-                <div className="select-container ingredient-unit">
-                  <Select
-                    value={amountUnit.value}
-                    placeholder={t('unit')}
-                    onChange={(val) => setAmountUnit(val.value)}
-                    options={amountUnitOptions}
-                    instanceId="amount-unit"
-                  />
-                </div>
-              </div>
-              {isAddingTransport ? (
-                <div className="optional-fields">
-                  <div className="select-container transport-mode-select">
-                    <Select
-                      value={transportMode.value}
-                      placeholder={t('transport_mode')}
-                      onChange={(val) => setTransportMode(val.value)}
-                      options={transportModeOptions}
-                      instanceId="transport-mode"
-                    />
-                  </div>
-                  <div className="select-container transport-type-select">
-                    <Select
-                      value={transportType.value}
-                      placeholder={t('transport_type')}
-                      onChange={(val) => setTransportType(val.value)}
-                      options={transportTypeOptions}
-                      instanceId="transport-type"
-                    />
-                  </div>
-                  <input
-                    className="distance-input"
-                    placeholder={t('distance')}
-                    type="number"
-                    name="distance"
-                    value={distance}
-                    onChange={(e) => setDistance(e.target.value)}
-                  />
-                  <div className="select-container transport-unit-select">
-                    <Select
-                      value={distanceUnit.value}
-                      placeholder={t('unit')}
-                      onChange={(val) => setDistanceUnit(val.value)}
-                      options={distanceUnitOptions}
-                      instanceId="distance-unit"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="optional-fields">
-                  <div className="add-transport-button-container">
-                    <Button clear onClick={() => setIsAddingTransport(true)}>
-                      {t('add_transport_optional')}
-                    </Button>
-                  </div>
-                  <InfoIcon title={t('transport_not_provided')} color={theme.colors.water} />
-                </div>
-              )}
-              <div className="add-button-container">
-                <Link href="/about?openSection=how-to-use">
-                  <a target="_blank" className="instructions">
-                    {t('how_to_use')}
-                    <span className="new-tab-icon">
-                      <FaExternalLinkAlt />
-                    </span>
-                  </a>
-                </Link>
-                <Button onClick={() => addIngredient()} disabled={!selectedIngredient || !amount}>
-                  {t('add')}
-                </Button>
-              </div>
-            </Card>
+            <IngredientForm meal={meal} foodData={foodData} addIngredient={addIngredient} cancelIngredient={cancelIngredient} 
+            t={t} />
           ) : (
             <div className="add-ingredient-container">
               <Button onClick={() => setIsAdding(true)}>+ {t('add_ingredient')}</Button>
