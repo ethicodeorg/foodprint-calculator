@@ -20,7 +20,17 @@ const TranslateTabs = ({ selectedLang }) => {
   // Add the translation ids that need to be translated in the PR here:
   const changes = {
     frontPage: [],
-    aboutPage: [],
+    aboutPage: [
+      'global_habitable_land',
+      'global_annual_emissions',
+      'global_annual_withdrawals',
+      'million_km_2',
+      'billion_tonnes',
+      'trillion_m_3',
+      'percent',
+      'food',
+      'other',
+    ],
     other: [],
   };
 

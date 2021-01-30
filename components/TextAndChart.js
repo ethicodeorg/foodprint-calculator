@@ -12,7 +12,7 @@ import {
 import ExternalLink from './ExternalLink';
 import theme from '../styles/theme';
 
-const TextAndChart = ({ data, total, text, title, source, unit, fill, interval }) => {
+const TextAndChart = ({ data, total, text, title, source, unit, fill, interval, t }) => {
   return (
     <div className="textAndChart">
       <p>
@@ -44,14 +44,14 @@ const TextAndChart = ({ data, total, text, title, source, unit, fill, interval }
               formatter={(value) => `${value} ${unit}`}
               contentStyle={{ background: '#222' }}
             />
-            <Bar dataKey="food" stackId="a" fill={fill} layout="vertical">
+            <Bar dataKey={t('food')} stackId="a" fill={fill} layout="vertical">
               <LabelList
-                formatter={(value) => `food: ${((value / total) * 100).toFixed(0)}%`}
+                formatter={(value) => `${t('food')}: ${((value / total) * 100).toFixed(0)}%`}
                 fill="#eee"
               />
             </Bar>
-            <Bar dataKey="other" stackId="a" fill="#aaa" layout="vertical">
-              <LabelList formatter={(_) => 'other'} />
+            <Bar dataKey={t('other')} stackId="a" fill="#aaa" layout="vertical">
+              <LabelList formatter={(_) => t('other')} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

@@ -54,17 +54,18 @@ const About = ({ t }) => {
                 total={104}
                 data={[
                   {
-                    name: 'Global habitable land',
+                    name: t('global_habitable_land'),
                     food: 51,
                     other: 53,
                   },
                 ]}
-                title="Global habitable land"
+                title={t('global_habitable_land')}
                 text={landUseText}
                 source="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-                unit="million km²"
+                unit={t('million_km_2')}
                 fill={theme.colors.land}
                 interval={2}
+                t={t}
               />
             </div>
             <div>
@@ -73,17 +74,18 @@ const About = ({ t }) => {
                 total={52.3}
                 data={[
                   {
-                    name: 'Global annual emissions',
+                    name: t('global_annual_emissions'),
                     food: 13.6,
                     other: 38.7,
                   },
                 ]}
-                title="Global annual emissions"
+                title={t('global_annual_emissions')}
                 text={ghgEmissionsText}
                 source="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-                unit="billion tonnes"
+                unit={t('billion_tonnes')}
                 fill={theme.colors.red}
                 interval={2}
+                t={t}
               />
             </div>
             <div>
@@ -92,17 +94,18 @@ const About = ({ t }) => {
                 total={4}
                 data={[
                   {
-                    name: 'Global annual withdrawals',
+                    name: t('global_annual_withdrawals'),
                     food: 2.8,
                     other: 1.2,
                   },
                 ]}
-                title="Global annual withdrawals"
+                title={t('global_annual_withdrawals')}
                 text={waterWithdrawalsText}
                 source="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-                unit="trillion m³"
+                unit={t('trillion_m_3')}
                 fill={theme.colors.water}
                 interval={3}
+                t={t}
               />
             </div>
             <div>
@@ -111,17 +114,18 @@ const About = ({ t }) => {
                 total={100}
                 data={[
                   {
-                    name: 'Global annual emissions',
+                    name: t('global_annual_emissions'),
                     food: 78,
                     other: 22,
                   },
                 ]}
-                title="Global annual emissions"
+                title={t('global_annual_emissions')}
                 text={eutrophyingEmissionsText}
                 source="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-                unit="percent"
+                unit={t('percent')}
                 fill={theme.colors.eutro}
                 interval={3}
+                t={t}
               />
             </div>
           </AboutSection>
