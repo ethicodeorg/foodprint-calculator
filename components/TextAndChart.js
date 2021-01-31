@@ -39,18 +39,13 @@ const TextAndChart = ({ data, total, text, title, source, unit, fill, interval, 
               <Label fill="#eee">{unit}</Label>
             </XAxis>
             <YAxis type="category" dataKey="name" width={0} stroke="#eee" />
-            <Tooltip
-              label="asdf"
-              formatter={(value) => `${value} ${unit}`}
-              contentStyle={{ background: '#222' }}
-            />
-            <Bar dataKey={t('food')} stackId="a" fill={fill} layout="vertical">
+            <Bar dataKey="food" stackId="a" fill={fill} layout="vertical">
               <LabelList
                 formatter={(value) => `${t('food')}: ${((value / total) * 100).toFixed(0)}%`}
                 fill="#eee"
               />
             </Bar>
-            <Bar dataKey={t('other')} stackId="a" fill="#aaa" layout="vertical">
+            <Bar dataKey="other" stackId="a" fill="#aaa" layout="vertical">
               <LabelList formatter={(_) => t('other')} />
             </Bar>
           </BarChart>
