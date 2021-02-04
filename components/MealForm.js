@@ -49,51 +49,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
   const [isAdding, setIsAdding] = useState(false);
-  const [isAddingTransport, setIsAddingTransport] = useState(false);
-  const initialUnits = [
-    { value: 'g', label: t('g') },
-    { value: 'kg', label: t('kg') },
-    { value: 'oz', label: t('oz') },
-    { value: 'lbs', label: t('lbs') },
-  ];
-  const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
-  const distanceUnitOptions = [
-    { value: 'km', label: t('km') },
-    { value: 'mi', label: t('mi') },
-  ];
-  const transportModeOptions = [
-    { value: 'road', label: t('road') },
-    { value: 'rail', label: t('rail') },
-    { value: 'water', label: t('water') },
-    { value: 'air', label: t('air') },
-  ];
-  const transportTypeOptions = [
-    { value: 'ambient', label: t('ambient') },
-    { value: 'temperatureControlled', label: t('temperatureControlled') },
-  ];
-  const [amountUnit, setAmountUnit] = useState(amountUnitOptions[0].value);
-  const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
-
-  let foodOptions = [];
-  for (let i = 0; i < foodData.length; i++) {
-    for (let j = 0; j < foodData[i].entities.length; j++) {
-      const label = t(foodData[i].entities[j].label);
-
-      // No need to add the same entry twice
-      if (!foodOptions.find((option) => option.label === label)) {
-        foodOptions.push({
-          key: foodData[i].key,
-          value: `${foodData[i].key}${j}`,
-          label,
-          rawLabel: foodData[i].entities[j].label,
-          averageWeight: foodData[i].entities[j].averageWeight,
-          gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
-          factor: foodData[i].entities[j].factor,
-        });
-      }
-    }
-  }
-  foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
 
   const numberOfServingsOptions = [];
   for (let i = 0; i < 10; i++) {
@@ -196,7 +151,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
 
   const cancelIngredient = () => {
     setIsAdding(false);
-    setIsAddingTransport(false);
   }
 
   const addIngredient = (selectedIngredient, amount, amountUnit, distance, distanceUnit, transportMode, transportType) => {
@@ -296,10 +250,13 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             editIngredient={editIngredient}
             numberOfServings={numberOfServings.value}
             t={t}
+            meal={meal}
+            addIngredient={addIngredient}
+            cancelIngredient={cancelIngredient}
           />
           <Separator />
           {isAdding ? (
-            <IngredientForm meal={meal} foodData={foodData} addIngredient={addIngredient} cancelIngredient={cancelIngredient} 
+            <IngredientForm meal={meal} addIngredient={addIngredient} cancelIngredient={cancelIngredient} 
             t={t} />
           ) : (
             <div className="add-ingredient-container">
@@ -419,9 +376,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           @media only screen and (min-width: ${theme.sizes.mobile}) {
             .required-fields {
               flex-wrap: nowrap;
-            }
-            .optional-fields {
-              flex-wrap: ${isAddingTransport ? 'wrap' : 'nowrap'};
             }
             .select-container {
               width: 170px;

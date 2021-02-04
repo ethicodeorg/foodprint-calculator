@@ -14,18 +14,12 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, t} ) => { 
-    const [user] = useUser();
-    const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
-    const [selectedIngredient, setSelectedIngredient] = useState();
-    
-    const [amount, setAmount] = useState('');
-  const [distance, setDistance] = useState('');
-  const [transportMode, setTransportMode] = useState('');
-  const [transportType, setTransportType] = useState('');
-  const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
-  const [isAdding, setIsAdding] = useState(false);
-  const [isAddingTransport, setIsAddingTransport] = useState(false);
+const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingredient, t} ) => { 
+  const [user] = useUser();
+  const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
+  const [amount, setAmount] = useState(ingredient ? ingredient.amount : '');
+  const [distance, setDistance] = useState(ingredient ? ingredient.distance : '');
+  const [isAddingTransport, setIsAddingTransport] = useState(ingredient ? (ingredient.transportMode || ingredient.transportType) : false);
   const initialUnits = [
     { value: 'g', label: t('g') },
     { value: 'kg', label: t('kg') },
@@ -33,22 +27,36 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, t} ) 
     { value: 'lbs', label: t('lbs') },
   ];
   const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
+  const [amountUnit, setAmountUnit] = useState(
+    ingredient 
+      ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) 
+      : '');
   const distanceUnitOptions = [
     { value: 'km', label: t('km') },
     { value: 'mi', label: t('mi') },
   ];
+  const [distanceUnit, setDistanceUnit] = useState(
+    ingredient 
+      ? distanceUnitOptions.find((o) => o.value === ingredient.distanceUnit) 
+      : distanceUnitOptions[0].value);
   const transportModeOptions = [
     { value: 'road', label: t('road') },
     { value: 'rail', label: t('rail') },
     { value: 'water', label: t('water') },
     { value: 'air', label: t('air') },
   ];
+  const [transportMode, setTransportMode] = useState(
+    ingredient 
+      ? transportModeOptions.find((o) => o.value === ingredient.transportMode) 
+      : '');
   const transportTypeOptions = [
     { value: 'ambient', label: t('ambient') },
     { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
-  const [amountUnit, setAmountUnit] = useState(amountUnitOptions[0].value);
-  const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
+  const [transportType, setTransportType] = useState(
+    ingredient
+      ? transportTypeOptions.find((o) => o.value === ingredient.transportType)
+      : '');
 
   let foodOptions = [];
   for (let i = 0; i < foodData.length; i++) {
@@ -70,26 +78,12 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, t} ) 
     }
   }
   foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
-
-  const numberOfServingsOptions = [];
-  for (let i = 0; i < 10; i++) {
-    numberOfServingsOptions.push({
-      value: i + 1,
-      label: i === 0 ? t('serves_1') : t('serves', { number: i + 1 }),
-    });
-  }
-  const [numberOfServings, setNumberOfServings] = useState(
-    meal
-      ? numberOfServingsOptions.find((o) => o.value === meal.numberOfServings)
-      : numberOfServingsOptions[0]
+  
+  const [selectedIngredient, setSelectedIngredient] = useState(
+    ingredient
+      ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel)
+      : ''
   );
-
-  useEffect(() => {
-    if (data) {
-      const ingredientData = data.meals[0].ingredients;
-      
-    }
-  }, [data]);
 
   // Automatically focus the next input when an ingredient has been selected
   // react reference for the "amount" field.
@@ -154,17 +148,17 @@ return (
     <div className="required-fields">
     <div className="select-container ingredient-select">
         <Select
-        value={selectedIngredient}
-        placeholder={t('ingredient')}
-        onChange={(val) => {
-            setSelectedIngredient(val);
-            changeUnitOptions(val);
-            setFocus(refAmount);
-        }}
-        options={foodOptions}
-        instanceId="ingredient"
-        autoFocus
-        />
+          defaultValue={selectedIngredient}
+          placeholder={t('ingredient')}
+          onChange={(val) => {
+              setSelectedIngredient(val);
+              changeUnitOptions(val);
+              setFocus(refAmount);
+          }}
+          options={foodOptions}
+          instanceId="ingredient"
+          autoFocus
+          />
     </div>
     <input
         className="amount-input"
@@ -177,19 +171,19 @@ return (
     />
     <div className="select-container ingredient-unit">
         <Select
-        value={amountUnit.value}
-        placeholder={t('unit')}
-        onChange={(val) => setAmountUnit(val.value)}
-        options={amountUnitOptions}
-        instanceId="amount-unit"
-        />
+          defaultValue={amountUnit}
+          placeholder={t('unit')}
+          onChange={(val) => setAmountUnit(val.value)}
+          options={amountUnitOptions}
+          instanceId="amount-unit"
+          />
     </div>
     </div>
     {isAddingTransport ? (
     <div className="optional-fields">
         <div className="select-container transport-mode-select">
         <Select
-            value={transportMode.value}
+            defaultValue={transportMode}
             placeholder={t('transport_mode')}
             onChange={(val) => setTransportMode(val.value)}
             options={transportModeOptions}
@@ -198,7 +192,7 @@ return (
         </div>
         <div className="select-container transport-type-select">
         <Select
-            value={transportType.value}
+            defaultValue={transportType}
             placeholder={t('transport_type')}
             onChange={(val) => setTransportType(val.value)}
             options={transportTypeOptions}
@@ -215,7 +209,7 @@ return (
         />
         <div className="select-container transport-unit-select">
         <Select
-            value={distanceUnit.value}
+            defaultValue={distanceUnit}
             placeholder={t('unit')}
             onChange={(val) => setDistanceUnit(val.value)}
             options={distanceUnitOptions}
