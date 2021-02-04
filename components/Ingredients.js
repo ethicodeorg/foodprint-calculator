@@ -8,15 +8,11 @@ import IngredientForm from './IngredientForm';
 import Separator from './Separator';
 
 const Ingredients = ({ ingredients, deleteIngredient, editIngredient, numberOfServings, t, meal, foodData, addIngredient }) => {
-  const [isEditing, setIsEditing] = useState();
+  const [isEditing, setIsEditing] = useState(-1);
 
   const cancelIngredient = () => {
-    setIsEditing(false);
+    setIsEditing(-1);
   }
-  console.log("ingredients")
-  console.log(ingredients)
-  console.log("isEditing: ", isEditing)
-  console.log("cancelIngredient: ", cancelIngredient)
   return (
     <div className="ingredients">
       <CardTitle>{t('ingredients')}</CardTitle>

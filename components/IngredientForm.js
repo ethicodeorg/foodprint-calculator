@@ -27,10 +27,6 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     { value: 'lbs', label: t('lbs') },
   ];
   const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits);
-  const [amountUnit, setAmountUnit] = useState(
-    ingredient 
-      ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) 
-      : '');
   const distanceUnitOptions = [
     { value: 'km', label: t('km') },
     { value: 'mi', label: t('mi') },
@@ -92,12 +88,14 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
   // When ingredient is selected we add quantity and volume options if applicaple
   // for the selected ingredient.
   const changeUnitOptions = (val) => {
+    console.log("in changeUnitOptions and val is: ", val)
     let unitsToAdd = [];
     let unitsToRemove = [];
     if (val.averageWeight) {
       // Don't add it if it's already there
       if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
         unitsToAdd.push({ value: 'qty', label: t('qty') });
+        console.log("adding qty")
       }
     } else {
       unitsToRemove.push('qty');
@@ -122,7 +120,27 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     setAmountUnitOptions(
       amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
     );
+    console.log("amountUnitOptions in changeUnitOptions:")
+    console.log(amountUnitOptions)
   };
+  const [amountUnit, setAmountUnit] = useState(
+    ingredient 
+      ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) 
+      : '');
+
+  useEffect(() => {
+    if (ingredient) {
+      console.log("has ingredient");
+      changeUnitOptions(selectedIngredient);
+
+      console.log("amountUnitOptions in useEffect:")
+      console.log(amountUnitOptions)
+      
+      setAmount(ingredient.amount);
+      setDistance(ingredient.distance);
+      setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
+    }
+  }, [ingredient]);
 
 return (
 <Fragment>
