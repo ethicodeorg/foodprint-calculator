@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AppBar, Tabs, Tab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { getAllTranslationIds } from '../utils/translationUtils';
 import TabPanel from './TabPanel';
 import theme from '../styles/theme';
 
@@ -19,9 +20,9 @@ const TranslateTabs = ({ selectedLang }) => {
 
   // Add the translation ids that need to be translated in the PR here:
   const changes = {
-    frontPage: [],
-    aboutPage: [],
-    other: [],
+    frontPage: getAllTranslationIds(0),
+    aboutPage: getAllTranslationIds(1),
+    other: getAllTranslationIds(2),
   };
 
   return (
