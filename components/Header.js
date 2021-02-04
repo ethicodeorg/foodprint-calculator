@@ -16,6 +16,7 @@ const Header = ({ t, i18n }) => {
     { value: 'fr', label: 'Français' },
     { value: 'it', label: 'Italiano' },
     { value: 'pt', label: 'Português' },
+    { value: 'de', label: 'Deutsch' },
   ];
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,6 +77,7 @@ const Header = ({ t, i18n }) => {
           {language === 'fr' && <Flags.FR />}
           {language === 'it' && <Flags.IT />}
           {language === 'pt' && <Flags.PT />}
+          {language === 'de' && <Flags.DE />}
         </div>
         <div className="language-select">
           <Select
