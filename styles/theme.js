@@ -11,6 +11,7 @@ const theme = {
     darkBorder: '#444',
     land: '#3D9970',
     ghg: '#FF4136',
+    red: '#994a3d',
     water: '#0074D9',
     eutro: '#85144b',
     teal: '#39CCCC',

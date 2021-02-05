@@ -2,6 +2,27 @@ import { useRouter } from 'next/router';
 import { FaTractor, FaTint, FaSmog } from 'react-icons/fa';
 import { withTranslation } from '../i18n';
 import { splitTranslationWithLink, SPLITTER } from '../utils/translationUtils';
+import {
+  AHDB,
+  BEEF_TYPES,
+  DAILY_KCAL,
+  ETHICODE,
+  ETHICODE_EMAIL,
+  FOOD_DIET,
+  FRESHWATER,
+  GLOBAL_EUTRO,
+  GLOBAL_GHG,
+  GLOBAL_LAND,
+  GLOBAL_WATER,
+  MAIN,
+  NHS,
+  OWID,
+  POORE_NEMECEK,
+  SCIENCEMAG,
+  TEAM,
+  U_2017_08,
+  WATER,
+} from '../utils/links';
 import Header from '../components/Header';
 import Layout from '../components/MyLayout';
 import Content from '../components/Content';
@@ -11,6 +32,7 @@ import CardTitle from '../components/CardTitle';
 import ExternalLink from '../components/ExternalLink';
 import AboutSection from '../components/AboutSection';
 import theme from '../styles/theme';
+import TextAndChart from '../components/TextAndChart';
 
 const About = ({ t }) => {
   const router = useRouter();
@@ -47,68 +69,86 @@ const About = ({ t }) => {
               {t('why_answer_1')} {t('why_answer_2')}
             </p>
             <p>{t('four_ways_impact')}</p>
-            <ol>
-              <li>
-                <span style={{ color: theme.colors.green }}>{t('land_use')}</span>
-                <ul>
-                  <li>
-                    {landUseText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-                    >
-                      {landUseText.linkText}
-                    </ExternalLink>{' '}
-                    {landUseText.afterLink}
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <span style={{ color: theme.colors.ghg }}>{t('ghg_emissions')}</span>
-                <ul>
-                  <li>
-                    {ghgEmissionsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-                    >
-                      {ghgEmissionsText.linkText}
-                    </ExternalLink>{' '}
-                    {ghgEmissionsText.afterLink}
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <span style={{ color: theme.colors.aqua }}>{t('water_withdrawals')}</span>
-                <ul>
-                  <li>
-                    {waterWithdrawalsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-                    >
-                      {waterWithdrawalsText.linkText}
-                    </ExternalLink>{' '}
-                    {waterWithdrawalsText.afterLink}
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <span style={{ color: theme.colors.fuchsia }}>{t('eutrophying_emissions')}</span>
-                <ul>
-                  <li>
-                    {eutrophyingEmissionsText.beforeLink}
-                    <ExternalLink
-                      color={theme.colors.aqua}
-                      href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-                    >
-                      {eutrophyingEmissionsText.linkText}
-                    </ExternalLink>{' '}
-                    {eutrophyingEmissionsText.afterLink}
-                  </li>
-                </ul>
-              </li>
-            </ol>
+            <div>
+              <h4>1. {t('land_use')}</h4>
+              <TextAndChart
+                total={104}
+                data={[
+                  {
+                    name: t('global_habitable_land'),
+                    food: 51,
+                    other: 53,
+                  },
+                ]}
+                title={t('global_habitable_land')}
+                text={landUseText}
+                source={`${OWID}/${MAIN}#${GLOBAL_LAND}`}
+                unit={t('million_km_2')}
+                fill={theme.colors.land}
+                interval={2}
+                t={t}
+              />
+            </div>
+            <div>
+              <h4>2. {t('ghg_emissions')}</h4>
+              <TextAndChart
+                total={52.3}
+                data={[
+                  {
+                    name: t('global_annual_emissions'),
+                    food: 13.6,
+                    other: 38.7,
+                  },
+                ]}
+                title={t('global_annual_emissions')}
+                text={ghgEmissionsText}
+                source={`${OWID}/${MAIN}#${GLOBAL_GHG}`}
+                unit={t('billion_tonnes')}
+                fill={theme.colors.red}
+                interval={2}
+                t={t}
+              />
+            </div>
+            <div>
+              <h4>3. {t('water_withdrawals')}</h4>
+              <TextAndChart
+                total={4}
+                data={[
+                  {
+                    name: t('global_annual_withdrawals'),
+                    food: 2.8,
+                    other: 1.2,
+                  },
+                ]}
+                title={t('global_annual_withdrawals')}
+                text={waterWithdrawalsText}
+                source={`${OWID}/${WATER}#${GLOBAL_WATER}`}
+                unit={t('trillion_m_3')}
+                fill={theme.colors.water}
+                interval={3}
+                t={t}
+              />
+            </div>
+            <div>
+              <h4>4. {t('eutrophying_emissions')}</h4>
+              <TextAndChart
+                total={100}
+                data={[
+                  {
+                    name: t('global_annual_emissions'),
+                    food: 78,
+                    other: 22,
+                  },
+                ]}
+                title={t('global_annual_emissions')}
+                text={eutrophyingEmissionsText}
+                source={`${OWID}/${MAIN}#${GLOBAL_EUTRO}`}
+                unit={t('percent')}
+                fill={theme.colors.eutro}
+                interval={3}
+                t={t}
+              />
+            </div>
           </AboutSection>
           <AboutSection title={t('how_does_it_work')} isOpen={openSection === 'function'}>
             <p>{t('function')}</p>
@@ -141,10 +181,7 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {landUseRDA.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food#half-of-the-world-s-habitable-land-is-used-for-agriculture"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${MAIN}#${GLOBAL_LAND}`}>
                 {landUseRDA.linkText}
               </ExternalLink>
               {landUseRDA.afterLink}
@@ -157,10 +194,7 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {ghgEmissionsRDA.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food#food-production-is-responsible-for-one-quarter-of-the-world-s-greenhouse-gas-emissions"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${MAIN}#${GLOBAL_GHG}`}>
                 {ghgEmissionsRDA.linkText}
               </ExternalLink>
               {ghgEmissionsRDA.afterLink}
@@ -173,17 +207,11 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {waterWithdrawalsRDA.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/water-use-stress#global-freshwater-use"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${WATER}#${FRESHWATER}`}>
                 {waterWithdrawalsRDA.linkText}
               </ExternalLink>{' '}
               {waterWithdrawalsRDA.afterLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/water-use-stress#share-of-freshwater-withdrawals-used-in-agriculture"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${WATER}#${GLOBAL_WATER}`}>
                 {waterWithdrawalsRDA.linkText2}
               </ExternalLink>
               {waterWithdrawalsRDA.afterLink2}
@@ -196,17 +224,11 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {eutrophyingEmissionsRDA.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food#eutrophying-emissions-from-food"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${MAIN}#${GLOBAL_EUTRO}`}>
                 {eutrophyingEmissionsRDA.linkText}
               </ExternalLink>
               {eutrophyingEmissionsRDA.afterLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://www.nhs.uk/common-health-questions/food-and-diet/what-should-my-daily-intake-of-calories-be/"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${NHS}/${FOOD_DIET}/${DAILY_KCAL}`}>
                 {eutrophyingEmissionsRDA.linkText2}
               </ExternalLink>{' '}
               {eutrophyingEmissionsRDA.afterLink2} {t('eutrophying_emissions_method')}
@@ -235,10 +257,7 @@ const About = ({ t }) => {
             </CardTitle>
             <p>
               {beefDairyHerdsText.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://beefandlamb.ahdb.org.uk/wp-content/uploads/2017/08/Beef-production-from-the-dairy-herd.pdf"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${AHDB}/${U_2017_08}/${BEEF_TYPES}`}>
                 {beefDairyHerdsText.linkText}
               </ExternalLink>
               {beefDairyHerdsText.afterLink}
@@ -247,17 +266,11 @@ const About = ({ t }) => {
           <AboutSection title={t('data_title')} isOpen={openSection === 'sources'}>
             <p>
               {dataText.beforeLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://ourworldindata.org/environmental-impacts-of-food"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${OWID}/${MAIN}`}>
                 {dataText.linkText}
               </ExternalLink>
               {dataText.afterLink}
-              <ExternalLink
-                color={theme.colors.aqua}
-                href="https://science.sciencemag.org/content/360/6392/987"
-              >
+              <ExternalLink color={theme.colors.aqua} href={`${SCIENCEMAG}/${POORE_NEMECEK}`}>
                 {dataText.linkText2}
               </ExternalLink>
               {dataText.afterLink2}
@@ -275,7 +288,7 @@ const About = ({ t }) => {
           <AboutSection title={t('story_title')} isOpen={openSection === 'story'}>
             <p>
               {t('story_text')} {t('story_text_2')}{' '}
-              <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/team">
+              <ExternalLink color={theme.colors.aqua} href={`${ETHICODE}/${TEAM}`}>
                 {t('meet_the_team')}
               </ExternalLink>
             </p>
@@ -283,7 +296,7 @@ const About = ({ t }) => {
           <AboutSection title={t('support_title')} isOpen={openSection === 'support'}>
             <p>
               {supportText.beforeLink}
-              <ExternalLink color={theme.colors.aqua} email href="mailto:ethicode@ethicode.org">
+              <ExternalLink color={theme.colors.aqua} email href={`mailto:${ETHICODE_EMAIL}`}>
                 {supportText.linkText}
               </ExternalLink>
               {supportText.afterLink}
@@ -309,6 +322,9 @@ const About = ({ t }) => {
         }
         p {
           line-height: 1.4;
+        }
+        h4 {
+          margin-top: 30px;
         }
       `}</style>
     </Layout>
