@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-  BarChart,
-  Bar,
-  Label,
-  XAxis,
-  YAxis,
-  Tooltip,
-  LabelList,
-  ResponsiveContainer,
-} from 'recharts';
+import { BarChart, Bar, Label, XAxis, YAxis, LabelList, ResponsiveContainer } from 'recharts';
 import ExternalLink from './ExternalLink';
 import theme from '../styles/theme';
 
 const TextAndChart = ({ data, total, text, title, source, unit, fill, interval, t }) => {
   return (
-    <div className="textAndChart">
+    <div>
       <p>
         {text.beforeLink}
         <ExternalLink color={theme.colors.aqua} href={source}>
@@ -23,7 +14,7 @@ const TextAndChart = ({ data, total, text, title, source, unit, fill, interval, 
         {text.afterLink}
       </p>
       <h4>{title}</h4>
-      <div className="chart">
+      <div>
         <ResponsiveContainer width="100%" height={150}>
           <BarChart
             data={data}
@@ -52,10 +43,6 @@ const TextAndChart = ({ data, total, text, title, source, unit, fill, interval, 
         </ResponsiveContainer>
       </div>
       <style jsx>{`
-        .textAndChart {
-        }
-        .chart {
-        }
         p {
           line-height: 1.4;
         }
