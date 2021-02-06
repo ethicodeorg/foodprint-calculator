@@ -147,13 +147,21 @@ const MealForm = ({ id, foodData, transportData, t }) => {
 
   const editIngredient = (index) => {
     const temp = [...ingredients];
-  }
+  };
 
   const cancelIngredient = () => {
     setIsAdding(false);
-  }
+  };
 
-  const addIngredient = (selectedIngredient, amount, amountUnit, distance, distanceUnit, transportMode, transportType) => {
+  const addIngredient = (
+    selectedIngredient,
+    amount,
+    amountUnit,
+    distance,
+    distanceUnit,
+    transportMode,
+    transportType
+  ) => {
     const food = foodData.find((f) => f.key === selectedIngredient.key);
     /* console.log(foodData)
     console.log('selectedIngredient:', selectedIngredient)
@@ -256,8 +264,12 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           />
           <Separator />
           {isAdding ? (
-            <IngredientForm meal={meal} addIngredient={addIngredient} cancelIngredient={cancelIngredient} 
-            t={t} />
+            <IngredientForm
+              meal={meal}
+              addIngredient={addIngredient}
+              cancelIngredient={cancelIngredient}
+              t={t}
+            />
           ) : (
             <div className="add-ingredient-container">
               <Button onClick={() => setIsAdding(true)}>+ {t('add_ingredient')}</Button>
@@ -392,7 +404,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           }
 
           @media only screen and (min-width: ${theme.sizes.ipad}) {
-            
           }
         `}</style>
       </Content>

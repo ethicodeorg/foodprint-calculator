@@ -14,12 +14,14 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingredient, t} ) => { 
+const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingredient, t }) => {
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const [amount, setAmount] = useState(ingredient ? ingredient.amount : '');
   const [distance, setDistance] = useState(ingredient ? ingredient.distance : '');
-  const [isAddingTransport, setIsAddingTransport] = useState(ingredient ? (ingredient.transportMode || ingredient.transportType) : false);
+  const [isAddingTransport, setIsAddingTransport] = useState(
+    ingredient ? ingredient.transportMode || ingredient.transportType : false
+  );
   const initialUnits = [
     { value: 'g', label: t('g') },
     { value: 'kg', label: t('kg') },
@@ -32,9 +34,10 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     { value: 'mi', label: t('mi') },
   ];
   const [distanceUnit, setDistanceUnit] = useState(
-    ingredient 
-      ? distanceUnitOptions.find((o) => o.value === ingredient.distanceUnit) 
-      : distanceUnitOptions[0].value);
+    ingredient
+      ? distanceUnitOptions.find((o) => o.value === ingredient.distanceUnit)
+      : distanceUnitOptions[0].value
+  );
   const transportModeOptions = [
     { value: 'road', label: t('road') },
     { value: 'rail', label: t('rail') },
@@ -42,17 +45,15 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     { value: 'air', label: t('air') },
   ];
   const [transportMode, setTransportMode] = useState(
-    ingredient 
-      ? transportModeOptions.find((o) => o.value === ingredient.transportMode) 
-      : '');
+    ingredient ? transportModeOptions.find((o) => o.value === ingredient.transportMode) : ''
+  );
   const transportTypeOptions = [
     { value: 'ambient', label: t('ambient') },
     { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
   const [transportType, setTransportType] = useState(
-    ingredient
-      ? transportTypeOptions.find((o) => o.value === ingredient.transportType)
-      : '');
+    ingredient ? transportTypeOptions.find((o) => o.value === ingredient.transportType) : ''
+  );
 
   let foodOptions = [];
   for (let i = 0; i < foodData.length; i++) {
@@ -74,7 +75,7 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     }
   }
   foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
-  
+
   const [selectedIngredient, setSelectedIngredient] = useState(
     ingredient
       ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel)
@@ -88,14 +89,14 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
   // When ingredient is selected we add quantity and volume options if applicaple
   // for the selected ingredient.
   const changeUnitOptions = (val) => {
-    console.log("in changeUnitOptions and val is: ", val)
+    console.log('in changeUnitOptions and val is: ', val);
     let unitsToAdd = [];
     let unitsToRemove = [];
     if (val.averageWeight) {
       // Don't add it if it's already there
       if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
         unitsToAdd.push({ value: 'qty', label: t('qty') });
-        console.log("adding qty")
+        console.log('adding qty');
       }
     } else {
       unitsToRemove.push('qty');
@@ -120,13 +121,12 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
     setAmountUnitOptions(
       amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
     );
-    console.log("amountUnitOptions in changeUnitOptions:")
-    console.log(amountUnitOptions)
+    console.log('amountUnitOptions in changeUnitOptions:');
+    console.log(amountUnitOptions);
   };
   const [amountUnit, setAmountUnit] = useState(
-    ingredient 
-      ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) 
-      : '');
+    ingredient ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) : ''
+  );
 
   useEffect(() => {
     if (ingredient) {
@@ -136,287 +136,304 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
 
   useEffect(() => {
     if (ingredient) {
-      console.log("amountUnitOptions in 2nd useEffect:")
-      console.log(amountUnitOptions)
+      console.log('amountUnitOptions in 2nd useEffect:');
+      console.log(amountUnitOptions);
       /* async () => {
         return await setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
-      }; */ 
+      }; */
       setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
-      console.log("amountUnitOptions.find((o) => o.value === ingredient.amountUnit): ", amountUnitOptions.find((o) => o.value === ingredient.amountUnit))
+      console.log(
+        'amountUnitOptions.find((o) => o.value === ingredient.amountUnit): ',
+        amountUnitOptions.find((o) => o.value === ingredient.amountUnit)
+      );
     }
   }, [amountUnitOptions]);
 
-return (
-<Fragment>
-<Card inner>
-    <div className="close-container">
-    <MyTooltip
-        title={t('cancel')}
-        placement="top"
-        arrow
-        enterTouchDelay={0}
-        leaveTouchDelay={3000}
-    >
-        <button
-        className="close-button"
-        onClick={() => {
-          cancelIngredient()
-        }}
-        >
-        <FaTimes />
-        </button>
-    </MyTooltip>
-    </div>
-    <div className="required-fields">
-    <div className="select-container ingredient-select">
-        <Select
-          defaultValue={selectedIngredient}
-          placeholder={t('ingredient')}
-          onChange={(val) => {
-              setSelectedIngredient(val);
-              changeUnitOptions(val);
-              setFocus(refAmount);
-          }}
-          options={foodOptions}
-          instanceId="ingredient"
-          autoFocus
+  return (
+    <Fragment>
+      <Card inner>
+        <div className="close-container">
+          <MyTooltip
+            title={t('cancel')}
+            placement="top"
+            arrow
+            enterTouchDelay={0}
+            leaveTouchDelay={3000}
+          >
+            <button
+              className="close-button"
+              onClick={() => {
+                cancelIngredient();
+              }}
+            >
+              <FaTimes />
+            </button>
+          </MyTooltip>
+        </div>
+        <div className="required-fields">
+          <div className="select-container ingredient-select">
+            <Select
+              defaultValue={selectedIngredient}
+              placeholder={t('ingredient')}
+              onChange={(val) => {
+                setSelectedIngredient(val);
+                changeUnitOptions(val);
+                setFocus(refAmount);
+              }}
+              options={foodOptions}
+              instanceId="ingredient"
+              autoFocus
+            />
+          </div>
+          <input
+            className="amount-input"
+            placeholder={t('amount')}
+            type="number"
+            name="amount"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            ref={refAmount}
           />
-    </div>
-    <input
-        className="amount-input"
-        placeholder={t('amount')}
-        type="number"
-        name="amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        ref={refAmount}
-    />
-    <div className="select-container ingredient-unit">
-        <Select
-          defaultValue={amountUnit}
-          placeholder={t('unit')}
-          onChange={(val) => setAmountUnit(val.value)}
-          options={amountUnitOptions}
-          instanceId="amount-unit"
-          />
-    </div>
-    </div>
-    {isAddingTransport ? (
-    <div className="optional-fields">
-        <div className="select-container transport-mode-select">
-        <Select
-            defaultValue={transportMode}
-            placeholder={t('transport_mode')}
-            onChange={(val) => setTransportMode(val.value)}
-            options={transportModeOptions}
-            instanceId="transport-mode"
-        />
+          <div className="select-container ingredient-unit">
+            <Select
+              defaultValue={amountUnit}
+              placeholder={t('unit')}
+              onChange={(val) => setAmountUnit(val.value)}
+              options={amountUnitOptions}
+              instanceId="amount-unit"
+            />
+          </div>
         </div>
-        <div className="select-container transport-type-select">
-        <Select
-            defaultValue={transportType}
-            placeholder={t('transport_type')}
-            onChange={(val) => setTransportType(val.value)}
-            options={transportTypeOptions}
-            instanceId="transport-type"
-        />
+        {isAddingTransport ? (
+          <div className="optional-fields">
+            <div className="select-container transport-mode-select">
+              <Select
+                defaultValue={transportMode}
+                placeholder={t('transport_mode')}
+                onChange={(val) => setTransportMode(val.value)}
+                options={transportModeOptions}
+                instanceId="transport-mode"
+              />
+            </div>
+            <div className="select-container transport-type-select">
+              <Select
+                defaultValue={transportType}
+                placeholder={t('transport_type')}
+                onChange={(val) => setTransportType(val.value)}
+                options={transportTypeOptions}
+                instanceId="transport-type"
+              />
+            </div>
+            <input
+              className="distance-input"
+              placeholder={t('distance')}
+              type="number"
+              name="distance"
+              value={distance}
+              onChange={(e) => setDistance(e.target.value)}
+            />
+            <div className="select-container transport-unit-select">
+              <Select
+                defaultValue={distanceUnit}
+                placeholder={t('unit')}
+                onChange={(val) => setDistanceUnit(val.value)}
+                options={distanceUnitOptions}
+                instanceId="distance-unit"
+              />
+            </div>
+          </div>
+        ) : (
+          <div className="optional-fields">
+            <div className="add-transport-button-container">
+              <Button clear onClick={() => setIsAddingTransport(true)}>
+                {t('add_transport_optional')}
+              </Button>
+            </div>
+            <InfoIcon title={t('transport_not_provided')} color={theme.colors.water} />
+          </div>
+        )}
+        <div className="add-button-container">
+          <Link href="/about?openSection=how-to-use">
+            <a target="_blank" className="instructions">
+              {t('how_to_use')}
+              <span className="new-tab-icon">
+                <FaExternalLinkAlt />
+              </span>
+            </a>
+          </Link>
+          <Button
+            onClick={() =>
+              addIngredient(
+                selectedIngredient,
+                amount,
+                amountUnit,
+                distance,
+                distanceUnit,
+                transportMode,
+                transportType
+              )
+            }
+            disabled={!selectedIngredient || !amount}
+          >
+            {t('add')}
+          </Button>
         </div>
-        <input
-        className="distance-input"
-        placeholder={t('distance')}
-        type="number"
-        name="distance"
-        value={distance}
-        onChange={(e) => setDistance(e.target.value)}
-        />
-        <div className="select-container transport-unit-select">
-        <Select
-            defaultValue={distanceUnit}
-            placeholder={t('unit')}
-            onChange={(val) => setDistanceUnit(val.value)}
-            options={distanceUnitOptions}
-            instanceId="distance-unit"
-        />
-        </div>
-    </div>
-    ) : (
-    <div className="optional-fields">
-        <div className="add-transport-button-container">
-        <Button clear onClick={() => setIsAddingTransport(true)}>
-            {t('add_transport_optional')}
-        </Button>
-        </div>
-        <InfoIcon title={t('transport_not_provided')} color={theme.colors.water} />
-    </div>
-    )}
-    <div className="add-button-container">
-    <Link href="/about?openSection=how-to-use">
-        <a target="_blank" className="instructions">
-        {t('how_to_use')}
-        <span className="new-tab-icon">
-            <FaExternalLinkAlt />
-        </span>
-        </a>
-    </Link>
-    <Button onClick={() => addIngredient(selectedIngredient, amount, amountUnit, distance, distanceUnit, transportMode, transportType)} disabled={!selectedIngredient || !amount}>
-        {t('add')}
-    </Button>
-    </div>
-</Card>
+      </Card>
 
-<style jsx>{`
-  input,
-  textarea {
-    display: block;
-    padding: 7px 10px;
-    border: 1px solid ${theme.colors.border};
-    border-radius: 4px;
-    font-family: ${theme.fontFamily.default};
-    font-size: 16px;
-    resize: none;
-  }
-  .amount-input,
-  .distance-input {
-    width: 100%;
-    margin: 0 0 20px 0;
-  }
-  .required-fields,
-  .optional-fields {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 100%;
-  }
-  .optional-fields {
-    margin-top: 20px;
-  }
-  .select-container {
-    width: 100%;
-  }
-  .ingredient-select {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .transport-mode-select {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .transport-type-select {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  .transport-unit-select {
-    width: 100%;
-    margin-right: 0;
-  }
-  .add-transport-button-container {
-    min-width: 160px;
-  }
-  .add-button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-  .optional-text {
-    margin: 10px 0 0;
-    font-size: 14px;
-  }
-  .close-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-    height: 30px;
-  }
-  .close-button {
-    display: flex;
-    align-items: center;
-    padding: 0;
-    font-size: 22px;
-    color: ${theme.colors.text};
-    background-color: #fff;
-    opacity: 1;
-    transition: opacity 0.2s;
-    cursor: pointer;
-    border: none;
-    outline: none;
-  }
-  .close-button:hover {
-    opacity: 0.7;
-  }
-  .ingredient-unit {
-    width: 200px;
-  }
-  .instructions {
-    margin-top: 20px;
-    color: ${theme.colors.water};
-    text-decoration: none;
-    font-size: 16px;
-    text-align: center;
-  }
-  .new-tab-icon {
-    display: inline;
-    margin-left: 5px;
-    font-size: 12px;
-  }
+      <style jsx>{`
+        input,
+        textarea {
+          display: block;
+          padding: 7px 10px;
+          border: 1px solid ${theme.colors.border};
+          border-radius: 4px;
+          font-family: ${theme.fontFamily.default};
+          font-size: 16px;
+          resize: none;
+        }
+        .amount-input,
+        .distance-input {
+          width: 100%;
+          margin: 0 0 20px 0;
+        }
+        .required-fields,
+        .optional-fields {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          width: 100%;
+        }
+        .optional-fields {
+          margin-top: 20px;
+        }
+        .select-container {
+          width: 100%;
+        }
+        .ingredient-select {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .transport-mode-select {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .transport-type-select {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+        .transport-unit-select {
+          width: 100%;
+          margin-right: 0;
+        }
+        .add-transport-button-container {
+          min-width: 160px;
+        }
+        .add-button-container {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin-top: 20px;
+        }
+        .optional-text {
+          margin: 10px 0 0;
+          font-size: 14px;
+        }
+        .close-container {
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-start;
+          height: 30px;
+        }
+        .close-button {
+          display: flex;
+          align-items: center;
+          padding: 0;
+          font-size: 22px;
+          color: ${theme.colors.text};
+          background-color: #fff;
+          opacity: 1;
+          transition: opacity 0.2s;
+          cursor: pointer;
+          border: none;
+          outline: none;
+        }
+        .close-button:hover {
+          opacity: 0.7;
+        }
+        .ingredient-unit {
+          width: 200px;
+        }
+        .instructions {
+          margin-top: 20px;
+          color: ${theme.colors.water};
+          text-decoration: none;
+          font-size: 16px;
+          text-align: center;
+        }
+        .new-tab-icon {
+          display: inline;
+          margin-left: 5px;
+          font-size: 12px;
+        }
 
-  @media only screen and (min-width: ${theme.sizes.mobile}) {
-    .required-fields {
-      flex-wrap: nowrap;
-    }
-    .optional-fields {
-      flex-wrap: ${isAddingTransport ? 'wrap' : 'nowrap'};
-    }
-    .select-container {
-      width: 170px;
-    }
-    .ingredient-select {
-      width: 220px;
-      margin: 0 20px 0 0;
-    }
-    .amount-input,
-    .distance-input {
-      width: 104px;
-      margin: 0 20px 0 0;
-    }
-    .distance-input {
-      margin: 0 20px 20px 0;
-    }
-    .transport-mode-select {
-      min-width: 182px;
-      margin: 0 20px 20px 0;
-    }
-    .transport-type-select {
-      min-width: 170px;
-      margin: 0 20px 20px 0;
-    }
-    .transport-unit-select {
-      width: 158px;
-      margin: 0 0 20px 0;
-    }
-    .add-button-container {
-      margin-top: 0;
-    }
-    .optional-text {
-      margin: 10px 0;
-    }
-    .ingredient-unit {
-      width: 200px;
-    }
-  }
+        @media only screen and (min-width: ${theme.sizes.mobile}) {
+          .required-fields {
+            flex-wrap: nowrap;
+          }
+          .optional-fields {
+            flex-wrap: ${isAddingTransport ? 'wrap' : 'nowrap'};
+          }
+          .select-container {
+            width: 170px;
+          }
+          .ingredient-select {
+            width: 220px;
+            margin: 0 20px 0 0;
+          }
+          .amount-input,
+          .distance-input {
+            width: 104px;
+            margin: 0 20px 0 0;
+          }
+          .distance-input {
+            margin: 0 20px 20px 0;
+          }
+          .transport-mode-select {
+            min-width: 182px;
+            margin: 0 20px 20px 0;
+          }
+          .transport-type-select {
+            min-width: 170px;
+            margin: 0 20px 20px 0;
+          }
+          .transport-unit-select {
+            width: 158px;
+            margin: 0 0 20px 0;
+          }
+          .add-button-container {
+            margin-top: 0;
+          }
+          .optional-text {
+            margin: 10px 0;
+          }
+          .ingredient-unit {
+            width: 200px;
+          }
+        }
 
-  @media only screen and (min-width: ${theme.sizes.ipad}) {
-    .close-container {
-      height: 0;
-    }
-  }
-`}</style>
-</Fragment>
-)}
+        @media only screen and (min-width: ${theme.sizes.ipad}) {
+          .close-container {
+            height: 0;
+          }
+        }
+      `}</style>
+    </Fragment>
+  );
+};
 
 const mapStateToProps = (state) => ({
-    foodData: state.foodData,
-    transportData: state.transportEmissions,
-  });
+  foodData: state.foodData,
+  transportData: state.transportEmissions,
+});
 
 export default connect(mapStateToProps)(IngredientForm);
