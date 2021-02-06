@@ -130,17 +130,21 @@ const IngredientForm = ( {meal, foodData, addIngredient, cancelIngredient, ingre
 
   useEffect(() => {
     if (ingredient) {
-      console.log("has ingredient");
       changeUnitOptions(selectedIngredient);
-
-      console.log("amountUnitOptions in useEffect:")
-      console.log(amountUnitOptions)
-      
-      setAmount(ingredient.amount);
-      setDistance(ingredient.distance);
-      setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
     }
   }, [ingredient]);
+
+  useEffect(() => {
+    if (ingredient) {
+      console.log("amountUnitOptions in 2nd useEffect:")
+      console.log(amountUnitOptions)
+      /* async () => {
+        return await setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
+      }; */ 
+      setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
+      console.log("amountUnitOptions.find((o) => o.value === ingredient.amountUnit): ", amountUnitOptions.find((o) => o.value === ingredient.amountUnit))
+    }
+  }, [amountUnitOptions]);
 
 return (
 <Fragment>
