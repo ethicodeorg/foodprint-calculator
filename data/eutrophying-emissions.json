@@ -267,11 +267,13 @@
   {
     "entity": "Pineapple",
     "code": "pin",
+    "_comment": "Estimated until we get real data from Joseph",
     "eutrophyingEmissionsPerUnit": 2.43
   },
   {
     "entity": "Kiwi",
     "code": "kiw",
+    "_comment": "Estimated until we get real data from Joseph",
     "eutrophyingEmissionsPerUnit": 2.43
   },
   {

@@ -272,25 +272,29 @@
   {
     "entity": "Beef (average)",
     "code": "bee",
-    "transport": 0,
+    "transport": 0.54,
+    "_comment": "Transport estimated until we get real data from Joseph",
     "ghgEmissionsPerUnit": 70.502
   },
   {
     "entity": "Dark Chocolate",
     "code": "dch",
-    "transport": 0,
+    "transport": 0.11,
+    "_comment": "Transport estimated until we get real data from Joseph",
     "ghgEmissionsPerUnit": 33.807
   },
   {
     "entity": "Milk Chocolate",
     "code": "mch",
-    "transport": 0,
+    "transport": 0.11,
+    "_comment": "Transport estimated until we get real data from Joseph",
     "ghgEmissionsPerUnit": 23.424
   },
   {
     "entity": "Lentils",
     "code": "len",
-    "transport": 0,
+    "transport": 0.1,
+    "_comment": "Transport estimated until we get real data from Joseph",
     "ghgEmissionsPerUnit": 2.819
   },
   {
