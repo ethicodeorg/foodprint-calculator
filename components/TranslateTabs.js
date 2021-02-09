@@ -165,7 +165,7 @@ const TranslateTabs = ({ selectedLang }) => {
       'grass_peas_cicerchie',
       'edamame_beans',
       'lima_beans',
-      'mung_means',
+      'mung_beans',
       'adzuki_beans',
       'cashews',
       'macadamia_nuts',
