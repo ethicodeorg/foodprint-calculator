@@ -147,7 +147,7 @@ const TranslateTabs = ({ selectedLang }) => {
       'nutmeg',
       'cumin',
       'saffron',
-      'gingseng',
+      'ginseng',
       'cloves',
       'tarragon',
       'wild_fennel',
