@@ -2,302 +2,281 @@
   {
     "entity": "Apples",
     "code": "app",
-    "year": 2018,
-    "landUsePerKilogram": 0.63,
-    "unit": "m²"
+    "landUsePerUnit": 0.63
   },
   {
     "entity": "Bananas",
     "code": "ban",
-    "year": 2018,
-    "landUsePerKilogram": 1.93,
-    "unit": "m²"
+    "landUsePerUnit": 1.929
   },
   {
     "entity": "Barley",
     "code": "bar",
-    "year": 2018,
-    "landUsePerKilogram": 1.11,
-    "unit": "m²"
+    "landUsePerUnit": 1.111
   },
   {
     "entity": "Beef (beef herd)",
     "code": "bbh",
-    "year": 2018,
-    "landUsePerKilogram": 326.21,
-    "unit": "m²"
+    "landUsePerUnit": 326.212
   },
   {
     "entity": "Beef (dairy herd)",
     "code": "bdh",
-    "year": 2018,
-    "landUsePerKilogram": 43.24,
-    "unit": "m²"
+    "landUsePerUnit": 43.237
   },
   {
     "entity": "Beet Sugar",
     "code": "bes",
-    "year": 2018,
-    "landUsePerKilogram": 1.83,
-    "unit": "m²"
+    "landUsePerUnit": 1.832
   },
   {
     "entity": "Berries & Grapes",
     "code": "ber",
-    "year": 2018,
-    "landUsePerKilogram": 2.41,
-    "unit": "m²"
+    "landUsePerUnit": 2.412
   },
   {
     "entity": "Brassicas",
     "code": "bra",
-    "year": 2018,
-    "landUsePerKilogram": 0.55,
-    "unit": "m²"
+    "landUsePerUnit": 0.551
   },
   {
     "entity": "Cane Sugar",
     "code": "can",
-    "year": 2018,
-    "landUsePerKilogram": 2.04,
-    "unit": "m²"
+    "landUsePerUnit": 2.041
   },
   {
     "entity": "Cassava",
     "code": "cas",
-    "year": 2018,
-    "landUsePerKilogram": 1.81,
-    "unit": "m²"
+    "landUsePerUnit": 1.811
   },
   {
     "entity": "Cheese",
     "code": "che",
-    "year": 2018,
-    "landUsePerKilogram": 87.79,
-    "unit": "m²"
+    "landUsePerUnit": 87.793
   },
   {
     "entity": "Citrus Fruit",
     "code": "cit",
-    "year": 2018,
-    "landUsePerKilogram": 0.86,
-    "unit": "m²"
+    "landUsePerUnit": 0.857
   },
   {
     "entity": "Coffee",
     "code": "cof",
-    "year": 2018,
-    "landUsePerKilogram": 21.62,
-    "unit": "m²"
+    "landUsePerUnit": 18.096
   },
   {
-    "entity": "Dark Chocolate",
+    "entity": "Chocolate",
     "code": "cho",
-    "year": 2018,
-    "landUsePerKilogram": 68.96,
-    "unit": "m²"
+    "landUsePerUnit": 56.618
   },
   {
     "entity": "Eggs",
     "code": "egg",
-    "year": 2018,
-    "landUsePerKilogram": 6.27,
-    "unit": "m²"
+    "landUsePerUnit": 6.271
   },
   {
     "entity": "Fish (farmed)",
     "code": "fis",
-    "year": 2018,
-    "landUsePerKilogram": 8.41,
-    "unit": "m²"
+    "landUsePerUnit": 8.408
   },
   {
     "entity": "Groundnuts",
     "code": "gro",
-    "year": 2018,
-    "landUsePerKilogram": 9.11,
-    "unit": "m²"
+    "landUsePerUnit": 9.114
   },
   {
     "entity": "Lamb & Mutton",
     "code": "lam",
-    "year": 2018,
-    "landUsePerKilogram": 369.81,
-    "unit": "m²"
+    "landUsePerUnit": 369.805
   },
   {
     "entity": "Maize",
     "code": "mai",
-    "year": 2018,
-    "landUsePerKilogram": 2.94,
-    "unit": "m²"
+    "landUsePerUnit": 2.94
   },
   {
     "entity": "Milk",
     "code": "mil",
-    "year": 2018,
-    "landUsePerKilogram": 8.95,
-    "unit": "m²"
+    "landUsePerUnit": 8.949
   },
   {
     "entity": "Nuts",
     "code": "nut",
-    "year": 2018,
-    "landUsePerKilogram": 12.96,
-    "unit": "m²"
+    "landUsePerUnit": 12.956
   },
   {
     "entity": "Oatmeal",
     "code": "oat",
-    "year": 2018,
-    "landUsePerKilogram": 7.6,
-    "unit": "m²"
+    "landUsePerUnit": 7.604
   },
   {
     "entity": "Olive Oil",
     "code": "olo",
-    "year": 2018,
-    "landUsePerKilogram": 26.31,
-    "unit": "m²"
+    "landUsePerUnit": 26.307
   },
   {
     "entity": "Onions & Leeks",
     "code": "oni",
-    "year": 2018,
-    "landUsePerKilogram": 0.39,
-    "unit": "m²"
+    "landUsePerUnit": 0.387
   },
   {
     "entity": "Other Fruit",
     "code": "fru",
-    "year": 2018,
-    "landUsePerKilogram": 0.89,
-    "unit": "m²"
+    "landUsePerUnit": 0.885
   },
   {
     "entity": "Other Pulses",
     "code": "pul",
-    "year": 2018,
-    "landUsePerKilogram": 15.57,
-    "unit": "m²"
+    "landUsePerUnit": 15.574
   },
   {
     "entity": "Other Vegetables",
     "code": "veg",
-    "year": 2018,
-    "landUsePerKilogram": 0.38,
-    "unit": "m²"
+    "landUsePerUnit": 0.38
   },
   {
     "entity": "Palm Oil",
     "code": "pao",
-    "year": 2018,
-    "landUsePerKilogram": 2.42,
-    "unit": "m²"
+    "landUsePerUnit": 2.419
   },
   {
     "entity": "Peas",
     "code": "pea",
-    "year": 2018,
-    "landUsePerKilogram": 7.46,
-    "unit": "m²"
+    "landUsePerUnit": 7.463
   },
   {
     "entity": "Pig Meat",
     "code": "pig",
-    "year": 2018,
-    "landUsePerKilogram": 17.36,
-    "unit": "m²"
+    "landUsePerUnit": 17.364
   },
   {
     "entity": "Potatoes",
     "code": "pot",
-    "year": 2018,
-    "landUsePerKilogram": 0.88,
-    "unit": "m²"
+    "landUsePerUnit": 0.878
   },
   {
     "entity": "Poultry Meat",
     "code": "pou",
-    "year": 2018,
-    "landUsePerKilogram": 12.22,
-    "unit": "m²"
+    "landUsePerUnit": 12.219
   },
   {
     "entity": "Prawns (farmed)",
     "code": "pra",
-    "year": 2018,
-    "landUsePerKilogram": 2.97,
-    "unit": "m²"
+    "landUsePerUnit": 2.97
   },
   {
     "entity": "Rapeseed Oil",
     "code": "rao",
-    "year": 2018,
-    "landUsePerKilogram": 10.63,
-    "unit": "m²"
+    "landUsePerUnit": 10.63
   },
   {
     "entity": "Rice",
     "code": "ric",
-    "year": 2018,
-    "landUsePerKilogram": 2.8,
-    "unit": "m²"
+    "landUsePerUnit": 2.802
   },
   {
     "entity": "Root Vegetables",
     "code": "roo",
-    "year": 2018,
-    "landUsePerKilogram": 0.33,
-    "unit": "m²"
+    "landUsePerUnit": 0.326
   },
   {
     "entity": "Soybean Oil",
     "code": "soo",
-    "year": 2018,
-    "landUsePerKilogram": 10.52,
-    "unit": "m²"
+    "landUsePerUnit": 10.522
   },
   {
     "entity": "Soymilk",
     "code": "som",
-    "year": 2018,
-    "landUsePerKilogram": 0.66,
-    "unit": "m²"
+    "landUsePerUnit": 0.661
   },
   {
     "entity": "Sunflower Oil",
     "code": "suo",
-    "year": 2018,
-    "landUsePerKilogram": 17.66,
-    "unit": "m²"
+    "landUsePerUnit": 17.665
   },
   {
     "entity": "Tofu (soybeans)",
     "code": "tof",
-    "year": 2018,
-    "landUsePerKilogram": 3.52,
-    "unit": "m²"
+    "landUsePerUnit": 3.519
   },
   {
     "entity": "Tomatoes",
     "code": "tom",
-    "year": 2018,
-    "landUsePerKilogram": 0.8,
-    "unit": "m²"
+    "landUsePerUnit": 0.801
   },
   {
     "entity": "Wheat & Rye",
     "code": "whe",
-    "year": 2018,
-    "landUsePerKilogram": 3.85,
-    "unit": "m²"
+    "landUsePerUnit": 3.85
   },
   {
     "entity": "Wine",
     "code": "win",
-    "year": 2018,
-    "landUsePerKilogram": 1.78,
-    "unit": "m²"
+    "landUsePerUnit": 1.78
+  },
+  {
+    "entity": "Almond milk",
+    "code": "alm",
+    "landUsePerUnit": 0.496
+  },
+  {
+    "entity": "Avocado",
+    "code": "avo",
+    "landUsePerUnit": 2.551
+  },
+  {
+    "entity": "Beef (average)",
+    "code": "bee",
+    "landUsePerUnit": 202.307
+  },
+  {
+    "entity": "Dark Chocolate",
+    "code": "dch",
+    "landUsePerUnit": 48.884
+  },
+  {
+    "entity": "Milk Chocolate",
+    "code": "mch",
+    "landUsePerUnit": 42.242
+  },
+  {
+    "entity": "Lentils",
+    "code": "len",
+    "landUsePerUnit": 24.088
+  },
+  {
+    "entity": "Oat milk",
+    "code": "oam",
+    "landUsePerUnit": 0.76
+  },
+  {
+    "entity": "Pasta",
+    "code": "pas",
+    "landUsePerUnit": 4.72
+  },
+  {
+    "entity": "Rice milk",
+    "code": "rim",
+    "landUsePerUnit": 0.336
+  },
+  {
+    "entity": "Tea",
+    "code": "tea",
+    "landUsePerUnit": 22
+  },
+  {
+    "entity": "Pineapple",
+    "code": "pin",
+    "landUsePerUnit": 0.406
+  },
+  {
+    "entity": "Kiwi",
+    "code": "kiw",
+    "landUsePerUnit": 0.546
+  },
+  {
+    "entity": "Unsupported ingredient",
+    "code": "uns",
+    "landUsePerUnit": 0
   }
 ]

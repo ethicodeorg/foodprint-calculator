@@ -5,18 +5,6 @@ import ghgEmissions from '../../data/ghg-emissions.json';
 import waterWithdrawals from '../../data/water-withdrawals.json';
 import transportEmissions from '../../data/transport-emissions.json';
 
-function sumUpGHG(foodGHG) {
-  return (
-    foodGHG.landUseChange +
-    foodGHG.animalFeed +
-    foodGHG.farm +
-    foodGHG.processing +
-    foodGHG.transport +
-    foodGHG.packaging +
-    foodGHG.retail
-  );
-}
-
 function getFoodData() {
   return foods.map((food) => {
     const foodLandUse = landUse.find((l) => l.code === food.key);
@@ -27,30 +15,21 @@ function getFoodData() {
     return {
       key: food.key,
       entities: food.foods,
+      baseUnit: food.baseUnit,
       landUse: {
-        value: foodLandUse.landUsePerKilogram,
-        unit: foodLandUse.unit,
+        value: foodLandUse.landUsePerUnit,
       },
       eutrophyingEmissions: {
-        value: foodEutro.eutrophyingEmissionsPerKilogram,
-        unit: foodEutro.unit,
+        value: foodEutro.eutrophyingEmissionsPerUnit,
       },
       ghgEmissions: {
         values: {
-          landUseChange: foodGHG.landUseChange,
-          animalFeed: foodGHG.animalFeed,
-          farm: foodGHG.farm,
-          processing: foodGHG.processing,
           transport: foodGHG.transport,
-          packaging: foodGHG.packaging,
-          retail: foodGHG.retail,
         },
-        value: sumUpGHG(foodGHG),
-        unit: foodGHG.unit,
+        value: foodGHG.ghgEmissionsPerUnit,
       },
       waterWithdrawals: {
-        value: foodWater.freshwaterWithdrawalsPerKilogram,
-        unit: foodWater.unit,
+        value: foodWater.freshwaterWithdrawalsPerUnit,
       },
     };
   });

@@ -76,6 +76,31 @@ export function getTransportEmissions(
     : 0;
 }
 
+export function convertToBaseUnit(amount, unit, selectedIngredient) {
+  if (selectedIngredient.baseUnit === 'kg') {
+    return convertToKilograms(amount, unit, selectedIngredient);
+  }
+
+  return convertToLiters(amount, unit, selectedIngredient);
+}
+
+function convertToLiters(amount, unit, selectedIngredient) {
+  const factoredAmount = amount * (selectedIngredient.factor || 1);
+
+  switch (unit) {
+    case 'tsp':
+      return factoredAmount * (5 / 1000);
+    case 'tbsp':
+      return factoredAmount * (15 / 1000);
+    case 'cups':
+      return factoredAmount * (250 / 1000);
+    case 'ltr':
+      return factoredAmount;
+    default:
+      return factoredAmount;
+  }
+}
+
 export function convertToKilograms(amount, unit, selectedIngredient) {
   const factoredAmount = amount * (selectedIngredient.factor || 1);
 
@@ -83,13 +108,13 @@ export function convertToKilograms(amount, unit, selectedIngredient) {
     case 'qty':
       return (amount * selectedIngredient.averageWeight) / 1000;
     case 'tsp':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (5 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (5 / 1000)) / 1000;
     case 'tbsp':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (15 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (15 / 1000)) / 1000;
     case 'cups':
-      return (factoredAmount * selectedIngredient.gramsPerLiter * (250 / 1000)) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000) * (250 / 1000)) / 1000;
     case 'ltr':
-      return (factoredAmount * selectedIngredient.gramsPerLiter) / 1000;
+      return (factoredAmount * (selectedIngredient.gramsPerLiter || 1000)) / 1000;
     case 'g':
       return factoredAmount / 1000;
     case 'oz':
