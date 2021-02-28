@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { FaChevronDown, FaDownload } from 'react-icons/fa';
+import { FaChartPie, FaChevronDown, FaDownload, FaList } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import classNames from 'classnames';
 import { getMealPieData } from '../utils/pieUtils';
@@ -12,48 +12,10 @@ import MyTooltip from './MyTooltip';
 import InfoIcon from './InfoIcon';
 import theme from '../styles/theme';
 
-const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
-  let html2canvas;
-  const router = useRouter();
+const Pies = ({ meal, numberOfServings, t, isChartView }) => {
   const pieData = getMealPieData(meal);
   const [showDetails, setShowDetails] = useState(true);
   const [showIngredients, setShowIngredients] = useState(false);
-
-  useEffect(() => {
-    html2canvas = require('html2canvas');
-  });
-
-  const downloadReport = (meal) => {
-    if (html2canvas && window && document) {
-      const pieContainer = meal._id
-        ? document.getElementById(meal._id).getElementsByClassName('pie-container')[0]
-        : document.getElementsByClassName('pie-container')[0];
-
-      // Process SVGs for canvas rendering
-      let svgElements = pieContainer.querySelectorAll('svg');
-      svgElements.forEach((item) => {
-        item.setAttribute('width', item.getBoundingClientRect().width);
-        item.style.width = null;
-      });
-
-      // Convert HTML element to HTML canvas
-      html2canvas(pieContainer, {
-        scrollY: -window.scrollY, // Vertical positioning
-        backgroundColor: null, // Transparent background
-      }).then((canvas) => {
-        // Create image from canvas
-        const dataURL = canvas.toDataURL();
-        const title = meal.title || mealTitle || 'Meal';
-        let link = document.createElement('a');
-        link.download = `${title
-          .toLowerCase()
-          .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
-          .replace(/ /g, '-')}-foodprint-report.png`;
-        link.href = dataURL;
-        link.click();
-      });
-    }
-  };
 
   return (
     <Fragment>
@@ -84,98 +46,112 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           <Separator />
         </Fragment>
       )}
-      <div className="title-container">
-        <div className="title-download">
-          <CardTitle>{`${t('foodprint')}${
-            numberOfServings > 1 ? ` - ${t('per_person')}` : ''
-          }`}</CardTitle>
-          {(router.route === '/mymeals' || router.route === '/newmeal') && (
-            <MyTooltip
-              title={t('download_report')}
-              placement="top"
-              arrow
-              enterTouchDelay={0}
-              leaveTouchDelay={3000}
+      {isChartView && (
+        <div className="title-container">
+          <div className="title-download">
+            <CardTitle>{`${t('foodprint')}${
+              numberOfServings > 1 ? ` - ${t('per_person')}` : ''
+            }`}</CardTitle>
+          </div>
+          <Button small clear onClick={() => setShowDetails(!showDetails)}>
+            {showDetails ? t('less') : t('more')}
+            <span
+              className={classNames('button-icon', {
+                'button-icon-reversed': showDetails,
+              })}
             >
-              <button className="download-button" onClick={() => downloadReport(meal)}>
-                <FaDownload />
-              </button>
-            </MyTooltip>
-          )}
+              <FaChevronDown />
+            </span>
+          </Button>
         </div>
-        <Button small clear onClick={() => setShowDetails(!showDetails)}>
-          {showDetails ? t('less') : t('more')}
-          <span
-            className={classNames('button-icon', {
-              'button-icon-reversed': showDetails,
-            })}
-          >
-            <FaChevronDown />
-          </span>
-        </Button>
-      </div>
-      {showDetails && (
+      )}
+      {showDetails && isChartView && (
         <div className="subtitle-container">
           {t('one_pie')}
           <InfoIcon title={t('des_tooltip_example_pie')} color={theme.colors.water} />
         </div>
       )}
-      <div
-        className={classNames('pie-container', {
-          'flex-container': !showDetails,
-        })}
-      >
-        {pieData.map((category, cIndex) => {
-          const { total, rda, name, unit, color } = category;
-          const numberOfExtraPies = Math.floor(total / rda);
-          const extraPies = [];
+      {isChartView ? (
+        <div
+          className={classNames('pie-container', {
+            'flex-container': !showDetails,
+          })}
+        >
+          {pieData.map((category, cIndex) => {
+            const { total, rda, name, unit, color } = category;
+            const numberOfExtraPies = Math.floor(total / rda);
+            const extraPies = [];
 
-          for (let i = 0; i < numberOfExtraPies; i++) {
-            extraPies.push({
+            for (let i = 0; i < numberOfExtraPies; i++) {
+              extraPies.push({
+                name: t(name),
+                total: rda,
+                rda: rda,
+                unit: unit,
+                color: color,
+                isExtra: true,
+              });
+            }
+
+            const lastPie = {
               name: t(name),
-              total: rda,
+              total: total % rda,
               rda: rda,
               unit: unit,
               color: color,
-              isExtra: true,
-            });
-          }
+            };
+            const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
 
-          const lastPie = {
-            name: t(name),
-            total: total % rda,
-            rda: rda,
-            unit: unit,
-            color: color,
-          };
-          const percentageString = `${((total / rda) * 100).toFixed(2)}% ${t('rda')}`;
-
-          return (
-            <div
-              className={classNames('category-container', {
-                'flex-container': showDetails,
-              })}
-              key={cIndex}
-            >
-              {showDetails && (
-                <div className="legend-container">
-                  <div className="legend-name">{t(name)}</div>
-                  <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
-                  <div className="percentage">
-                    <span className={`percentage-${cIndex}`}>{percentageString}</span>
-                    <InfoIcon title={t(`des_tooltip_${name}`)} color={lastPie.color} />
+            return (
+              <div
+                className={classNames('category-container', {
+                  'flex-container': showDetails,
+                })}
+                key={cIndex}
+              >
+                {showDetails && (
+                  <div className="legend-container">
+                    <div className="legend-name">{t(name)}</div>
+                    <div className="value">{`${total.toFixed(2)} ${unit}`}</div>
+                    <div className="percentage">
+                      <span className={`percentage-${cIndex}`}>{percentageString}</span>
+                      <InfoIcon title={t(`des_tooltip_${name}`)} color={lastPie.color} />
+                    </div>
                   </div>
+                )}
+                <div className="pies-container">
+                  {extraPies.concat(lastPie).map((pie, pIndex) => (
+                    <Pie key={pIndex} category={pie} label={`${t(name)}: ${percentageString}`} />
+                  ))}
                 </div>
-              )}
-              <div className="pies-container">
-                {extraPies.concat(lastPie).map((pie, pIndex) => (
-                  <Pie key={pIndex} category={pie} label={`${t(name)}: ${percentageString}`} />
-                ))}
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="list-container">
+          <div className="list-header">Sustainability Facts</div>
+          <div className="list-subheader">{`${numberOfServings} Servings per recipe`}</div>
+          <div className="list-toprow">Amount per serving</div>
+          <div className="list-secondrow">% Daily Earth Share*</div>
+          {pieData.map((category, cIndex) => {
+            const { name, total, rda, unit } = category;
+            return (
+              <div className={classNames('list-row', { 'list-row-last': cIndex === 3 })}>
+                <div>
+                  {`${t(name)}: `}
+                  <span className="list-value">{`${total.toFixed(2)} ${unit}`}</span>
+                </div>
+                <div className="list-percentage">{`${((total / rda) * 100).toFixed(2)}%`}</div>
+              </div>
+            );
+          })}
+          <div className="list-footnote">
+            *The % Daily Earth Share tells you how much this food contributes to your recommended
+            daily impact on the environment for each category.
+          </div>
+        </div>
+      )}
       <style jsx>{`
         .title-container {
           display: flex;
@@ -263,7 +239,8 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           display: flex;
           align-items: baseline;
         }
-        .download-button {
+        .download-button,
+        .view-toggle-button {
           display: flex;
           align-items: center;
           margin: 0 20px;
@@ -277,13 +254,59 @@ const Pies = ({ meal, numberOfServings, mealTitle, t }) => {
           border: none;
           outline: none;
         }
-        .download-button:hover {
+        .download-button:hover,
+        .view-toggle-button:hover {
           opacity: 0.7;
+        }
+        .view-toggle-button {
+          color: ${theme.colors.text};
         }
         .new-tab-icon {
           display: inline;
           margin-left: 5px;
           font-size: 12px;
+        }
+        .list-container {
+          border: 1px solid ${theme.colors.text};
+          margin-top: 10px;
+          padding: 5px;
+          font-size: 14px;
+        }
+        .list-header {
+          font-size: 26px;
+          border-bottom: 1px solid ${theme.colors.text};
+        }
+        .list-subheader {
+          padding: 4px 0;
+          border-bottom: 7px solid ${theme.colors.text};
+        }
+        .list-toprow {
+          padding: 4px 0;
+          border-bottom: 3px solid ${theme.colors.text};
+        }
+        .list-secondrow {
+          border-bottom: 1px solid ${theme.colors.text};
+          padding: 4px 0;
+          text-align: right;
+          font-weight: bold;
+        }
+        .list-row {
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid ${theme.colors.text};
+          padding: 4px 0;
+        }
+        .list-row-last {
+          border-bottom: none;
+        }
+        .list-value,
+        .list-percentage {
+          font-weight: bold;
+        }
+        .list-footnote {
+          border-top: 7px solid ${theme.colors.text};
+          padding: 4px 0;
+          font-size: 10px;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {

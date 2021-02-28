@@ -157,6 +157,7 @@ const MealsPage = ({
                   t={t}
                   mutate={mutate}
                   setLocalMeals={setLocalMeals}
+                  mealTitle={meal.title}
                 />
               );
             })

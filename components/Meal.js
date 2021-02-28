@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import {
@@ -11,6 +11,9 @@ import {
   FaPlus,
   FaCopy,
   FaExclamationTriangle,
+  FaDownload,
+  FaList,
+  FaChartPie,
 } from 'react-icons/fa';
 import classNames from 'classnames';
 import QRCode from 'qrcode.react';
@@ -37,9 +40,12 @@ const Meal = ({
   t,
   mutate,
   setLocalMeals,
+  mealTitle,
 }) => {
+  let html2canvas;
   const router = useRouter();
   const [user] = useUser();
+  const [isChartView, setIsChartView] = useState(true);
   const userSubtitle = `${meal?.user?.name || ''}${
     meal?.user?.type && meal?.user?.type !== 'other' ? `, ${t(meal?.user?.type)}` : ''
   }`;
@@ -95,6 +101,42 @@ const Meal = ({
     }
   };
 
+  useEffect(() => {
+    html2canvas = require('html2canvas');
+  });
+
+  const downloadReport = (meal) => {
+    if (html2canvas && window && document) {
+      const pieContainer = meal._id
+        ? document.getElementById(meal._id).getElementsByClassName('pie-container')[0]
+        : document.getElementsByClassName('pie-container')[0];
+
+      // Process SVGs for canvas rendering
+      let svgElements = pieContainer.querySelectorAll('svg');
+      svgElements.forEach((item) => {
+        item.setAttribute('width', item.getBoundingClientRect().width);
+        item.style.width = null;
+      });
+
+      // Convert HTML element to HTML canvas
+      html2canvas(pieContainer, {
+        scrollY: -window.scrollY, // Vertical positioning
+        backgroundColor: null, // Transparent background
+      }).then((canvas) => {
+        // Create image from canvas
+        const dataURL = canvas.toDataURL();
+        const title = meal.title || mealTitle || 'Meal';
+        let link = document.createElement('a');
+        link.download = `${title
+          .toLowerCase()
+          .replace(/([^a-z0-9 ]+)/g, '') // Remove illegal filename characters
+          .replace(/ /g, '-')}-foodprint-report.png`;
+        link.href = dataURL;
+        link.click();
+      });
+    }
+  };
+
   return (
     <div className="meal" id={meal._id}>
       <Card>
@@ -106,24 +148,17 @@ const Meal = ({
               <MealLink id={meal._id}>{meal.title}</MealLink>
             )}
           </CardTitle>
-          {router.route === '/mymeals' && !!user && (
-            <MyTooltip
-              title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
-              placement="top"
-              arrow
-              enterTouchDelay={0}
-              leaveTouchDelay={4000}
-            >
-              <button
-                className={classNames('visibility-button', {
-                  'visibility-button-public': meal.visibility === 'public',
-                })}
-                onClick={() => changeVisibility(meal)}
-              >
-                {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
-              </button>
-            </MyTooltip>
-          )}
+          <MyTooltip
+            title="Toggle view"
+            placement="top"
+            arrow
+            enterTouchDelay={0}
+            leaveTouchDelay={3000}
+          >
+            <button className="view-toggle-button" onClick={() => setIsChartView(!isChartView)}>
+              {isChartView ? <FaList /> : <FaChartPie />}
+            </button>
+          </MyTooltip>
           {router.route === '/mymeals' && !user && (
             <MyTooltip
               title={t('warning_not_logged_in')}
@@ -178,7 +213,12 @@ const Meal = ({
         </p>
         {meal.about && <AboutMeal text={meal.about} t={t} />}
         {meal.link && <ExternalLink href={meal.link}>{t('link_to_recipe')}</ExternalLink>}
-        <Pies meal={meal} numberOfServings={meal.numberOfServings} t={t} />
+        <Pies
+          meal={meal}
+          numberOfServings={meal.numberOfServings}
+          t={t}
+          isChartView={isChartView}
+        />
         {router.route === '/mymeals' && (
           <Fragment>
             <Separator />
@@ -195,6 +235,35 @@ const Meal = ({
                 </button>
               </MyTooltip>
               <div className="right-footer">
+                {router.route === '/mymeals' && !!user && (
+                  <MyTooltip
+                    title={meal.visibility === 'public' ? t('make_private') : t('publish_meal')}
+                    placement="top"
+                    arrow
+                    enterTouchDelay={0}
+                    leaveTouchDelay={4000}
+                  >
+                    <button
+                      className={classNames('visibility-button', {
+                        'visibility-button-public': meal.visibility === 'public',
+                      })}
+                      onClick={() => changeVisibility(meal)}
+                    >
+                      {meal.visibility === 'public' ? <FaEye /> : <FaEyeSlash />}
+                    </button>
+                  </MyTooltip>
+                )}
+                <MyTooltip
+                  title={t('download_report')}
+                  placement="top"
+                  arrow
+                  enterTouchDelay={0}
+                  leaveTouchDelay={3000}
+                >
+                  <button className="download-button" onClick={() => downloadReport(meal)}>
+                    <FaDownload />
+                  </button>
+                </MyTooltip>
                 <MyTooltip
                   title={t('download_qr')}
                   placement="top"
@@ -265,6 +334,7 @@ const Meal = ({
           display: flex;
           align-items: center;
           padding: 0;
+          margin-right: 20px;
           font-size: 22px;
           color: ${theme.colors.eutro};
           background-color: transparent;
@@ -299,6 +369,7 @@ const Meal = ({
           color: ${theme.colors.land};
         }
         .download-button,
+        .view-toggle-button,
         .duplicate-button {
           display: flex;
           align-items: center;
@@ -318,6 +389,7 @@ const Meal = ({
         }
         .duplicate-button:hover,
         .warning-icon:hover,
+        .view-toggle-button:hover,
         .download-button:hover {
           opacity: 0.7;
         }
@@ -326,6 +398,10 @@ const Meal = ({
         }
         .qr-code {
           display: none;
+        }
+        .view-toggle-button {
+          color: ${theme.colors.land};
+          margin-right: 0;
         }
         .warning-icon {
           color: ${theme.colors.orange};

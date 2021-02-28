@@ -451,7 +451,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             <Pies
               meal={getTotalByCategory(ingredients, numberOfServings.value)}
               numberOfServings={numberOfServings.value}
-              mealTitle={mealName}
               t={t}
             />
           </Card>
