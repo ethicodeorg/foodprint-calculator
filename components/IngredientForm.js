@@ -22,19 +22,6 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
   const [isAddingTransport, setIsAddingTransport] = useState(
     ingredient ? ingredient.transportMode || ingredient.transportType : false
   );
-  /* const initialUnits = [
-    { value: 'g', label: t('g') },
-    { value: 'kg', label: t('kg') },
-    { value: 'oz', label: t('oz') },
-    { value: 'lbs', label: t('lbs') },
-  ];
-  const [amountUnitOptions, setAmountUnitOptions] = useState(initialUnits); */
-  const initialUnits = [
-    { value: 'g', label: t('g') },
-    { value: 'kg', label: t('kg') },
-    { value: 'oz', label: t('oz') },
-    { value: 'lbs', label: t('lbs') },
-  ];
   const [amountUnitOptions, setAmountUnitOptions] = useState(
     []
   );
@@ -95,45 +82,7 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
   // Automatically focus the next input when an ingredient has been selected
   // react reference for the "amount" field.
   const refAmount = useRef();
-
-  // When ingredient is selected we add quantity and volume options if applicaple
-  // for the selected ingredient.
-  /* const changeUnitOptions = (val) => {
-    console.log('in changeUnitOptions and val is: ', val);
-    let unitsToAdd = [];
-    let unitsToRemove = [];
-    if (val.averageWeight) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'qty')) {
-        unitsToAdd.push({ value: 'qty', label: t('qty') });
-        console.log('adding qty');
-      }
-    } else {
-      unitsToRemove.push('qty');
-    }
-
-    if (val.gramsPerLiter) {
-      // Don't add it if it's already there
-      if (!amountUnitOptions.find((unit) => unit.value === 'tsp')) {
-        unitsToAdd = [
-          ...unitsToAdd,
-          { value: 'tsp', label: t('tsp') },
-          { value: 'tbsp', label: t('tbsp') },
-          { value: 'cups', label: t('cups') },
-          { value: 'ltr', label: t('ltr') },
-        ];
-      }
-    } else {
-      unitsToRemove.push('tsp', 'tbsp', 'cups', 'ltr');
-    }
-
-    // Remove options with .filter and add options with .concat
-    setAmountUnitOptions(
-      amountUnitOptions.filter((unit) => !unitsToRemove.includes(unit.value)).concat(unitsToAdd)
-    );
-    console.log('amountUnitOptions in changeUnitOptions:');
-    console.log(amountUnitOptions);
-  }; */
+  
   const changeUnitOptions = (val) => {
     const quantityUnits = [{ value: 'qty', label: t('qty') }];
     const weightUnits = [
@@ -165,7 +114,6 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
     setAmountUnitOptions(newUnits);
     // If the currently selected unit is unavailable for the ingredient, we clear it.
     if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
-      console.log('setAmountUnit blank')
       setAmountUnit('');
     }
   };
@@ -174,27 +122,16 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
 
   useEffect(() => {
     if (ingredient) {
-      console.log('first useEffect')
       changeUnitOptions(selectedIngredient);
     }
   }, [ingredient]);
 
   useEffect(() => {
     if (ingredient && amountUnitOptions.length) {
-      console.log('amountUnitOptions in 2nd useEffect:');
-      console.log(amountUnitOptions);
-      console.log(
-        'amountUnitOptions.find((o) => o.value === ingredient.amountUnit.value): ',
-        amountUnitOptions.find((o) => o.value === ingredient.amountUnit.value)
-      ); // undefined with .value
-      console.log(
-        'amountUnitOptions.find((o) => o.value === ingredient.amountUnit): ',
-        amountUnitOptions.find((o) => o.value === ingredient.amountUnit)
-      );
       setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
     }
   }, [amountUnitOptions]);
-  console.log('amountUnit: ', amountUnit)
+  
   return (
     <Fragment>
       <Card inner>
@@ -321,7 +258,7 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
             }
             disabled={!selectedIngredient || !amount}
           >
-            {t('add')}
+            {!ingredient ? t('add') : t('edit_ingredient')}
           </Button>
         </div>
       </Card>
