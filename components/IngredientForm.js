@@ -117,8 +117,7 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
       setAmountUnit('');
     }
   };
-  const [amountUnit, setAmountUnit] = useState([ingredient ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) : '']);
-  //const [amountUnit, setAmountUnit] = useState();
+  const [amountUnit, setAmountUnit] = useState([]);
 
   useEffect(() => {
     if (ingredient) {
@@ -156,7 +155,7 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
         <div className="required-fields">
           <div className="select-container ingredient-select">
             <Select
-              defaultValue={selectedIngredient}
+              value={selectedIngredient}
               placeholder={t('ingredient')}
               onChange={(val) => {
                 setSelectedIngredient(val);
@@ -179,7 +178,7 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
           />
           <div className="select-container ingredient-unit">
             <Select
-              value={amountUnit}
+              value={ingredient ? amountUnit : amountUnit.value}
               placeholder={t('unit')}
               onChange={(val) => setAmountUnit(val.value)}
               options={amountUnitOptions}
