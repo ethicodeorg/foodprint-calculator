@@ -83,6 +83,8 @@
   "verify_email_text": "Please wait while we verify your email",
   "transported_text": "{{transportMode}}: {{distance}} {{distanceUnit}}",
   "remove_ingredient": "Remove ingredient",
+  "remove_ingredient_sure": "Are you sure you want to remove this ingredient?",
+  "edit_ingredient": "Edit ingredient",
   "lets_calculate": "Let's calculate",
   "restaurant": "Restaurant",
   "cafeteria": "Cafeteria",

@@ -247,6 +247,8 @@ const TranslateTabs = ({ selectedLang }) => {
       'yogurt',
       'unsupported_ingredient',
       'other_berries',
+      'edit_ingredient',
+      'remove_ingredient_sure',
     ],
   };
 
