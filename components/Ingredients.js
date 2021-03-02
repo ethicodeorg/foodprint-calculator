@@ -16,6 +16,7 @@ const Ingredients = ({
   meal,
   foodData,
   addIngredient,
+  saveIngredient,
 }) => {
   const [isEditing, setIsEditing] = useState(-1);
 
@@ -47,6 +48,9 @@ const Ingredients = ({
             meal={meal}
             addIngredient={addIngredient}
             cancelIngredient={cancelIngredient}
+            editIngredient={editIngredient}
+            index={index}
+            saveIngredient={saveIngredient}
             ingredient={ingredient}
             t={t}
           />

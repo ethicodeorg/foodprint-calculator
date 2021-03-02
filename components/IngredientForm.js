@@ -14,7 +14,7 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingredient, t }) => {
+const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, editIngredient, ingredient, index, saveIngredient, t }) => {
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const [amount, setAmount] = useState(ingredient ? ingredient.amount : '');
@@ -114,7 +114,8 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
     setAmountUnitOptions(newUnits);
     // If the currently selected unit is unavailable for the ingredient, we clear it.
     if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
-      setAmountUnit('');
+      console.log("setting blank")
+      //setAmountUnit('');
     }
   };
   const [amountUnit, setAmountUnit] = useState([]);
@@ -127,6 +128,8 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
 
   useEffect(() => {
     if (ingredient && amountUnitOptions.length) {
+      console.log("amountUnitOptions.find((o) => o.value === ingredient.amountUnit");
+      console.log(amountUnitOptions.find((o) => o.value === ingredient.amountUnit))
       setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
     }
   }, [amountUnitOptions]);
@@ -177,10 +180,11 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
             ref={refAmount}
           />
           <div className="select-container ingredient-unit">
+            type of is '{typeof amountUnit}'
             <Select
-              value={ingredient ? amountUnit : amountUnit.value}
+              value={amountUnit}
               placeholder={t('unit')}
-              onChange={(val) => setAmountUnit(val.value)}
+              onChange={(val) => setAmountUnit(val)}
               options={amountUnitOptions}
               instanceId="amount-unit"
             />
@@ -245,7 +249,9 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
           </Link>
           <Button
             onClick={() =>
-              addIngredient(
+            {
+              saveIngredient(
+                index,
                 selectedIngredient,
                 amount,
                 amountUnit,
@@ -253,11 +259,13 @@ const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, ingre
                 distanceUnit,
                 transportMode,
                 transportType
-              )
+              );
+            cancelIngredient()}
+                
             }
             disabled={!selectedIngredient || !amount}
-          >
-            {!ingredient ? t('add') : t('edit_ingredient')}
+            >
+          {!ingredient ? t('add') : t('edit_ingredient')}
           </Button>
         </div>
       </Card>

@@ -146,7 +146,25 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIngredients(temp);
   };
 
-  const editIngredient = (index) => {
+  const editIngredient = (
+    index,
+    selectedIngredient,
+    amount,
+    amountUnit,
+    distance,
+    distanceUnit,
+    transportMode,
+    transportType
+  ) => {
+    console.log("in editIngredient");
+    console.log("index: ", index);
+    console.log("selectedIngredient: ", selectedIngredient);
+    console.log("amount: ", amount);
+    console.log("amountUnit: ", amountUnit);
+    console.log("distance: ", distance);
+    console.log("distanceUnit: ", distanceUnit);
+    console.log("transportMode: ", transportMode);
+    console.log("transportType: ", transportType);
     const temp = [...ingredients];
   };
 
@@ -226,6 +244,93 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIsAdding(false);
   };
 
+  const saveIngredient = (
+    index,
+    selectedIngredient,
+    amount,
+    amountUnit,
+    distance,
+    distanceUnit,
+    transportMode,
+    transportType
+  ) => {
+    const food = foodData.find((f) => f.key === selectedIngredient.key);
+    console.log(foodData)
+    console.log('selectedIngredient:', selectedIngredient)
+    console.log('selectedIngredient.key:', selectedIngredient.key)
+    console.log('food:', food)
+    console.log('amount:', amount)
+    console.log('amountUnit:', amountUnit)
+    console.log('distance:', distance)
+    console.log('distanceUnit:', distanceUnit)
+    console.log('transportMode:', transportMode)
+    console.log('transportType:', transportType)
+    console.log('amountUnit:', amountUnit)
+    const transportEmissions = getTransportEmissions(
+      transportData,
+      distance,
+      distanceUnit,
+      transportMode,
+      transportType,
+      amount,
+      amountUnit,
+      selectedIngredient
+    );
+    const amountInBaseUnit = convertToBaseUnit(amount, amountUnit, selectedIngredient);
+    console.log("amountInBaseUnit")
+    console.log(amountInBaseUnit)
+    const ghgEmissionBreakdown = {
+      transport: transportEmissions
+        ? transportEmissions * amountInBaseUnit
+        : food.ghgEmissions.values.transport * amountInBaseUnit,
+    };
+    const ingredient = {
+      key: selectedIngredient.key,
+      rawLabel: selectedIngredient.rawLabel,
+      amount,
+      amountUnit: amountUnit.value,
+      distance,
+      distanceUnit,
+      transportMode,
+      transportType,
+      landUse: {
+        value: food.landUse.value * amountInBaseUnit,
+        unit: food.landUse.unit,
+      },
+      ghgEmissions: {
+        values: ghgEmissionBreakdown,
+        value:
+          food.ghgEmissions.value * amountInBaseUnit +
+          (transportEmissions
+            ? transportEmissions * amountInBaseUnit
+            : food.ghgEmissions.values.transport * amountInBaseUnit),
+        unit: food.ghgEmissions.unit,
+      },
+      eutrophyingEmissions: {
+        value: food.eutrophyingEmissions.value * amountInBaseUnit,
+        unit: food.eutrophyingEmissions.unit,
+      },
+      waterWithdrawals: {
+        value: food.waterWithdrawals.value * amountInBaseUnit,
+        unit: food.waterWithdrawals.unit,
+      },
+    };
+    // problem - sometimes amountUnit is an object and other times it is a string
+    if (typeof index != 'undefined') {
+        //setIngredients((ingredients) => [...ingredients, ingredient])
+        //setIsAdding(false)
+        console.log("index: ", index)
+        console.log("ingredient")
+        console.log(ingredient)
+        const temp = [...ingredients];
+        temp.splice(index, 1, ingredient);
+        setIngredients(temp);
+    } else {
+        setIngredients((ingredients) => [...ingredients, ingredient])
+        setIsAdding(false)
+    }
+  };
+
   return (
     <Fragment>
       <Header />
@@ -256,6 +361,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             meal={meal}
             addIngredient={addIngredient}
             cancelIngredient={cancelIngredient}
+            saveIngredient={saveIngredient}
           />
           <Separator />
           {isAdding ? (
@@ -263,6 +369,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
               meal={meal}
               addIngredient={addIngredient}
               cancelIngredient={cancelIngredient}
+              saveIngredient={saveIngredient}
               t={t}
             />
           ) : (
