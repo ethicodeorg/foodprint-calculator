@@ -180,7 +180,6 @@ const IngredientForm = ({ meal, foodData, cancelIngredient, ingredient, index, s
             ref={refAmount}
           />
           <div className="select-container ingredient-unit">
-            type of is '{typeof amountUnit}'
             <Select
               value={amountUnit}
               placeholder={t('unit')}
