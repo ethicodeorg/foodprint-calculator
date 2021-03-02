@@ -10,12 +10,10 @@ import Separator from './Separator';
 const Ingredients = ({
   ingredients,
   deleteIngredient,
-  editIngredient,
   numberOfServings,
   t,
   meal,
   foodData,
-  addIngredient,
   saveIngredient,
 }) => {
   const [isEditing, setIsEditing] = useState(-1);
@@ -46,9 +44,7 @@ const Ingredients = ({
           <Separator />
           <IngredientForm
             meal={meal}
-            addIngredient={addIngredient}
             cancelIngredient={cancelIngredient}
-            editIngredient={editIngredient}
             index={index}
             saveIngredient={saveIngredient}
             ingredient={ingredient}
@@ -66,27 +62,24 @@ const Ingredients = ({
           <div className="pies-container">
             <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} t={t} />
           </div>
-              <div className="control-container">
-                {editIngredient && (
-                  <MyTooltip
-                    title={t('edit_ingredient')}
-                    placement="top"
-                    arrow
-                    enterTouchDelay={0}
-                    leaveTouchDelay={3000}
-                  >
-                    <button
-                      className="edit-button"
-                      onClick={() => {
-                        setIsEditing(index);
-                        editIngredient.bind(this, index);
-                      }}
-                    >
-                      <FaEdit />
-                    </button>
-                  </MyTooltip>
-                )}
-          {deleteIngredient && (
+          <div className="control-container">
+            <MyTooltip
+              title={t('edit_ingredient')}
+              placement="top"
+              arrow
+              enterTouchDelay={0}
+              leaveTouchDelay={3000}
+            >
+              <button
+                className="edit-button"
+                onClick={() => {
+                  setIsEditing(index);
+                  //saveIngredient.bind(this, index);
+                }}
+              >
+                <FaEdit />
+              </button>
+            </MyTooltip>
             <MyTooltip
               title={t('remove_ingredient')}
               placement="top"
@@ -98,7 +91,6 @@ const Ingredients = ({
                 <FaTrash />
               </button>
             </MyTooltip>
-          )}
         </div>
       </div>
       <style jsx>{`

@@ -14,7 +14,7 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const IngredientForm = ({ meal, foodData, addIngredient, cancelIngredient, editIngredient, ingredient, index, saveIngredient, t }) => {
+const IngredientForm = ({ meal, foodData, cancelIngredient, ingredient, index, saveIngredient, t }) => {
   const [user] = useUser();
   const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const [amount, setAmount] = useState(ingredient ? ingredient.amount : '');
