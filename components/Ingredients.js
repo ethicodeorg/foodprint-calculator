@@ -1,10 +1,18 @@
+import React, { Fragment, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import TinyPies from './TinyPies';
 import CardTitle from './CardTitle';
 import MyTooltip from './MyTooltip';
 import theme from '../styles/theme';
+import Modal from 'react-modal';
+import Button from './Button';
 
-const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => (
+const Ingredients = ({ ingredients, numberOfServings, deleteIngredient, t }) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [confirmModalMessage, setConfirmModalMessage] = useState('');
+  const modalAnimationTime = 200;
+
+  return (
   <div className="ingredients">
     <CardTitle>{t('ingredients')}</CardTitle>
     {!ingredients.length && (
@@ -20,7 +28,15 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
         : '';
       const amountString = `${ingredient.amount} ${
         ingredient.amountUnit === 'qty' ? '' : t(`${ingredient.amountUnit}_short`)
-      }`;
+        }`;
+      const confirmModalMessage = (
+        <Fragment>
+          {t('remove_ingredient')}?<br /><br />
+          {amountString} {t(ingredient.rawLabel)}
+          {transportString.length ? <br /> : ''}
+          {transportString.length ? transportString : ''}
+        </Fragment>
+      );
 
       return (
         <div className="ingredient" key={index}>
@@ -31,22 +47,53 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
           <div className="pies-container">
             <TinyPies ingredient={ingredient} numberOfServings={numberOfServings} t={t} />
           </div>
-          {deleteIngredient && (
-            <MyTooltip
-              title={t('remove_ingredient')}
-              placement="top"
-              arrow
-              enterTouchDelay={0}
-              leaveTouchDelay={3000}
-            >
-              <button className="delete-button" onClick={deleteIngredient.bind(this, index)}>
-                <FaTrash />
-              </button>
-            </MyTooltip>
-          )}
+          <MyTooltip
+            title={t('remove_ingredient')}
+            placement="top"
+            arrow
+            enterTouchDelay={0}
+            leaveTouchDelay={3000}
+          >
+            <button className="delete-button" onClick={() => {setConfirmModalMessage(confirmModalMessage);setShowConfirmModal(true)}}>
+              <FaTrash />
+            </button>
+          </MyTooltip>
         </div>
       );
     })}
+    
+    <Modal
+        isOpen={showConfirmModal}
+        onRequestClose={() => setShowConfirmModal(false)}
+        style={{
+          content: {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+          },
+          overlay: {
+            backgroundColor: 'rgba(34, 34, 34, 0.5)',
+          },
+        }}
+        contentLabel="Example Modal"
+        closeTimeoutMS={modalAnimationTime}
+      >
+        <div className="confirm-message">
+          {confirmModalMessage}
+        </div><br />
+        <div className="modal-button-container">
+          <Button primary onClick={() => { setShowConfirmModal(false); setConfirmModalMessage('')}}>
+            {t('cancel')}
+          </Button>
+          <Button primary remove onClick={() => {
+            deleteIngredient();
+          setShowConfirmModal(false); setConfirmModalMessage('')}}>
+            {t('delete')}
+          </Button>
+        </div>
+    </Modal>
 
     <style jsx>{`
       .ingredient {
@@ -90,6 +137,6 @@ const Ingredients = ({ ingredients, deleteIngredient, numberOfServings, t }) => 
       }
     `}</style>
   </div>
-);
+)};
 
 export default Ingredients;
