@@ -80,6 +80,9 @@ const Ingredients = ({
                 <FaEdit />
               </button>
             </MyTooltip>
+
+               &nbsp;&nbsp; 
+
             <MyTooltip
               title={t('remove_ingredient')}
               placement="top"
@@ -133,7 +136,7 @@ const Ingredients = ({
         .edit-button {
           padding: 0;
           font-size: 14px;
-          color: ${theme.colors.eutro};
+          color: ${theme.colors.teal};
           background-color: #fff;
           opacity: 1;
           transition: opacity 0.2s;
