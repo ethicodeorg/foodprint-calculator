@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
-import { Link, Router } from '../i18n';
+import { Link } from '../i18n';
 import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
 import { setFocus } from '../utils/ui';
 import { useUser } from '../lib/hooks';
@@ -14,9 +14,8 @@ import theme from '../styles/theme';
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-const IngredientForm = ({ meal, foodData, cancelIngredient, ingredient, index, saveIngredient, t }) => {
+const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIngredient, t }) => {
   const [user] = useUser();
-  const { data, error } = useSWR(user && id ? `/api/meals?id=${id}` : null, fetcher);
   const [amount, setAmount] = useState(ingredient ? ingredient.amount : '');
   const [distance, setDistance] = useState(ingredient ? ingredient.distance : '');
   const [isAddingTransport, setIsAddingTransport] = useState(
@@ -97,7 +96,9 @@ const IngredientForm = ({ meal, foodData, cancelIngredient, ingredient, index, s
       { value: 'cups', label: t('cups') },
       { value: 'ltr', label: t('ltr') },
     ];
+
     let newUnits;
+
     if (val.baseUnit === 'l') {
       newUnits = volumeUnits;
     } else {
@@ -112,6 +113,7 @@ const IngredientForm = ({ meal, foodData, cancelIngredient, ingredient, index, s
       }
     }
     setAmountUnitOptions(newUnits);
+    
     // If the currently selected unit is unavailable for the ingredient, we clear it.
     if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
       console.log("setting blank")
