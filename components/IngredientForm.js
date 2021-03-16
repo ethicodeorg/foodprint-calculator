@@ -178,7 +178,6 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
             ref={refAmount}
           />
           <div className="select-container ingredient-unit">
-            type of is '{typeof amountUnit}'
             <Select
               value={amountUnit}
               placeholder={t('unit')}
@@ -198,7 +197,6 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
         {isAddingTransport ? (
           <div className="optional-fields">
             <div className="select-container transport-mode-select">
-              type of is '{typeof transportMode}'
               <Select
                 value={transportMode}
                 placeholder={t('transport_mode')}
@@ -208,7 +206,6 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
               />
             </div>
             <div className="select-container transport-type-select">
-              type of is '{typeof transportType}'
               <Select
                 value={transportType}
                 placeholder={t('transport_type')}
@@ -226,7 +223,6 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
               onChange={(e) => setDistance(e.target.value)}
             />
             <div className="select-container transport-unit-select">
-              type of is '{typeof distanceUnit}'
               <Select
                 value={distanceUnit}
                 placeholder={t('unit')}
