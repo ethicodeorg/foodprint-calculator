@@ -24,6 +24,7 @@ import Header from './Header';
 import Card from './Card';
 import Content from './Content';
 import Pies from './Pies';
+import IngredientForm from './IngredientForm';
 import Ingredients from './Ingredients';
 import PageTitle from './PageTitle';
 import Button from './Button';
@@ -47,53 +48,8 @@ const MealForm = ({ id, foodData, transportData, t }) => {
   const [mealName, setMealName] = useState(meal ? meal.title : '');
   const [aboutMeal, setAboutMeal] = useState(meal ? meal.about : '');
   const [mealLink, setMealLink] = useState(meal ? meal.link : '');
-  const [selectedIngredient, setSelectedIngredient] = useState();
-  const [amount, setAmount] = useState('');
-  const [distance, setDistance] = useState('');
-  const [transportMode, setTransportMode] = useState('');
-  const [transportType, setTransportType] = useState('');
   const [ingredients, setIngredients] = useState(meal ? meal.ingredients : []);
   const [isAdding, setIsAdding] = useState(false);
-  const [isAddingTransport, setIsAddingTransport] = useState(false);
-  const [amountUnitOptions, setAmountUnitOptions] = useState([]);
-  const distanceUnitOptions = [
-    { value: 'km', label: t('km') },
-    { value: 'mi', label: t('mi') },
-  ];
-  const transportModeOptions = [
-    { value: 'road', label: t('road') },
-    { value: 'rail', label: t('rail') },
-    { value: 'water', label: t('water') },
-    { value: 'air', label: t('air') },
-  ];
-  const transportTypeOptions = [
-    { value: 'ambient', label: t('ambient') },
-    { value: 'temperatureControlled', label: t('temperatureControlled') },
-  ];
-  const [amountUnit, setAmountUnit] = useState();
-  const [distanceUnit, setDistanceUnit] = useState(distanceUnitOptions[0].value);
-
-  let foodOptions = [];
-  for (let i = 0; i < foodData.length; i++) {
-    for (let j = 0; j < foodData[i].entities.length; j++) {
-      const label = t(foodData[i].entities[j].label);
-
-      // No need to add the same entry twice
-      if (!foodOptions.find((option) => option.label === label)) {
-        foodOptions.push({
-          key: foodData[i].key,
-          value: `${foodData[i].key}${j}`,
-          baseUnit: foodData[i].baseUnit,
-          label,
-          rawLabel: foodData[i].entities[j].label,
-          averageWeight: foodData[i].entities[j].averageWeight,
-          gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
-          factor: foodData[i].entities[j].factor,
-        });
-      }
-    }
-  }
-  foodOptions = foodOptions.sort((a, b) => (a.label > b.label ? 1 : -1));
 
   const numberOfServingsOptions = [];
   for (let i = 0; i < 10; i++) {
@@ -190,19 +146,32 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     setIngredients(temp);
   };
 
-  const addIngredient = () => {
+  const cancelIngredient = () => {
+    setIsAdding(false);
+  };
+
+  const saveIngredient = (
+    index,
+    selectedIngredient,
+    amount,
+    amountUnit,
+    distance,
+    distanceUnit,
+    transportMode,
+    transportType
+  ) => {
     const food = foodData.find((f) => f.key === selectedIngredient.key);
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
-      distanceUnit,
-      transportMode,
-      transportType,
+      distanceUnit = distanceUnit.value,
+      transportMode = transportMode.value,
+      transportType = transportType.value,
       amount,
-      amountUnit.value,
+      amountUnit,
       selectedIngredient
     );
-    const amountInBaseUnit = convertToBaseUnit(amount, amountUnit.value, selectedIngredient);
+    const amountInBaseUnit = convertToBaseUnit(amount, amountUnit, selectedIngredient);
     const ghgEmissionBreakdown = {
       transport: transportEmissions
         ? transportEmissions * amountInBaseUnit
@@ -210,6 +179,7 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     };
     const ingredient = {
       key: selectedIngredient.key,
+      value: selectedIngredient.value,
       rawLabel: selectedIngredient.rawLabel,
       amount,
       amountUnit: amountUnit.value,
@@ -239,59 +209,16 @@ const MealForm = ({ id, foodData, transportData, t }) => {
         unit: food.waterWithdrawals.unit,
       },
     };
-
-    setIngredients((ingredients) => [...ingredients, ingredient]);
-    setAmount('');
-    setDistance('');
-    setSelectedIngredient();
-    setIsAdding(false);
-    setIsAddingTransport(false);
-    setAmountUnit();
-    setAmountUnitOptions([]);
-  };
-
-  // When ingredient is selected we add the appropriate unit options for the selected ingredient.
-  const changeUnitOptions = (val) => {
-    const quantityUnits = [{ value: 'qty', label: t('qty') }];
-    const weightUnits = [
-      { value: 'g', label: t('g') },
-      { value: 'kg', label: t('kg') },
-      { value: 'oz', label: t('oz') },
-      { value: 'lbs', label: t('lbs') },
-    ];
-    const volumeUnits = [
-      { value: 'tsp', label: t('tsp') },
-      { value: 'tbsp', label: t('tbsp') },
-      { value: 'cups', label: t('cups') },
-      { value: 'ltr', label: t('ltr') },
-    ];
-    let newUnits;
-
-    if (val.baseUnit === 'l') {
-      newUnits = volumeUnits;
+    // problem - sometimes amountUnit is an object and other times it is a string
+    if (typeof index != 'undefined') {
+        const temp = [...ingredients];
+        temp.splice(index, 1, ingredient);
+        setIngredients(temp);
     } else {
-      if ((val.averageWeight && val.gramsPerLiter) || val.key === 'uns') {
-        newUnits = quantityUnits.concat(weightUnits).concat(volumeUnits);
-      } else if (val.averageWeight) {
-        newUnits = quantityUnits.concat(weightUnits);
-      } else if (val.gramsPerLiter) {
-        newUnits = weightUnits.concat(volumeUnits);
-      } else {
-        newUnits = weightUnits;
-      }
-    }
-
-    setAmountUnitOptions(newUnits);
-
-    // If the currently selected unit is unavailable for the ingredient, we clear it.
-    if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
-      setAmountUnit('');
+        setIngredients((ingredients) => [...ingredients, ingredient])
+        setIsAdding(false)
     }
   };
-
-  // Automatically focus the next input when an ingredient has been selected
-  // react reference for the "amount" field.
-  const refAmount = useRef();
 
   return (
     <Fragment>
@@ -319,127 +246,18 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             deleteIngredient={deleteIngredient}
             numberOfServings={numberOfServings.value}
             t={t}
+            meal={meal}
+            cancelIngredient={cancelIngredient}
+            saveIngredient={saveIngredient}
           />
           <Separator />
           {isAdding ? (
-            <Card inner>
-              <div className="close-container">
-                <MyTooltip
-                  title={t('cancel')}
-                  placement="top"
-                  arrow
-                  enterTouchDelay={0}
-                  leaveTouchDelay={3000}
-                >
-                  <button
-                    className="close-button"
-                    onClick={() => {
-                      setIsAdding(false);
-                      setIsAddingTransport(false);
-                    }}
-                  >
-                    <FaTimes />
-                  </button>
-                </MyTooltip>
-              </div>
-              <div className="required-fields">
-                <div className="select-container ingredient-select">
-                  <Select
-                    value={selectedIngredient}
-                    placeholder={t('ingredient')}
-                    onChange={(val) => {
-                      setSelectedIngredient(val);
-                      changeUnitOptions(val);
-                      setFocus(refAmount);
-                    }}
-                    options={foodOptions}
-                    instanceId="ingredient"
-                    autoFocus
-                  />
-                </div>
-                <input
-                  className="amount-input"
-                  placeholder={t('amount')}
-                  type="number"
-                  min="0"
-                  name="amount"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  ref={refAmount}
-                />
-                <div className="select-container ingredient-unit">
-                  <Select
-                    value={amountUnit}
-                    placeholder={t('unit')}
-                    onChange={(val) => setAmountUnit(val)}
-                    options={amountUnitOptions}
-                    instanceId="amount-unit"
-                  />
-                </div>
-              </div>
-              {isAddingTransport ? (
-                <div className="optional-fields">
-                  <div className="select-container transport-mode-select">
-                    <Select
-                      value={transportMode.value}
-                      placeholder={t('transport_mode')}
-                      onChange={(val) => setTransportMode(val.value)}
-                      options={transportModeOptions}
-                      instanceId="transport-mode"
-                    />
-                  </div>
-                  <div className="select-container transport-type-select">
-                    <Select
-                      value={transportType.value}
-                      placeholder={t('transport_type')}
-                      onChange={(val) => setTransportType(val.value)}
-                      options={transportTypeOptions}
-                      instanceId="transport-type"
-                    />
-                  </div>
-                  <input
-                    className="distance-input"
-                    placeholder={t('distance')}
-                    type="number"
-                    min="0"
-                    name="distance"
-                    value={distance}
-                    onChange={(e) => setDistance(e.target.value)}
-                  />
-                  <div className="select-container transport-unit-select">
-                    <Select
-                      value={distanceUnit.value}
-                      placeholder={t('unit')}
-                      onChange={(val) => setDistanceUnit(val.value)}
-                      options={distanceUnitOptions}
-                      instanceId="distance-unit"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div className="optional-fields">
-                  <div className="add-transport-button-container">
-                    <Button clear onClick={() => setIsAddingTransport(true)}>
-                      {t('add_transport_optional')}
-                    </Button>
-                  </div>
-                  <InfoIcon title={t('transport_not_provided')} color={theme.colors.water} />
-                </div>
-              )}
-              <div className="add-button-container">
-                <Link href="/about?openSection=how-to-use">
-                  <a target="_blank" className="instructions">
-                    {t('how_to_use')}
-                    <span className="new-tab-icon">
-                      <FaExternalLinkAlt />
-                    </span>
-                  </a>
-                </Link>
-                <Button onClick={() => addIngredient()} disabled={!selectedIngredient || !amount}>
-                  {t('add')}
-                </Button>
-              </div>
-            </Card>
+            <IngredientForm
+              meal={meal}
+              cancelIngredient={cancelIngredient}
+              saveIngredient={saveIngredient}
+              t={t}
+            />
           ) : (
             <div className="add-ingredient-container">
               <Button onClick={() => setIsAdding(true)}>+ {t('add_ingredient')}</Button>
@@ -521,18 +339,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           .about-meal-input {
             width: calc(100% - 20px);
           }
-          .amount-input,
-          .distance-input {
-            width: 100%;
-            margin: 0 0 20px 0;
-          }
-          .add-ingredient {
-            display: flex;
-            flex-wrap: wrap;
-            padding: 20px;
-            border: 1px solid ${theme.colors.border};
-            border-radius: 4px;
-          }
           .required-fields,
           .optional-fields {
             display: flex;
@@ -553,72 +359,8 @@ const MealForm = ({ id, foodData, transportData, t }) => {
           .number-of-servings-select {
             width: 100%;
           }
-          .ingredient-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-mode-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-type-select {
-            width: 100%;
-            margin-bottom: 20px;
-          }
-          .transport-unit-select {
-            width: 100%;
-            margin-right: 0;
-          }
-          .add-button {
-            font-size: 16px;
-            font-weight: bold;
-            width: 180px;
-            margin: 20px 0 0;
-            padding: 10px;
-            background-color: ${theme.colors.land};
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: #fff;
-          }
-          .add-transport-button {
-            font-size: 16px;
-            font-weight: bold;
-            width: 180px;
-            margin-right: 20px;
-            padding: 10px;
-            background-color: ${theme.colors.land};
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border-radius: 4px;
-            border: none;
-            color: #fff;
-          }
-          .add-button:disabled {
-            opacity: 0.7;
-            cursor: default;
-          }
-          .add-button:hover {
-            opacity: 0.7;
-          }
-          .add-transport-button-container {
-            min-width: 160px;
-          }
-          .add-button-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 20px;
-          }
           .add-ingredient-container {
             margin-top: 20px;
-          }
-          .add-button {
-            width: 100px;
-            margin-bottom: 0;
           }
           .optional-text {
             margin: 10px 0 0;
@@ -630,83 +372,16 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             display: flex;
             justify-content: space-between;
           }
-          .close-container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: flex-start;
-            height: 30px;
-          }
-          .close-button {
-            display: flex;
-            align-items: center;
-            padding: 0;
-            font-size: 22px;
-            color: ${theme.colors.text};
-            background-color: #fff;
-            opacity: 1;
-            transition: opacity 0.2s;
-            cursor: pointer;
-            border: none;
-            outline: none;
-          }
-          .close-button:hover {
-            opacity: 0.7;
-          }
-          .ingredient-unit {
-            width: 200px;
-          }
-          .instructions {
-            margin-top: 20px;
-            color: ${theme.colors.water};
-            text-decoration: none;
-            font-size: 16px;
-            text-align: center;
-          }
-          .new-tab-icon {
-            display: inline;
-            margin-left: 5px;
-            font-size: 12px;
-          }
 
           @media only screen and (min-width: ${theme.sizes.mobile}) {
             .required-fields {
               flex-wrap: nowrap;
             }
-            .optional-fields {
-              flex-wrap: ${isAddingTransport ? 'wrap' : 'nowrap'};
-            }
             .select-container {
               width: 170px;
             }
-            .ingredient-select {
-              width: 220px;
-              margin: 0 20px 0 0;
-            }
             .number-of-servings-select {
               width: 300px;
-            }
-            .amount-input,
-            .distance-input {
-              width: 104px;
-              margin: 0 20px 0 0;
-            }
-            .distance-input {
-              margin: 0 20px 20px 0;
-            }
-            .transport-mode-select {
-              min-width: 182px;
-              margin: 0 20px 20px 0;
-            }
-            .transport-type-select {
-              min-width: 170px;
-              margin: 0 20px 20px 0;
-            }
-            .transport-unit-select {
-              width: 158px;
-              margin: 0 0 20px 0;
-            }
-            .add-button-container {
-              margin-top: 0;
             }
             .optional-text {
               margin: 10px 0;
@@ -714,15 +389,9 @@ const MealForm = ({ id, foodData, transportData, t }) => {
             .button-container {
               padding: 0;
             }
-            .ingredient-unit {
-              width: 200px;
-            }
           }
 
           @media only screen and (min-width: ${theme.sizes.ipad}) {
-            .close-container {
-              height: 0;
-            }
           }
         `}</style>
       </Content>

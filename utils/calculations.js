@@ -48,7 +48,7 @@ function convertTransportToKilograms(
 ) {
   const distanceInKilometers = convertToKilometers(distance, distanceUnit);
   const weightInTonnes = convertToTonnes(amount, amountUnit, selectedIngredient);
-
+  
   return distanceInKilometers * weightInTonnes * transportData[transportMode][transportType];
 }
 
