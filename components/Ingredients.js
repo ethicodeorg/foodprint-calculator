@@ -37,7 +37,9 @@ const Ingredients = ({
         : '';
       const amountString = `${ingredient.amount} ${
         ingredient.amountUnit === 'qty' ? '' : t(`${ingredient.amountUnit}_short`)
-      }`;
+        }`;
+      
+      console.log("ingredient in ingredients list: ", ingredient)
 
       return isEditing === index ? (
         <Fragment key={index}>

@@ -4,7 +4,6 @@ import { Link } from '../i18n';
 import { FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
 import { setFocus } from '../utils/ui';
 import { useUser } from '../lib/hooks';
-import useSWR from 'swr';
 import Select from 'react-select';
 import Card from './Card';
 import Button from './Button';
@@ -31,7 +30,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
   const [distanceUnit, setDistanceUnit] = useState(
     ingredient
       ? distanceUnitOptions.find((o) => o.value === ingredient.distanceUnit)
-      : distanceUnitOptions[0].value
+      : {}
   );
   const transportModeOptions = [
     { value: 'road', label: t('road') },
@@ -40,14 +39,14 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
     { value: 'air', label: t('air') },
   ];
   const [transportMode, setTransportMode] = useState(
-    ingredient ? transportModeOptions.find((o) => o.value === ingredient.transportMode) : ''
+    ingredient ? transportModeOptions.find((o) => o.value === ingredient.transportMode) : {}
   );
   const transportTypeOptions = [
     { value: 'ambient', label: t('ambient') },
     { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
   const [transportType, setTransportType] = useState(
-    ingredient ? transportTypeOptions.find((o) => o.value === ingredient.transportType) : ''
+    ingredient ? transportTypeOptions.find((o) => o.value === ingredient.transportType) : {}
   );
 
   let foodOptions = [];
@@ -65,7 +64,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
           rawLabel: foodData[i].entities[j].label,
           averageWeight: foodData[i].entities[j].averageWeight,
           gramsPerLiter: foodData[i].entities[j].gramsPerLiter,
-          factor: foodData[i].entities[j].factor,
+          factor: foodData[i].entities[j].factor || 1,
         });
       }
     }
@@ -75,8 +74,14 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
   const [selectedIngredient, setSelectedIngredient] = useState(
     ingredient
       ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel)
-      : ''
+      : {}
   );
+
+  console.log("ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : 'nada': ", ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : 'nada')
+  console.log("ingredient: ", ingredient);
+  console.log("selectedIngredient: ", selectedIngredient);
+  console.log("ingredient || selectedIngredient: ", ingredient || selectedIngredient);
+  console.log("ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : selectedIngredient ? foodOptions.find((o) => o.key === selectedIngredient.key && o.rawLabel === selectedIngredient.rawLabel) : 'nada' ", ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : selectedIngredient ? foodOptions.find((o) => o.key === selectedIngredient.key && o.rawLabel === selectedIngredient.rawLabel) : 'nada' )
 
   // Automatically focus the next input when an ingredient has been selected
   // react reference for the "amount" field.
@@ -113,14 +118,21 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
       }
     }
     setAmountUnitOptions(newUnits);
-    
+    /* console.log("changeUnitOptions val: ", val)
+    console.log("newUnits: ", newUnits)
+    console.log("amountUnit : ", amountUnit)
+    console.log("ingredient?.amountUnit: ", ingredient?.amountUnit);
+    console.log("selectedIngredient.baseUnit: ", selectedIngredient.baseUnit);
+    console.log("amountUnit?.value: ", amountUnit?.value)
+    console.log("newUnits.some((unit) => unit.value === amountUnit?.value)", newUnits.some((unit) => unit.value === amountUnit?.value)) */
+
     // If the currently selected unit is unavailable for the ingredient, we clear it.
-    if (!newUnits.some((unit) => unit.value === amountUnit?.value)) {
+    if (!newUnits.some((unit) => unit.value === val.baseUnit)) {
       console.log("setting blank")
-      //setAmountUnit('');
+      setAmountUnit([]);
     }
   };
-  const [amountUnit, setAmountUnit] = useState([]);
+  const [amountUnit, setAmountUnit] = useState(ingredient ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) : {});
 
   useEffect(() => {
     if (ingredient) {
@@ -130,9 +142,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
 
   useEffect(() => {
     if (ingredient && amountUnitOptions.length) {
-      console.log("amountUnitOptions.find((o) => o.value === ingredient.amountUnit");
-      console.log(amountUnitOptions.find((o) => o.value === ingredient.amountUnit))
-      setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit));
+      setAmountUnit(amountUnitOptions.find((o) => o.value === ingredient.amountUnit) || {});
     }
   }, [amountUnitOptions]);
   
@@ -165,7 +175,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
               onChange={(val) => {
                 setSelectedIngredient(val);
                 changeUnitOptions(val);
-                setFocus(refAmount);
+                setFocus(refAmount)
               }}
               options={foodOptions}
               instanceId="ingredient"
@@ -182,6 +192,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
             ref={refAmount}
           />
           <div className="select-container ingredient-unit">
+            type of is '{typeof amountUnit}'
             <Select
               value={amountUnit}
               placeholder={t('unit')}
@@ -189,24 +200,33 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
               options={amountUnitOptions}
               instanceId="amount-unit"
             />
+            {/* <Select
+              value={amountUnit}
+              placeholder={t('unit')}
+              onChange={(val) => setAmountUnit(val)}
+              options={amountUnitOptions}
+              instanceId="amount-unit"
+            /> */}
           </div>
         </div>
         {isAddingTransport ? (
           <div className="optional-fields">
             <div className="select-container transport-mode-select">
+              type of is '{typeof transportMode}'
               <Select
-                defaultValue={transportMode}
+                value={transportMode}
                 placeholder={t('transport_mode')}
-                onChange={(val) => setTransportMode(val.value)}
+                onChange={(val) => setTransportMode(val)}
                 options={transportModeOptions}
                 instanceId="transport-mode"
               />
             </div>
             <div className="select-container transport-type-select">
+              type of is '{typeof transportType}'
               <Select
-                defaultValue={transportType}
+                value={transportType}
                 placeholder={t('transport_type')}
-                onChange={(val) => setTransportType(val.value)}
+                onChange={(val) => setTransportType(val)}
                 options={transportTypeOptions}
                 instanceId="transport-type"
               />
@@ -220,10 +240,11 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
               onChange={(e) => setDistance(e.target.value)}
             />
             <div className="select-container transport-unit-select">
+              type of is '{typeof distanceUnit}'
               <Select
-                defaultValue={distanceUnit}
+                value={distanceUnit}
                 placeholder={t('unit')}
-                onChange={(val) => setDistanceUnit(val.value)}
+                onChange={(val) => setDistanceUnit(val)}
                 options={distanceUnitOptions}
                 instanceId="distance-unit"
               />
