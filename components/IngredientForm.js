@@ -77,12 +77,6 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
       : {}
   );
 
-  console.log("ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : 'nada': ", ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : 'nada')
-  console.log("ingredient: ", ingredient);
-  console.log("selectedIngredient: ", selectedIngredient);
-  console.log("ingredient || selectedIngredient: ", ingredient || selectedIngredient);
-  console.log("ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : selectedIngredient ? foodOptions.find((o) => o.key === selectedIngredient.key && o.rawLabel === selectedIngredient.rawLabel) : 'nada' ", ingredient ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel) : selectedIngredient ? foodOptions.find((o) => o.key === selectedIngredient.key && o.rawLabel === selectedIngredient.rawLabel) : 'nada' )
-
   // Automatically focus the next input when an ingredient has been selected
   // react reference for the "amount" field.
   const refAmount = useRef();
@@ -118,17 +112,9 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
       }
     }
     setAmountUnitOptions(newUnits);
-    /* console.log("changeUnitOptions val: ", val)
-    console.log("newUnits: ", newUnits)
-    console.log("amountUnit : ", amountUnit)
-    console.log("ingredient?.amountUnit: ", ingredient?.amountUnit);
-    console.log("selectedIngredient.baseUnit: ", selectedIngredient.baseUnit);
-    console.log("amountUnit?.value: ", amountUnit?.value)
-    console.log("newUnits.some((unit) => unit.value === amountUnit?.value)", newUnits.some((unit) => unit.value === amountUnit?.value)) */
 
     // If the currently selected unit is unavailable for the ingredient, we clear it.
     if (!newUnits.some((unit) => unit.value === val.baseUnit)) {
-      console.log("setting blank")
       setAmountUnit([]);
     }
   };

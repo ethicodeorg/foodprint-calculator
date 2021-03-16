@@ -161,7 +161,6 @@ const MealForm = ({ id, foodData, transportData, t }) => {
     transportType
   ) => {
     const food = foodData.find((f) => f.key === selectedIngredient.key);
-    console.log("selectedIngredient in MealForm.js: ", selectedIngredient)
     const transportEmissions = getTransportEmissions(
       transportData,
       distance,
