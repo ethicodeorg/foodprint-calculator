@@ -30,7 +30,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
   const [distanceUnit, setDistanceUnit] = useState(
     ingredient
       ? distanceUnitOptions.find((o) => o.value === ingredient.distanceUnit)
-      : {}
+      : []
   );
   const transportModeOptions = [
     { value: 'road', label: t('road') },
@@ -39,14 +39,14 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
     { value: 'air', label: t('air') },
   ];
   const [transportMode, setTransportMode] = useState(
-    ingredient ? transportModeOptions.find((o) => o.value === ingredient.transportMode) : {}
+    ingredient ? transportModeOptions.find((o) => o.value === ingredient.transportMode) : []
   );
   const transportTypeOptions = [
     { value: 'ambient', label: t('ambient') },
     { value: 'temperatureControlled', label: t('temperatureControlled') },
   ];
   const [transportType, setTransportType] = useState(
-    ingredient ? transportTypeOptions.find((o) => o.value === ingredient.transportType) : {}
+    ingredient ? transportTypeOptions.find((o) => o.value === ingredient.transportType) : []
   );
 
   let foodOptions = [];
@@ -74,7 +74,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
   const [selectedIngredient, setSelectedIngredient] = useState(
     ingredient
       ? foodOptions.find((o) => o.key === ingredient.key && o.rawLabel === ingredient.rawLabel)
-      : {}
+      : []
   );
 
   // Automatically focus the next input when an ingredient has been selected
@@ -118,7 +118,7 @@ const IngredientForm = ({ foodData, cancelIngredient, ingredient, index, saveIng
       setAmountUnit([]);
     }
   };
-  const [amountUnit, setAmountUnit] = useState(ingredient ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) : {});
+  const [amountUnit, setAmountUnit] = useState(ingredient ? amountUnitOptions.find((o) => o.value === ingredient.amountUnit) : []);
 
   useEffect(() => {
     if (ingredient) {
