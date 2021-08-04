@@ -238,6 +238,7 @@ const MealsPage = ({
           font-size: 24px;
           text-align: center;
           color: #fff;
+          text-shadow: 1px 1px 1px ${theme.colors.darkBorder};
         }
         .select-container {
           max-width: 400px;

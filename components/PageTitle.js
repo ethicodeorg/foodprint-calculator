@@ -15,6 +15,7 @@ const PageTitle = ({ children }) => (
         font-size: 32px;
         font-weight: normal;
         text-align: center;
+        text-shadow: 1px 1px 1px ${theme.colors.darkBorder};
         color: ${theme.colors.white};
       }
 
@@ -24,6 +25,7 @@ const PageTitle = ({ children }) => (
           font-size: 48px;
           font-weight: normal;
           text-align: center;
+          text-shadow: 2px 2px 2px ${theme.colors.darkBorder};
         }
       }
     `}</style>

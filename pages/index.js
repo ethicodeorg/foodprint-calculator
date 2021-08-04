@@ -103,6 +103,7 @@ const Index = ({ t }) => {
         h1 {
           margin: 0 auto;
           font-size: 32px;
+          text-shadow: 1px 1px 1px ${theme.colors.darkBorder};
           font-weight: normal;
           text-align: center;
         }
@@ -166,6 +167,7 @@ const Index = ({ t }) => {
           }
           h1 {
             font-size: 60px;
+            text-shadow: 2px 2px 2px ${theme.colors.darkBorder};
           }
           p {
             max-width: 720px;
@@ -188,6 +190,7 @@ const Index = ({ t }) => {
           }
           h1 {
             font-size: 104px;
+            text-shadow: 3px 3px 3px ${theme.colors.darkBorder};
           }
           h3 {
             font-size: 36px;
