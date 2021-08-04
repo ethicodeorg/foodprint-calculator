@@ -58,7 +58,7 @@ const Layout = ({ children, title = '', t, showFloater }) => {
       <div className="footer">
         <div className="powered-by">
           {poweredBy.beforeLink}
-          <img className="ethicode" src="/ethicode-logo-white.png" />
+          <img className="ethicode" src="/ethilogo-on-black.svg" />
         </div>
         <div className="ethicode-link">
           <ExternalLink color={theme.colors.aqua} href="http://ethicode.org/">
@@ -89,7 +89,9 @@ const Layout = ({ children, title = '', t, showFloater }) => {
           width: 100vw;
           z-index: -1;
           opacity: 0.9;
-          background: url('/earth-cover.jpg') no-repeat 50%;
+          background: url('/guiltypuffin.jpg') no-repeat;
+          background-position-x: 20%;
+          background-position-y: 50px;
           background-size: cover;
         }
         .create-button {
@@ -133,13 +135,17 @@ const Layout = ({ children, title = '', t, showFloater }) => {
           padding-right: 40px;
         }
         .ethicode {
-          height: 30px;
+          height: 20px;
+          padding: 5px 0;
         }
 
         @media only screen and (min-width: ${theme.sizes.mobile}) {
           .create-button {
             bottom: 70px;
             right: 50px;
+          }
+          .background {
+            background-position-x: 50%;
           }
         }
       `}</style>

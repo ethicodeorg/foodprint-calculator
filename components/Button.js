@@ -121,6 +121,7 @@ const Button = ({
           font-size: 24px;
           min-width: 180px;
           padding: ${noPad ? '0' : '15px 40px'};
+          box-shadow: 2px 2px 7px 1px rgba(0, 0, 0, 0.25);
         }
         .button-round {
           min-width: 66px;
