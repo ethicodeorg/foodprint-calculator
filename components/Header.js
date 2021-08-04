@@ -65,9 +65,7 @@ const Header = ({ t, i18n }) => {
       <Link href="/">
         <a className="link home">
           <div className="logo-container">
-            <object className="earth-logo" data={`/sliced-logo${language === 'is' ? '-is' : ''}.svg`} type="image/svg+xml">
-              <img src={`/sliced-logo${language === 'is' ? '-is' : ''}.png`} />
-            </object>
+            <img className="earth-logo" src={`/food-e-logo${language === 'is' ? '-is' : ''}.svg`} />
           </div>
         </a>
       </Link>
