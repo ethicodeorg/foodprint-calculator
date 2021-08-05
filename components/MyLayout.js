@@ -89,7 +89,7 @@ const Layout = ({ children, title = '', t, showFloater }) => {
           width: 100vw;
           z-index: -1;
           opacity: 0.9;
-          background: url('/guiltypuffin.jpg') no-repeat;
+          background: url('/guilty.jpg') no-repeat;
           background-position-x: 20%;
           background-position-y: 50px;
           background-size: cover;
