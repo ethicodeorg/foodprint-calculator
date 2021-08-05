@@ -11,8 +11,11 @@ const Card = ({ children, inner, userForm, seeThrough, dark, noBorderRadius }) =
         box-shadow: none;
         padding: ${inner && !noBorderRadius ? '0' : '20px'};
         margin: ${inner ? '0' : '20px'} auto 0;
-        background-color: ${dark ? theme.colors.darkBackground : theme.colors.white};
-        opacity: ${seeThrough ? '0.9' : '1'};
+        background-color: ${dark
+          ? seeThrough
+            ? 'rgba(0, 0, 0, 0.7)'
+            : theme.colors.darkBackground
+          : theme.colors.white};
         max-width: ${userForm ? '300px' : 'auto'};
       }
 
