@@ -20,7 +20,7 @@
     "html2canvas": "^1.0.0-rc.5",
     "isomorphic-unfetch": "^3.0.0",
     "mongodb": "^3.5.7",
-    "next": "^9.5.5",
+    "next": "^11.1.0",
     "next-connect": "^0.6.6",
     "next-i18next": "^6.0.2",
     "next-redux-wrapper": "^6.0.0-rc.7",
