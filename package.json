@@ -45,7 +45,7 @@
     "redux-thunk": "^2.3.0",
     "store": "^2.0.12",
     "swr": "^0.2.0",
-    "validator": "^13.0.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.4.0",
